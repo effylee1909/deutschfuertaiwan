@@ -516,6 +516,63 @@ const textbookLessons = {
   },
 };
 
+const syllabusTopics = {
+  A1: [
+    "冠詞與名詞", "自我介紹與基本句", "公告與短訊閱讀", "數字、時間與星期",
+    "家庭與朋友", "食物、點餐與付款", "城市、方向與交通", "購物與價格",
+    "日常作息與可分動詞", "天氣、衣著與顏色", "身體、健康與預約", "A1 總複習與檢定任務",
+  ],
+  A2: [
+    "完成式 Perfekt", "購物與預約", "通知與 email 閱讀", "租屋與住宿",
+    "旅行與交通問題", "工作、學校與計畫", "比較級與建議", "Dativ 介系詞",
+    "weil / dass / wenn 子句", "表格、申請與官方文件", "邀請、拒絕與改期", "A2 綜合情境任務",
+  ],
+  B1: [
+    "原因、意見與請求", "正式 email 與投訴", "工作與面試", "生活問題與解決方案",
+    "旅遊經驗與敘事", "健康、保險與諮詢", "教育與學習方法", "媒體與網路使用",
+    "環境與交通討論", "被動語態入門", "Konjunktiv II 禮貌請求", "B1 口說與寫作整合",
+  ],
+  B2: [
+    "立場、比較與討論", "數位化與資料保護", "永續生活與消費", "教育與職涯選擇",
+    "城市發展與居住", "健康政策與生活品質", "移民、文化與社會參與", "媒體素養與假訊息",
+    "工作模式與責任", "科學、科技與風險", "抽象名詞與名詞化", "B2 論述整合任務",
+  ],
+};
+
+const syllabusVocabulary = {
+  A1: [
+    ["der Name", "名字"], ["die Adresse", "地址"], ["die Uhrzeit", "時間"], ["die Familie", "家庭"], ["das Essen", "食物"], ["die Stadt", "城市"],
+    ["der Preis", "價格"], ["der Bus", "公車"], ["die Jacke", "外套"], ["der Arzt", "醫生"], ["müde", "累的"], ["bezahlen", "付款"],
+  ],
+  A2: [
+    ["die Reservierung", "預訂"], ["der Termin", "預約"], ["die Unterkunft", "住宿"], ["die Verspätung", "延誤"], ["die Ausbildung", "職業訓練"],
+    ["die Erfahrung", "經驗"], ["die Rechnung", "帳單"], ["das Formular", "表格"], ["verschieben", "改期"], ["teilnehmen", "參加"], ["deshalb", "因此"], ["trotzdem", "儘管如此"],
+  ],
+  B1: [
+    ["die Bewerbung", "求職申請"], ["die Beschwerde", "投訴"], ["die Lösung", "解決方法"], ["die Ursache", "原因"], ["der Vorteil", "優點"],
+    ["der Nachteil", "缺點"], ["die Versicherung", "保險"], ["die Entscheidung", "決定"], ["begründen", "說明理由"], ["vorschlagen", "建議"], ["obwohl", "雖然"], ["höflich", "禮貌地"],
+  ],
+  B2: [
+    ["der Datenschutz", "資料保護"], ["die Nachhaltigkeit", "永續性"], ["die Voraussetzung", "前提"], ["die Verantwortung", "責任"], ["die Herausforderung", "挑戰"],
+    ["die Entwicklung", "發展"], ["die Gleichberechtigung", "平等權利"], ["die Digitalisierung", "數位化"], ["berücksichtigen", "考慮到"], ["gewährleisten", "保障"], ["einerseits", "一方面"], ["andererseits", "另一方面"],
+  ],
+};
+
+const syllabusGrammar = {
+  A1: [
+    ["Verbposition 2", "主句變位動詞通常放第二位。"], ["Artikel", "名詞要連 der/die/das 一起背。"], ["W-Fragen", "用 wer, wo, wann, wie viel 問基本資訊。"], ["Akkusativ", "常見於 kaufen, haben, brauchen 後面的受詞。"],
+  ],
+  A2: [
+    ["Perfekt", "用 haben/sein + Partizip II 表達過去事件。"], ["Dativ", "mit, nach, bei, von, zu 常接 Dativ。"], ["Nebensatz", "weil/dass/wenn 子句中變位動詞放句尾。"], ["Komparativ", "用 schneller, günstiger, besser 比較兩件事。"],
+  ],
+  B1: [
+    ["Konjunktiv II", "用 könnte/würde 表達禮貌請求或假設。"], ["Passiv", "用 werden + Partizip II 描述被動狀態或流程。"], ["Konnektoren", "用 deshalb, trotzdem, obwohl 建立邏輯。"], ["indirekte Frage", "ob/wann/warum 後面動詞放句尾。"],
+  ],
+  B2: [
+    ["Nominalisierung", "用抽象名詞讓表達更正式。"], ["zweiteilige Konnektoren", "einerseits/andererseits 平衡觀點。"], ["Passiversatz", "用 sich lassen、sein zu + Infinitiv 表達可行性。"], ["Argumentstruktur", "提出立場、理由、例子、限制與結論。"],
+  ],
+};
+
 const learningExpansionCards = {
   A1: [
     {
@@ -1860,6 +1917,7 @@ function enhanceExamPools(pools) {
 }
 
 function initializeLessons() {
+  expandSyllabusLessons();
   ensureStageCoverage();
 
   const levelCounts = {};
@@ -1873,9 +1931,110 @@ function initializeLessons() {
     lesson.lessonCode = `L${lesson.lessonNumber}`;
     lesson.topic = getLessonTopic(lesson);
     lesson.navTitle = `${lesson.lessonCode} ${lesson.topic}`;
+    lesson.textbook = lesson.textbook || createTextbookContent(lesson.level, lesson.lessonNumber, lesson.topic);
     lesson.courseSummary = getCourseSummary(lesson);
     lesson.questions = buildLessonQuestions(lesson, index);
   });
+}
+
+function expandSyllabusLessons() {
+  levelOrder.forEach((level) => {
+    const topics = syllabusTopics[level] || [];
+    const existingCount = lessons.filter((lesson) => lesson.level === level).length;
+
+    topics.slice(existingCount).forEach((topic, offset) => {
+      const lessonNumber = existingCount + offset + 1;
+      const stage = testStages[(lessonNumber - 1) % testStages.length];
+      const id = `${level.toLowerCase()}-lesson-${lessonNumber}`;
+      const textbook = createTextbookContent(level, lessonNumber, topic);
+
+      lessonStages[id] = stage;
+      lessons.push({
+        id,
+        level,
+        track: stage,
+        badge: level,
+        title: topic,
+        topic,
+        description: `${level} L${lessonNumber}：${topic}`,
+        sourceNote: "課程內容依 CEFR 能力描述、Goethe/telc 題型方向與台灣學習者常見需求原創整理。",
+        textbook,
+        cards: createLessonFocusCards(level, topic, textbook),
+        questions: [],
+      });
+    });
+  });
+}
+
+function createTextbookContent(level, lessonNumber, topic) {
+  const vocab = rotateArray(syllabusVocabulary[level], lessonNumber - 1).slice(0, getVocabCount(level));
+  const grammar = rotateArray(syllabusGrammar[level], lessonNumber - 1).slice(0, getGrammarCount(level));
+  return {
+    title: `${level} L${lessonNumber}: ${topic}`,
+    text: createReadingText(level, topic, lessonNumber),
+    vocab,
+    grammar,
+  };
+}
+
+function getVocabCount(level) {
+  return { A1: 6, A2: 8, B1: 10, B2: 12 }[level] || 6;
+}
+
+function getGrammarCount(level) {
+  return { A1: 3, A2: 4, B1: 4, B2: 4 }[level] || 3;
+}
+
+function createReadingText(level, topic, lessonNumber) {
+  const texts = {
+    A1: [
+      `Das Thema dieser Lektion ist ${topic}. Lin lernt Deutsch in Taipei. Sie schreibt neue Wörter in ihr Heft und spricht einfache Sätze laut. Am Ende fragt sie ihre Lehrerin: Können Sie das bitte wiederholen?`,
+      `Heute übt Lin ${topic}. Sie liest kurze Sätze, fragt nach Informationen und antwortet langsam. Die Wörter sind noch neu, aber sie kann schon einfache Fragen verstehen.`,
+    ],
+    A2: [
+      `In dieser Lektion geht es um ${topic}. Lin hat letzte Woche eine ähnliche Situation erlebt und erzählt davon im Deutschkurs. Sie erklärt, was passiert ist, warum sie Hilfe gebraucht hat und welche Lösung am Ende funktioniert hat.`,
+      `Der Text enthält mehrere Informationen zu Zeit, Ort und Grund. Lin muss nicht jedes Wort übersetzen, sondern zuerst die Aufgabe lesen und dann im Text nach den wichtigen Details suchen.`,
+      `Am Ende schreibt sie eine kurze Nachricht, weil sie den Termin ändern möchte. Sie benutzt höfliche Sätze und achtet darauf, dass das konjugierte Verb im Nebensatz am Ende steht.`,
+    ],
+    B1: [
+      `Das Thema ${topic} kommt häufig im Alltag, in Prüfungen und in Gesprächen vor. Lin liest einen längeren Text, in dem eine Person ein Problem beschreibt, einen Grund nennt und um eine konkrete Lösung bittet.`,
+      `Im Unterricht sammelt die Gruppe Argumente. Einige Lernende finden die Situation einfach, andere sehen mehrere Schwierigkeiten. Lin formuliert ihre Meinung und begründet sie mit einem Beispiel aus ihrem Alltag.`,
+      `Für die schriftliche Aufgabe achtet sie auf eine klare Struktur: zuerst der Anlass, dann die Erklärung, danach die Bitte oder der Vorschlag. Dadurch wirkt der Text höflich und verständlich.`,
+      `Beim Sprechen versucht sie, nicht nur einzelne Wörter zu sagen, sondern ganze Sätze miteinander zu verbinden.`,
+    ],
+    B2: [
+      `In dieser Lektion wird ${topic} aus mehreren Perspektiven betrachtet. Der Ausgangstext beschreibt nicht nur eine Alltagssituation, sondern auch gesellschaftliche Folgen, mögliche Vorteile und kritische Gegenargumente.`,
+      `Lin markiert zentrale Begriffe und unterscheidet zwischen Fakten, Beispielen und Bewertungen. Besonders wichtig ist, dass sie die Haltung der Autorin erkennt und die Argumentation nicht nur wortwörtlich, sondern inhaltlich versteht.`,
+      `In der Diskussion formuliert sie eine differenzierte Position. Einerseits sieht sie praktische Vorteile, andererseits weist sie auf Bedingungen hin, die erfüllt sein müssen, damit die vorgeschlagene Lösung langfristig sinnvoll bleibt.`,
+      `Für die Schreibaufgabe nutzt sie Konnektoren, nominale Wendungen und ein kurzes Fazit. So entsteht ein Text, der nicht nur korrekt, sondern auch zusammenhängend und überzeugend wirkt.`,
+      `Die Lektion trainiert deshalb Lesen, Wortschatz, Grammatik und produktive Fertigkeiten gemeinsam.`,
+    ],
+  };
+
+  return rotateArray(texts[level], lessonNumber - 1).join(" ");
+}
+
+function createLessonFocusCards(level, topic, textbook) {
+  return [
+    {
+      tag: "課文",
+      title: `${topic} 的閱讀目標`,
+      body: "先抓主題、人物、時間、地點和原因，再回頭整理細節。",
+      example: textbook.text.split(".")[0] + ".",
+    },
+    {
+      tag: "單字",
+      title: "用情境記單字",
+      body: "每課單字都應該放回句子中練習，不只背中文意思。",
+      example: textbook.vocab.slice(0, 3).map(([word]) => word).join(" / "),
+    },
+    {
+      tag: "文法",
+      title: "本課文法任務",
+      body: textbook.grammar[0]?.[1] || "把文法放進口說與寫作任務中練習。",
+      example: textbook.grammar[0]?.[0] || topic,
+    },
+  ];
 }
 
 function ensureStageCoverage() {
@@ -1925,6 +2084,8 @@ function getCourseSummary(lesson) {
 }
 
 function getLessonTopic(lesson) {
+  if (lesson.topic) return lesson.topic;
+
   const topics = {
     "a1-articles": "冠詞與名詞",
     "a1-sentences": "自我介紹與基本句",
@@ -1956,7 +2117,7 @@ function getLessonCards(lesson) {
 }
 
 function renderTextbookLesson(lesson) {
-  const content = textbookLessons[lesson.level]?.[lesson.stage];
+  const content = lesson.textbook || textbookLessons[lesson.level]?.[lesson.stage];
   if (!content) return;
 
   lessonReadingEl.innerHTML = `
