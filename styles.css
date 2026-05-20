@@ -594,6 +594,16 @@ button:disabled {
   background: #fff;
 }
 
+.level-table-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.level-table-stack h4 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;

@@ -433,6 +433,89 @@ const dailyPhraseBanks = {
   ],
 };
 
+const learningExpansionCards = {
+  A1: [
+    {
+      tag: "台灣學生易錯",
+      title: "不要只背中文意思，要把冠詞一起背",
+      body: "德文名詞的性別會影響後面的文法變化。初學時請把 der/die/das 和名詞當成一組聲音記憶。",
+      example: "der Bahnhof, die Adresse, das Zimmer",
+    },
+    {
+      tag: "語序",
+      title: "陳述句動詞第二位",
+      body: "中文句子可以很彈性，但德文主句的變位動詞通常站在第二位置。時間放前面時，主詞要往後移。",
+      example: "Heute lerne ich Deutsch. / Ich lerne heute Deutsch.",
+    },
+    {
+      tag: "口說",
+      title: "先準備萬用請求句",
+      body: "旅行或和德國人對話時，A1 最實用的是請對方重複、說慢一點、幫忙或指路。",
+      example: "Können Sie bitte langsamer sprechen?",
+    },
+  ],
+  A2: [
+    {
+      tag: "Perfekt",
+      title: "完成式先看 haben / sein",
+      body: "日常口語講過去常用 Perfekt。多數動詞用 haben，移動或狀態改變常用 sein。",
+      example: "Ich habe gelernt. / Ich bin gefahren.",
+    },
+    {
+      tag: "Dativ",
+      title: "介系詞後面的格位要整組背",
+      body: "A2 常見 mit, nach, bei, von, zu 後面多接 Dativ。建議把介系詞和例句一起記。",
+      example: "mit dem Bus, nach der Arbeit, bei meiner Freundin",
+    },
+    {
+      tag: "可分動詞",
+      title: "可分動詞的前綴常跑到句尾",
+      body: "可分動詞在現在式主句中會拆開，前綴放句尾；在完成式中常變成 ge 插在中間。",
+      example: "Ich stehe um 7 Uhr auf. / Ich bin aufgestanden.",
+    },
+  ],
+  B1: [
+    {
+      tag: "連接詞",
+      title: "用 weil / deshalb 建立原因和結果",
+      body: "B1 開始不只回答單句，要能說原因、結果和個人意見。注意 weil 子句動詞放最後。",
+      example: "Ich komme später, weil der Zug Verspätung hat.",
+    },
+    {
+      tag: "寫作",
+      title: "Email 要有禮貌開頭和明確目的",
+      body: "德檢和生活都常用 email。先說來信目的，再說原因，最後提出請求或下一步。",
+      example: "Ich schreibe Ihnen, weil ich den Termin verschieben möchte.",
+    },
+    {
+      tag: "討論",
+      title: "意見句要加理由",
+      body: "表達意見時不要只說 gut/schlecht。至少補一個理由，會更接近 B1 要求。",
+      example: "Meiner Meinung nach ist das sinnvoll, weil es Zeit spart.",
+    },
+  ],
+  B2: [
+    {
+      tag: "論述",
+      title: "用 einerseits / andererseits 平衡觀點",
+      body: "B2 需要能比較不同立場。先說一方面，再說另一方面，最後給自己的結論。",
+      example: "Einerseits ist es praktisch, andererseits ist es teuer.",
+    },
+    {
+      tag: "精準表達",
+      title: "把 gut / schlecht 換成更準確的詞",
+      body: "進階表達要避免太籠統。可以用 sinnvoll, zuverlässig, nachhaltig, problematisch 等詞。",
+      example: "Diese Lösung ist sinnvoll, aber langfristig problematisch.",
+    },
+    {
+      tag: "正式請求",
+      title: "客服、學校、機關情境要禮貌明確",
+      body: "在德語正式情境中，清楚說明問題、提供必要資訊，再提出具體請求。",
+      example: "Könnten Sie bitte prüfen, ob eine Umbuchung möglich ist?",
+    },
+  ],
+};
+
 const vocabularyRows = [
   { type: "名詞", german: "der Tisch", chinese: "桌子" },
   { type: "名詞", german: "die Lampe", chinese: "燈" },
@@ -696,6 +779,75 @@ const verbRows = [
   { verb: "verbessern", chinese: "改善", ich: "verbessere", du: "verbesserst", third: "verbessert", plural: "verbessern" },
   { verb: "unterstützen", chinese: "支持", ich: "unterstütze", du: "unterstützt", third: "unterstützt", plural: "unterstützen" },
   { verb: "zusammenfassen", chinese: "摘要；總結", ich: "fasse zusammen", du: "fasst zusammen", third: "fasst zusammen", plural: "fassen zusammen" },
+  { verb: "bleiben", chinese: "停留；保持", ich: "bleibe", du: "bleibst", third: "bleibt", plural: "bleiben" },
+  { verb: "heißen", chinese: "叫做", ich: "heiße", du: "heißt", third: "heißt", plural: "heißen" },
+  { verb: "geben", chinese: "給；有", ich: "gebe", du: "gibst", third: "gibt", plural: "geben" },
+  { verb: "nehmen", chinese: "拿；搭乘", ich: "nehme", du: "nimmst", third: "nimmt", plural: "nehmen" },
+  { verb: "bringen", chinese: "帶來", ich: "bringe", du: "bringst", third: "bringt", plural: "bringen" },
+  { verb: "wissen", chinese: "知道", ich: "weiß", du: "weißt", third: "weiß", plural: "wissen" },
+  { verb: "denken", chinese: "想；認為", ich: "denke", du: "denkst", third: "denkt", plural: "denken" },
+  { verb: "kennen", chinese: "認識；知道", ich: "kenne", du: "kennst", third: "kennt", plural: "kennen" },
+  { verb: "nennen", chinese: "稱呼；命名", ich: "nenne", du: "nennst", third: "nennt", plural: "nennen" },
+  { verb: "rennen", chinese: "跑", ich: "renne", du: "rennst", third: "rennt", plural: "rennen" },
+  { verb: "beginnen", chinese: "開始", ich: "beginne", du: "beginnst", third: "beginnt", plural: "beginnen" },
+  { verb: "gewinnen", chinese: "贏得", ich: "gewinne", du: "gewinnst", third: "gewinnt", plural: "gewinnen" },
+  { verb: "liegen", chinese: "躺；位於", ich: "liege", du: "liegst", third: "liegt", plural: "liegen" },
+  { verb: "sitzen", chinese: "坐", ich: "sitze", du: "sitzt", third: "sitzt", plural: "sitzen" },
+  { verb: "stehen", chinese: "站；位於", ich: "stehe", du: "stehst", third: "steht", plural: "stehen" },
+  { verb: "legen", chinese: "放置（平放）", ich: "lege", du: "legst", third: "legt", plural: "legen" },
+  { verb: "setzen", chinese: "放置；使坐下", ich: "setze", du: "setzt", third: "setzt", plural: "setzen" },
+  { verb: "stellen", chinese: "放置（直立）", ich: "stelle", du: "stellst", third: "stellt", plural: "stellen" },
+  { verb: "tragen", chinese: "穿戴；攜帶", ich: "trage", du: "trägst", third: "trägt", plural: "tragen" },
+  { verb: "schlafen", chinese: "睡覺", ich: "schlafe", du: "schläfst", third: "schläft", plural: "schlafen" },
+  { verb: "laufen", chinese: "跑；步行", ich: "laufe", du: "läufst", third: "läuft", plural: "laufen" },
+  { verb: "einladen", chinese: "邀請", ich: "lade ein", du: "lädst ein", third: "lädt ein", plural: "laden ein" },
+  { verb: "abschließen", chinese: "鎖上；完成", ich: "schließe ab", du: "schließt ab", third: "schließt ab", plural: "schließen ab" },
+  { verb: "anbieten", chinese: "提供", ich: "biete an", du: "bietest an", third: "bietet an", plural: "bieten an" },
+  { verb: "anmelden", chinese: "報名；登記", ich: "melde an", du: "meldest an", third: "meldet an", plural: "melden an" },
+  { verb: "ablehnen", chinese: "拒絕", ich: "lehne ab", du: "lehnst ab", third: "lehnt ab", plural: "lehnen ab" },
+  { verb: "akzeptieren", chinese: "接受", ich: "akzeptiere", du: "akzeptierst", third: "akzeptiert", plural: "akzeptieren" },
+  { verb: "erreichen", chinese: "抵達；達成", ich: "erreiche", du: "erreichst", third: "erreicht", plural: "erreichen" },
+  { verb: "erhalten", chinese: "收到；獲得", ich: "erhalte", du: "erhältst", third: "erhält", plural: "erhalten" },
+  { verb: "enthalten", chinese: "包含", ich: "enthalte", du: "enthältst", third: "enthält", plural: "enthalten" },
+  { verb: "entstehen", chinese: "產生；形成", ich: "entstehe", du: "entstehst", third: "entsteht", plural: "entstehen" },
+  { verb: "bestehen", chinese: "通過；存在", ich: "bestehe", du: "bestehst", third: "besteht", plural: "bestehen" },
+  { verb: "beschreiben", chinese: "描述", ich: "beschreibe", du: "beschreibst", third: "beschreibt", plural: "beschreiben" },
+  { verb: "erklären", chinese: "解釋", ich: "erkläre", du: "erklärst", third: "erklärt", plural: "erklären" },
+  { verb: "behaupten", chinese: "主張；聲稱", ich: "behaupte", du: "behauptest", third: "behauptet", plural: "behaupten" },
+  { verb: "beweisen", chinese: "證明", ich: "beweise", du: "beweist", third: "beweist", plural: "beweisen" },
+];
+
+const verbPrincipalRows = [
+  { verb: "sein", chinese: "是", aux: "sein", participle: "gewesen", example: "Ich bin in Berlin gewesen.", ich: "war", du: "warst", third: "war", plural: "waren" },
+  { verb: "haben", chinese: "有", aux: "haben", participle: "gehabt", example: "Ich habe Zeit gehabt.", ich: "hatte", du: "hattest", third: "hatte", plural: "hatten" },
+  { verb: "werden", chinese: "變成；將會", aux: "sein", participle: "geworden", example: "Es ist kalt geworden.", ich: "wurde", du: "wurdest", third: "wurde", plural: "wurden" },
+  { verb: "gehen", chinese: "走；去", aux: "sein", participle: "gegangen", example: "Ich bin nach Hause gegangen.", ich: "ging", du: "gingst", third: "ging", plural: "gingen" },
+  { verb: "kommen", chinese: "來", aux: "sein", participle: "gekommen", example: "Sie ist spät gekommen.", ich: "kam", du: "kamst", third: "kam", plural: "kamen" },
+  { verb: "fahren", chinese: "搭車；開車；前往", aux: "sein", participle: "gefahren", example: "Wir sind nach Berlin gefahren.", ich: "fuhr", du: "fuhrst", third: "fuhr", plural: "fuhren" },
+  { verb: "bleiben", chinese: "停留；保持", aux: "sein", participle: "geblieben", example: "Ich bin zu Hause geblieben.", ich: "blieb", du: "bliebst", third: "blieb", plural: "blieben" },
+  { verb: "essen", chinese: "吃", aux: "haben", participle: "gegessen", example: "Ich habe Pizza gegessen.", ich: "aß", du: "aßest", third: "aß", plural: "aßen" },
+  { verb: "trinken", chinese: "喝", aux: "haben", participle: "getrunken", example: "Er hat Wasser getrunken.", ich: "trank", du: "trankst", third: "trank", plural: "tranken" },
+  { verb: "sprechen", chinese: "說；講", aux: "haben", participle: "gesprochen", example: "Wir haben Deutsch gesprochen.", ich: "sprach", du: "sprachst", third: "sprach", plural: "sprachen" },
+  { verb: "lesen", chinese: "閱讀", aux: "haben", participle: "gelesen", example: "Sie hat ein Buch gelesen.", ich: "las", du: "lasest", third: "las", plural: "lasen" },
+  { verb: "schreiben", chinese: "寫", aux: "haben", participle: "geschrieben", example: "Ich habe eine E-Mail geschrieben.", ich: "schrieb", du: "schriebst", third: "schrieb", plural: "schrieben" },
+  { verb: "finden", chinese: "找到；覺得", aux: "haben", participle: "gefunden", example: "Ich habe den Weg gefunden.", ich: "fand", du: "fandest", third: "fand", plural: "fanden" },
+  { verb: "helfen", chinese: "幫助", aux: "haben", participle: "geholfen", example: "Sie hat mir geholfen.", ich: "half", du: "halfst", third: "half", plural: "halfen" },
+  { verb: "nehmen", chinese: "拿；搭乘", aux: "haben", participle: "genommen", example: "Ich habe den Bus genommen.", ich: "nahm", du: "nahmst", third: "nahm", plural: "nahmen" },
+  { verb: "geben", chinese: "給；有", aux: "haben", participle: "gegeben", example: "Es hat ein Problem gegeben.", ich: "gab", du: "gabst", third: "gab", plural: "gaben" },
+  { verb: "wissen", chinese: "知道", aux: "haben", participle: "gewusst", example: "Ich habe das nicht gewusst.", ich: "wusste", du: "wusstest", third: "wusste", plural: "wussten" },
+  { verb: "denken", chinese: "想；認為", aux: "haben", participle: "gedacht", example: "Ich habe an dich gedacht.", ich: "dachte", du: "dachtest", third: "dachte", plural: "dachten" },
+  { verb: "bringen", chinese: "帶來", aux: "haben", participle: "gebracht", example: "Er hat das Buch mitgebracht.", ich: "brachte", du: "brachtest", third: "brachte", plural: "brachten" },
+  { verb: "kennen", chinese: "認識；知道", aux: "haben", participle: "gekannt", example: "Ich habe sie schon gekannt.", ich: "kannte", du: "kanntest", third: "kannte", plural: "kannten" },
+  { verb: "nennen", chinese: "稱呼；命名", aux: "haben", participle: "genannt", example: "Er hat den Preis genannt.", ich: "nannte", du: "nanntest", third: "nannte", plural: "nannten" },
+  { verb: "rennen", chinese: "跑", aux: "sein", participle: "gerannt", example: "Wir sind schnell gerannt.", ich: "rannte", du: "ranntest", third: "rannte", plural: "rannten" },
+  { verb: "beginnen", chinese: "開始", aux: "haben", participle: "begonnen", example: "Der Kurs hat begonnen.", ich: "begann", du: "begannst", third: "begann", plural: "begannen" },
+  { verb: "gewinnen", chinese: "贏得", aux: "haben", participle: "gewonnen", example: "Sie hat gewonnen.", ich: "gewann", du: "gewannst", third: "gewann", plural: "gewannen" },
+  { verb: "liegen", chinese: "躺；位於", aux: "haben", participle: "gelegen", example: "Das Hotel hat zentral gelegen.", ich: "lag", du: "lagst", third: "lag", plural: "lagen" },
+  { verb: "sitzen", chinese: "坐", aux: "haben", participle: "gesessen", example: "Wir haben im Café gesessen.", ich: "saß", du: "saßest", third: "saß", plural: "saßen" },
+  { verb: "stehen", chinese: "站；位於", aux: "haben", participle: "gestanden", example: "Ich habe an der Haltestelle gestanden.", ich: "stand", du: "standest", third: "stand", plural: "standen" },
+  { verb: "tragen", chinese: "穿戴；攜帶", aux: "haben", participle: "getragen", example: "Sie hat eine Jacke getragen.", ich: "trug", du: "trugst", third: "trug", plural: "trugen" },
+  { verb: "schlafen", chinese: "睡覺", aux: "haben", participle: "geschlafen", example: "Ich habe gut geschlafen.", ich: "schlief", du: "schliefst", third: "schlief", plural: "schliefen" },
+  { verb: "laufen", chinese: "跑；步行", aux: "sein", participle: "gelaufen", example: "Er ist zum Bahnhof gelaufen.", ich: "lief", du: "liefst", third: "lief", plural: "liefen" },
 ];
 
 const supplementalQuestionPools = {
@@ -824,8 +976,10 @@ const answersEl = document.querySelector("#answers");
 const feedbackEl = document.querySelector("#feedback");
 const nextButton = document.querySelector("#next");
 const restartButton = document.querySelector("#restart");
-const vocabTableEl = document.querySelector("#vocab-table");
-const verbTableEl = document.querySelector("#verb-table");
+const vocabLevelTablesEl = document.querySelector("#vocab-level-tables");
+const presentVerbTableEl = document.querySelector("#present-verb-table");
+const perfectVerbTableEl = document.querySelector("#perfect-verb-table");
+const preteriteVerbTableEl = document.querySelector("#preterite-verb-table");
 const downloadVocabButton = document.querySelector("#download-vocab");
 const downloadVerbsButton = document.querySelector("#download-verbs");
 
@@ -894,7 +1048,7 @@ function renderLesson() {
   startButton.textContent = `開始 ${activeLesson.level} ${activeLesson.stage}測驗`;
 
   lessonCardsEl.innerHTML = "";
-  activeLesson.cards.forEach((card) => {
+  [...activeLesson.cards, ...(learningExpansionCards[activeLesson.level] || [])].forEach((card) => {
     const article = document.createElement("article");
     article.className = "rule-card note";
     article.innerHTML = `
@@ -951,17 +1105,38 @@ function showResources() {
 }
 
 function renderResourceTables() {
-  vocabTableEl.innerHTML = vocabularyRows
-    .map((row) => `
-      <tr>
-        <td>${row.type}</td>
-        <td>${row.german}</td>
-        <td>${row.chinese}</td>
-      </tr>
+  const vocabByLevel = groupVocabularyByLevel();
+  vocabLevelTablesEl.innerHTML = levelOrder
+    .map((level) => `
+      <section>
+        <h4>${level} 單字表</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>類型</th>
+                <th>德文</th>
+                <th>中文</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${vocabByLevel[level]
+                .map((row) => `
+                  <tr>
+                    <td>${row.type}</td>
+                    <td>${row.german}</td>
+                    <td>${row.chinese}</td>
+                  </tr>
+                `)
+                .join("")}
+            </tbody>
+          </table>
+        </div>
+      </section>
     `)
     .join("");
 
-  verbTableEl.innerHTML = verbRows
+  presentVerbTableEl.innerHTML = verbRows
     .map((row) => `
       <tr>
         <td>${row.verb}</td>
@@ -973,6 +1148,39 @@ function renderResourceTables() {
       </tr>
     `)
     .join("");
+
+  perfectVerbTableEl.innerHTML = verbPrincipalRows
+    .map((row) => `
+      <tr>
+        <td>${row.verb}</td>
+        <td>${row.chinese}</td>
+        <td>${row.aux}</td>
+        <td>${row.participle}</td>
+        <td>${row.example}</td>
+      </tr>
+    `)
+    .join("");
+
+  preteriteVerbTableEl.innerHTML = verbPrincipalRows
+    .map((row) => `
+      <tr>
+        <td>${row.verb}</td>
+        <td>${row.chinese}</td>
+        <td>${row.ich}</td>
+        <td>${row.du}</td>
+        <td>${row.third}</td>
+        <td>${row.plural}</td>
+      </tr>
+    `)
+    .join("");
+}
+
+function groupVocabularyByLevel() {
+  return vocabularyRows.reduce((groups, row, index) => {
+    const level = row.level || levelOrder[Math.min(Math.floor(index / 52), levelOrder.length - 1)];
+    groups[level].push(row);
+    return groups;
+  }, { A1: [], A2: [], B1: [], B2: [] });
 }
 
 function downloadCsv(filename, rows, headers) {
@@ -1420,13 +1628,32 @@ downloadVocabButton.addEventListener("click", () => {
   ]);
 });
 downloadVerbsButton.addEventListener("click", () => {
-  downloadCsv("deutsch-verben.csv", verbRows, [
+  const rows = verbRows.map((row) => {
+    const principal = verbPrincipalRows.find((item) => item.verb === row.verb) || {};
+    return {
+      ...row,
+      aux: principal.aux || "",
+      participle: principal.participle || "",
+      preteriteIch: principal.ich || "",
+      preteriteDu: principal.du || "",
+      preteriteThird: principal.third || "",
+      preteritePlural: principal.plural || "",
+    };
+  });
+
+  downloadCsv("deutsch-verben.csv", rows, [
     { key: "verb", label: "動詞" },
     { key: "chinese", label: "中文" },
-    { key: "ich", label: "ich" },
-    { key: "du", label: "du" },
-    { key: "third", label: "er/sie/es" },
-    { key: "plural", label: "wir/sie/Sie" },
+    { key: "ich", label: "現在式 ich" },
+    { key: "du", label: "現在式 du" },
+    { key: "third", label: "現在式 er/sie/es" },
+    { key: "plural", label: "現在式 wir/sie/Sie" },
+    { key: "aux", label: "Perfekt 助動詞" },
+    { key: "participle", label: "Partizip II" },
+    { key: "preteriteIch", label: "Präteritum ich" },
+    { key: "preteriteDu", label: "Präteritum du" },
+    { key: "preteriteThird", label: "Präteritum er/sie/es" },
+    { key: "preteritePlural", label: "Präteritum wir/sie/Sie" },
   ]);
 });
 
