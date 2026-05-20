@@ -433,6 +433,89 @@ const dailyPhraseBanks = {
   ],
 };
 
+const textbookLessons = {
+  A1: {
+    初級: {
+      title: "Im Café",
+      text: "Anna ist in Taipei. Sie lernt Deutsch und geht am Morgen in ein Café. Sie sagt: Ich hätte gern einen Kaffee und ein Brötchen. Der Kaffee kostet 90 Dollar. Anna fragt: Kann ich mit Karte bezahlen?",
+      vocab: [["das Café", "咖啡店"], ["der Kaffee", "咖啡"], ["kosten", "花費"], ["bezahlen", "付款"], ["mit Karte", "用卡"]],
+      grammar: [["Ich hätte gern ...", "禮貌點餐句型，比 Ich will ... 自然。"], ["Verbposition 2", "主句變位動詞放第二位：Der Kaffee kostet 90 Dollar."], ["Nomen + Artikel", "單字要連冠詞一起背：der Kaffee, das Café."]],
+    },
+    中級: {
+      title: "Ein Tag in Taipei",
+      text: "Heute hat Ben Deutschkurs. Um 9 Uhr fährt er mit dem Bus zur Schule. Nach dem Kurs kauft er ein Buch. Am Abend lernt er zu Hause und schreibt eine kurze Nachricht an seine Freundin.",
+      vocab: [["der Deutschkurs", "德文課"], ["mit dem Bus", "搭公車"], ["die Schule", "學校"], ["die Nachricht", "訊息"], ["zu Hause", "在家"]],
+      grammar: [["Zeit am Satzanfang", "時間放句首時，動詞仍在第二位：Heute hat Ben ..."], ["mit + Dativ", "mit dem Bus 是固定常見交通表達。"], ["trennbare Verben", "einkaufen 類動詞會拆開：Er kauft ein."]],
+    },
+    進階: {
+      title: "Hinweis im Sprachkurs",
+      text: "Der Deutschkurs beginnt heute um 18 Uhr in Raum 204. Bitte bringen Sie das Kursbuch und einen Stift mit. Am Freitag findet der Kurs nicht statt, weil die Schule geschlossen ist.",
+      vocab: [["beginnen", "開始"], ["der Raum", "教室；房間"], ["mitbringen", "帶來"], ["stattfinden", "舉行"], ["geschlossen", "關閉的"]],
+      grammar: [["nicht stattfinden", "表示活動不舉行。"], ["weil-Satz", "weil 後面的變位動詞放句尾：weil die Schule geschlossen ist."], ["Bitte + Verb", "公告常用 Bitte bringen Sie ... 表示請攜帶。"]],
+    },
+  },
+  A2: {
+    初級: {
+      title: "Gestern im Restaurant",
+      text: "Gestern ist Mia mit ihrer Freundin ins Restaurant gegangen. Sie haben Pasta gegessen und Wasser getrunken. Danach hat Mia die Rechnung bezahlt. Sie ist um 21 Uhr nach Hause gefahren.",
+      vocab: [["gestern", "昨天"], ["das Restaurant", "餐廳"], ["die Rechnung", "帳單"], ["danach", "之後"], ["nach Hause fahren", "回家"]],
+      grammar: [["Perfekt mit haben", "essen, trinken, bezahlen 多用 haben。"], ["Perfekt mit sein", "gehen, fahren 表移動時常用 sein。"], ["Partizip II am Ende", "過去分詞通常放句尾：Sie haben Pasta gegessen."]],
+    },
+    中級: {
+      title: "Termin verschieben",
+      text: "Chen hat morgen einen Arzttermin, aber er muss länger arbeiten. Er ruft in der Praxis an und sagt: Guten Tag, ich möchte meinen Termin verschieben. Haben Sie am Freitagvormittag Zeit?",
+      vocab: [["der Arzttermin", "看診預約"], ["die Praxis", "診所"], ["anrufen", "打電話"], ["verschieben", "改期"], ["der Vormittag", "上午"]],
+      grammar: [["Modalverb + Infinitiv", "muss arbeiten, möchte verschieben。"], ["Akkusativ", "meinen Termin，陽性 der Termin 在 Akkusativ 變成 den/meinen。"], ["trennbares Verb", "anrufen: Er ruft in der Praxis an."]],
+    },
+    進階: {
+      title: "Neue Information",
+      text: "Der Kurs findet morgen nicht im Raum 204 statt, sondern im Raum 310. Die Teilnehmer sollen das Arbeitsbuch mitbringen. Wer nicht kommen kann, soll eine E-Mail an die Lehrerin schreiben.",
+      vocab: [["nicht ..., sondern ...", "不是...而是..."], ["der Teilnehmer", "參加者"], ["sollen", "應該；被要求"], ["das Arbeitsbuch", "練習本"], ["die Lehrerin", "女老師"]],
+      grammar: [["sondern", "用來修正前面的否定資訊。"], ["sollen", "表示規定或他人要求。"], ["Wer nicht kommen kann, soll ...", "公告中常見的條件句型。"]],
+    },
+  },
+  B1: {
+    初級: {
+      title: "Eine E-Mail an die Schule",
+      text: "Sehr geehrte Frau Weber, ich kann morgen leider nicht am Kurs teilnehmen, weil ich einen wichtigen Termin habe. Könnten Sie mir bitte die Hausaufgaben per E-Mail schicken? Vielen Dank im Voraus.",
+      vocab: [["teilnehmen", "參加"], ["wichtig", "重要的"], ["per E-Mail", "透過電子郵件"], ["im Voraus", "預先"], ["leider", "很遺憾"]],
+      grammar: [["formelle Anrede", "Sehr geehrte ... 用於正式 email。"], ["weil + Verb am Ende", "weil ich einen wichtigen Termin habe."], ["höfliche Bitte", "Könnten Sie mir bitte ...?"]],
+    },
+    中級: {
+      title: "Meinung zum Homeoffice",
+      text: "Meiner Meinung nach ist Homeoffice für viele Menschen praktisch. Man spart Zeit und kann ruhiger arbeiten. Trotzdem fehlt manchmal der direkte Kontakt zu Kolleginnen und Kollegen.",
+      vocab: [["meiner Meinung nach", "依我看"], ["praktisch", "實用的"], ["Zeit sparen", "節省時間"], ["trotzdem", "儘管如此"], ["der Kontakt", "接觸；聯絡"]],
+      grammar: [["Meinung äußern", "用 Meiner Meinung nach ... 開始表達意見。"], ["trotzdem", "表示轉折，後面主句動詞仍在第二位。"], ["zu + Dativ", "Kontakt zu Kolleginnen und Kollegen."]],
+    },
+    進階: {
+      title: "Problem mit der Reservierung",
+      text: "Ich habe ein Problem mit meiner Reservierung. Das Zimmer ist zwar günstig, aber es liegt sehr weit vom Bahnhof entfernt. Deshalb möchte ich wissen, ob ein anderes Zimmer frei ist.",
+      vocab: [["die Reservierung", "預訂"], ["zwar ..., aber ...", "雖然...但是..."], ["entfernt", "距離...遠"], ["deshalb", "因此"], ["frei", "空的；可用的"]],
+      grammar: [["zwar ... aber", "先讓步，再提出真正重點。"], ["indirekte Frage", "ob ein anderes Zimmer frei ist，動詞放句尾。"], ["deshalb + Verbposition 2", "Deshalb möchte ich ..."]],
+    },
+  },
+  B2: {
+    初級: {
+      title: "Öffentliche Verkehrsmittel",
+      text: "Öffentliche Verkehrsmittel sind oft günstiger und umweltfreundlicher als das Auto. Ein Nachteil ist jedoch, dass die Fahrt manchmal länger dauert und man weniger flexibel ist.",
+      vocab: [["öffentlich", "公共的"], ["umweltfreundlich", "環保的"], ["der Nachteil", "缺點"], ["jedoch", "然而"], ["flexibel", "彈性的"]],
+      grammar: [["Komparativ", "günstiger, umweltfreundlicher, länger。"], ["dass-Satz", "dass 後面動詞放句尾。"], ["Vor- und Nachteile", "B2 論述常需平衡優缺點。"]],
+    },
+    中級: {
+      title: "Digitale Angebote",
+      text: "Digitale Angebote erleichtern viele Alltagsaufgaben. Allerdings sollten ältere Menschen nicht ausgeschlossen werden. Deshalb ist persönliche Beratung weiterhin wichtig.",
+      vocab: [["digital", "數位的"], ["erleichtern", "使...更容易"], ["ausschließen", "排除"], ["die Beratung", "諮詢"], ["weiterhin", "仍然"]],
+      grammar: [["Passividee", "nicht ausgeschlossen werden 表示不應被排除。"], ["allerdings", "正式轉折詞，比 aber 更書面。"], ["Nominalstil", "persönliche Beratung 是 B2 常見名詞化表達。"]],
+    },
+    進階: {
+      title: "Datenschutz und Komfort",
+      text: "Viele Apps sind bequem, sammeln aber persönliche Daten. Einerseits profitieren Nutzer von schnellen Dienstleistungen, andererseits müssen Datenschutz und Transparenz garantiert werden.",
+      vocab: [["bequem", "方便的；舒適的"], ["persönliche Daten", "個人資料"], ["profitieren von", "受益於"], ["die Dienstleistung", "服務"], ["die Transparenz", "透明度"]],
+      grammar: [["einerseits / andererseits", "用來平衡兩方觀點。"], ["müssen + Partizip werden", "garantiert werden 表示被保障。"], ["abstrakte Nomen", "Datenschutz、Transparenz 是 B2 常見抽象名詞。"]],
+    },
+  },
+};
+
 const learningExpansionCards = {
   A1: [
     {
@@ -1029,6 +1112,36 @@ const verbPrincipalRows = [
   { verb: "laufen", chinese: "跑；步行", aux: "sein", participle: "gelaufen", example: "Er ist zum Bahnhof gelaufen.", ich: "lief", du: "liefst", third: "lief", plural: "liefen" },
 ];
 
+const extraVerbPrincipalRows = [
+  { verb: "müssen", aux: "haben", participle: "gemusst", ich: "musste", du: "musstest", third: "musste", plural: "mussten" },
+  { verb: "können", aux: "haben", participle: "gekonnt", ich: "konnte", du: "konntest", third: "konnte", plural: "konnten" },
+  { verb: "wollen", aux: "haben", participle: "gewollt", ich: "wollte", du: "wolltest", third: "wollte", plural: "wollten" },
+  { verb: "dürfen", aux: "haben", participle: "gedurft", ich: "durfte", du: "durftest", third: "durfte", plural: "durften" },
+  { verb: "sollen", aux: "haben", participle: "gesollt", ich: "sollte", du: "solltest", third: "sollte", plural: "sollten" },
+  { verb: "ankommen", aux: "sein", participle: "angekommen", ich: "kam an", du: "kamst an", third: "kam an", plural: "kamen an" },
+  { verb: "abfahren", aux: "sein", participle: "abgefahren", ich: "fuhr ab", du: "fuhrst ab", third: "fuhr ab", plural: "fuhren ab" },
+  { verb: "aufstehen", aux: "sein", participle: "aufgestanden", ich: "stand auf", du: "standest auf", third: "stand auf", plural: "standen auf" },
+  { verb: "anrufen", aux: "haben", participle: "angerufen", ich: "rief an", du: "riefst an", third: "rief an", plural: "riefen an" },
+  { verb: "mitbringen", aux: "haben", participle: "mitgebracht", ich: "brachte mit", du: "brachtest mit", third: "brachte mit", plural: "brachten mit" },
+  { verb: "teilnehmen", aux: "haben", participle: "teilgenommen", ich: "nahm teil", du: "nahmst teil", third: "nahm teil", plural: "nahmen teil" },
+  { verb: "unterschreiben", aux: "haben", participle: "unterschrieben", ich: "unterschrieb", du: "unterschriebst", third: "unterschrieb", plural: "unterschrieben" },
+  { verb: "vorbereiten", aux: "haben", participle: "vorbereitet", ich: "bereitete vor", du: "bereitetest vor", third: "bereitete vor", plural: "bereiteten vor" },
+  { verb: "empfehlen", aux: "haben", participle: "empfohlen", ich: "empfahl", du: "empfahlst", third: "empfahl", plural: "empfahlen" },
+  { verb: "verlieren", aux: "haben", participle: "verloren", ich: "verlor", du: "verlorst", third: "verlor", plural: "verloren" },
+  { verb: "entscheiden", aux: "haben", participle: "entschieden", ich: "entschied", du: "entschiedest", third: "entschied", plural: "entschieden" },
+  { verb: "vergleichen", aux: "haben", participle: "verglichen", ich: "verglich", du: "verglichst", third: "verglich", plural: "verglichen" },
+  { verb: "heißen", aux: "haben", participle: "geheißen", ich: "hieß", du: "hießest", third: "hieß", plural: "hießen" },
+  { verb: "einladen", aux: "haben", participle: "eingeladen", ich: "lud ein", du: "ludst ein", third: "lud ein", plural: "luden ein" },
+  { verb: "abschließen", aux: "haben", participle: "abgeschlossen", ich: "schloss ab", du: "schlossest ab", third: "schloss ab", plural: "schlossen ab" },
+  { verb: "anbieten", aux: "haben", participle: "angeboten", ich: "bot an", du: "botest an", third: "bot an", plural: "boten an" },
+  { verb: "erhalten", aux: "haben", participle: "erhalten", ich: "erhielt", du: "erhieltst", third: "erhielt", plural: "erhielten" },
+  { verb: "enthalten", aux: "haben", participle: "enthalten", ich: "enthielt", du: "enthieltst", third: "enthielt", plural: "enthielten" },
+  { verb: "entstehen", aux: "sein", participle: "entstanden", ich: "entstand", du: "entstandest", third: "entstand", plural: "entstanden" },
+  { verb: "bestehen", aux: "haben", participle: "bestanden", ich: "bestand", du: "bestandest", third: "bestand", plural: "bestanden" },
+  { verb: "beschreiben", aux: "haben", participle: "beschrieben", ich: "beschrieb", du: "beschriebst", third: "beschrieb", plural: "beschrieben" },
+  { verb: "beweisen", aux: "haben", participle: "bewiesen", ich: "bewies", du: "bewiesest", third: "bewies", plural: "bewiesen" },
+];
+
 const supplementalQuestionPools = {
   A1: [
     { type: "choice", prompt: "___ Mann", translation: "男人", options: ["der", "die", "das"], answer: "der", hint: "男性人物通常是陽性：der Mann。" },
@@ -1135,6 +1248,9 @@ const levelTextEl = document.querySelector("#level-text");
 const lessonBadgeEl = document.querySelector("#lesson-badge");
 const lessonTitleEl = document.querySelector("#lesson-title");
 const lessonDescriptionEl = document.querySelector("#lesson-description");
+const lessonReadingEl = document.querySelector("#lesson-reading");
+const lessonVocabularyEl = document.querySelector("#lesson-vocabulary");
+const lessonGrammarEl = document.querySelector("#lesson-grammar");
 const lessonCardsEl = document.querySelector("#lesson-cards");
 const dailyPhrasesEl = document.querySelector("#daily-phrases");
 const sourceNoteEl = document.querySelector("#source-note");
@@ -1230,6 +1346,7 @@ function renderLesson() {
   lessonDescriptionEl.textContent = activeLesson.courseSummary;
   sourceNoteEl.textContent = activeLesson.sourceNote;
   startButton.textContent = `開始 ${activeLesson.level} ${activeLesson.stage}測驗`;
+  renderTextbookLesson(activeLesson);
 
   lessonCardsEl.innerHTML = "";
   getLessonCards(activeLesson).forEach((card) => {
@@ -1292,6 +1409,7 @@ function renderResourceTables() {
   if (!vocabLevelTablesEl || !presentVerbTableEl || !perfectVerbTableEl || !preteriteVerbTableEl) return;
 
   const vocabByLevel = groupVocabularyByLevel();
+  const principalRows = getAllVerbPrincipalRows();
   vocabLevelTablesEl.innerHTML = levelOrder
     .map((level) => `
       <section>
@@ -1335,7 +1453,7 @@ function renderResourceTables() {
     `)
     .join("");
 
-  perfectVerbTableEl.innerHTML = verbPrincipalRows
+  perfectVerbTableEl.innerHTML = principalRows
     .map((row) => `
       <tr>
         <td>${row.verb}</td>
@@ -1347,7 +1465,7 @@ function renderResourceTables() {
     `)
     .join("");
 
-  preteriteVerbTableEl.innerHTML = verbPrincipalRows
+  preteriteVerbTableEl.innerHTML = principalRows
     .map((row) => `
       <tr>
         <td>${row.verb}</td>
@@ -1361,12 +1479,172 @@ function renderResourceTables() {
     .join("");
 }
 
+function getAllVerbPrincipalRows() {
+  return verbRows.map(getVerbPrincipalRow);
+}
+
+function getVerbPrincipalRow(row) {
+  const override = [...verbPrincipalRows, ...extraVerbPrincipalRows].find((item) => item.verb === row.verb);
+  if (override) {
+    return {
+      ...row,
+      ...override,
+      example: override.example || buildPerfectExample(row, override),
+    };
+  }
+
+  const generated = {
+    aux: getDefaultAuxiliary(row.verb),
+    participle: buildRegularParticiple(row.verb),
+    ...buildWeakPreteriteForms(row.verb),
+  };
+
+  return {
+    ...row,
+    ...generated,
+    example: buildPerfectExample(row, generated),
+  };
+}
+
+function getDefaultAuxiliary(verb) {
+  const seinVerbs = new Set(["gehen", "fahren", "kommen", "bleiben", "laufen", "rennen", "ankommen", "abfahren", "aufstehen", "entstehen"]);
+  return seinVerbs.has(verb) ? "sein" : "haben";
+}
+
+function buildPerfectExample(row, principal) {
+  const subject = principal.aux === "sein" ? "Ich bin" : "Ich habe";
+  return `${subject} ${principal.participle}.`;
+}
+
+function buildRegularParticiple(verb) {
+  const separable = splitSeparableVerb(verb);
+  if (separable) {
+    return `${separable.prefix}${buildBaseParticiple(separable.base, true)}`;
+  }
+
+  return buildBaseParticiple(verb, false);
+}
+
+function buildBaseParticiple(verb, isSeparableBase) {
+  if (verb.endsWith("ieren")) return `${getVerbStem(verb)}t`;
+
+  const stem = getVerbStem(verb);
+  const ending = needsExtraE(stem) ? "et" : "t";
+  if (!isSeparableBase && hasInseparablePrefix(verb)) return `${stem}${ending}`;
+  return `ge${stem}${ending}`;
+}
+
+function buildWeakPreteriteForms(verb) {
+  const separable = splitSeparableVerb(verb);
+  const base = separable?.base || verb;
+  const stem = getVerbStem(base);
+  const marker = needsExtraE(stem) ? "ete" : "te";
+  const ich = `${stem}${marker}`;
+  const du = `${ich}st`;
+  const third = ich;
+  const plural = `${stem}${marker}n`;
+
+  if (!separable) return { ich, du, third, plural };
+
+  return {
+    ich: `${ich} ${separable.prefix}`,
+    du: `${du} ${separable.prefix}`,
+    third: `${third} ${separable.prefix}`,
+    plural: `${plural} ${separable.prefix}`,
+  };
+}
+
+function splitSeparableVerb(verb) {
+  const prefixes = ["zusammen", "vor", "mit", "aus", "ein", "auf", "an", "ab", "um"];
+  const prefix = prefixes.find((item) => verb.startsWith(item) && verb.length > item.length + 3);
+  if (!prefix) return null;
+  return { prefix, base: verb.slice(prefix.length) };
+}
+
+function hasInseparablePrefix(verb) {
+  return /^(be|emp|ent|er|ge|miss|ver|zer|über|unter|wider|wieder)/.test(verb);
+}
+
+function getVerbStem(verb) {
+  if (verb.endsWith("eln")) return verb.slice(0, -1);
+  if (verb.endsWith("ern")) return verb.slice(0, -1);
+  if (verb.endsWith("en")) return verb.slice(0, -2);
+  if (verb.endsWith("n")) return verb.slice(0, -1);
+  return verb;
+}
+
+function needsExtraE(stem) {
+  return /[dt]$/.test(stem);
+}
+
 function groupVocabularyByLevel() {
   return vocabularyRows.reduce((groups, row, index) => {
-    const level = row.level || levelOrder[Math.min(Math.floor(index / 52), levelOrder.length - 1)];
+    const level = row.level || inferVocabularyLevel(row, index);
     groups[level].push(row);
     return groups;
   }, { A1: [], A2: [], B1: [], B2: [] });
+}
+
+function inferVocabularyLevel(row, index) {
+  const a1Words = new Set([
+    "der Tisch", "die Lampe", "das Buch", "der Mann", "die Frau", "das Kind",
+    "die Zeitung", "der Montag", "das Mädchen", "das Hotel", "wohnen", "lernen",
+    "kaufen", "gehen", "fahren", "essen", "trinken", "krank", "pünktlich",
+    "wichtig", "der Bahnhof", "der Flughafen", "die Haltestelle", "die Fahrkarte",
+    "der Fahrplan", "der Reisepass", "das Gepäck", "das Frühstück", "das Restaurant",
+    "die Apotheke", "das Krankenhaus", "der Supermarkt", "die Bäckerei", "der Markt",
+    "der Preis", "die Größe", "die Farbe", "die Familie", "der Freund",
+    "die Freundin", "der Nachbar", "die Freizeit", "das Hobby", "der Sport",
+    "das Kino", "das Museum", "die Hausaufgabe", "fragen", "antworten",
+    "verstehen", "wiederholen", "helfen", "suchen", "finden", "freundlich",
+    "höflich", "günstig", "teuer", "bequem", "ruhig", "laut", "schnell",
+    "langsam", "weil", "zuerst", "danach",
+  ]);
+  const a2Words = new Set([
+    "der Termin", "die Verspätung", "das Arbeitsbuch", "die Wohnung", "die Miete",
+    "die Rechnung", "die Anmeldung", "der Arbeitsplatz", "die Erfahrung",
+    "die Ausbildung", "das Studium", "verschieben", "vereinbaren", "ankommen",
+    "abfahren", "buchen", "bezahlen", "bestellen", "empfehlen", "verlieren",
+    "reservieren", "stornieren", "umbuchen", "ausfüllen", "unterschreiben",
+    "teilnehmen", "vorbereiten", "die Reservierung", "die Unterkunft",
+    "die Rezeption", "die Speisekarte", "das Trinkgeld", "der Arzttermin",
+    "die Beschwerden", "das Medikament", "der Rabatt", "der Kollege",
+    "die Kollegin", "die Sehenswürdigkeit", "die Universität", "der Unterricht",
+    "die Prüfung", "die Präsentation", "das Gehalt", "die Arbeitszeit",
+    "die Besprechung", "die Aufgabe", "die Nachricht", "die E-Mail",
+    "das Formular", "die Unterschrift", "dringend", "zuverlässig", "möglich",
+    "auch", "deshalb", "trotzdem", "außerdem",
+  ]);
+  const b1Words = new Set([
+    "der Vertrag", "die Behörde", "der Antrag", "die Krankenversicherung",
+    "die Umwelt", "die Meinung", "der Vorteil", "der Nachteil", "die Lösung",
+    "das Problem", "kündigen", "begründen", "vergleichen", "diskutieren",
+    "zusammenfassen", "dringend", "zuverlässig", "verantwortlich",
+    "meiner Meinung nach", "zum Beispiel", "die Bewerbung", "der Lebenslauf",
+    "das Vorstellungsgespräch", "die Frist", "das Projekt", "die Entscheidung",
+    "die Erlaubnis", "die Möglichkeit", "die Chance", "die Kultur",
+    "präsentieren", "organisieren", "entscheiden", "begrenzen", "verbessern",
+    "schließlich",
+  ]);
+  const b2Words = new Set([
+    "der Klimawandel", "die Nachhaltigkeit", "die Digitalisierung", "die Gesellschaft",
+    "das Argument", "die Verantwortung", "die Voraussetzung", "die Folge",
+    "die Ursache", "der Zusammenhang", "die Entwicklung", "die Veränderung",
+    "die Fähigkeit", "die Herausforderung", "die Sicherheit", "die Ernährung",
+    "die Energie", "die Mobilität", "der Datenschutz", "die Gleichberechtigung",
+    "die Integration", "die Politik", "die Wirtschaft", "berücksichtigen",
+    "vermeiden", "verbessern", "unterstützen", "nachhaltig", "kompliziert",
+    "sinnvoll", "notwendig", "freiwillig", "öffentlich", "privat", "aktuell",
+    "obwohl", "damit", "sobald", "während", "einerseits", "andererseits",
+    "allerdings",
+  ]);
+
+  if (a1Words.has(row.german)) return "A1";
+  if (a2Words.has(row.german)) return "A2";
+  if (b1Words.has(row.german)) return "B1";
+  if (b2Words.has(row.german)) return "B2";
+  if (index < 60) return "A2";
+  return "B1";
 }
 
 function downloadCsv(filename, rows, headers) {
@@ -1562,6 +1840,24 @@ function getLessonCards(lesson) {
   const generalCards = learningExpansionCards[lesson.level] || [];
   const baseCards = lesson.isGeneratedTest ? [] : lesson.cards.slice(0, 2);
   return [...stageCards, ...baseCards, ...generalCards.slice(0, 1)];
+}
+
+function renderTextbookLesson(lesson) {
+  const content = textbookLessons[lesson.level]?.[lesson.stage];
+  if (!content) return;
+
+  lessonReadingEl.innerHTML = `
+    <h3>${content.title}</h3>
+    <p>${content.text}</p>
+  `;
+
+  lessonVocabularyEl.innerHTML = content.vocab
+    .map(([german, chinese]) => `<div><strong>${german}</strong><br><span>${chinese}</span></div>`)
+    .join("");
+
+  lessonGrammarEl.innerHTML = content.grammar
+    .map(([title, body]) => `<div><strong>${title}</strong><br><span>${body}</span></div>`)
+    .join("");
 }
 
 function rotateArray(items, offset) {
@@ -1833,15 +2129,15 @@ downloadVocabButton.addEventListener("click", () => {
 });
 downloadVerbsButton.addEventListener("click", () => {
   const rows = verbRows.map((row) => {
-    const principal = verbPrincipalRows.find((item) => item.verb === row.verb) || {};
+    const principal = getVerbPrincipalRow(row);
     return {
       ...row,
-      aux: principal.aux || "",
-      participle: principal.participle || "",
-      preteriteIch: principal.ich || "",
-      preteriteDu: principal.du || "",
-      preteriteThird: principal.third || "",
-      preteritePlural: principal.plural || "",
+      aux: principal.aux,
+      participle: principal.participle,
+      preteriteIch: principal.ich,
+      preteriteDu: principal.du,
+      preteriteThird: principal.third,
+      preteritePlural: principal.plural,
     };
   });
 

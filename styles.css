@@ -300,6 +300,62 @@ button:disabled {
   margin-top: 18px;
 }
 
+.textbook-reading {
+  margin-top: 20px;
+  border-left: 5px solid var(--blue);
+  border-radius: 8px;
+  padding: 18px;
+  background: #fff;
+}
+
+.textbook-reading h3 {
+  margin: 0 0 10px;
+  font-size: 1.12rem;
+}
+
+.textbook-reading p {
+  margin: 0;
+  line-height: 1.75;
+}
+
+.textbook-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.textbook-box {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+}
+
+.textbook-box h3 {
+  margin: 0 0 12px;
+  font-size: 1.02rem;
+}
+
+.mini-vocab-list,
+.grammar-list {
+  display: grid;
+  gap: 10px;
+}
+
+.mini-vocab-list div,
+.grammar-list div {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  line-height: 1.55;
+}
+
+.mini-vocab-list div:first-child,
+.grammar-list div:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
 .rule-card {
   border-left: 5px solid currentColor;
   border-radius: 8px;
@@ -667,6 +723,10 @@ td {
 
   .course-nav {
     position: static;
+  }
+
+  .textbook-grid {
+    grid-template-columns: 1fr;
   }
 
   .article-orbit {
