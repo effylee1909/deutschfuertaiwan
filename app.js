@@ -1095,6 +1095,127 @@ const vocabularyRows = [
   { type: "副詞/連接詞", german: "schließlich", chinese: "最後；終於" },
 ];
 
+const nounPluralMap = {
+  "der Tisch": "die Tische",
+  "die Lampe": "die Lampen",
+  "das Buch": "die Bücher",
+  "der Mann": "die Männer",
+  "die Frau": "die Frauen",
+  "das Kind": "die Kinder",
+  "die Zeitung": "die Zeitungen",
+  "der Montag": "die Montage",
+  "das Mädchen": "die Mädchen",
+  "das Hotel": "die Hotels",
+  "der Termin": "die Termine",
+  "die Verspätung": "die Verspätungen",
+  "das Arbeitsbuch": "die Arbeitsbücher",
+  "die Wohnung": "die Wohnungen",
+  "die Miete": "die Mieten",
+  "der Vertrag": "die Verträge",
+  "die Rechnung": "die Rechnungen",
+  "die Behörde": "die Behörden",
+  "der Antrag": "die Anträge",
+  "die Anmeldung": "die Anmeldungen",
+  "die Krankenversicherung": "die Krankenversicherungen",
+  "der Arbeitsplatz": "die Arbeitsplätze",
+  "die Erfahrung": "die Erfahrungen",
+  "die Ausbildung": "die Ausbildungen",
+  "das Studium": "die Studien",
+  "die Umwelt": "-",
+  "der Klimawandel": "-",
+  "die Nachhaltigkeit": "-",
+  "die Digitalisierung": "-",
+  "die Gesellschaft": "die Gesellschaften",
+  "die Meinung": "die Meinungen",
+  "das Argument": "die Argumente",
+  "der Vorteil": "die Vorteile",
+  "der Nachteil": "die Nachteile",
+  "die Lösung": "die Lösungen",
+  "das Problem": "die Probleme",
+  "der Bahnhof": "die Bahnhöfe",
+  "der Flughafen": "die Flughäfen",
+  "die Haltestelle": "die Haltestellen",
+  "die Fahrkarte": "die Fahrkarten",
+  "der Fahrplan": "die Fahrpläne",
+  "der Reisepass": "die Reisepässe",
+  "das Gepäck": "-",
+  "die Reservierung": "die Reservierungen",
+  "die Unterkunft": "die Unterkünfte",
+  "die Rezeption": "die Rezeptionen",
+  "das Frühstück": "die Frühstücke",
+  "das Restaurant": "die Restaurants",
+  "die Speisekarte": "die Speisekarten",
+  "das Trinkgeld": "die Trinkgelder",
+  "die Apotheke": "die Apotheken",
+  "das Krankenhaus": "die Krankenhäuser",
+  "der Arzttermin": "die Arzttermine",
+  "die Beschwerden": "die Beschwerden",
+  "das Medikament": "die Medikamente",
+  "der Supermarkt": "die Supermärkte",
+  "die Bäckerei": "die Bäckereien",
+  "der Markt": "die Märkte",
+  "der Preis": "die Preise",
+  "der Rabatt": "die Rabatte",
+  "die Größe": "die Größen",
+  "die Farbe": "die Farben",
+  "die Quittung": "die Quittungen",
+  "die Familie": "die Familien",
+  "der Freund": "die Freunde",
+  "die Freundin": "die Freundinnen",
+  "der Kollege": "die Kollegen",
+  "die Kollegin": "die Kolleginnen",
+  "der Nachbar": "die Nachbarn",
+  "die Freizeit": "-",
+  "das Hobby": "die Hobbys",
+  "der Sport": "-",
+  "das Kino": "die Kinos",
+  "das Museum": "die Museen",
+  "die Sehenswürdigkeit": "die Sehenswürdigkeiten",
+  "die Universität": "die Universitäten",
+  "der Unterricht": "-",
+  "die Prüfung": "die Prüfungen",
+  "die Präsentation": "die Präsentationen",
+  "die Hausaufgabe": "die Hausaufgaben",
+  "die Bewerbung": "die Bewerbungen",
+  "der Lebenslauf": "die Lebensläufe",
+  "das Vorstellungsgespräch": "die Vorstellungsgespräche",
+  "das Gehalt": "die Gehälter",
+  "die Arbeitszeit": "die Arbeitszeiten",
+  "die Besprechung": "die Besprechungen",
+  "die Aufgabe": "die Aufgaben",
+  "die Frist": "die Fristen",
+  "das Projekt": "die Projekte",
+  "die Verantwortung": "die Verantwortungen",
+  "die Entscheidung": "die Entscheidungen",
+  "die Nachricht": "die Nachrichten",
+  "die E-Mail": "die E-Mails",
+  "das Formular": "die Formulare",
+  "die Unterschrift": "die Unterschriften",
+  "die Erlaubnis": "die Erlaubnisse",
+  "die Voraussetzung": "die Voraussetzungen",
+  "die Folge": "die Folgen",
+  "die Ursache": "die Ursachen",
+  "der Zusammenhang": "die Zusammenhänge",
+  "die Entwicklung": "die Entwicklungen",
+  "die Veränderung": "die Veränderungen",
+  "die Möglichkeit": "die Möglichkeiten",
+  "die Fähigkeit": "die Fähigkeiten",
+  "die Herausforderung": "die Herausforderungen",
+  "die Chance": "die Chancen",
+  "die Sicherheit": "die Sicherheiten",
+  "die Gesundheit": "-",
+  "die Ernährung": "-",
+  "die Bewegung": "die Bewegungen",
+  "die Energie": "die Energien",
+  "die Mobilität": "-",
+  "der Datenschutz": "-",
+  "die Gleichberechtigung": "-",
+  "die Integration": "die Integrationen",
+  "die Kultur": "die Kulturen",
+  "die Politik": "-",
+  "die Wirtschaft": "die Wirtschaften",
+};
+
 const verbRows = [
   { verb: "sein", chinese: "是", ich: "bin", du: "bist", third: "ist", plural: "sind" },
   { verb: "haben", chinese: "有", ich: "habe", du: "hast", third: "hat", plural: "haben" },
@@ -1573,17 +1694,18 @@ function renderResourceTables() {
           <table>
             <thead>
               <tr>
-                <th>類型</th>
                 <th>德文</th>
+                <th>詞性</th>
                 <th>中文</th>
               </tr>
             </thead>
             <tbody>
               ${vocabByLevel[level]
+                .map((row) => formatVocabularyRow(row))
                 .map((row) => `
                   <tr>
-                    <td>${row.type}</td>
                     <td>${row.german}</td>
+                    <td>${row.partOfSpeech}</td>
                     <td>${row.chinese}</td>
                   </tr>
                 `)
@@ -1632,6 +1754,32 @@ function renderResourceTables() {
       </tr>
     `)
     .join("");
+}
+
+function formatVocabularyRows(rows) {
+  return rows.map((row) => formatVocabularyRow(row));
+}
+
+function formatVocabularyRow(row) {
+  const partOfSpeech = getPartOfSpeechAbbreviation(row.type);
+  const plural = row.type === "名詞" ? nounPluralMap[row.german] : "";
+  const german = plural ? `${row.german} / Pl. ${plural}` : row.german;
+  return {
+    german,
+    partOfSpeech,
+    chinese: row.chinese,
+  };
+}
+
+function getPartOfSpeechAbbreviation(type) {
+  const abbreviations = {
+    名詞: "N.",
+    動詞: "V.",
+    形容詞: "Adj.",
+    "副詞/連接詞": "Adv./Konj.",
+  };
+
+  return abbreviations[type] || type;
 }
 
 function getAllVerbPrincipalRows() {
@@ -2664,9 +2812,9 @@ resetProgressButton.addEventListener("click", () => {
   renderDashboard();
 });
 downloadVocabButton.addEventListener("click", () => {
-  downloadCsv("deutsch-vokabeln.csv", vocabularyRows, [
-    { key: "type", label: "類型" },
+  downloadCsv("deutsch-vokabeln.csv", formatVocabularyRows(vocabularyRows), [
     { key: "german", label: "德文" },
+    { key: "partOfSpeech", label: "詞性" },
     { key: "chinese", label: "中文" },
   ]);
 });
