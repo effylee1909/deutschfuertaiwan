@@ -184,6 +184,36 @@ button:disabled {
   margin-top: 18px;
 }
 
+.level-nav-group {
+  display: grid;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.level-nav-group:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.level-nav-group h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.level-nav-section {
+  display: grid;
+  gap: 8px;
+}
+
+.level-nav-section h4 {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
 .resource-tab {
   width: 100%;
   min-height: 50px;

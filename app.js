@@ -516,6 +516,185 @@ const learningExpansionCards = {
   ],
 };
 
+const stageLearningCards = {
+  A1: {
+    初級: [
+      {
+        tag: "A1 初級",
+        title: "先建立句子骨架",
+        body: "先掌握自我介紹、問價格、問地點、點餐這些最常用句型。重點是能立刻說出完整短句。",
+        example: "Ich heiße Lin. / Wo ist der Bahnhof?",
+      },
+      {
+        tag: "核心",
+        title: "sein / haben / wohnen / kommen",
+        body: "A1 初級先把最常用動詞變位背熟，因為幾乎每個對話都會用到。",
+        example: "ich bin, ich habe, ich wohne, ich komme",
+      },
+    ],
+    中級: [
+      {
+        tag: "A1 中級",
+        title: "動詞第二位與時間位置",
+        body: "開始練習把 heute、morgen、um 8 Uhr 放到句首。時間放前面時，動詞仍然在第二位。",
+        example: "Heute lerne ich Deutsch. / Morgen arbeite ich.",
+      },
+      {
+        tag: "練習",
+        title: "從單字變成小句子",
+        body: "不要只背 Bahnhof、Kaffee、Zimmer，要練習把單字放進可用句子。",
+        example: "Ich suche den Bahnhof. / Ich möchte einen Kaffee.",
+      },
+    ],
+    進階: [
+      {
+        tag: "A1 進階",
+        title: "短訊與公告閱讀",
+        body: "A1 檢定閱讀常出現營業時間、課程通知、簡短訊息。先找時間、地點和動作，不要逐字翻譯。",
+        example: "geöffnet, geschlossen, beginnt um 18 Uhr",
+      },
+      {
+        tag: "考試",
+        title: "是非和選擇題要看關鍵詞",
+        body: "看到 nicht、nur、heute、morgen、Samstag 這類詞要特別注意，答案常藏在附近。",
+        example: "Samstag geschlossen. / nur bis 14 Uhr",
+      },
+    ],
+  },
+  A2: {
+    初級: [
+      {
+        tag: "A2 初級",
+        title: "完成式 Perfekt 是口語過去的核心",
+        body: "先判斷助動詞 haben 或 sein，再把 Partizip II 放句尾。",
+        example: "Ich habe gelernt. / Ich bin gefahren.",
+      },
+      {
+        tag: "句尾",
+        title: "過去分詞放最後",
+        body: "中文沒有這種句尾壓軸感，台灣學生常漏掉句尾的 Partizip II。",
+        example: "Ich habe gestern Pizza gegessen.",
+      },
+    ],
+    中級: [
+      {
+        tag: "A2 中級",
+        title: "處理日常任務",
+        body: "A2 要能改預約、訂房、付款、問路、說明自己不能去的原因。",
+        example: "Ich möchte den Termin verschieben.",
+      },
+      {
+        tag: "Dativ",
+        title: "mit / nach / bei / von / zu",
+        body: "這些介系詞常接 Dativ，建議連介系詞和名詞冠詞一起背。",
+        example: "mit dem Bus, zu der Ärztin, nach der Arbeit",
+      },
+    ],
+    進階: [
+      {
+        tag: "A2 進階",
+        title: "讀懂較長通知",
+        body: "A2 閱讀會出現改時間、換教室、只營業到某時間等資訊。",
+        example: "nicht am Dienstag, sondern am Donnerstag",
+      },
+      {
+        tag: "語序",
+        title: "weil 子句動詞放最後",
+        body: "說原因時常用 weil。記得變位動詞會跑到子句最後。",
+        example: "weil ich arbeiten muss",
+      },
+    ],
+  },
+  B1: {
+    初級: [
+      {
+        tag: "B1 初級",
+        title: "把理由說完整",
+        body: "B1 不只回答資訊，還要能說明原因、描述情況、提出簡單請求。",
+        example: "Ich kann nicht kommen, weil ich länger arbeiten muss.",
+      },
+      {
+        tag: "Email",
+        title: "先說目的，再說原因",
+        body: "寫信時第一句先講目的，第二句說原因，最後提出請求。",
+        example: "Ich schreibe Ihnen, weil ich den Termin verschieben möchte.",
+      },
+    ],
+    中級: [
+      {
+        tag: "B1 中級",
+        title: "表達意見與同意/不同意",
+        body: "開始練習 Meinung、einverstanden、Vorteil、Nachteil 這些討論詞。",
+        example: "Meiner Meinung nach ist das sinnvoll.",
+      },
+      {
+        tag: "連接",
+        title: "用 deshalb / trotzdem 連接句子",
+        body: "B1 的句子需要邏輯。用 deshalb 表示結果，用 trotzdem 表示轉折。",
+        example: "Der Zug hat Verspätung, deshalb komme ich später.",
+      },
+    ],
+    進階: [
+      {
+        tag: "B1 進階",
+        title: "閱讀時抓態度和目的",
+        body: "B1 閱讀常問作者想做什麼、問題是什麼、為什麼改時間。不要只找單字，要看整句功能。",
+        example: "Könnten wir den Termin auf Freitag verschieben?",
+      },
+      {
+        tag: "口說",
+        title: "用三句完成一個回應",
+        body: "先表態，再說原因，最後給建議或下一步。",
+        example: "Das passt mir leider nicht. Ich muss arbeiten. Können wir morgen sprechen?",
+      },
+    ],
+  },
+  B2: {
+    初級: [
+      {
+        tag: "B2 初級",
+        title: "觀點要有結構",
+        body: "B2 要能比較不同立場。先講優點，再講缺點，最後說自己的判斷。",
+        example: "Ein Vorteil ist ..., ein Nachteil ist ...",
+      },
+      {
+        tag: "詞彙",
+        title: "把 gut / schlecht 換成精準詞",
+        body: "練習 sinnvoll、problematisch、nachhaltig、zuverlässig、kompliziert 這些更準確的形容詞。",
+        example: "Diese Lösung ist sinnvoll, aber langfristig problematisch.",
+      },
+    ],
+    中級: [
+      {
+        tag: "B2 中級",
+        title: "正式情境要清楚且禮貌",
+        body: "和客服、學校或機關溝通時，要說明問題、條件和希望對方做什麼。",
+        example: "Könnten Sie bitte prüfen, ob eine Umbuchung möglich ist?",
+      },
+      {
+        tag: "條件",
+        title: "用 Voraussetzung / falls / sofern 說條件",
+        body: "B2 常需要說明在什麼條件下某件事可行。",
+        example: "Unter dieser Voraussetzung ist das möglich.",
+      },
+    ],
+    進階: [
+      {
+        tag: "B2 進階",
+        title: "論述要能平衡兩邊",
+        body: "用 einerseits / andererseits / insgesamt 讓回答更像完整論述。",
+        example: "Einerseits spart man Zeit, andererseits entstehen höhere Kosten.",
+      },
+      {
+        tag: "閱讀",
+        title: "注意作者立場",
+        body: "B2 閱讀常問作者支持還是反對、主要擔心什麼、結論是什麼。",
+        example: "Insgesamt überwiegen für mich die Vorteile.",
+      },
+    ],
+  },
+};
+
 const vocabularyRows = [
   { type: "名詞", german: "der Tisch", chinese: "桌子" },
   { type: "名詞", german: "die Lampe", chinese: "燈" },
@@ -991,41 +1170,46 @@ function renderLessonList() {
     const levelLessons = lessons.filter((lesson) => lesson.level === level);
     if (levelLessons.length === 0) return;
 
-    const courseGroup = document.createElement("section");
-    courseGroup.className = "lesson-group";
-    courseGroup.innerHTML = `<h3>${level}課程</h3>`;
+    const levelGroup = document.createElement("section");
+    levelGroup.className = "level-nav-group";
+    levelGroup.innerHTML = `<h3>${level}</h3>`;
+
+    const courseGroup = document.createElement("div");
+    courseGroup.className = "level-nav-section";
+    courseGroup.innerHTML = "<h4>課程</h4>";
 
     levelLessons
-      .filter((lesson) => !lesson.isGeneratedTest)
+      .sort((a, b) => testStages.indexOf(a.stage) - testStages.indexOf(b.stage))
       .forEach((lesson) => {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "lesson-tab";
         button.dataset.active = lesson.id === activeLesson.id && !lessonPanel.hidden;
-        button.innerHTML = `<span>${lesson.level}</span><strong>${lesson.shortTitle}</strong><small>${lesson.description}</small>`;
+        button.innerHTML = `<span>${lesson.level}</span><strong>${lesson.stage}課程</strong><small>${lesson.courseSummary}</small>`;
         button.addEventListener("click", () => selectLesson(lesson.id));
         courseGroup.appendChild(button);
       });
 
-    lessonListEl.appendChild(courseGroup);
+    levelGroup.appendChild(courseGroup);
 
-    const testGroup = document.createElement("section");
-    testGroup.className = "lesson-group";
-    testGroup.innerHTML = `<h3>${level}測驗</h3>`;
+    const testGroup = document.createElement("div");
+    testGroup.className = "level-nav-section";
+    testGroup.innerHTML = "<h4>測驗</h4>";
 
     [...levelLessons]
       .sort((a, b) => testStages.indexOf(a.stage) - testStages.indexOf(b.stage))
       .forEach((lesson) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "lesson-tab";
-      button.dataset.active = lesson.id === activeLesson.id && !quizPanel.hidden;
-      button.innerHTML = `<span>${lesson.level}</span><strong>${lesson.stage}綜合測驗</strong><small>20 Fragen: Lesen, Wortschatz, Grammatik und Sprachbausteine.</small>`;
-      button.addEventListener("click", () => selectQuiz(lesson.id));
-      testGroup.appendChild(button);
-    });
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "lesson-tab";
+        button.dataset.active = lesson.id === activeLesson.id && !quizPanel.hidden;
+        button.innerHTML = `<span>${lesson.level}</span><strong>${lesson.stage}綜合測驗</strong><small>20 Fragen: Lesen, Wortschatz, Grammatik und Sprachbausteine.</small>`;
+        button.addEventListener("click", () => selectQuiz(lesson.id));
+        testGroup.appendChild(button);
+      });
 
-    lessonListEl.appendChild(testGroup);
+    levelGroup.appendChild(testGroup);
+    lessonListEl.appendChild(levelGroup);
   });
 }
 
@@ -1042,13 +1226,13 @@ function selectQuiz(id) {
 function renderLesson() {
   levelTextEl.textContent = `${activeLesson.level}：${levelLabels[activeLesson.level]}`;
   lessonBadgeEl.textContent = activeLesson.level;
-  lessonTitleEl.textContent = `${activeLesson.stage}測驗：${activeLesson.shortTitle}`;
-  lessonDescriptionEl.textContent = activeLesson.description;
+  lessonTitleEl.textContent = `${activeLesson.stage}課程：${activeLesson.shortTitle}`;
+  lessonDescriptionEl.textContent = activeLesson.courseSummary;
   sourceNoteEl.textContent = activeLesson.sourceNote;
   startButton.textContent = `開始 ${activeLesson.level} ${activeLesson.stage}測驗`;
 
   lessonCardsEl.innerHTML = "";
-  [...activeLesson.cards, ...(learningExpansionCards[activeLesson.level] || [])].forEach((card) => {
+  getLessonCards(activeLesson).forEach((card) => {
     const article = document.createElement("article");
     article.className = "rule-card note";
     article.innerHTML = `
@@ -1105,6 +1289,8 @@ function showResources() {
 }
 
 function renderResourceTables() {
+  if (!vocabLevelTablesEl || !presentVerbTableEl || !perfectVerbTableEl || !preteriteVerbTableEl) return;
+
   const vocabByLevel = groupVocabularyByLevel();
   vocabLevelTablesEl.innerHTML = levelOrder
     .map((level) => `
@@ -1320,6 +1506,7 @@ function initializeLessons() {
     lesson.stage = lessonStages[lesson.id] || testStages[index % testStages.length];
     lesson.badge = lesson.level;
     lesson.shortTitle = lesson.title;
+    lesson.courseSummary = getCourseSummary(lesson);
     lesson.questions = buildLessonQuestions(lesson, index);
   });
 }
@@ -1358,6 +1545,23 @@ function buildLessonQuestions(lesson, index) {
   const pool = germanExamPools[lesson.level] || supplementalQuestionPools[lesson.level] || [];
   const rotatedPool = rotateArray(pool, index * 5);
   return rotatedPool.slice(0, 20);
+}
+
+function getCourseSummary(lesson) {
+  const summaries = {
+    初級: "基礎句型、核心單字與最常用生活會話。",
+    中級: "文法組合、日常任務與較完整句子。",
+    進階: "閱讀策略、考試題型與意見表達。",
+  };
+
+  return `${lesson.level} ${lesson.stage}：${summaries[lesson.stage]}`;
+}
+
+function getLessonCards(lesson) {
+  const stageCards = stageLearningCards[lesson.level]?.[lesson.stage] || [];
+  const generalCards = learningExpansionCards[lesson.level] || [];
+  const baseCards = lesson.isGeneratedTest ? [] : lesson.cards.slice(0, 2);
+  return [...stageCards, ...baseCards, ...generalCards.slice(0, 1)];
 }
 
 function rotateArray(items, offset) {
