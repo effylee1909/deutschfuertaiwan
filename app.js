@@ -2320,36 +2320,66 @@ function getLessonProverb(level, lessonNumber) {
 }
 
 function createLessonDailyPhrases(level, lessonNumber, topic) {
-  const names = ["Anna", "Ben", "Emma", "Tom", "Mia", "Sara", "David", "Julia"];
-  const name = names[(lessonNumber + 1) % names.length];
   const phraseSets = {
     A1: [
-      [`Ich lerne heute ${topic}.`, `我今天學 ${topic}。`],
-      [`Können Sie ${topic} bitte erklären?`, `可以請您解釋 ${topic} 嗎？`],
-      [`${name}, kannst du den Satz zu ${topic} bitte wiederholen?`, `${name}，你可以把 ${topic} 的句子再說一次嗎？`],
-      [`Ich schreibe die neuen Wörter zu ${topic} auf.`, `我把 ${topic} 的新單字寫下來。`],
+      [["Wie heißt das auf Deutsch?", "這個德文怎麼說？"], ["Ich verstehe das Wort nicht.", "我不懂這個字。"], ["Kannst du bitte langsamer sprechen?", "你可以說慢一點嗎？"], ["Ich brauche ein Beispiel.", "我需要一個例子。"]],
+      [["Ich heiße Anna.", "我叫 Anna。"], ["Ich komme aus Taiwan.", "我來自台灣。"], ["Ich wohne in Taipei.", "我住在台北。"], ["Freut mich.", "很高興認識你。"]],
+      [["Wann beginnt der Kurs?", "課程什麼時候開始？"], ["Wo ist Raum 204?", "204 教室在哪裡？"], ["Der Kurs fällt heute aus.", "今天課程取消。"], ["Bitte bringen Sie ein Buch mit.", "請帶一本書。"]],
+      [["Wie spät ist es?", "現在幾點？"], ["Der Termin ist um neun Uhr.", "預約在九點。"], ["Heute ist Montag.", "今天是星期一。"], ["Ich habe am Freitag Zeit.", "我星期五有空。"]],
+      [["Das ist meine Mutter.", "這是我媽媽。"], ["Hast du Geschwister?", "你有兄弟姊妹嗎？"], ["Mein Freund wohnt in Berlin.", "我的朋友住在柏林。"], ["Wir besuchen meine Familie.", "我們拜訪我的家人。"]],
+      [["Ich hätte gern Wasser.", "我想要水。"], ["Die Rechnung bitte.", "請給我帳單。"], ["Kann ich mit Karte bezahlen?", "我可以刷卡嗎？"], ["Das schmeckt sehr gut.", "這很好吃。"]],
+      [["Gehen Sie geradeaus.", "請直走。"], ["Wo ist die Haltestelle?", "站牌在哪裡？"], ["Ich fahre mit dem Bus.", "我搭公車。"], ["Ist der Bahnhof weit?", "火車站遠嗎？"]],
+      [["Wie viel kostet das?", "這個多少錢？"], ["Haben Sie das in Blau?", "這個有藍色的嗎？"], ["Ich nehme diese Jacke.", "我要這件外套。"], ["Das ist mir zu teuer.", "這對我太貴了。"]],
+      [["Ich stehe um sieben Uhr auf.", "我七點起床。"], ["Wann kaufst du ein?", "你什麼時候採買？"], ["Ich rufe dich später an.", "我晚點打給你。"], ["Am Abend sehe ich fern.", "晚上我看電視。"]],
+      [["Es ist heute kalt.", "今天很冷。"], ["Ich trage eine Jacke.", "我穿外套。"], ["Welche Farbe gefällt dir?", "你喜歡哪個顏色？"], ["Der Pullover ist warm.", "毛衣很暖。"]],
+      [["Ich habe Kopfschmerzen.", "我頭痛。"], ["Ich brauche einen Arzttermin.", "我需要看診預約。"], ["Tut das weh?", "這會痛嗎？"], ["Ich bin seit gestern krank.", "我從昨天開始生病。"]],
+      [["Ich möchte mich anmelden.", "我想報名。"], ["Können Sie das bitte wiederholen?", "可以請您再說一次嗎？"], ["Ich habe noch eine Frage.", "我還有一個問題。"], ["Danke für Ihre Hilfe.", "謝謝您的幫忙。"]],
     ],
     A2: [
-      [`Ich habe eine Frage zu ${topic}.`, `我對 ${topic} 有一個問題。`],
-      [`Könnten wir das Beispiel zu ${topic} noch einmal üben?`, `我們可以再練一次 ${topic} 的例句嗎？`],
-      [`Ich habe die Aufgabe zu ${topic} gestern vorbereitet.`, `我昨天準備了 ${topic} 的任務。`],
-      [`Das passt gut zu meinem Alltag: ${topic}.`, `這很適合我的日常生活：${topic}。`],
+      [["Ich habe gestern Deutsch gelernt.", "我昨天學了德文。"], ["Wir sind nach Hause gefahren.", "我們回家了。"], ["Hast du schon gegessen?", "你吃過了嗎？"], ["Ich bin spät angekommen.", "我很晚抵達。"]],
+      [["Ich möchte den Termin verschieben.", "我想改預約。"], ["Passt Ihnen Donnerstag?", "星期四您方便嗎？"], ["Ich brauche eine Quittung.", "我需要收據。"], ["Können Sie mir helfen?", "您可以幫我嗎？"]],
+      [["Vielen Dank für Ihre Nachricht.", "謝謝您的訊息。"], ["Ich kann leider nicht kommen.", "我很抱歉不能去。"], ["Bitte antworten Sie mir kurz.", "請簡短回覆我。"], ["Anbei finden Sie das Formular.", "附件是表格。"]],
+      [["Ist das Zimmer noch frei?", "這個房間還空著嗎？"], ["Wie hoch ist die Miete?", "租金是多少？"], ["Ich suche eine ruhige Unterkunft.", "我找安靜的住宿。"], ["Kann ich die Wohnung besichtigen?", "我可以看房嗎？"]],
+      [["Der Zug hat Verspätung.", "火車誤點了。"], ["Mein Anschluss ist weg.", "我的轉乘沒了。"], ["Wo bekomme ich ein neues Ticket?", "我在哪裡拿新票？"], ["Fährt heute noch ein Bus?", "今天還有公車嗎？"]],
+      [["Ich muss morgen früh arbeiten.", "我明天一早要工作。"], ["Der Unterricht beginnt um acht.", "課八點開始。"], ["Wir planen ein Projekt.", "我們規劃一個專案。"], ["Ich bereite die Präsentation vor.", "我準備簡報。"]],
+      [["Das ist günstiger als gestern.", "這比昨天便宜。"], ["Ich empfehle diese Verbindung.", "我推薦這個交通連線。"], ["Der Weg ist kürzer.", "路比較短。"], ["Nimm lieber den Zug.", "你最好搭火車。"]],
+      [["Ich fahre mit dem Fahrrad.", "我騎腳踏車。"], ["Nach der Arbeit gehe ich einkaufen.", "下班後我去採買。"], ["Bei meiner Freundin gibt es Kaffee.", "我朋友那裡有咖啡。"], ["Wir gehen zu den Eltern.", "我們去父母家。"]],
+      [["Ich komme später, weil ich arbeite.", "我晚點來，因為我工作。"], ["Ich glaube, dass das möglich ist.", "我相信這是可能的。"], ["Wenn es regnet, bleibe ich zu Hause.", "如果下雨，我待在家。"], ["Sag mir bitte, wann du kommst.", "請告訴我你何時來。"]],
+      [["Wo muss ich unterschreiben?", "我必須在哪裡簽名？"], ["Ich fülle das Formular online aus.", "我線上填表。"], ["Brauche ich einen Antrag?", "我需要申請書嗎？"], ["Die Behörde öffnet um neun.", "機關九點開門。"]],
+      [["Danke für die Einladung.", "謝謝邀請。"], ["Das passt mir leider nicht.", "這時間我不方便。"], ["Können wir uns nächste Woche treffen?", "我們可以下週見嗎？"], ["Ich sage dir morgen Bescheid.", "我明天告訴你。"]],
+      [["Ich möchte die Situation kurz erklären.", "我想簡短說明狀況。"], ["Zuerst lese ich die Aufgabe.", "我先讀題目。"], ["Danach markiere ich die Details.", "之後我標出細節。"], ["Zum Schluss schreibe ich die Antwort.", "最後我寫答案。"]],
     ],
     B1: [
-      [`Meiner Meinung nach ist ${topic} im Alltag wichtig.`, `依我看，${topic} 在日常中很重要。`],
-      [`Ich kann ${topic} mit einem Beispiel erklären.`, `我可以用一個例子解釋 ${topic}。`],
-      [`Könnten Sie mir bitte zu ${topic} eine Rückmeldung geben?`, `可以請您針對 ${topic} 給我回饋嗎？`],
-      [`Ich möchte meine Antwort zu ${topic} klarer formulieren.`, `我想把我對 ${topic} 的回答表達得更清楚。`],
+      [["Ich bin damit einverstanden.", "我同意這件事。"], ["Das sehe ich etwas anders.", "我有點不同看法。"], ["Könnten Sie das bitte begründen?", "可以請您說明理由嗎？"], ["Dafür gibt es mehrere Gründe.", "這有幾個理由。"]],
+      [["Ich möchte mich beschweren.", "我想投訴。"], ["Die Lieferung ist zu spät angekommen.", "貨物太晚抵達。"], ["Ich bitte um eine schnelle Lösung.", "我請求快速解決。"], ["Vielen Dank im Voraus.", "先謝謝您。"]],
+      [["Ich interessiere mich für die Stelle.", "我對這個職位有興趣。"], ["Ich habe Erfahrung im Verkauf.", "我有銷售經驗。"], ["Wann kann ich mich vorstellen?", "我何時可以面試？"], ["Ich schicke Ihnen meinen Lebenslauf.", "我寄履歷給您。"]],
+      [["Das Problem lässt sich lösen.", "這個問題可以解決。"], ["Wir sollten zuerst die Ursache finden.", "我們應該先找原因。"], ["Vielleicht gibt es eine Alternative.", "也許有替代方案。"], ["Ich schlage einen neuen Termin vor.", "我建議新的時間。"]],
+      [["Letztes Jahr bin ich nach Wien gereist.", "去年我去了維也納。"], ["Die Reise hat mir sehr gefallen.", "我很喜歡這趟旅行。"], ["Besonders interessant war das Museum.", "特別有趣的是博物館。"], ["Am Ende war ich sehr müde.", "最後我很累。"]],
+      [["Ich brauche eine Beratung.", "我需要諮詢。"], ["Meine Versicherung bezahlt das nicht.", "我的保險不支付這個。"], ["Welche Unterlagen brauche ich?", "我需要哪些文件？"], ["Ich möchte einen zweiten Termin.", "我想要第二個預約。"]],
+      [["Ich lerne besser mit Beispielen.", "我用例子學得比較好。"], ["Der Kurs hilft mir beim Sprechen.", "這門課幫助我口說。"], ["Ich wiederhole jeden Tag zehn Minuten.", "我每天複習十分鐘。"], ["Fehler gehören zum Lernen.", "錯誤是學習的一部分。"]],
+      [["Ich nutze das Internet jeden Tag.", "我每天使用網路。"], ["Diese Nachricht wirkt nicht seriös.", "這則訊息看起來不可靠。"], ["Man sollte die Quelle prüfen.", "應該查證來源。"], ["Soziale Medien haben Vor- und Nachteile.", "社群媒體有優缺點。"]],
+      [["Ich fahre öfter mit öffentlichen Verkehrsmitteln.", "我更常搭大眾運輸。"], ["Das ist besser für die Umwelt.", "這對環境比較好。"], ["Trotzdem ist das Auto manchmal praktischer.", "儘管如此，汽車有時比較實用。"], ["Die Stadt braucht sichere Radwege.", "城市需要安全自行車道。"]],
+      [["Das Formular wird online ausgefüllt.", "表格會在線上填寫。"], ["Die Anmeldung wird automatisch bestätigt.", "報名會自動確認。"], ["Der Termin wird verschoben.", "預約會被改期。"], ["Die Unterlagen werden geprüft.", "文件會被審核。"]],
+      [["Könnten Sie mir bitte weiterhelfen?", "可以請您協助我嗎？"], ["Ich würde gern einen Termin vereinbaren.", "我想約一個時間。"], ["Hätten Sie morgen Zeit?", "您明天有空嗎？"], ["Das wäre sehr freundlich.", "那會非常感謝。"]],
+      [["Ich möchte zuerst meine Meinung sagen.", "我想先說我的意見。"], ["Danach nenne ich ein Beispiel.", "之後我舉一個例子。"], ["Zum Schluss fasse ich alles zusammen.", "最後我總結。"], ["Haben Sie noch Fragen dazu?", "您對此還有問題嗎？"]],
     ],
     B2: [
-      [`Bei ${topic} sollte man mehrere Perspektiven berücksichtigen.`, `談到 ${topic} 時應該考慮多種觀點。`],
-      [`Einerseits ist ${topic} praktisch, andererseits gibt es Risiken.`, `一方面 ${topic} 很實用，另一方面也有風險。`],
-      [`Ich möchte meine Position zu ${topic} genauer begründen.`, `我想更精確地說明我對 ${topic} 的立場。`],
-      [`Zusammenfassend halte ich diese Lösung bei ${topic} für sinnvoll.`, `總結來說，我認為 ${topic} 中這個解決方法合理。`],
+      [["Ich möchte zwei Aspekte hervorheben.", "我想強調兩個面向。"], ["Diese Entwicklung hat langfristige Folgen.", "這個發展有長期後果。"], ["Das Argument überzeugt mich nur teilweise.", "這個論點只部分說服我。"], ["Man sollte die Rahmenbedingungen beachten.", "應該注意框架條件。"]],
+      [["Datenschutz spielt eine zentrale Rolle.", "資料保護扮演核心角色。"], ["Nutzerinnen und Nutzer brauchen Transparenz.", "使用者需要透明度。"], ["Digitale Angebote dürfen niemanden ausschließen.", "數位服務不應排除任何人。"], ["Persönliche Beratung bleibt wichtig.", "個人諮詢仍然重要。"]],
+      [["Nachhaltiger Konsum beginnt im Alltag.", "永續消費從日常開始。"], ["Billig ist nicht immer sinnvoll.", "便宜不一定合理。"], ["Man muss Produktion und Transport mitdenken.", "必須一併考慮生產與運輸。"], ["Verzicht kann auch Freiheit bedeuten.", "放棄也可能意味自由。"]],
+      [["Berufliche Entscheidungen hängen von vielen Faktoren ab.", "職涯決定取決於許多因素。"], ["Ein Studium ist nicht der einzige Weg.", "大學不是唯一道路。"], ["Weiterbildung wird immer wichtiger.", "進修越來越重要。"], ["Praktische Erfahrung sollte stärker zählen.", "實務經驗應更被重視。"]],
+      [["Bezahlbarer Wohnraum ist ein großes Thema.", "可負擔住宅是重大議題。"], ["Städte müssen lebenswerter werden.", "城市必須變得更宜居。"], ["Kurze Wege verbessern die Lebensqualität.", "短距離動線提升生活品質。"], ["Lärm belastet viele Bewohner.", "噪音困擾許多居民。"]],
+      [["Gesundheitspolitik betrifft alle Menschen.", "健康政策影響所有人。"], ["Prävention ist günstiger als Behandlung.", "預防比治療便宜。"], ["Psychische Gesundheit darf nicht unterschätzt werden.", "心理健康不應被低估。"], ["Zugang zu Hilfe muss einfacher werden.", "取得協助必須更容易。"]],
+      [["Teilhabe bedeutet mehr als Anwesenheit.", "參與不只是人在場。"], ["Sprache erleichtert Integration.", "語言促進融入。"], ["Kulturelle Vielfalt kann eine Stärke sein.", "文化多樣性可以是優勢。"], ["Vorurteile müssen aktiv abgebaut werden.", "偏見必須主動消除。"]],
+      [["Nicht jede Information ist zuverlässig.", "不是每個資訊都可靠。"], ["Bilder können manipuliert werden.", "圖片可能被操弄。"], ["Man sollte verschiedene Quellen vergleichen.", "應比較不同來源。"], ["Medienkompetenz gehört zur Allgemeinbildung.", "媒體素養屬於基本教育。"]],
+      [["Flexible Arbeit braucht klare Regeln.", "彈性工作需要明確規則。"], ["Verantwortung darf nicht unsichtbar werden.", "責任不應變得隱形。"], ["Homeoffice verändert die Kommunikation.", "遠距工作改變溝通。"], ["Teams brauchen Vertrauen und Struktur.", "團隊需要信任與結構。"]],
+      [["Technischer Fortschritt ist nicht neutral.", "科技進步並非中立。"], ["Risiken müssen offen diskutiert werden.", "風險必須公開討論。"], ["Forschung braucht gesellschaftliche Kontrolle.", "研究需要社會監督。"], ["Innovation sollte dem Menschen dienen.", "創新應服務於人。"]],
+      [["Nominalisierungen verdichten Informationen.", "名詞化濃縮資訊。"], ["Ein abstrakter Stil wirkt formeller.", "抽象風格顯得更正式。"], ["Zu viele Nomen machen Texte schwer.", "太多名詞會讓文章變難。"], ["Gute Texte bleiben trotzdem klar.", "好的文章仍然清楚。"]],
+      [["Eine gute Argumentation braucht Struktur.", "好的論述需要結構。"], ["Zuerst formuliere ich meine These.", "我先表達論點。"], ["Danach prüfe ich mögliche Einwände.", "之後我檢視可能反對意見。"], ["Am Ende ziehe ich ein begründetes Fazit.", "最後我提出有理由的結論。"]],
     ],
   };
 
-  return phraseSets[level].map(([german, chinese]) => ({ german, chinese }));
+  return phraseSets[level][lessonNumber - 1].map(([german, chinese]) => ({ german, chinese }));
 }
 
 function normalizeTopicData(topicData) {
