@@ -1286,22 +1286,35 @@ function renderLessonList() {
     const levelLessons = lessons.filter((lesson) => lesson.level === level);
     if (levelLessons.length === 0) return;
 
-    const levelGroup = document.createElement("section");
-    levelGroup.className = "level-nav-group";
-    levelGroup.innerHTML = `<h3>${level}</h3>`;
+    const levelGroup = document.createElement("details");
+    levelGroup.className = "level-folder";
+    levelGroup.open = activeLesson.level === level || level === "A1";
+    levelGroup.innerHTML = `
+      <summary>
+        <span class="folder-mark" aria-hidden="true"></span>
+        <span>
+          <strong>${level}</strong>
+          <small>${getLevelFolderLabel(level)}</small>
+        </span>
+      </summary>
+    `;
 
     const courseGroup = document.createElement("div");
-    courseGroup.className = "level-nav-section";
+    courseGroup.className = "folder-branch";
     courseGroup.innerHTML = "<h4>課程</h4>";
 
     levelLessons
-      .sort((a, b) => testStages.indexOf(a.stage) - testStages.indexOf(b.stage))
+      .sort(sortLessonsByCode)
       .forEach((lesson) => {
         const button = document.createElement("button");
         button.type = "button";
-        button.className = "lesson-tab";
+        button.className = "lesson-tab tree-item";
         button.dataset.active = lesson.id === activeLesson.id && !lessonPanel.hidden;
-        button.innerHTML = `<span>${lesson.level}</span><strong>${lesson.stage}課程</strong><small>${lesson.courseSummary}</small>`;
+        button.innerHTML = `
+          <span class="tree-code">${lesson.lessonCode}</span>
+          <strong>${lesson.navTitle}</strong>
+          <small>${lesson.topic}</small>
+        `;
         button.addEventListener("click", () => selectLesson(lesson.id));
         courseGroup.appendChild(button);
       });
@@ -1309,17 +1322,21 @@ function renderLessonList() {
     levelGroup.appendChild(courseGroup);
 
     const testGroup = document.createElement("div");
-    testGroup.className = "level-nav-section";
-    testGroup.innerHTML = "<h4>測驗</h4>";
+    testGroup.className = "folder-branch";
+    testGroup.innerHTML = "<h4>課後測驗</h4>";
 
     [...levelLessons]
-      .sort((a, b) => testStages.indexOf(a.stage) - testStages.indexOf(b.stage))
+      .sort(sortLessonsByCode)
       .forEach((lesson) => {
         const button = document.createElement("button");
         button.type = "button";
-        button.className = "lesson-tab";
+        button.className = "lesson-tab tree-item quiz-tree-item";
         button.dataset.active = lesson.id === activeLesson.id && !quizPanel.hidden;
-        button.innerHTML = `<span>${lesson.level}</span><strong>${lesson.stage}綜合測驗</strong><small>20 Fragen: Lesen, Wortschatz, Grammatik und Sprachbausteine.</small>`;
+        button.innerHTML = `
+          <span class="tree-code">T${lesson.lessonNumber}</span>
+          <strong>${lesson.lessonCode} 測驗</strong>
+          <small>20 Fragen · Lesen / Wortschatz / Grammatik</small>
+        `;
         button.addEventListener("click", () => selectQuiz(lesson.id));
         testGroup.appendChild(button);
       });
@@ -1341,11 +1358,11 @@ function selectQuiz(id) {
 
 function renderLesson() {
   levelTextEl.textContent = `${activeLesson.level}：${levelLabels[activeLesson.level]}`;
-  lessonBadgeEl.textContent = activeLesson.level;
-  lessonTitleEl.textContent = `${activeLesson.stage}課程：${activeLesson.shortTitle}`;
+  lessonBadgeEl.textContent = `${activeLesson.level} · ${activeLesson.lessonCode}`;
+  lessonTitleEl.textContent = `${activeLesson.lessonCode} ${activeLesson.topic}`;
   lessonDescriptionEl.textContent = activeLesson.courseSummary;
   sourceNoteEl.textContent = activeLesson.sourceNote;
-  startButton.textContent = `開始 ${activeLesson.level} ${activeLesson.stage}測驗`;
+  startButton.textContent = `開始 ${activeLesson.lessonCode} 課後測驗`;
   renderTextbookLesson(activeLesson);
 
   lessonCardsEl.innerHTML = "";
@@ -1780,10 +1797,17 @@ function createGermanExamPools() {
 function initializeLessons() {
   ensureStageCoverage();
 
+  const levelCounts = {};
+
   lessons.forEach((lesson, index) => {
     lesson.stage = lessonStages[lesson.id] || testStages[index % testStages.length];
     lesson.badge = lesson.level;
     lesson.shortTitle = lesson.title;
+    lesson.lessonNumber = (levelCounts[lesson.level] || 0) + 1;
+    levelCounts[lesson.level] = lesson.lessonNumber;
+    lesson.lessonCode = `L${lesson.lessonNumber}`;
+    lesson.topic = getLessonTopic(lesson);
+    lesson.navTitle = `${lesson.lessonCode} ${lesson.topic}`;
     lesson.courseSummary = getCourseSummary(lesson);
     lesson.questions = buildLessonQuestions(lesson, index);
   });
@@ -1832,7 +1856,31 @@ function getCourseSummary(lesson) {
     進階: "閱讀策略、考試題型與意見表達。",
   };
 
-  return `${lesson.level} ${lesson.stage}：${summaries[lesson.stage]}`;
+  return `${lesson.level} ${lesson.lessonCode}：${summaries[lesson.stage]}`;
+}
+
+function getLessonTopic(lesson) {
+  const topics = {
+    "a1-articles": "冠詞與名詞",
+    "a1-sentences": "自我介紹與基本句",
+    "a1-reading": "公告與短訊閱讀",
+    "a2-perfect": "完成式 Perfekt",
+    "a2-daily": "購物與預約",
+    "a2-reading": "通知與 email 閱讀",
+    "b1-daily": "原因、意見與請求",
+    "b2-travel-talk": "立場、比較與討論",
+  };
+
+  return topics[lesson.id] || lesson.title.replace(`${lesson.level} `, "");
+}
+
+function sortLessonsByCode(a, b) {
+  return a.lessonNumber - b.lessonNumber;
+}
+
+function getLevelFolderLabel(level) {
+  const counts = lessons.filter((lesson) => lesson.level === level).length;
+  return `${counts} Lektionen · ${counts} Tests`;
 }
 
 function getLessonCards(lesson) {
