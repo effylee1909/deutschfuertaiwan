@@ -1474,8 +1474,7 @@ let quizSeed = Date.now();
 let currentPreparedQuestion = null;
 
 const progressStorageKey = "deutschfuertaiwan-progress-v1";
-
-initializeLessons();
+const usedLessonVocabularyByLevel = {};
 
 const lessonListEl = document.querySelector("#lesson-list");
 const levelTextEl = document.querySelector("#level-text");
@@ -1618,7 +1617,19 @@ function renderLesson() {
     lessonCardsEl.appendChild(article);
   });
 
-  dailyPhrasesEl.innerHTML = dailyPhraseBanks[activeLesson.level]
+  if (activeLesson.textbook?.proverb) {
+    const proverb = document.createElement("article");
+    proverb.className = "rule-card note proverb-card";
+    proverb.innerHTML = `
+      <span class="article-tag">Sprichwort</span>
+      <h3>本課德文俗諺</h3>
+      <p class="example">${activeLesson.textbook.proverb.german}</p>
+      <p>${activeLesson.textbook.proverb.chinese}</p>
+    `;
+    lessonCardsEl.appendChild(proverb);
+  }
+
+  dailyPhrasesEl.innerHTML = (activeLesson.dailyPhrases || dailyPhraseBanks[activeLesson.level])
     .map((phrase) => `
       <article class="phrase-card">
         <strong>${phrase.german}</strong>
@@ -1763,7 +1774,7 @@ function formatVocabularyRows(rows) {
 function formatVocabularyRow(row) {
   const partOfSpeech = getPartOfSpeechAbbreviation(row.type);
   const plural = row.type === "名詞" ? nounPluralMap[row.german] : "";
-  const german = plural ? `${row.german} / Pl. ${plural}` : row.german;
+  const german = plural ? `${row.german} - ${plural}` : row.german;
   return {
     german,
     partOfSpeech,
@@ -2122,6 +2133,9 @@ function initializeLessons() {
   ensureStageCoverage();
 
   const levelCounts = {};
+  levelOrder.forEach((level) => {
+    usedLessonVocabularyByLevel[level] = new Set();
+  });
 
   lessons.forEach((lesson, index) => {
     lesson.stage = lessonStages[lesson.id] || testStages[index % testStages.length];
@@ -2135,7 +2149,8 @@ function initializeLessons() {
     lesson.topicDe = topicData.de;
     lesson.topic = `${topicData.zh} · ${topicData.de}`;
     lesson.navTitle = `${lesson.lessonCode} ${lesson.topic}`;
-    lesson.textbook = lesson.textbook || createTextbookContent(lesson.level, lesson.lessonNumber, topicData);
+    lesson.textbook = createTextbookContent(lesson.level, lesson.lessonNumber, topicData);
+    lesson.dailyPhrases = createLessonDailyPhrases(lesson.level, lesson.lessonNumber, topicData.de);
     lesson.courseSummary = getCourseSummary(lesson);
     lesson.questions = buildLessonQuestions(lesson, index);
   });
@@ -2174,14 +2189,63 @@ function expandSyllabusLessons() {
 
 function createTextbookContent(level, lessonNumber, topicData) {
   const normalizedTopic = normalizeTopicData(topicData);
-  const vocab = rotateArray(syllabusVocabulary[level], lessonNumber - 1).slice(0, getVocabCount(level));
+  const vocab = createLessonVocabulary(level, lessonNumber, normalizedTopic);
   const grammar = rotateArray(syllabusGrammar[level], lessonNumber - 1).slice(0, getGrammarCount(level));
   return {
     title: `${level} L${lessonNumber}: ${normalizedTopic.zh} · ${normalizedTopic.de}`,
-    text: createReadingText(level, normalizedTopic.de, lessonNumber),
+    text: createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
     vocab,
     grammar,
+    proverb: getLessonProverb(level, lessonNumber),
   };
+}
+
+function createLessonVocabulary(level, lessonNumber, topicData) {
+  const count = getVocabCount(level);
+  const used = usedLessonVocabularyByLevel[level] || new Set();
+  const preferred = [...(syllabusVocabulary[level] || []), ...getExpandedVocabularyPool(level)];
+  const rotated = rotateArray(preferred, (lessonNumber - 1) * count);
+  const selected = [];
+
+  rotated.forEach((entry) => {
+    const normalized = normalizeVocabularyEntry(entry);
+    if (selected.length >= count) return;
+    if (used.has(normalized[0])) return;
+    selected.push(normalized);
+    used.add(normalized[0]);
+  });
+
+  while (selected.length < count) {
+    const generated = createTopicVocabularyEntry(topicData, lessonNumber, selected.length + 1);
+    if (!used.has(generated[0])) {
+      selected.push(generated);
+      used.add(generated[0]);
+    }
+  }
+
+  usedLessonVocabularyByLevel[level] = used;
+  return selected;
+}
+
+function getExpandedVocabularyPool(level) {
+  const scoredRows = vocabularyRows.map((row, index) => ({
+    row,
+    index,
+    score: inferVocabularyLevel(row, index) === level ? 0 : 1,
+  }));
+
+  return scoredRows
+    .sort((a, b) => a.score - b.score || a.index - b.index)
+    .map(({ row }) => [row.german, row.chinese, row.type === "名詞" ? nounPluralMap[row.german] || "-" : ""]);
+}
+
+function normalizeVocabularyEntry(entry) {
+  return [entry[0], entry[1], entry[2] || ""];
+}
+
+function createTopicVocabularyEntry(topicData, lessonNumber, index) {
+  const base = topicData.de.split(/[, und]+/).filter(Boolean)[0] || "Thema";
+  return [`der ${base}-Ausdruck ${lessonNumber}.${index}`, `${topicData.zh}相關表達 ${index}`, `die ${base}-Ausdrücke ${lessonNumber}.${index}`];
 }
 
 function getVocabCount(level) {
@@ -2192,25 +2256,30 @@ function getGrammarCount(level) {
   return { A1: 3, A2: 4, B1: 4, B2: 4 }[level] || 3;
 }
 
-function createReadingText(level, topic, lessonNumber) {
+function createReadingText(level, topic, lessonNumber, vocab = []) {
   const names = ["Anna", "Ben", "Emma", "Tom", "Mia", "Sara", "David", "Julia"];
   const name = names[(lessonNumber - 1) % names.length];
   const friend = names[lessonNumber % names.length];
+  const focusWords = vocab.slice(0, 5).map(([word]) => stripVocabularyArticle(word)).join(", ");
+  const focusSentence = `Wichtige Wörter in dieser Lektion sind ${focusWords}.`;
   const texts = {
     A1: [
       `${name} lernt heute ${topic}. ${name} schreibt neue Wörter in ein Heft und spricht einfache Sätze laut. Am Ende fragt ${name}: Können Sie das bitte wiederholen?`,
       `${friend} übt mit ${name} kurze Dialoge. Die Sätze sind einfach, aber wichtig: eine Frage stellen, eine Antwort geben und höflich um Hilfe bitten.`,
+      focusSentence,
     ],
     A2: [
       `In dieser Lektion geht es um ${topic}. ${name} hat letzte Woche eine ähnliche Situation erlebt und erzählt davon im Deutschkurs. ${name} erklärt, was passiert ist, warum Hilfe nötig war und welche Lösung am Ende funktioniert hat.`,
       `Der Text enthält mehrere Informationen zu Zeit, Ort und Grund. ${friend} muss nicht jedes Wort übersetzen, sondern zuerst die Aufgabe lesen und dann im Text nach den wichtigen Details suchen.`,
       `Am Ende schreibt ${name} eine kurze Nachricht, weil ein Termin geändert werden muss. Die Nachricht ist höflich, klar und enthält einen neuen Vorschlag.`,
+      focusSentence,
     ],
     B1: [
       `Das Thema ${topic} kommt häufig im Alltag, in Prüfungen und in Gesprächen vor. ${name} liest einen längeren Text, in dem eine Person ein Problem beschreibt, einen Grund nennt und um eine konkrete Lösung bittet.`,
       `Im Unterricht sammelt die Gruppe Argumente. Einige Lernende finden die Situation einfach, andere sehen mehrere Schwierigkeiten. ${friend} formuliert eine Meinung und begründet sie mit einem Beispiel aus dem Alltag.`,
       `Für die schriftliche Aufgabe achtet sie auf eine klare Struktur: zuerst der Anlass, dann die Erklärung, danach die Bitte oder der Vorschlag. Dadurch wirkt der Text höflich und verständlich.`,
       `Beim Sprechen versucht sie, nicht nur einzelne Wörter zu sagen, sondern ganze Sätze miteinander zu verbinden.`,
+      focusSentence,
     ],
     B2: [
       `In dieser Lektion wird ${topic} aus mehreren Perspektiven betrachtet. Der Ausgangstext beschreibt nicht nur eine Alltagssituation, sondern auch gesellschaftliche Folgen, mögliche Vorteile und kritische Gegenargumente.`,
@@ -2218,10 +2287,69 @@ function createReadingText(level, topic, lessonNumber) {
       `In der Diskussion formuliert sie eine differenzierte Position. Einerseits sieht sie praktische Vorteile, andererseits weist sie auf Bedingungen hin, die erfüllt sein müssen, damit die vorgeschlagene Lösung langfristig sinnvoll bleibt.`,
       `Für die Schreibaufgabe nutzt sie Konnektoren, nominale Wendungen und ein kurzes Fazit. So entsteht ein Text, der nicht nur korrekt, sondern auch zusammenhängend und überzeugend wirkt.`,
       `Die Lektion trainiert deshalb Lesen, Wortschatz, Grammatik und produktive Fertigkeiten gemeinsam.`,
+      focusSentence,
     ],
   };
 
   return rotateArray(texts[level], lessonNumber - 1).join(" ");
+}
+
+function stripVocabularyArticle(word) {
+  return word.replace(/^(der|die|das)\s+/, "");
+}
+
+const lessonProverbs = [
+  ["Übung macht den Meister.", "熟能生巧。"],
+  ["Aller Anfang ist schwer.", "萬事起頭難。"],
+  ["Ohne Fleiß kein Preis.", "不努力就沒有收穫。"],
+  ["Viele Wege führen nach Rom.", "條條大路通羅馬。"],
+  ["Besser spät als nie.", "遲到總比不到好。"],
+  ["Ende gut, alles gut.", "結局好，一切都好。"],
+  ["Der frühe Vogel fängt den Wurm.", "早起的人掌握機會。"],
+  ["Kleine Schritte führen auch zum Ziel.", "小步前進也能到達目標。"],
+  ["Aus Fehlern lernt man.", "人會從錯誤中學習。"],
+  ["Geduld bringt Rosen.", "耐心會帶來成果。"],
+  ["Reden ist Silber, Schweigen ist Gold.", "言語是銀，沉默是金。"],
+  ["Wer A sagt, muss auch B sagen.", "開始了就要負責到底。"],
+];
+
+function getLessonProverb(level, lessonNumber) {
+  const levelOffset = levelOrder.indexOf(level) * 3;
+  const [german, chinese] = lessonProverbs[(lessonNumber - 1 + levelOffset) % lessonProverbs.length];
+  return { german, chinese };
+}
+
+function createLessonDailyPhrases(level, lessonNumber, topic) {
+  const names = ["Anna", "Ben", "Emma", "Tom", "Mia", "Sara", "David", "Julia"];
+  const name = names[(lessonNumber + 1) % names.length];
+  const phraseSets = {
+    A1: [
+      [`Ich lerne heute ${topic}.`, `我今天學 ${topic}。`],
+      [`Können Sie ${topic} bitte erklären?`, `可以請您解釋 ${topic} 嗎？`],
+      [`${name}, kannst du den Satz zu ${topic} bitte wiederholen?`, `${name}，你可以把 ${topic} 的句子再說一次嗎？`],
+      [`Ich schreibe die neuen Wörter zu ${topic} auf.`, `我把 ${topic} 的新單字寫下來。`],
+    ],
+    A2: [
+      [`Ich habe eine Frage zu ${topic}.`, `我對 ${topic} 有一個問題。`],
+      [`Könnten wir das Beispiel zu ${topic} noch einmal üben?`, `我們可以再練一次 ${topic} 的例句嗎？`],
+      [`Ich habe die Aufgabe zu ${topic} gestern vorbereitet.`, `我昨天準備了 ${topic} 的任務。`],
+      [`Das passt gut zu meinem Alltag: ${topic}.`, `這很適合我的日常生活：${topic}。`],
+    ],
+    B1: [
+      [`Meiner Meinung nach ist ${topic} im Alltag wichtig.`, `依我看，${topic} 在日常中很重要。`],
+      [`Ich kann ${topic} mit einem Beispiel erklären.`, `我可以用一個例子解釋 ${topic}。`],
+      [`Könnten Sie mir bitte zu ${topic} eine Rückmeldung geben?`, `可以請您針對 ${topic} 給我回饋嗎？`],
+      [`Ich möchte meine Antwort zu ${topic} klarer formulieren.`, `我想把我對 ${topic} 的回答表達得更清楚。`],
+    ],
+    B2: [
+      [`Bei ${topic} sollte man mehrere Perspektiven berücksichtigen.`, `談到 ${topic} 時應該考慮多種觀點。`],
+      [`Einerseits ist ${topic} praktisch, andererseits gibt es Risiken.`, `一方面 ${topic} 很實用，另一方面也有風險。`],
+      [`Ich möchte meine Position zu ${topic} genauer begründen.`, `我想更精確地說明我對 ${topic} 的立場。`],
+      [`Zusammenfassend halte ich diese Lösung bei ${topic} für sinnvoll.`, `總結來說，我認為 ${topic} 中這個解決方法合理。`],
+    ],
+  };
+
+  return phraseSets[level].map(([german, chinese]) => ({ german, chinese }));
 }
 
 function normalizeTopicData(topicData) {
@@ -2848,5 +2976,6 @@ downloadVerbsButton.addEventListener("click", () => {
   ]);
 });
 
+initializeLessons();
 renderLesson();
 renderResourceTables();
