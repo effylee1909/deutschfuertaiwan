@@ -661,6 +661,41 @@ const verbRows = [
   { verb: "vergleichen", chinese: "比較", ich: "vergleiche", du: "vergleichst", third: "vergleicht", plural: "vergleichen" },
   { verb: "diskutieren", chinese: "討論", ich: "diskutiere", du: "diskutierst", third: "diskutiert", plural: "diskutieren" },
   { verb: "überzeugen", chinese: "說服", ich: "überzeuge", du: "überzeugst", third: "überzeugt", plural: "überzeugen" },
+  { verb: "kommen", chinese: "來", ich: "komme", du: "kommst", third: "kommt", plural: "kommen" },
+  { verb: "sprechen", chinese: "說；講", ich: "spreche", du: "sprichst", third: "spricht", plural: "sprechen" },
+  { verb: "lesen", chinese: "閱讀", ich: "lese", du: "liest", third: "liest", plural: "lesen" },
+  { verb: "schreiben", chinese: "寫", ich: "schreibe", du: "schreibst", third: "schreibt", plural: "schreiben" },
+  { verb: "arbeiten", chinese: "工作", ich: "arbeite", du: "arbeitest", third: "arbeitet", plural: "arbeiten" },
+  { verb: "finden", chinese: "找到；覺得", ich: "finde", du: "findest", third: "findet", plural: "finden" },
+  { verb: "suchen", chinese: "尋找", ich: "suche", du: "suchst", third: "sucht", plural: "suchen" },
+  { verb: "helfen", chinese: "幫助", ich: "helfe", du: "hilfst", third: "hilft", plural: "helfen" },
+  { verb: "fragen", chinese: "詢問", ich: "frage", du: "fragst", third: "fragt", plural: "fragen" },
+  { verb: "antworten", chinese: "回答", ich: "antworte", du: "antwortest", third: "antwortet", plural: "antworten" },
+  { verb: "bestellen", chinese: "點餐；訂購", ich: "bestelle", du: "bestellst", third: "bestellt", plural: "bestellen" },
+  { verb: "bezahlen", chinese: "付款", ich: "bezahle", du: "bezahlst", third: "bezahlt", plural: "bezahlen" },
+  { verb: "buchen", chinese: "預訂", ich: "buche", du: "buchst", third: "bucht", plural: "buchen" },
+  { verb: "stornieren", chinese: "取消預訂", ich: "storniere", du: "stornierst", third: "storniert", plural: "stornieren" },
+  { verb: "umbuchen", chinese: "改訂", ich: "buche um", du: "buchst um", third: "bucht um", plural: "buchen um" },
+  { verb: "ankommen", chinese: "抵達", ich: "komme an", du: "kommst an", third: "kommt an", plural: "kommen an" },
+  { verb: "abfahren", chinese: "出發；發車", ich: "fahre ab", du: "fährst ab", third: "fährt ab", plural: "fahren ab" },
+  { verb: "aufstehen", chinese: "起床", ich: "stehe auf", du: "stehst auf", third: "steht auf", plural: "stehen auf" },
+  { verb: "einkaufen", chinese: "採買", ich: "kaufe ein", du: "kaufst ein", third: "kauft ein", plural: "kaufen ein" },
+  { verb: "anrufen", chinese: "打電話給", ich: "rufe an", du: "rufst an", third: "ruft an", plural: "rufen an" },
+  { verb: "mitbringen", chinese: "帶來", ich: "bringe mit", du: "bringst mit", third: "bringt mit", plural: "bringen mit" },
+  { verb: "ausfüllen", chinese: "填寫", ich: "fülle aus", du: "füllst aus", third: "füllt aus", plural: "füllen aus" },
+  { verb: "unterschreiben", chinese: "簽名", ich: "unterschreibe", du: "unterschreibst", third: "unterschreibt", plural: "unterschreiben" },
+  { verb: "teilnehmen", chinese: "參加", ich: "nehme teil", du: "nimmst teil", third: "nimmt teil", plural: "nehmen teil" },
+  { verb: "vorbereiten", chinese: "準備", ich: "bereite vor", du: "bereitest vor", third: "bereitet vor", plural: "bereiten vor" },
+  { verb: "empfehlen", chinese: "推薦", ich: "empfehle", du: "empfiehlst", third: "empfiehlt", plural: "empfehlen" },
+  { verb: "verlieren", chinese: "遺失；失去", ich: "verliere", du: "verlierst", third: "verliert", plural: "verlieren" },
+  { verb: "verstehen", chinese: "理解", ich: "verstehe", du: "verstehst", third: "versteht", plural: "verstehen" },
+  { verb: "wiederholen", chinese: "重複", ich: "wiederhole", du: "wiederholst", third: "wiederholt", plural: "wiederholen" },
+  { verb: "organisieren", chinese: "組織；安排", ich: "organisiere", du: "organisierst", third: "organisiert", plural: "organisieren" },
+  { verb: "entscheiden", chinese: "決定", ich: "entscheide", du: "entscheidest", third: "entscheidet", plural: "entscheiden" },
+  { verb: "vermeiden", chinese: "避免", ich: "vermeide", du: "vermeidest", third: "vermeidet", plural: "vermeiden" },
+  { verb: "verbessern", chinese: "改善", ich: "verbessere", du: "verbesserst", third: "verbessert", plural: "verbessern" },
+  { verb: "unterstützen", chinese: "支持", ich: "unterstütze", du: "unterstützt", third: "unterstützt", plural: "unterstützen" },
+  { verb: "zusammenfassen", chinese: "摘要；總結", ich: "fasse zusammen", du: "fasst zusammen", third: "fasst zusammen", plural: "fassen zusammen" },
 ];
 
 const supplementalQuestionPools = {
@@ -760,6 +795,7 @@ let activeLesson = lessons[0];
 let currentIndex = 0;
 let score = 0;
 let answered = false;
+let quizSeed = Date.now();
 
 initializeLessons();
 
@@ -893,6 +929,7 @@ function showLesson() {
 function startQuiz() {
   currentIndex = 0;
   score = 0;
+  quizSeed = Date.now();
   lessonPanel.hidden = true;
   resourcesPanel.hidden = true;
   quizPanel.hidden = false;
@@ -1121,33 +1158,94 @@ function rotateArray(items, offset) {
   return [...items.slice(start), ...items.slice(0, start)];
 }
 
+function shuffleWithSeed(items, seed) {
+  const shuffled = [...items];
+
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    const swapIndex = seed % (index + 1);
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
+
+  return shuffled;
+}
+
 function renderQuestion() {
   const question = activeLesson.questions[currentIndex];
+  const preparedQuestion = prepareQuestion(question, currentIndex);
   answered = false;
 
   scoreEl.textContent = score;
   totalEl.textContent = activeLesson.questions.length;
   progressBar.style.width = `${(currentIndex / activeLesson.questions.length) * 100}%`;
   metaEl.textContent = `Aufgabe ${currentIndex + 1} von ${activeLesson.questions.length}`;
-  textEl.textContent = question.prompt;
-  translationEl.textContent = question.translation || question.question || "";
-  feedbackEl.textContent = getWaitingText(question.type);
+  textEl.textContent = preparedQuestion.prompt;
+  translationEl.textContent = preparedQuestion.translation || preparedQuestion.question || "";
+  feedbackEl.textContent = getWaitingText(preparedQuestion.type);
   nextButton.disabled = true;
   nextButton.textContent = currentIndex === activeLesson.questions.length - 1 ? "Ergebnis anzeigen" : "Nächste Aufgabe";
 
   answersEl.innerHTML = "";
 
-  if (question.type === "choice" || question.type === "reading") {
-    renderChoiceQuestion(question);
+  if (preparedQuestion.type === "choice" || preparedQuestion.type === "reading") {
+    renderChoiceQuestion(preparedQuestion);
   }
 
-  if (question.type === "cloze") {
-    renderClozeQuestion(question);
+  if (preparedQuestion.type === "cloze") {
+    renderClozeQuestion(preparedQuestion);
+  }
+
+  if (preparedQuestion.type === "match") {
+    renderMatchQuestion(preparedQuestion);
+  }
+}
+
+function prepareQuestion(question, index) {
+  const seed = quizSeed + index * 101 + activeLesson.id.length;
+
+  if (question.type === "choice" || question.type === "reading") {
+    const options = avoidFirstAnswer(
+      shuffleWithSeed(question.options, seed),
+      question.answer,
+      seed,
+    );
+
+    return {
+      ...question,
+      options,
+    };
   }
 
   if (question.type === "match") {
-    renderMatchQuestion(question);
+    const pairs = shuffleWithSeed(question.pairs, seed);
+    const optionSet = avoidOriginalMatchOrder(
+      shuffleWithSeed([...new Set(question.pairs.map((pair) => pair.answer))], seed + 17),
+      pairs,
+      seed,
+    );
+
+    return {
+      ...question,
+      pairs,
+      optionSet,
+    };
   }
+
+  return question;
+}
+
+function avoidFirstAnswer(options, answer, seed) {
+  if (options.length < 2 || options[0] !== answer) return options;
+  const offset = 1 + (seed % (options.length - 1));
+  return [...options.slice(offset), ...options.slice(0, offset)];
+}
+
+function avoidOriginalMatchOrder(options, pairs, seed) {
+  if (options.length < 2) return options;
+  const sameOrder = pairs.every((pair, index) => pair.answer === options[index]);
+  if (!sameOrder) return options;
+  const offset = 1 + (seed % (options.length - 1));
+  return [...options.slice(offset), ...options.slice(0, offset)];
 }
 
 function renderChoiceQuestion(question) {
@@ -1176,8 +1274,8 @@ function renderClozeQuestion(question) {
   const form = document.createElement("form");
   form.className = "cloze-form";
   form.innerHTML = `
-    <input id="cloze-input" autocomplete="off" aria-label="填入答案" />
-    <button type="submit">送出</button>
+    <input id="cloze-input" autocomplete="off" aria-label="Antwort eingeben" />
+    <button type="submit">Antwort prüfen</button>
   `;
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -1191,7 +1289,7 @@ function renderClozeQuestion(question) {
 function renderMatchQuestion(question) {
   const form = document.createElement("form");
   form.className = "match-form";
-  const optionSet = [...new Set(question.pairs.map((pair) => pair.answer))];
+  const optionSet = question.optionSet || [...new Set(question.pairs.map((pair) => pair.answer))];
 
   question.pairs.forEach((pair, index) => {
     const row = document.createElement("label");
@@ -1201,8 +1299,8 @@ function renderMatchQuestion(question) {
       .join("");
     row.innerHTML = `
       <span>${pair.term}</span>
-      <select aria-label="${pair.term} 的答案" data-index="${index}">
-        <option value="">選擇</option>
+      <select aria-label="Antwort für ${pair.term}" data-index="${index}">
+        <option value="">Bitte wählen</option>
         ${options}
       </select>
     `;
@@ -1211,7 +1309,7 @@ function renderMatchQuestion(question) {
 
   const submit = document.createElement("button");
   submit.type = "submit";
-  submit.textContent = "送出配對";
+  submit.textContent = "Zuordnung prüfen";
   form.appendChild(submit);
 
   form.addEventListener("submit", (event) => {
