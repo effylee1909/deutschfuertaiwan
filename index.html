@@ -31,6 +31,7 @@
             <p id="level-text" class="level-text"></p>
           </div>
           <button id="resource-tab" class="resource-tab" type="button">複習表格下載</button>
+          <button id="dashboard-tab" class="resource-tab" type="button">知識點地圖後台</button>
           <div id="lesson-list" class="lesson-list"></div>
         </aside>
 
@@ -116,6 +117,23 @@
             <button id="back-to-lesson" class="secondary" type="button">Zur Lektion</button>
             <button id="restart" class="secondary" type="button">Neu starten</button>
             <button id="next" type="button">Nächste Aufgabe</button>
+          </div>
+        </section>
+
+        <section id="dashboard-panel" class="dashboard-panel" aria-labelledby="dashboard-title" hidden>
+          <div class="section-heading">
+            <p class="eyebrow">Lehrkraft</p>
+            <h2 id="dashboard-title">知識點地圖</h2>
+            <p class="panel-description">
+              這裡會依據學生在此裝置上的作答紀錄統計弱點，方便你整理之後要補強的課程內容。
+            </p>
+          </div>
+
+          <div id="dashboard-summary" class="dashboard-summary"></div>
+          <div id="knowledge-map" class="knowledge-map"></div>
+
+          <div class="download-actions">
+            <button id="reset-progress" class="secondary" type="button">清除本機學習紀錄</button>
           </div>
         </section>
 

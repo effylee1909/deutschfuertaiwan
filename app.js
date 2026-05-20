@@ -1233,13 +1233,16 @@ const supplementalQuestionPools = {
   ],
 };
 
-const germanExamPools = createGermanExamPools();
+const germanExamPools = enhanceExamPools(createGermanExamPools());
 
 let activeLesson = lessons[0];
 let currentIndex = 0;
 let score = 0;
 let answered = false;
 let quizSeed = Date.now();
+let currentPreparedQuestion = null;
+
+const progressStorageKey = "deutschfuertaiwan-progress-v1";
 
 initializeLessons();
 
@@ -1256,10 +1259,12 @@ const dailyPhrasesEl = document.querySelector("#daily-phrases");
 const sourceNoteEl = document.querySelector("#source-note");
 const startButton = document.querySelector("#start-quiz");
 const resourceTab = document.querySelector("#resource-tab");
+const dashboardTab = document.querySelector("#dashboard-tab");
 const backToLessonButton = document.querySelector("#back-to-lesson");
 const quizPanel = document.querySelector("#quiz-panel");
 const lessonPanel = document.querySelector("#lesson-panel");
 const resourcesPanel = document.querySelector("#resources-panel");
+const dashboardPanel = document.querySelector("#dashboard-panel");
 const quizTitleEl = document.querySelector("#quiz-title");
 const scoreEl = document.querySelector("#score");
 const totalEl = document.querySelector("#total");
@@ -1277,10 +1282,14 @@ const perfectVerbTableEl = document.querySelector("#perfect-verb-table");
 const preteriteVerbTableEl = document.querySelector("#preterite-verb-table");
 const downloadVocabButton = document.querySelector("#download-vocab");
 const downloadVerbsButton = document.querySelector("#download-verbs");
+const dashboardSummaryEl = document.querySelector("#dashboard-summary");
+const knowledgeMapEl = document.querySelector("#knowledge-map");
+const resetProgressButton = document.querySelector("#reset-progress");
 
 function renderLessonList() {
   lessonListEl.innerHTML = "";
   resourceTab.dataset.active = "false";
+  dashboardTab.dataset.active = "false";
 
   levelOrder.forEach((level) => {
     const levelLessons = lessons.filter((lesson) => lesson.level === level);
@@ -1291,7 +1300,7 @@ function renderLessonList() {
     levelGroup.open = activeLesson.level === level || level === "A1";
     levelGroup.innerHTML = `
       <summary>
-        <span class="folder-mark" aria-hidden="true"></span>
+        <span class="level-chip">${level}</span>
         <span>
           <strong>${level}</strong>
           <small>${getLevelFolderLabel(level)}</small>
@@ -1393,8 +1402,10 @@ function renderLesson() {
 function showLesson() {
   quizPanel.hidden = true;
   resourcesPanel.hidden = true;
+  dashboardPanel.hidden = true;
   lessonPanel.hidden = false;
   resourceTab.dataset.active = "false";
+  dashboardTab.dataset.active = "false";
   renderLesson();
 }
 
@@ -1404,8 +1415,10 @@ function startQuiz() {
   quizSeed = Date.now();
   lessonPanel.hidden = true;
   resourcesPanel.hidden = true;
+  dashboardPanel.hidden = true;
   quizPanel.hidden = false;
   resourceTab.dataset.active = "false";
+  dashboardTab.dataset.active = "false";
   quizTitleEl.textContent = `${activeLesson.level} Prüfung - ${stageGermanLabels[activeLesson.stage]}`;
   renderLessonList();
   renderQuestion();
@@ -1414,12 +1427,27 @@ function startQuiz() {
 function showResources() {
   lessonPanel.hidden = true;
   quizPanel.hidden = true;
+  dashboardPanel.hidden = true;
   resourcesPanel.hidden = false;
   resourceTab.dataset.active = "true";
+  dashboardTab.dataset.active = "false";
   renderLessonList();
   resourceTab.dataset.active = "true";
   levelTextEl.textContent = "常用單字與動詞：可下載表格複習";
   renderResourceTables();
+}
+
+function showDashboard() {
+  lessonPanel.hidden = true;
+  quizPanel.hidden = true;
+  resourcesPanel.hidden = true;
+  dashboardPanel.hidden = false;
+  resourceTab.dataset.active = "false";
+  dashboardTab.dataset.active = "true";
+  renderLessonList();
+  dashboardTab.dataset.active = "true";
+  levelTextEl.textContent = "教師後台：統整學生在本機作答的弱點";
+  renderDashboard();
 }
 
 function renderResourceTables() {
@@ -1794,6 +1822,43 @@ function createGermanExamPools() {
   };
 }
 
+function enhanceExamPools(pools) {
+  const additions = {
+    A1: [
+      { type: "reading", skill: "Lesen Teil 1", tags: ["Lesen", "Alltag"], prompt: "Lesen Sie die Nachricht. Ist die Aussage richtig?", passage: "Hallo Tim, ich bin um 10 Uhr am Bahnhof. Ich kaufe die Fahrkarten. Bitte bring Kaffee mit. Lara", question: "Lara kauft die Fahrkarten.", options: ["Richtig", "Falsch"], answer: "Richtig", hint: "Im Text steht: Ich kaufe die Fahrkarten." },
+      { type: "reading", skill: "Lesen Teil 2", tags: ["Lesen", "Information"], prompt: "Lesen Sie die Anzeige und wählen Sie.", passage: "Sprachschule Mitte: Deutsch A1, Montag und Mittwoch, 18:00-19:30 Uhr. Anmeldung bis Freitag.", question: "Wann ist der Kurs?", options: ["Montag und Mittwoch", "Dienstag und Freitag", "Nur am Freitag"], answer: "Montag und Mittwoch", hint: "Die Anzeige nennt Montag und Mittwoch." },
+      { type: "listening", skill: "Hören Teil 1", tags: ["Hören", "Zahlen"], prompt: "Hörskript: Wählen Sie die richtige Information.", passage: "Guten Tag, hier ist die Praxis Dr. Klein. Ihr Termin ist morgen um 9 Uhr, nicht um 10 Uhr.", question: "Wann ist der Termin?", options: ["Um 9 Uhr", "Um 10 Uhr", "Heute"], answer: "Um 9 Uhr", hint: "Im Hörskript steht: morgen um 9 Uhr." },
+      { type: "writing", skill: "Schreiben", tags: ["Schreiben", "Alltag"], prompt: "Schreiben Sie eine kurze Nachricht.", task: "Sie können heute nicht zum Deutschkurs kommen. Schreiben Sie 2-3 Sätze: Entschuldigung, Grund, Bitte um Hausaufgaben.", answer: "__SELF_OK__", model: "Hallo Frau Weber, ich kann heute leider nicht zum Kurs kommen, weil ich krank bin. Können Sie mir bitte die Hausaufgaben schicken?" },
+      { type: "speaking", skill: "Sprechen Teil 2", tags: ["Sprechen", "Fragen"], prompt: "Sprechen Sie laut.", task: "Fragekarte: Name. Stellen Sie eine passende Frage und antworten Sie kurz.", answer: "__SELF_OK__", model: "Wie heißen Sie? - Ich heiße Lin." },
+    ],
+    A2: [
+      { type: "reading", skill: "Lesen Teil 1", tags: ["Lesen", "Termin"], prompt: "Lesen Sie die E-Mail. Wählen Sie die richtige Antwort.", passage: "Sehr geehrte Frau Lin, der Termin am Dienstag fällt aus. Wir können Ihnen am Donnerstag um 11 Uhr einen neuen Termin anbieten.", question: "Was ist richtig?", options: ["Der Termin ist am Donnerstag.", "Der Termin bleibt am Dienstag.", "Es gibt keinen neuen Termin."], answer: "Der Termin ist am Donnerstag.", hint: "Ein neuer Termin wird am Donnerstag um 11 Uhr angeboten." },
+      { type: "listening", skill: "Hören Teil 2", tags: ["Hören", "Reisen"], prompt: "Hörskript: Wählen Sie die richtige Antwort.", passage: "Achtung an Gleis 4: Der Zug nach München fährt heute 20 Minuten später ab.", question: "Was passiert?", options: ["Der Zug hat Verspätung.", "Der Zug fällt aus.", "Der Zug fährt früher."], answer: "Der Zug hat Verspätung.", hint: "20 Minuten später bedeutet Verspätung." },
+      { type: "choice", skill: "Sprachbausteine", tags: ["Perfekt"], prompt: "Wählen Sie die richtige Lösung.", translation: "Gestern ___ ich eine Wohnung besichtigt.", options: ["habe", "bin", "war"], answer: "habe", hint: "besichtigen bildet das Perfekt mit haben." },
+      { type: "writing", skill: "Schreiben", tags: ["Schreiben", "Termin"], prompt: "Schreiben Sie eine E-Mail.", task: "Sie möchten einen Termin verschieben. Schreiben Sie 3-4 Sätze: Grund, neuer Vorschlag, Bitte um Antwort.", answer: "__SELF_OK__", model: "Sehr geehrte Frau Keller, ich kann morgen leider nicht kommen, weil ich arbeiten muss. Kann ich am Freitag um 10 Uhr kommen? Bitte antworten Sie mir kurz." },
+      { type: "speaking", skill: "Sprechen Teil 3", tags: ["Sprechen", "Alltag"], prompt: "Sprechen Sie laut.", task: "Planen Sie mit einer Person einen Ausflug. Fragen Sie nach Zeit, Ort und Verkehrsmittel.", answer: "__SELF_OK__", model: "Wann treffen wir uns? Wo treffen wir uns? Fahren wir mit dem Bus oder mit dem Zug?" },
+    ],
+    B1: [
+      { type: "reading", skill: "Lesen", tags: ["Lesen", "Meinung"], prompt: "Lesen Sie den Kommentar. Welche Aussage passt?", passage: "Viele finden Online-Unterricht praktisch. Trotzdem lernen manche besser im Kursraum, weil sie dort direkter fragen können.", question: "Was sagt der Text?", options: ["Online-Unterricht hat Vorteile, aber nicht für alle.", "Online-Unterricht ist immer schlecht.", "Im Kursraum kann niemand fragen."], answer: "Online-Unterricht hat Vorteile, aber nicht für alle.", hint: "Der Text nennt beide Seiten." },
+      { type: "choice", skill: "Sprachbausteine", tags: ["Nebensatz"], prompt: "Wählen Sie die passende Form.", translation: "Ich melde mich an, ___ ich eine Bestätigung bekommen habe.", options: ["sobald", "trotzdem", "deshalb"], answer: "sobald", hint: "sobald bedeutet: wenn etwas passiert ist." },
+      { type: "writing", skill: "Schreiben", tags: ["Schreiben", "Beschwerde"], prompt: "Schreiben Sie eine formelle Nachricht.", task: "Sie haben ein Problem mit einer Reservierung. Schreiben Sie: Problem, Wunsch, höfliche Bitte.", answer: "__SELF_OK__", model: "Sehr geehrte Damen und Herren, ich habe ein Problem mit meiner Reservierung. Das Zimmer ist nicht wie beschrieben. Könnten Sie mir bitte eine andere Lösung anbieten?" },
+      { type: "speaking", skill: "Sprechen", tags: ["Sprechen", "Meinung"], prompt: "Sprechen Sie laut.", task: "Sagen Sie Ihre Meinung zum Thema Homeoffice und nennen Sie einen Vorteil und einen Nachteil.", answer: "__SELF_OK__", model: "Meiner Meinung nach ist Homeoffice praktisch, weil man Zeit spart. Ein Nachteil ist, dass der Kontakt zu Kolleginnen und Kollegen fehlt." },
+    ],
+    B2: [
+      { type: "reading", skill: "Lesen", tags: ["Lesen", "Argumentation"], prompt: "Lesen Sie den Abschnitt. Welche Aussage fasst ihn zusammen?", passage: "Digitale Dienstleistungen sparen Zeit und Kosten. Gleichzeitig müssen Datenschutz, Barrierefreiheit und persönliche Beratung garantiert werden.", question: "Was ist die Kernaussage?", options: ["Digitalisierung braucht klare Schutzmaßnahmen.", "Digitale Angebote sind grundsätzlich unnötig.", "Persönliche Beratung soll verschwinden."], answer: "Digitalisierung braucht klare Schutzmaßnahmen.", hint: "Der Text nennt Vorteile und notwendige Bedingungen." },
+      { type: "choice", skill: "Sprachbausteine", tags: ["Konnektoren"], prompt: "Wählen Sie die passende Verbindung.", translation: "___ öffentliche Verkehrsmittel günstiger sind, entscheiden sich manche Menschen für das Auto.", options: ["Obwohl", "Deshalb", "Sobald"], answer: "Obwohl", hint: "Obwohl leitet einen Gegensatz ein." },
+      { type: "writing", skill: "Schreiben", tags: ["Schreiben", "Argumentation"], prompt: "Schreiben Sie einen kurzen Kommentar.", task: "Thema: Sollten Sprachkurse online stattfinden? Schreiben Sie 4-5 Sätze mit Vorteil, Nachteil und eigener Meinung.", answer: "__SELF_OK__", model: "Ein Vorteil von Online-Kursen ist die Flexibilität. Andererseits fehlt manchmal der direkte Austausch. Meiner Meinung nach ist eine Kombination aus Online- und Präsenzunterricht am sinnvollsten." },
+      { type: "speaking", skill: "Sprechen", tags: ["Sprechen", "Argumentation"], prompt: "Sprechen Sie laut.", task: "Vergleichen Sie zwei Möglichkeiten: mit dem Auto reisen oder mit dem Zug reisen. Nennen Sie Vor- und Nachteile.", answer: "__SELF_OK__", model: "Der Zug ist oft umweltfreundlicher und entspannter. Das Auto ist flexibler, aber meist teurer und weniger nachhaltig." },
+    ],
+  };
+
+  Object.entries(additions).forEach(([level, questions]) => {
+    pools[level] = [...questions, ...(pools[level] || [])];
+  });
+
+  return pools;
+}
+
 function initializeLessons() {
   ensureStageCoverage();
 
@@ -1929,12 +1994,13 @@ function shuffleWithSeed(items, seed) {
 function renderQuestion() {
   const question = activeLesson.questions[currentIndex];
   const preparedQuestion = prepareQuestion(question, currentIndex);
+  currentPreparedQuestion = preparedQuestion;
   answered = false;
 
   scoreEl.textContent = score;
   totalEl.textContent = activeLesson.questions.length;
   progressBar.style.width = `${(currentIndex / activeLesson.questions.length) * 100}%`;
-  metaEl.textContent = `Aufgabe ${currentIndex + 1} von ${activeLesson.questions.length}`;
+  metaEl.textContent = `Aufgabe ${currentIndex + 1} von ${activeLesson.questions.length} · ${getExamSkillLabel(preparedQuestion)}`;
   textEl.textContent = preparedQuestion.prompt;
   translationEl.textContent = preparedQuestion.translation || preparedQuestion.question || "";
   feedbackEl.textContent = getWaitingText(preparedQuestion.type);
@@ -1943,7 +2009,7 @@ function renderQuestion() {
 
   answersEl.innerHTML = "";
 
-  if (preparedQuestion.type === "choice" || preparedQuestion.type === "reading") {
+  if (preparedQuestion.type === "choice" || preparedQuestion.type === "reading" || preparedQuestion.type === "listening") {
     renderChoiceQuestion(preparedQuestion);
   }
 
@@ -1954,12 +2020,16 @@ function renderQuestion() {
   if (preparedQuestion.type === "match") {
     renderMatchQuestion(preparedQuestion);
   }
+
+  if (preparedQuestion.type === "writing" || preparedQuestion.type === "speaking") {
+    renderSelfCheckQuestion(preparedQuestion);
+  }
 }
 
 function prepareQuestion(question, index) {
   const seed = quizSeed + index * 101 + activeLesson.id.length;
 
-  if (question.type === "choice" || question.type === "reading") {
+  if (question.type === "choice" || question.type === "reading" || question.type === "listening") {
     const options = avoidFirstAnswer(
       shuffleWithSeed(question.options, seed),
       question.answer,
@@ -2026,6 +2096,44 @@ function renderChoiceQuestion(question) {
   answersEl.appendChild(grid);
 }
 
+function renderSelfCheckQuestion(question) {
+  if (question.passage) {
+    const passage = document.createElement("p");
+    passage.className = "reading-passage";
+    passage.textContent = question.passage;
+    answersEl.appendChild(passage);
+  }
+
+  const card = document.createElement("div");
+  card.className = "self-check-card";
+  card.innerHTML = `
+    <p>${question.task || "Bearbeiten Sie die Aufgabe und vergleichen Sie danach mit dem Beispiel."}</p>
+    <div class="model-answer" hidden>
+      <strong>Beispiel / Erwartung</strong>
+      <span>${question.model || question.answer}</span>
+    </div>
+  `;
+
+  const reveal = document.createElement("button");
+  reveal.type = "button";
+  reveal.className = "secondary";
+  reveal.textContent = "Beispiel anzeigen";
+  reveal.addEventListener("click", () => {
+    card.querySelector(".model-answer").hidden = false;
+  });
+
+  const done = document.createElement("button");
+  done.type = "button";
+  done.textContent = "Geübt";
+  done.addEventListener("click", () => answerQuestion(question.answer || "__SELF_OK__", question));
+
+  const actions = document.createElement("div");
+  actions.className = "self-check-actions";
+  actions.append(reveal, done);
+  card.appendChild(actions);
+  answersEl.appendChild(card);
+}
+
 function renderClozeQuestion(question) {
   const form = document.createElement("form");
   form.className = "cloze-form";
@@ -2087,6 +2195,7 @@ function answerQuestion(value, question) {
 
   answered = true;
   if (correct) score += 1;
+  recordAttempt(question, correct, value);
 
   feedbackEl.innerHTML = correct
     ? `<strong>Richtig.</strong> ${question.hint}`
@@ -2102,7 +2211,7 @@ function lockCurrentQuestion(question, value) {
     control.disabled = true;
   });
 
-  if (question.type !== "choice" && question.type !== "reading") return;
+  if (question.type !== "choice" && question.type !== "reading" && question.type !== "listening") return;
 
   answersEl.querySelectorAll(".answer-grid button").forEach((button) => {
     if (button.textContent === value) {
@@ -2121,9 +2230,149 @@ function getWaitingText(type) {
     cloze: "Schreiben Sie die passende Lösung.",
     match: "Ordnen Sie die passenden Ausdrücke zu.",
     reading: "Lesen Sie den Text und wählen Sie die richtige Antwort.",
+    listening: "Lesen Sie das Hörskript wie eine Hörverstehensaufgabe und wählen Sie.",
+    writing: "Schreiben Sie eine kurze Antwort und vergleichen Sie mit dem Beispiel.",
+    speaking: "Sprechen Sie laut und vergleichen Sie Ihre Antwort mit dem Beispiel.",
   };
 
   return messages[type] || "Bearbeiten Sie die Aufgabe.";
+}
+
+function getExamSkillLabel(question) {
+  const labels = {
+    choice: "Sprachbausteine",
+    cloze: "Schreiben",
+    match: "Wortschatz",
+    reading: "Lesen",
+    listening: "Hören",
+    writing: "Schreiben",
+    speaking: "Sprechen",
+  };
+
+  return question.skill || labels[question.type] || "Prüfung";
+}
+
+function recordAttempt(question, correct, value) {
+  const progress = loadProgress();
+  const tags = getQuestionTags(question);
+  const entry = {
+    time: new Date().toISOString(),
+    level: activeLesson.level,
+    lesson: activeLesson.lessonCode,
+    topic: activeLesson.topic,
+    skill: getExamSkillLabel(question),
+    tags,
+    prompt: question.prompt,
+    correct,
+    answer: String(value),
+  };
+
+  progress.attempts.push(entry);
+  progress.attempts = progress.attempts.slice(-500);
+  saveProgress(progress);
+}
+
+function loadProgress() {
+  try {
+    return JSON.parse(localStorage.getItem(progressStorageKey)) || { attempts: [] };
+  } catch (error) {
+    return { attempts: [] };
+  }
+}
+
+function saveProgress(progress) {
+  try {
+    localStorage.setItem(progressStorageKey, JSON.stringify(progress));
+  } catch (error) {
+    // GitHub Pages has no database; if localStorage is blocked, the app simply skips tracking.
+  }
+}
+
+function getQuestionTags(question) {
+  if (question.tags?.length) return question.tags;
+
+  const text = `${question.prompt || ""} ${question.translation || ""} ${question.question || ""}`.toLowerCase();
+  const tags = [];
+  if (/artikel|der|die|das/.test(text)) tags.push("Artikel");
+  if (/perfekt|gegangen|gegessen|partizip/.test(text)) tags.push("Perfekt");
+  if (/weil|dass|obwohl|nebensatz/.test(text)) tags.push("Nebensatz");
+  if (/termin|reservierung|hotel|zimmer/.test(text)) tags.push("Alltag");
+  if (/lesen|text|anzeige|e-mail|hinweis/.test(text) || question.type === "reading") tags.push("Lesen");
+  if (question.type === "listening") tags.push("Hören");
+  if (question.type === "writing") tags.push("Schreiben");
+  if (question.type === "speaking") tags.push("Sprechen");
+  return tags.length ? tags : ["Allgemein"];
+}
+
+function renderDashboard() {
+  const attempts = loadProgress().attempts;
+  const total = attempts.length;
+  const wrong = attempts.filter((attempt) => !attempt.correct).length;
+  const accuracy = total ? Math.round(((total - wrong) / total) * 100) : 0;
+
+  dashboardSummaryEl.innerHTML = `
+    <article>
+      <strong>${total}</strong>
+      <span>作答紀錄</span>
+    </article>
+    <article>
+      <strong>${accuracy}%</strong>
+      <span>平均正確率</span>
+    </article>
+    <article>
+      <strong>${wrong}</strong>
+      <span>需要補強</span>
+    </article>
+  `;
+
+  const tagStats = buildTagStats(attempts);
+  if (tagStats.length === 0) {
+    knowledgeMapEl.innerHTML = `
+      <article class="knowledge-card">
+        <h3>尚未有作答紀錄</h3>
+        <p>請先讓學生完成幾題測驗，這裡就會開始累積弱點地圖。</p>
+      </article>
+    `;
+    return;
+  }
+
+  knowledgeMapEl.innerHTML = tagStats
+    .map((item) => {
+      const rate = Math.round((item.wrong / item.total) * 100);
+      return `
+        <article class="knowledge-card" data-risk="${rate >= 50 ? "high" : rate >= 25 ? "medium" : "low"}">
+          <div>
+            <h3>${item.tag}</h3>
+            <p>${item.total} 題紀錄，錯 ${item.wrong} 題</p>
+          </div>
+          <strong>${rate}%</strong>
+          <span class="risk-bar"><span style="width:${rate}%"></span></span>
+          <small>${getKnowledgeAdvice(item.tag, rate)}</small>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function buildTagStats(attempts) {
+  const map = new Map();
+
+  attempts.forEach((attempt) => {
+    attempt.tags.forEach((tag) => {
+      const current = map.get(tag) || { tag, total: 0, wrong: 0 };
+      current.total += 1;
+      if (!attempt.correct) current.wrong += 1;
+      map.set(tag, current);
+    });
+  });
+
+  return [...map.values()].sort((a, b) => (b.wrong / b.total) - (a.wrong / a.total));
+}
+
+function getKnowledgeAdvice(tag, rate) {
+  if (rate >= 50) return `建議下次課程優先補強 ${tag}，並加入更多分步練習。`;
+  if (rate >= 25) return `${tag} 有零星錯誤，可以安排短複習或錯題回顧。`;
+  return `${tag} 目前掌握度穩定，可維持一般複習。`;
 }
 
 function renderResult() {
@@ -2165,9 +2414,14 @@ function goNext() {
 
 startButton.addEventListener("click", startQuiz);
 resourceTab.addEventListener("click", showResources);
+dashboardTab.addEventListener("click", showDashboard);
 backToLessonButton.addEventListener("click", showLesson);
 restartButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", goNext);
+resetProgressButton.addEventListener("click", () => {
+  saveProgress({ attempts: [] });
+  renderDashboard();
+});
 downloadVocabButton.addEventListener("click", () => {
   downloadCsv("deutsch-vokabeln.csv", vocabularyRows, [
     { key: "type", label: "類型" },
