@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>德文學習與測驗平台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow">Deutsch Lernen</p>
+          <h1 id="page-title">德文學習與測驗平台</h1>
+          <p>
+            從 A1 到 B2 先學內容，再用同等級內的初級、中級、進階綜合測驗檢查理解。
+          </p>
+        </div>
+        <div class="article-orbit" aria-label="德文冠詞示意">
+          <span class="orbit-item masculine">der</span>
+          <span class="orbit-item feminine">die</span>
+          <span class="orbit-item neuter">das</span>
+        </div>
+      </section>
+
+      <section class="study-app" aria-label="德文學習平台">
+        <aside class="course-nav" aria-label="單元選單">
+          <div>
+            <p class="eyebrow">Kurs</p>
+            <h2>課程選單</h2>
+            <p id="level-text" class="level-text"></p>
+          </div>
+          <button id="resource-tab" class="resource-tab" type="button">複習表格下載</button>
+          <div id="lesson-list" class="lesson-list"></div>
+        </aside>
+
+        <section id="lesson-panel" class="lesson-panel">
+          <div class="section-heading">
+            <p id="lesson-badge" class="eyebrow">A1</p>
+            <h2 id="lesson-title">學習內容</h2>
+            <p id="lesson-description" class="panel-description"></p>
+          </div>
+
+          <div id="lesson-cards" class="rule-stack"></div>
+
+          <div class="phrase-panel">
+            <div class="section-heading">
+              <p class="eyebrow">Alltag</p>
+              <h3>日常可用例句</h3>
+            </div>
+            <div id="daily-phrases" class="phrase-grid"></div>
+          </div>
+
+          <div class="source-panel">
+            <h3>內容來源</h3>
+            <p id="source-note"></p>
+            <a href="https://www.goethe.de/ins/de/de/m/prf/grm.html" target="_blank" rel="noreferrer">Goethe-Institut：Bestimmter Artikel</a>
+            <a href="https://www.goethe.de/ins/de/en/m/prf/prf/gzsd1/ueb.html" target="_blank" rel="noreferrer">Goethe-Institut：A1 Practice Materials</a>
+            <a href="https://www.goethe.de/ins/us/en/sta/wsh/prf/gzfit2/ueb.html" target="_blank" rel="noreferrer">Goethe-Institut：A2 Practice Materials</a>
+            <a href="https://www.goethe.de/pro/relaunch/prf/en/Goethe-Zertifikat_B1_Wortliste.pdf" target="_blank" rel="noreferrer">Goethe-Institut：B1 Wortliste</a>
+            <a href="https://www.goethe.de/prj/dvt/en/" target="_blank" rel="noreferrer">Goethe-Institut：Vocabulary Trainer</a>
+            <a href="https://www.telc.net/en/language-examinations/certificate-exams/german/start-german1-telc-german-a1/" target="_blank" rel="noreferrer">telc：Deutsch A1 Exam Format</a>
+            <a href="https://www.telc.net/en/language-examinations/certificate-exams/german/start-german-2-telc-german-a2/" target="_blank" rel="noreferrer">telc：Deutsch A2 Exam Format</a>
+            <a href="https://deutsch.lingolia.com/en/grammar/nouns-and-articles" target="_blank" rel="noreferrer">Lingolia：Nouns and Articles</a>
+            <a href="https://deutsch.info/grammar/nouns?hl=en" target="_blank" rel="noreferrer">deutsch.info：Nouns and Articles</a>
+            <a href="https://www.duden.de/rechtschreibung/Tisch" target="_blank" rel="noreferrer">Duden：Tisch, Buch, Lampe 等詞條</a>
+          </div>
+
+          <div class="lesson-actions">
+            <button id="start-quiz" type="button">開始課後測驗</button>
+          </div>
+        </section>
+
+        <section id="quiz-panel" class="quiz-panel" aria-labelledby="quiz-title" hidden>
+          <div class="quiz-top">
+            <div>
+              <p class="eyebrow">Quiz</p>
+              <h2 id="quiz-title">選出正確冠詞</h2>
+            </div>
+            <div class="score-pill" aria-live="polite">
+              <span id="score">0</span>/<span id="total">0</span>
+            </div>
+          </div>
+
+          <div class="progress-track" aria-hidden="true">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+
+          <article class="question-card">
+            <p id="question-meta" class="question-meta"></p>
+            <h3 id="question-text"></h3>
+            <p id="question-translation" class="translation"></p>
+
+            <div id="answers" class="answer-area"></div>
+
+            <div id="feedback" class="feedback" aria-live="polite"></div>
+          </article>
+
+          <div class="quiz-actions">
+            <button id="back-to-lesson" class="secondary" type="button">Zur Lektion</button>
+            <button id="restart" class="secondary" type="button">Neu starten</button>
+            <button id="next" type="button">Nächste Aufgabe</button>
+          </div>
+        </section>
+
+        <section id="resources-panel" class="resources-panel" aria-labelledby="resources-title" hidden>
+          <div class="section-heading">
+            <p class="eyebrow">Material</p>
+            <h2 id="resources-title">複習表格</h2>
+            <p class="panel-description">
+              這裡整理常用德文單字和動詞變化，可下載成 CSV 後用 Excel 或 Google Sheets 複習。
+            </p>
+          </div>
+
+          <div class="download-actions">
+            <button id="download-vocab" type="button">下載單字表 CSV</button>
+            <button id="download-verbs" class="secondary" type="button">下載動詞變化表 CSV</button>
+          </div>
+
+          <div class="table-block">
+            <h3>單字表</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>類型</th>
+                    <th>德文</th>
+                    <th>中文</th>
+                  </tr>
+                </thead>
+                <tbody id="vocab-table"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="table-block">
+            <h3>動詞變化表</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>動詞</th>
+                    <th>中文</th>
+                    <th>ich</th>
+                    <th>du</th>
+                    <th>er/sie/es</th>
+                    <th>wir/sie/Sie</th>
+                  </tr>
+                </thead>
+                <tbody id="verb-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
