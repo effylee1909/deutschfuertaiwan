@@ -406,9 +406,29 @@ button:disabled {
 
 .mini-vocab-list div,
 .grammar-list div {
+  display: grid;
+  gap: 4px;
   border-top: 1px solid var(--line);
   padding: 12px 0;
   line-height: 1.55;
+}
+
+.mini-vocab-list small {
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.mini-vocab-list span,
+.grammar-list span {
+  color: var(--muted);
+}
+
+.grammar-list em {
+  border-left: 4px solid var(--gold);
+  padding-left: 10px;
+  color: var(--ink);
+  font-style: normal;
+  font-weight: 800;
 }
 
 .mini-vocab-list div:first-child,

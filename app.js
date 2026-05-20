@@ -278,8 +278,8 @@ const lessons = [
       {
         type: "reading",
         prompt: "閱讀 email 並回答問題",
-        passage: "Sehr geehrte Frau Keller, ich kann am Montag leider nicht kommen, weil mein Zug Verspätung hat. Kann ich am Dienstag um 10 Uhr kommen? Mit freundlichen Grüßen, Chen",
-        question: "Chen 為什麼星期一不能去？",
+        passage: "Sehr geehrte Frau Keller, ich kann am Montag leider nicht kommen, weil mein Zug Verspätung hat. Kann ich am Dienstag um 10 Uhr kommen? Mit freundlichen Grüßen, Emma",
+        question: "Emma 為什麼星期一不能去？",
         options: ["火車誤點", "他生病了", "他要買票"],
         answer: "火車誤點",
         hint: "weil mein Zug Verspätung hat 表示因為火車誤點。",
@@ -463,7 +463,7 @@ const textbookLessons = {
     },
     中級: {
       title: "Termin verschieben",
-      text: "Chen hat morgen einen Arzttermin, aber er muss länger arbeiten. Er ruft in der Praxis an und sagt: Guten Tag, ich möchte meinen Termin verschieben. Haben Sie am Freitagvormittag Zeit?",
+      text: "Emma hat morgen einen Arzttermin, aber sie muss länger arbeiten. Sie ruft in der Praxis an und sagt: Guten Tag, ich möchte meinen Termin verschieben. Haben Sie am Freitagvormittag Zeit?",
       vocab: [["der Arzttermin", "看診預約"], ["die Praxis", "診所"], ["anrufen", "打電話"], ["verschieben", "改期"], ["der Vormittag", "上午"]],
       grammar: [["Modalverb + Infinitiv", "muss arbeiten, möchte verschieben。"], ["Akkusativ", "meinen Termin，陽性 der Termin 在 Akkusativ 變成 den/meinen。"], ["trennbares Verb", "anrufen: Er ruft in der Praxis an."]],
     },
@@ -518,58 +518,111 @@ const textbookLessons = {
 
 const syllabusTopics = {
   A1: [
-    "冠詞與名詞", "自我介紹與基本句", "公告與短訊閱讀", "數字、時間與星期",
-    "家庭與朋友", "食物、點餐與付款", "城市、方向與交通", "購物與價格",
-    "日常作息與可分動詞", "天氣、衣著與顏色", "身體、健康與預約", "A1 總複習與檢定任務",
+    { zh: "冠詞與名詞", de: "Artikel und Nomen" },
+    { zh: "自我介紹與基本句", de: "Vorstellung und einfache Sätze" },
+    { zh: "公告與短訊閱讀", de: "Hinweise und kurze Nachrichten" },
+    { zh: "數字、時間與星期", de: "Zahlen, Uhrzeit und Wochentage" },
+    { zh: "家庭與朋友", de: "Familie und Freunde" },
+    { zh: "食物、點餐與付款", de: "Essen, Bestellen und Bezahlen" },
+    { zh: "城市、方向與交通", de: "Stadt, Wege und Verkehr" },
+    { zh: "購物與價格", de: "Einkaufen und Preise" },
+    { zh: "日常作息與可分動詞", de: "Tagesablauf und trennbare Verben" },
+    { zh: "天氣、衣著與顏色", de: "Wetter, Kleidung und Farben" },
+    { zh: "身體、健康與預約", de: "Körper, Gesundheit und Termine" },
+    { zh: "A1 總複習與檢定任務", de: "A1 Wiederholung und Prüfungstraining" },
   ],
   A2: [
-    "完成式 Perfekt", "購物與預約", "通知與 email 閱讀", "租屋與住宿",
-    "旅行與交通問題", "工作、學校與計畫", "比較級與建議", "Dativ 介系詞",
-    "weil / dass / wenn 子句", "表格、申請與官方文件", "邀請、拒絕與改期", "A2 綜合情境任務",
+    { zh: "完成式 Perfekt", de: "Perfekt im Alltag" },
+    { zh: "購物與預約", de: "Einkaufen und Termine" },
+    { zh: "通知與 email 閱讀", de: "Mitteilungen und E-Mails" },
+    { zh: "租屋與住宿", de: "Wohnung und Unterkunft" },
+    { zh: "旅行與交通問題", de: "Reisen und Verkehrsprobleme" },
+    { zh: "工作、學校與計畫", de: "Arbeit, Schule und Pläne" },
+    { zh: "比較級與建議", de: "Vergleiche und Empfehlungen" },
+    { zh: "Dativ 介系詞", de: "Dativpräpositionen" },
+    { zh: "weil / dass / wenn 子句", de: "Nebensätze mit weil, dass und wenn" },
+    { zh: "表格、申請與官方文件", de: "Formulare, Anträge und Behörden" },
+    { zh: "邀請、拒絕與改期", de: "Einladungen, Absagen und Verschieben" },
+    { zh: "A2 綜合情境任務", de: "A2 Alltagssituationen und Prüfungstraining" },
   ],
   B1: [
-    "原因、意見與請求", "正式 email 與投訴", "工作與面試", "生活問題與解決方案",
-    "旅遊經驗與敘事", "健康、保險與諮詢", "教育與學習方法", "媒體與網路使用",
-    "環境與交通討論", "被動語態入門", "Konjunktiv II 禮貌請求", "B1 口說與寫作整合",
+    { zh: "原因、意見與請求", de: "Gründe, Meinungen und Bitten" },
+    { zh: "正式 email 與投訴", de: "Formelle E-Mails und Beschwerden" },
+    { zh: "工作與面試", de: "Arbeit und Bewerbungsgespräche" },
+    { zh: "生活問題與解決方案", de: "Alltagsprobleme und Lösungen" },
+    { zh: "旅遊經驗與敘事", de: "Reiseerfahrungen und Erzählen" },
+    { zh: "健康、保險與諮詢", de: "Gesundheit, Versicherung und Beratung" },
+    { zh: "教育與學習方法", de: "Bildung und Lernstrategien" },
+    { zh: "媒體與網路使用", de: "Medien und Internetnutzung" },
+    { zh: "環境與交通討論", de: "Umwelt und Mobilität" },
+    { zh: "被動語態入門", de: "Passiv im Alltag" },
+    { zh: "Konjunktiv II 禮貌請求", de: "Höfliche Bitten mit Konjunktiv II" },
+    { zh: "B1 口說與寫作整合", de: "B1 Sprechen und Schreiben" },
   ],
   B2: [
-    "立場、比較與討論", "數位化與資料保護", "永續生活與消費", "教育與職涯選擇",
-    "城市發展與居住", "健康政策與生活品質", "移民、文化與社會參與", "媒體素養與假訊息",
-    "工作模式與責任", "科學、科技與風險", "抽象名詞與名詞化", "B2 論述整合任務",
+    { zh: "立場、比較與討論", de: "Positionen, Vergleiche und Diskussionen" },
+    { zh: "數位化與資料保護", de: "Digitalisierung und Datenschutz" },
+    { zh: "永續生活與消費", de: "Nachhaltigkeit und Konsum" },
+    { zh: "教育與職涯選擇", de: "Bildung und berufliche Entscheidungen" },
+    { zh: "城市發展與居住", de: "Stadtentwicklung und Wohnen" },
+    { zh: "健康政策與生活品質", de: "Gesundheitspolitik und Lebensqualität" },
+    { zh: "移民、文化與社會參與", de: "Migration, Kultur und Teilhabe" },
+    { zh: "媒體素養與假訊息", de: "Medienkompetenz und Falschinformationen" },
+    { zh: "工作模式與責任", de: "Arbeitsmodelle und Verantwortung" },
+    { zh: "科學、科技與風險", de: "Wissenschaft, Technik und Risiken" },
+    { zh: "抽象名詞與名詞化", de: "Abstrakte Nomen und Nominalisierung" },
+    { zh: "B2 論述整合任務", de: "B2 Argumentation und Prüfungstraining" },
   ],
 };
 
 const syllabusVocabulary = {
   A1: [
-    ["der Name", "名字"], ["die Adresse", "地址"], ["die Uhrzeit", "時間"], ["die Familie", "家庭"], ["das Essen", "食物"], ["die Stadt", "城市"],
-    ["der Preis", "價格"], ["der Bus", "公車"], ["die Jacke", "外套"], ["der Arzt", "醫生"], ["müde", "累的"], ["bezahlen", "付款"],
+    ["der Name", "名字", "die Namen"], ["die Adresse", "地址", "die Adressen"], ["die Uhrzeit", "時間", "die Uhrzeiten"], ["die Familie", "家庭", "die Familien"],
+    ["das Essen", "食物", "-"], ["die Stadt", "城市", "die Städte"], ["der Preis", "價格", "die Preise"], ["der Bus", "公車", "die Busse"],
+    ["die Jacke", "外套", "die Jacken"], ["der Arzt", "醫生", "die Ärzte"], ["das Zimmer", "房間", "die Zimmer"], ["die Frage", "問題", "die Fragen"],
+    ["der Freund", "朋友；男朋友", "die Freunde"], ["das Brot", "麵包", "die Brote"], ["die Fahrkarte", "車票", "die Fahrkarten"], ["müde", "累的", ""], ["bezahlen", "付款", ""],
   ],
   A2: [
-    ["die Reservierung", "預訂"], ["der Termin", "預約"], ["die Unterkunft", "住宿"], ["die Verspätung", "延誤"], ["die Ausbildung", "職業訓練"],
-    ["die Erfahrung", "經驗"], ["die Rechnung", "帳單"], ["das Formular", "表格"], ["verschieben", "改期"], ["teilnehmen", "參加"], ["deshalb", "因此"], ["trotzdem", "儘管如此"],
+    ["die Reservierung", "預訂", "die Reservierungen"], ["der Termin", "預約", "die Termine"], ["die Unterkunft", "住宿", "die Unterkünfte"], ["die Verspätung", "延誤", "die Verspätungen"],
+    ["die Ausbildung", "職業訓練", "die Ausbildungen"], ["die Erfahrung", "經驗", "die Erfahrungen"], ["die Rechnung", "帳單", "die Rechnungen"], ["das Formular", "表格", "die Formulare"],
+    ["der Vorschlag", "建議", "die Vorschläge"], ["die Möglichkeit", "可能性", "die Möglichkeiten"], ["verschieben", "改期", ""], ["teilnehmen", "參加", ""], ["deshalb", "因此", ""], ["trotzdem", "儘管如此", ""],
   ],
   B1: [
-    ["die Bewerbung", "求職申請"], ["die Beschwerde", "投訴"], ["die Lösung", "解決方法"], ["die Ursache", "原因"], ["der Vorteil", "優點"],
-    ["der Nachteil", "缺點"], ["die Versicherung", "保險"], ["die Entscheidung", "決定"], ["begründen", "說明理由"], ["vorschlagen", "建議"], ["obwohl", "雖然"], ["höflich", "禮貌地"],
+    ["die Bewerbung", "求職申請", "die Bewerbungen"], ["die Beschwerde", "投訴", "die Beschwerden"], ["die Lösung", "解決方法", "die Lösungen"], ["die Ursache", "原因", "die Ursachen"],
+    ["der Vorteil", "優點", "die Vorteile"], ["der Nachteil", "缺點", "die Nachteile"], ["die Versicherung", "保險", "die Versicherungen"], ["die Entscheidung", "決定", "die Entscheidungen"],
+    ["die Voraussetzung", "前提", "die Voraussetzungen"], ["die Meinung", "意見", "die Meinungen"], ["begründen", "說明理由", ""], ["vorschlagen", "建議", ""], ["obwohl", "雖然", ""], ["höflich", "禮貌地", ""],
   ],
   B2: [
-    ["der Datenschutz", "資料保護"], ["die Nachhaltigkeit", "永續性"], ["die Voraussetzung", "前提"], ["die Verantwortung", "責任"], ["die Herausforderung", "挑戰"],
-    ["die Entwicklung", "發展"], ["die Gleichberechtigung", "平等權利"], ["die Digitalisierung", "數位化"], ["berücksichtigen", "考慮到"], ["gewährleisten", "保障"], ["einerseits", "一方面"], ["andererseits", "另一方面"],
+    ["der Datenschutz", "資料保護", "-"], ["die Nachhaltigkeit", "永續性", "-"], ["die Voraussetzung", "前提", "die Voraussetzungen"], ["die Verantwortung", "責任", "die Verantwortungen"],
+    ["die Herausforderung", "挑戰", "die Herausforderungen"], ["die Entwicklung", "發展", "die Entwicklungen"], ["die Gleichberechtigung", "平等權利", "-"], ["die Digitalisierung", "數位化", "-"],
+    ["die Maßnahme", "措施", "die Maßnahmen"], ["der Zusammenhang", "關聯", "die Zusammenhänge"], ["berücksichtigen", "考慮到", ""], ["gewährleisten", "保障", ""], ["einerseits", "一方面", ""], ["andererseits", "另一方面", ""],
   ],
 };
 
 const syllabusGrammar = {
   A1: [
-    ["Verbposition 2", "主句變位動詞通常放第二位。"], ["Artikel", "名詞要連 der/die/das 一起背。"], ["W-Fragen", "用 wer, wo, wann, wie viel 問基本資訊。"], ["Akkusativ", "常見於 kaufen, haben, brauchen 後面的受詞。"],
+    ["Verbposition 2", "德文主句的變位動詞通常放在第二位置。時間或地點放句首時，主詞會移到動詞後面。", "Ich lerne heute Deutsch. / Heute lerne ich Deutsch."],
+    ["Artikel", "名詞要連冠詞一起學，因為 der/die/das 會影響後面的格變化與代名詞。", "der Tisch, die Tasche, das Buch"],
+    ["W-Fragen", "疑問詞放句首，變位動詞放第二位，用來詢問人、地點、時間、價格等資訊。", "Wo wohnst du? / Wie viel kostet das?"],
+    ["Akkusativ", "haben, kaufen, brauchen 後面的直接受詞常用 Akkusativ。陽性冠詞 der 會變成 den。", "Ich kaufe den Kaffee. / Ich brauche einen Stift."],
   ],
   A2: [
-    ["Perfekt", "用 haben/sein + Partizip II 表達過去事件。"], ["Dativ", "mit, nach, bei, von, zu 常接 Dativ。"], ["Nebensatz", "weil/dass/wenn 子句中變位動詞放句尾。"], ["Komparativ", "用 schneller, günstiger, besser 比較兩件事。"],
+    ["Perfekt", "日常口語常用 haben/sein + Partizip II 說過去。移動或狀態改變常搭配 sein。", "Ich habe gelernt. / Emma ist nach Berlin gefahren."],
+    ["Dativ", "mit, nach, bei, von, zu 後面常接 Dativ，冠詞會變成 dem/der/den。", "mit dem Bus, bei der Freundin, zu den Eltern"],
+    ["Nebensatz", "weil, dass, wenn 引導子句時，變位動詞放在子句最後。", "Tom kommt später, weil er arbeiten muss."],
+    ["Komparativ", "形容詞加 -er 用來比較；常和 als 搭配。", "Der Zug ist schneller als der Bus."],
   ],
   B1: [
-    ["Konjunktiv II", "用 könnte/würde 表達禮貌請求或假設。"], ["Passiv", "用 werden + Partizip II 描述被動狀態或流程。"], ["Konnektoren", "用 deshalb, trotzdem, obwohl 建立邏輯。"], ["indirekte Frage", "ob/wann/warum 後面動詞放句尾。"],
+    ["Konjunktiv II", "用 könnte、würde、hätte 表達禮貌請求、建議或假設，比直接命令更自然。", "Könnten Sie mir bitte helfen? / Ich würde gern einen Termin vereinbaren."],
+    ["Passiv", "用 werden + Partizip II 描述流程或重點在事情本身，而不是誰做。", "Das Formular wird online ausgefüllt."],
+    ["Konnektoren", "用 deshalb、trotzdem、obwohl 連接原因、結果與轉折，讓回答更像完整段落。", "Obwohl es regnet, fährt David mit dem Fahrrad."],
+    ["indirekte Frage", "間接問句用 ob/wann/warum 等連接，子句動詞放最後。", "Ich möchte wissen, ob der Termin noch frei ist."],
   ],
   B2: [
-    ["Nominalisierung", "用抽象名詞讓表達更正式。"], ["zweiteilige Konnektoren", "einerseits/andererseits 平衡觀點。"], ["Passiversatz", "用 sich lassen、sein zu + Infinitiv 表達可行性。"], ["Argumentstruktur", "提出立場、理由、例子、限制與結論。"],
+    ["Nominalisierung", "把動詞或形容詞轉成名詞，可以讓論述更正式、濃縮資訊。", "die Digitalisierung, die Verbesserung, die Verantwortung"],
+    ["zweiteilige Konnektoren", "用 einerseits/andererseits 平衡兩方觀點，適合口說與寫作論述。", "Einerseits spart man Zeit, andererseits entstehen neue Risiken."],
+    ["Passiversatz", "用 sich lassen 或 sein zu + Infinitiv 表達可行性、必要性或客觀要求。", "Das Problem lässt sich lösen. / Die Daten sind zu schützen."],
+    ["Argumentstruktur", "B2 回答要有立場、理由、例子、限制與結論，不能只列單句。", "Insgesamt überwiegen die Vorteile, wenn klare Regeln gelten."],
   ],
 };
 
@@ -663,7 +716,7 @@ const stageLearningCards = {
         tag: "A1 初級",
         title: "先建立句子骨架",
         body: "先掌握自我介紹、問價格、問地點、點餐這些最常用句型。重點是能立刻說出完整短句。",
-        example: "Ich heiße Lin. / Wo ist der Bahnhof?",
+        example: "Ich heiße Anna. / Wo ist der Bahnhof?",
       },
       {
         tag: "核心",
@@ -1886,10 +1939,10 @@ function enhanceExamPools(pools) {
       { type: "reading", skill: "Lesen Teil 2", tags: ["Lesen", "Information"], prompt: "Lesen Sie die Anzeige und wählen Sie.", passage: "Sprachschule Mitte: Deutsch A1, Montag und Mittwoch, 18:00-19:30 Uhr. Anmeldung bis Freitag.", question: "Wann ist der Kurs?", options: ["Montag und Mittwoch", "Dienstag und Freitag", "Nur am Freitag"], answer: "Montag und Mittwoch", hint: "Die Anzeige nennt Montag und Mittwoch." },
       { type: "listening", skill: "Hören Teil 1", tags: ["Hören", "Zahlen"], prompt: "Hörskript: Wählen Sie die richtige Information.", passage: "Guten Tag, hier ist die Praxis Dr. Klein. Ihr Termin ist morgen um 9 Uhr, nicht um 10 Uhr.", question: "Wann ist der Termin?", options: ["Um 9 Uhr", "Um 10 Uhr", "Heute"], answer: "Um 9 Uhr", hint: "Im Hörskript steht: morgen um 9 Uhr." },
       { type: "writing", skill: "Schreiben", tags: ["Schreiben", "Alltag"], prompt: "Schreiben Sie eine kurze Nachricht.", task: "Sie können heute nicht zum Deutschkurs kommen. Schreiben Sie 2-3 Sätze: Entschuldigung, Grund, Bitte um Hausaufgaben.", answer: "__SELF_OK__", model: "Hallo Frau Weber, ich kann heute leider nicht zum Kurs kommen, weil ich krank bin. Können Sie mir bitte die Hausaufgaben schicken?" },
-      { type: "speaking", skill: "Sprechen Teil 2", tags: ["Sprechen", "Fragen"], prompt: "Sprechen Sie laut.", task: "Fragekarte: Name. Stellen Sie eine passende Frage und antworten Sie kurz.", answer: "__SELF_OK__", model: "Wie heißen Sie? - Ich heiße Lin." },
+      { type: "speaking", skill: "Sprechen Teil 2", tags: ["Sprechen", "Fragen"], prompt: "Sprechen Sie laut.", task: "Fragekarte: Name. Stellen Sie eine passende Frage und antworten Sie kurz.", answer: "__SELF_OK__", model: "Wie heißen Sie? - Ich heiße Anna." },
     ],
     A2: [
-      { type: "reading", skill: "Lesen Teil 1", tags: ["Lesen", "Termin"], prompt: "Lesen Sie die E-Mail. Wählen Sie die richtige Antwort.", passage: "Sehr geehrte Frau Lin, der Termin am Dienstag fällt aus. Wir können Ihnen am Donnerstag um 11 Uhr einen neuen Termin anbieten.", question: "Was ist richtig?", options: ["Der Termin ist am Donnerstag.", "Der Termin bleibt am Dienstag.", "Es gibt keinen neuen Termin."], answer: "Der Termin ist am Donnerstag.", hint: "Ein neuer Termin wird am Donnerstag um 11 Uhr angeboten." },
+      { type: "reading", skill: "Lesen Teil 1", tags: ["Lesen", "Termin"], prompt: "Lesen Sie die E-Mail. Wählen Sie die richtige Antwort.", passage: "Sehr geehrte Frau Miller, der Termin am Dienstag fällt aus. Wir können Ihnen am Donnerstag um 11 Uhr einen neuen Termin anbieten.", question: "Was ist richtig?", options: ["Der Termin ist am Donnerstag.", "Der Termin bleibt am Dienstag.", "Es gibt keinen neuen Termin."], answer: "Der Termin ist am Donnerstag.", hint: "Ein neuer Termin wird am Donnerstag um 11 Uhr angeboten." },
       { type: "listening", skill: "Hören Teil 2", tags: ["Hören", "Reisen"], prompt: "Hörskript: Wählen Sie die richtige Antwort.", passage: "Achtung an Gleis 4: Der Zug nach München fährt heute 20 Minuten später ab.", question: "Was passiert?", options: ["Der Zug hat Verspätung.", "Der Zug fällt aus.", "Der Zug fährt früher."], answer: "Der Zug hat Verspätung.", hint: "20 Minuten später bedeutet Verspätung." },
       { type: "choice", skill: "Sprachbausteine", tags: ["Perfekt"], prompt: "Wählen Sie die richtige Lösung.", translation: "Gestern ___ ich eine Wohnung besichtigt.", options: ["habe", "bin", "war"], answer: "habe", hint: "besichtigen bildet das Perfekt mit haben." },
       { type: "writing", skill: "Schreiben", tags: ["Schreiben", "Termin"], prompt: "Schreiben Sie eine E-Mail.", task: "Sie möchten einen Termin verschieben. Schreiben Sie 3-4 Sätze: Grund, neuer Vorschlag, Bitte um Antwort.", answer: "__SELF_OK__", model: "Sehr geehrte Frau Keller, ich kann morgen leider nicht kommen, weil ich arbeiten muss. Kann ich am Freitag um 10 Uhr kommen? Bitte antworten Sie mir kurz." },
@@ -1929,9 +1982,12 @@ function initializeLessons() {
     lesson.lessonNumber = (levelCounts[lesson.level] || 0) + 1;
     levelCounts[lesson.level] = lesson.lessonNumber;
     lesson.lessonCode = `L${lesson.lessonNumber}`;
-    lesson.topic = getLessonTopic(lesson);
+    const topicData = getLessonTopicData(lesson);
+    lesson.topicZh = topicData.zh;
+    lesson.topicDe = topicData.de;
+    lesson.topic = `${topicData.zh} · ${topicData.de}`;
     lesson.navTitle = `${lesson.lessonCode} ${lesson.topic}`;
-    lesson.textbook = lesson.textbook || createTextbookContent(lesson.level, lesson.lessonNumber, lesson.topic);
+    lesson.textbook = lesson.textbook || createTextbookContent(lesson.level, lesson.lessonNumber, topicData);
     lesson.courseSummary = getCourseSummary(lesson);
     lesson.questions = buildLessonQuestions(lesson, index);
   });
@@ -1942,11 +1998,11 @@ function expandSyllabusLessons() {
     const topics = syllabusTopics[level] || [];
     const existingCount = lessons.filter((lesson) => lesson.level === level).length;
 
-    topics.slice(existingCount).forEach((topic, offset) => {
+    topics.slice(existingCount).forEach((topicData, offset) => {
       const lessonNumber = existingCount + offset + 1;
       const stage = testStages[(lessonNumber - 1) % testStages.length];
       const id = `${level.toLowerCase()}-lesson-${lessonNumber}`;
-      const textbook = createTextbookContent(level, lessonNumber, topic);
+      const textbook = createTextbookContent(level, lessonNumber, topicData);
 
       lessonStages[id] = stage;
       lessons.push({
@@ -1954,31 +2010,34 @@ function expandSyllabusLessons() {
         level,
         track: stage,
         badge: level,
-        title: topic,
-        topic,
-        description: `${level} L${lessonNumber}：${topic}`,
+        title: `${topicData.zh} · ${topicData.de}`,
+        topic: `${topicData.zh} · ${topicData.de}`,
+        topicZh: topicData.zh,
+        topicDe: topicData.de,
+        description: `${level} L${lessonNumber}：${topicData.zh} · ${topicData.de}`,
         sourceNote: "課程內容依 CEFR 能力描述、Goethe/telc 題型方向與台灣學習者常見需求原創整理。",
         textbook,
-        cards: createLessonFocusCards(level, topic, textbook),
+        cards: createLessonFocusCards(level, `${topicData.zh} · ${topicData.de}`, textbook),
         questions: [],
       });
     });
   });
 }
 
-function createTextbookContent(level, lessonNumber, topic) {
+function createTextbookContent(level, lessonNumber, topicData) {
+  const normalizedTopic = normalizeTopicData(topicData);
   const vocab = rotateArray(syllabusVocabulary[level], lessonNumber - 1).slice(0, getVocabCount(level));
   const grammar = rotateArray(syllabusGrammar[level], lessonNumber - 1).slice(0, getGrammarCount(level));
   return {
-    title: `${level} L${lessonNumber}: ${topic}`,
-    text: createReadingText(level, topic, lessonNumber),
+    title: `${level} L${lessonNumber}: ${normalizedTopic.zh} · ${normalizedTopic.de}`,
+    text: createReadingText(level, normalizedTopic.de, lessonNumber),
     vocab,
     grammar,
   };
 }
 
 function getVocabCount(level) {
-  return { A1: 6, A2: 8, B1: 10, B2: 12 }[level] || 6;
+  return { A1: 10, A2: 12, B1: 14, B2: 14 }[level] || 10;
 }
 
 function getGrammarCount(level) {
@@ -1986,25 +2045,28 @@ function getGrammarCount(level) {
 }
 
 function createReadingText(level, topic, lessonNumber) {
+  const names = ["Anna", "Ben", "Emma", "Tom", "Mia", "Sara", "David", "Julia"];
+  const name = names[(lessonNumber - 1) % names.length];
+  const friend = names[lessonNumber % names.length];
   const texts = {
     A1: [
-      `Das Thema dieser Lektion ist ${topic}. Lin lernt Deutsch in Taipei. Sie schreibt neue Wörter in ihr Heft und spricht einfache Sätze laut. Am Ende fragt sie ihre Lehrerin: Können Sie das bitte wiederholen?`,
-      `Heute übt Lin ${topic}. Sie liest kurze Sätze, fragt nach Informationen und antwortet langsam. Die Wörter sind noch neu, aber sie kann schon einfache Fragen verstehen.`,
+      `${name} lernt heute ${topic}. ${name} schreibt neue Wörter in ein Heft und spricht einfache Sätze laut. Am Ende fragt ${name}: Können Sie das bitte wiederholen?`,
+      `${friend} übt mit ${name} kurze Dialoge. Die Sätze sind einfach, aber wichtig: eine Frage stellen, eine Antwort geben und höflich um Hilfe bitten.`,
     ],
     A2: [
-      `In dieser Lektion geht es um ${topic}. Lin hat letzte Woche eine ähnliche Situation erlebt und erzählt davon im Deutschkurs. Sie erklärt, was passiert ist, warum sie Hilfe gebraucht hat und welche Lösung am Ende funktioniert hat.`,
-      `Der Text enthält mehrere Informationen zu Zeit, Ort und Grund. Lin muss nicht jedes Wort übersetzen, sondern zuerst die Aufgabe lesen und dann im Text nach den wichtigen Details suchen.`,
-      `Am Ende schreibt sie eine kurze Nachricht, weil sie den Termin ändern möchte. Sie benutzt höfliche Sätze und achtet darauf, dass das konjugierte Verb im Nebensatz am Ende steht.`,
+      `In dieser Lektion geht es um ${topic}. ${name} hat letzte Woche eine ähnliche Situation erlebt und erzählt davon im Deutschkurs. ${name} erklärt, was passiert ist, warum Hilfe nötig war und welche Lösung am Ende funktioniert hat.`,
+      `Der Text enthält mehrere Informationen zu Zeit, Ort und Grund. ${friend} muss nicht jedes Wort übersetzen, sondern zuerst die Aufgabe lesen und dann im Text nach den wichtigen Details suchen.`,
+      `Am Ende schreibt ${name} eine kurze Nachricht, weil ein Termin geändert werden muss. Die Nachricht ist höflich, klar und enthält einen neuen Vorschlag.`,
     ],
     B1: [
-      `Das Thema ${topic} kommt häufig im Alltag, in Prüfungen und in Gesprächen vor. Lin liest einen längeren Text, in dem eine Person ein Problem beschreibt, einen Grund nennt und um eine konkrete Lösung bittet.`,
-      `Im Unterricht sammelt die Gruppe Argumente. Einige Lernende finden die Situation einfach, andere sehen mehrere Schwierigkeiten. Lin formuliert ihre Meinung und begründet sie mit einem Beispiel aus ihrem Alltag.`,
+      `Das Thema ${topic} kommt häufig im Alltag, in Prüfungen und in Gesprächen vor. ${name} liest einen längeren Text, in dem eine Person ein Problem beschreibt, einen Grund nennt und um eine konkrete Lösung bittet.`,
+      `Im Unterricht sammelt die Gruppe Argumente. Einige Lernende finden die Situation einfach, andere sehen mehrere Schwierigkeiten. ${friend} formuliert eine Meinung und begründet sie mit einem Beispiel aus dem Alltag.`,
       `Für die schriftliche Aufgabe achtet sie auf eine klare Struktur: zuerst der Anlass, dann die Erklärung, danach die Bitte oder der Vorschlag. Dadurch wirkt der Text höflich und verständlich.`,
       `Beim Sprechen versucht sie, nicht nur einzelne Wörter zu sagen, sondern ganze Sätze miteinander zu verbinden.`,
     ],
     B2: [
       `In dieser Lektion wird ${topic} aus mehreren Perspektiven betrachtet. Der Ausgangstext beschreibt nicht nur eine Alltagssituation, sondern auch gesellschaftliche Folgen, mögliche Vorteile und kritische Gegenargumente.`,
-      `Lin markiert zentrale Begriffe und unterscheidet zwischen Fakten, Beispielen und Bewertungen. Besonders wichtig ist, dass sie die Haltung der Autorin erkennt und die Argumentation nicht nur wortwörtlich, sondern inhaltlich versteht.`,
+      `${name} markiert zentrale Begriffe und unterscheidet zwischen Fakten, Beispielen und Bewertungen. Besonders wichtig ist, dass die Haltung der Autorin erkannt und die Argumentation nicht nur wortwörtlich, sondern inhaltlich verstanden wird.`,
       `In der Diskussion formuliert sie eine differenzierte Position. Einerseits sieht sie praktische Vorteile, andererseits weist sie auf Bedingungen hin, die erfüllt sein müssen, damit die vorgeschlagene Lösung langfristig sinnvoll bleibt.`,
       `Für die Schreibaufgabe nutzt sie Konnektoren, nominale Wendungen und ein kurzes Fazit. So entsteht ein Text, der nicht nur korrekt, sondern auch zusammenhängend und überzeugend wirkt.`,
       `Die Lektion trainiert deshalb Lesen, Wortschatz, Grammatik und produktive Fertigkeiten gemeinsam.`,
@@ -2012,6 +2074,11 @@ function createReadingText(level, topic, lessonNumber) {
   };
 
   return rotateArray(texts[level], lessonNumber - 1).join(" ");
+}
+
+function normalizeTopicData(topicData) {
+  if (typeof topicData === "string") return { zh: topicData, de: topicData };
+  return topicData;
 }
 
 function createLessonFocusCards(level, topic, textbook) {
@@ -2083,21 +2150,22 @@ function getCourseSummary(lesson) {
   return `${lesson.level} ${lesson.lessonCode}：${summaries[lesson.stage]}`;
 }
 
-function getLessonTopic(lesson) {
-  if (lesson.topic) return lesson.topic;
+function getLessonTopicData(lesson) {
+  if (lesson.topicZh && lesson.topicDe) return { zh: lesson.topicZh, de: lesson.topicDe };
 
   const topics = {
-    "a1-articles": "冠詞與名詞",
-    "a1-sentences": "自我介紹與基本句",
-    "a1-reading": "公告與短訊閱讀",
-    "a2-perfect": "完成式 Perfekt",
-    "a2-daily": "購物與預約",
-    "a2-reading": "通知與 email 閱讀",
-    "b1-daily": "原因、意見與請求",
-    "b2-travel-talk": "立場、比較與討論",
+    "a1-articles": { zh: "冠詞與名詞", de: "Artikel und Nomen" },
+    "a1-sentences": { zh: "自我介紹與基本句", de: "Vorstellung und einfache Sätze" },
+    "a1-reading": { zh: "公告與短訊閱讀", de: "Hinweise und kurze Nachrichten" },
+    "a2-perfect": { zh: "完成式 Perfekt", de: "Perfekt im Alltag" },
+    "a2-daily": { zh: "購物與預約", de: "Einkaufen und Termine" },
+    "a2-reading": { zh: "通知與 email 閱讀", de: "Mitteilungen und E-Mails" },
+    "b1-daily": { zh: "原因、意見與請求", de: "Gründe, Meinungen und Bitten" },
+    "b2-travel-talk": { zh: "立場、比較與討論", de: "Positionen, Vergleiche und Diskussionen" },
   };
 
-  return topics[lesson.id] || lesson.title.replace(`${lesson.level} `, "");
+  if (topics[lesson.id]) return topics[lesson.id];
+  return { zh: lesson.title.replace(`${lesson.level} `, ""), de: lesson.title.replace(`${lesson.level} `, "") };
 }
 
 function sortLessonsByCode(a, b) {
@@ -2126,11 +2194,23 @@ function renderTextbookLesson(lesson) {
   `;
 
   lessonVocabularyEl.innerHTML = content.vocab
-    .map(([german, chinese]) => `<div><strong>${german}</strong><br><span>${chinese}</span></div>`)
+    .map(([german, chinese, plural]) => `
+      <div>
+        <strong>${german}</strong>
+        ${plural ? `<small>Plural: ${plural}</small>` : ""}
+        <span>${chinese}</span>
+      </div>
+    `)
     .join("");
 
   lessonGrammarEl.innerHTML = content.grammar
-    .map(([title, body]) => `<div><strong>${title}</strong><br><span>${body}</span></div>`)
+    .map(([title, body, example]) => `
+      <div>
+        <strong>${title}</strong>
+        <span>${body}</span>
+        ${example ? `<em>${example}</em>` : ""}
+      </div>
+    `)
     .join("");
 }
 
