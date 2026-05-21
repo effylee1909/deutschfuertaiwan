@@ -2190,7 +2190,7 @@ function expandSyllabusLessons() {
 function createTextbookContent(level, lessonNumber, topicData) {
   const normalizedTopic = normalizeTopicData(topicData);
   const vocab = createLessonVocabulary(level, lessonNumber, normalizedTopic);
-  const grammar = rotateArray(syllabusGrammar[level], lessonNumber - 1).slice(0, getGrammarCount(level));
+  const grammar = createLessonGrammar(level, lessonNumber);
   return {
     title: `${level} L${lessonNumber}: ${normalizedTopic.zh} · ${normalizedTopic.de}`,
     text: createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
@@ -2198,6 +2198,12 @@ function createTextbookContent(level, lessonNumber, topicData) {
     grammar,
     proverb: getLessonProverb(level, lessonNumber),
   };
+}
+
+function createLessonGrammar(level, lessonNumber) {
+  return rotateArray(syllabusGrammar[level], lessonNumber - 1)
+    .slice(0, getGrammarCount(level))
+    .map(([title, body, example], index) => [`L${lessonNumber}.${index + 1} ${title}`, body, example]);
 }
 
 function createLessonVocabulary(level, lessonNumber, topicData) {
