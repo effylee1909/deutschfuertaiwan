@@ -72,12 +72,14 @@ button:disabled {
 }
 
 .intro {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
   gap: 28px;
   align-items: center;
   min-height: 240px;
   padding: 12px 0 30px;
+  overflow: hidden;
 }
 
 .intro-copy h1 {
@@ -151,6 +153,25 @@ button:disabled {
   left: 64px;
   bottom: 22px;
   background: var(--green);
+}
+
+.home-decor {
+  position: absolute;
+  inset: auto 0 8px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.home-decor span {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 16px;
+  background: rgba(255, 254, 250, 0.72);
+  color: var(--muted);
+  font-weight: 900;
+  box-shadow: var(--soft-shadow);
 }
 
 .layout,

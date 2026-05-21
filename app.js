@@ -1499,6 +1499,7 @@ let score = 0;
 let answered = false;
 let quizSeed = Date.now();
 let currentPreparedQuestion = null;
+let activeMainSection = "home";
 
 const progressStorageKey = "deutschfuertaiwan-progress-v1";
 const usedLessonVocabularyByLevel = {};
@@ -1594,7 +1595,9 @@ function renderLessonList() {
         courseGroup.appendChild(button);
       });
 
-    levelGroup.appendChild(courseGroup);
+    if (activeMainSection === "learning") {
+      levelGroup.appendChild(courseGroup);
+    }
 
     const testGroup = document.createElement("div");
     testGroup.className = "folder-branch";
@@ -1616,7 +1619,9 @@ function renderLessonList() {
         testGroup.appendChild(button);
       });
 
-    levelGroup.appendChild(testGroup);
+    if (activeMainSection === "exam") {
+      levelGroup.appendChild(testGroup);
+    }
 
     const examGroup = document.createElement("div");
     examGroup.className = "folder-branch";
@@ -1638,7 +1643,9 @@ function renderLessonList() {
         examGroup.appendChild(button);
       });
 
-    levelGroup.appendChild(examGroup);
+    if (activeMainSection === "exam") {
+      levelGroup.appendChild(examGroup);
+    }
     lessonListEl.appendChild(levelGroup);
   });
 }
@@ -1660,6 +1667,7 @@ function renderLesson() {
   lessonDescriptionEl.textContent = activeLesson.courseSummary;
   sourceNoteEl.textContent = activeLesson.sourceNote;
   startButton.textContent = `${activeLesson.lessonCode} Lektionstest starten`;
+  startButton.hidden = activeMainSection === "learning";
   renderTextbookLesson(activeLesson);
 
   lessonCardsEl.innerHTML = "";
@@ -1708,6 +1716,7 @@ function showLesson() {
   lessonPanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
+  renderLessonList();
   renderLesson();
 }
 
@@ -1784,8 +1793,11 @@ function showDashboard() {
 }
 
 function showAppSection(section) {
+  activeMainSection = section;
   homePanel.hidden = true;
   studyApp.hidden = false;
+  resourceTab.hidden = section !== "knowledge";
+  dashboardTab.hidden = section !== "knowledge";
   setMainTab(section);
 }
 
@@ -2660,8 +2672,9 @@ function sortLessonsByCode(a, b) {
 }
 
 function getLevelFolderLabel(level) {
-  const counts = lessons.filter((lesson) => lesson.level === level).length;
-  return `${counts} Lektionen · ${counts} Tests`;
+  const lessonCount = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam).length;
+  if (activeMainSection === "exam") return `${lessonCount} Tests · 3 Prüfungen`;
+  return `${lessonCount} Lektionen`;
 }
 
 function getLessonCards(lesson) {
