@@ -2159,6 +2159,9 @@ function createGermanExamPools() {
 function enhanceExamPools(pools) {
   const additions = {
     A1: [
+      { type: "spelling", skill: "Wortschatz Bild", tags: ["Wortschatz", "Rechtschreibung"], group: "Bildaufgabe", prompt: "Schreiben Sie das Wort mit Artikel.", visual: { icon: "☕", title: "Kaffee", caption: "Getränk im Café" }, answers: ["der Kaffee", "Kaffee"], hint: "Richtig ist: der Kaffee." },
+      { type: "spelling", skill: "Wortschatz Bild", tags: ["Wortschatz", "Rechtschreibung"], group: "Bildaufgabe", prompt: "Schreiben Sie das Wort mit Artikel.", visual: { icon: "📘", title: "Buch", caption: "zum Lesen" }, answers: ["das Buch", "Buch"], hint: "Richtig ist: das Buch." },
+      { type: "cloze", skill: "Wortschatz", tags: ["Alltag", "Mehrfachantwort"], group: "Minidialog Café", prompt: "Guten Tag. Ich hätte gern einen ___.", answers: ["Kaffee", "Tee", "Saft"], hint: "Kaffee, Tee oder Saft passen hier." },
       { type: "reading", skill: "Lesen Teil 1", tags: ["Lesen", "Alltag"], prompt: "Lesen Sie die Nachricht. Ist die Aussage richtig?", passage: "Hallo Tim, ich bin um 10 Uhr am Bahnhof. Ich kaufe die Fahrkarten. Bitte bring Kaffee mit. Lara", question: "Lara kauft die Fahrkarten.", options: ["Richtig", "Falsch"], answer: "Richtig", hint: "Im Text steht: Ich kaufe die Fahrkarten." },
       { type: "reading", skill: "Lesen Teil 2", tags: ["Lesen", "Information"], prompt: "Lesen Sie die Anzeige und wählen Sie.", passage: "Sprachschule Mitte: Deutsch A1, Montag und Mittwoch, 18:00-19:30 Uhr. Anmeldung bis Freitag.", question: "Wann ist der Kurs?", options: ["Montag und Mittwoch", "Dienstag und Freitag", "Nur am Freitag"], answer: "Montag und Mittwoch", hint: "Die Anzeige nennt Montag und Mittwoch." },
       { type: "listening", skill: "Hören Teil 1", tags: ["Hören", "Zahlen"], prompt: "Hörskript: Wählen Sie die richtige Information.", passage: "Guten Tag, hier ist die Praxis Dr. Klein. Ihr Termin ist morgen um 9 Uhr, nicht um 10 Uhr.", question: "Wann ist der Termin?", options: ["Um 9 Uhr", "Um 10 Uhr", "Heute"], answer: "Um 9 Uhr", hint: "Im Hörskript steht: morgen um 9 Uhr." },
@@ -2166,6 +2169,8 @@ function enhanceExamPools(pools) {
       { type: "speaking", skill: "Sprechen Teil 2", tags: ["Sprechen", "Fragen"], prompt: "Sprechen Sie laut.", task: "Fragekarte: Name. Stellen Sie eine passende Frage und antworten Sie kurz.", answer: "__SELF_OK__", model: "Wie heißen Sie? - Ich heiße Anna." },
     ],
     A2: [
+      { type: "spelling", skill: "Wortschatz Bild", tags: ["Wortschatz", "Rechtschreibung"], group: "Bildaufgabe", prompt: "Schreiben Sie das Wort mit Artikel.", visual: { icon: "🏨", title: "Hotelzimmer", caption: "für die Reise" }, answers: ["das Zimmer", "Zimmer"], hint: "Richtig ist: das Zimmer." },
+      { type: "cloze", skill: "Sprachbausteine", tags: ["Perfekt", "Mehrfachantwort"], group: "Satzgruppe Perfekt", prompt: "Gestern ___ ich Deutsch gelernt.", answers: ["habe", "hab"], hint: "Standardform: habe." },
       { type: "reading", skill: "Lesen Teil 1", tags: ["Lesen", "Termin"], prompt: "Lesen Sie die E-Mail. Wählen Sie die richtige Antwort.", passage: "Sehr geehrte Frau Miller, der Termin am Dienstag fällt aus. Wir können Ihnen am Donnerstag um 11 Uhr einen neuen Termin anbieten.", question: "Was ist richtig?", options: ["Der Termin ist am Donnerstag.", "Der Termin bleibt am Dienstag.", "Es gibt keinen neuen Termin."], answer: "Der Termin ist am Donnerstag.", hint: "Ein neuer Termin wird am Donnerstag um 11 Uhr angeboten." },
       { type: "listening", skill: "Hören Teil 2", tags: ["Hören", "Reisen"], prompt: "Hörskript: Wählen Sie die richtige Antwort.", passage: "Achtung an Gleis 4: Der Zug nach München fährt heute 20 Minuten später ab.", question: "Was passiert?", options: ["Der Zug hat Verspätung.", "Der Zug fällt aus.", "Der Zug fährt früher."], answer: "Der Zug hat Verspätung.", hint: "20 Minuten später bedeutet Verspätung." },
       { type: "choice", skill: "Sprachbausteine", tags: ["Perfekt"], prompt: "Wählen Sie die richtige Lösung.", translation: "Gestern ___ ich eine Wohnung besichtigt.", options: ["habe", "bin", "war"], answer: "habe", hint: "besichtigen bildet das Perfekt mit haben." },
@@ -2173,12 +2178,15 @@ function enhanceExamPools(pools) {
       { type: "speaking", skill: "Sprechen Teil 3", tags: ["Sprechen", "Alltag"], prompt: "Sprechen Sie laut.", task: "Planen Sie mit einer Person einen Ausflug. Fragen Sie nach Zeit, Ort und Verkehrsmittel.", answer: "__SELF_OK__", model: "Wann treffen wir uns? Wo treffen wir uns? Fahren wir mit dem Bus oder mit dem Zug?" },
     ],
     B1: [
+      { type: "cloze", skill: "Schreiben", tags: ["Redemittel", "Mehrfachantwort"], group: "Redemittel Meinung", prompt: "___ Meinung nach ist Online-Unterricht praktisch.", answers: ["Meiner", "Meiner Meinung nach"], hint: "Meiner Meinung nach ist die feste Wendung." },
+      { type: "reading", skill: "Lesen Aufgabengruppe", tags: ["Lesen", "題組"], group: "Aufgaben 1-2: Eine Nachricht", prompt: "Lesen Sie den Text und wählen Sie.", passage: "Anna kann heute nicht zum Kurs kommen. Sie hat Fieber und bittet um die Hausaufgaben.", question: "Warum kommt Anna nicht?", options: ["Sie ist krank.", "Sie reist.", "Sie hat keine Lust."], answer: "Sie ist krank.", hint: "Fieber zeigt: Sie ist krank." },
       { type: "reading", skill: "Lesen", tags: ["Lesen", "Meinung"], prompt: "Lesen Sie den Kommentar. Welche Aussage passt?", passage: "Viele finden Online-Unterricht praktisch. Trotzdem lernen manche besser im Kursraum, weil sie dort direkter fragen können.", question: "Was sagt der Text?", options: ["Online-Unterricht hat Vorteile, aber nicht für alle.", "Online-Unterricht ist immer schlecht.", "Im Kursraum kann niemand fragen."], answer: "Online-Unterricht hat Vorteile, aber nicht für alle.", hint: "Der Text nennt beide Seiten." },
       { type: "choice", skill: "Sprachbausteine", tags: ["Nebensatz"], prompt: "Wählen Sie die passende Form.", translation: "Ich melde mich an, ___ ich eine Bestätigung bekommen habe.", options: ["sobald", "trotzdem", "deshalb"], answer: "sobald", hint: "sobald bedeutet: wenn etwas passiert ist." },
       { type: "writing", skill: "Schreiben", tags: ["Schreiben", "Beschwerde"], prompt: "Schreiben Sie eine formelle Nachricht.", task: "Sie haben ein Problem mit einer Reservierung. Schreiben Sie: Problem, Wunsch, höfliche Bitte.", answer: "__SELF_OK__", model: "Sehr geehrte Damen und Herren, ich habe ein Problem mit meiner Reservierung. Das Zimmer ist nicht wie beschrieben. Könnten Sie mir bitte eine andere Lösung anbieten?" },
       { type: "speaking", skill: "Sprechen", tags: ["Sprechen", "Meinung"], prompt: "Sprechen Sie laut.", task: "Sagen Sie Ihre Meinung zum Thema Homeoffice und nennen Sie einen Vorteil und einen Nachteil.", answer: "__SELF_OK__", model: "Meiner Meinung nach ist Homeoffice praktisch, weil man Zeit spart. Ein Nachteil ist, dass der Kontakt zu Kolleginnen und Kollegen fehlt." },
     ],
     B2: [
+      { type: "cloze", skill: "Schreiben", tags: ["Argumentation", "Mehrfachantwort"], group: "Argumentation", prompt: "Insgesamt ___ für mich die Vorteile.", answers: ["überwiegen", "ueberwiegen"], hint: "Überwiegen kann auch ohne Umlaut als ueberwiegen eingegeben werden." },
       { type: "reading", skill: "Lesen", tags: ["Lesen", "Argumentation"], prompt: "Lesen Sie den Abschnitt. Welche Aussage fasst ihn zusammen?", passage: "Digitale Dienstleistungen sparen Zeit und Kosten. Gleichzeitig müssen Datenschutz, Barrierefreiheit und persönliche Beratung garantiert werden.", question: "Was ist die Kernaussage?", options: ["Digitalisierung braucht klare Schutzmaßnahmen.", "Digitale Angebote sind grundsätzlich unnötig.", "Persönliche Beratung soll verschwinden."], answer: "Digitalisierung braucht klare Schutzmaßnahmen.", hint: "Der Text nennt Vorteile und notwendige Bedingungen." },
       { type: "choice", skill: "Sprachbausteine", tags: ["Konnektoren"], prompt: "Wählen Sie die passende Verbindung.", translation: "___ öffentliche Verkehrsmittel günstiger sind, entscheiden sich manche Menschen für das Auto.", options: ["Obwohl", "Deshalb", "Sobald"], answer: "Obwohl", hint: "Obwohl leitet einen Gegensatz ein." },
       { type: "writing", skill: "Schreiben", tags: ["Schreiben", "Argumentation"], prompt: "Schreiben Sie einen kurzen Kommentar.", task: "Thema: Sollten Sprachkurse online stattfinden? Schreiben Sie 4-5 Sätze mit Vorteil, Nachteil und eigener Meinung.", answer: "__SELF_OK__", model: "Ein Vorteil von Online-Kursen ist die Flexibilität. Andererseits fehlt manchmal der direkte Austausch. Meiner Meinung nach ist eine Kombination aus Online- und Präsenzunterricht am sinnvollsten." },
@@ -2666,18 +2674,22 @@ function renderQuestion() {
   progressBar.style.width = `${(currentIndex / activeLesson.questions.length) * 100}%`;
   metaEl.textContent = `Aufgabe ${currentIndex + 1} von ${activeLesson.questions.length} · ${getExamSkillLabel(preparedQuestion)}`;
   textEl.textContent = preparedQuestion.prompt;
-  translationEl.textContent = preparedQuestion.translation || preparedQuestion.question || "";
+  translationEl.textContent = [preparedQuestion.group, preparedQuestion.translation || preparedQuestion.question || ""].filter(Boolean).join(" · ");
   feedbackEl.textContent = getWaitingText(preparedQuestion.type);
   nextButton.disabled = true;
   nextButton.textContent = currentIndex === activeLesson.questions.length - 1 ? "Ergebnis anzeigen" : "Nächste Aufgabe";
 
   answersEl.innerHTML = "";
 
+  if (preparedQuestion.visual) {
+    renderQuestionVisual(preparedQuestion.visual);
+  }
+
   if (preparedQuestion.type === "choice" || preparedQuestion.type === "reading" || preparedQuestion.type === "listening") {
     renderChoiceQuestion(preparedQuestion);
   }
 
-  if (preparedQuestion.type === "cloze") {
+  if (preparedQuestion.type === "cloze" || preparedQuestion.type === "spelling") {
     renderClozeQuestion(preparedQuestion);
   }
 
@@ -2694,9 +2706,10 @@ function prepareQuestion(question, index) {
   const seed = quizSeed + index * 101 + activeLesson.id.length;
 
   if (question.type === "choice" || question.type === "reading" || question.type === "listening") {
+    const primaryAnswer = getPrimaryAnswer(question);
     const options = avoidFirstAnswer(
       shuffleWithSeed(question.options, seed),
-      question.answer,
+      primaryAnswer,
       seed,
     );
 
@@ -2722,6 +2735,10 @@ function prepareQuestion(question, index) {
   }
 
   return question;
+}
+
+function getPrimaryAnswer(question) {
+  return Array.isArray(question.answers) ? question.answers[0] : question.answer;
 }
 
 function avoidFirstAnswer(options, answer, seed) {
@@ -2771,6 +2788,19 @@ function renderChoiceQuestion(question) {
   submit.disabled = true;
   submit.addEventListener("click", () => answerQuestion(selectedOption, question));
   answersEl.appendChild(submit);
+}
+
+function renderQuestionVisual(visual) {
+  const card = document.createElement("div");
+  card.className = "visual-question";
+  card.innerHTML = `
+    <div class="visual-icon" aria-hidden="true">${visual.icon}</div>
+    <div>
+      <strong>${visual.title}</strong>
+      <span>${visual.caption || ""}</span>
+    </div>
+  `;
+  answersEl.appendChild(card);
 }
 
 function renderSelfCheckQuestion(question) {
@@ -2866,9 +2896,7 @@ function renderMatchQuestion(question) {
 function answerQuestion(value, question) {
   if (answered) return;
 
-  const normalizedValue = value.toLowerCase();
-  const normalizedAnswer = String(question.answer || "__MATCH_OK__").toLowerCase();
-  const correct = normalizedValue === normalizedAnswer;
+  const correct = isCorrectAnswer(value, question);
 
   answered = true;
   if (correct) score += 1;
@@ -2892,19 +2920,39 @@ function lockCurrentQuestion(question, value) {
 
   answersEl.querySelectorAll(".answer-grid button").forEach((button) => {
     if (button.textContent === value) {
-      button.classList.add("selected", value === question.answer ? "correct" : "wrong");
+      button.classList.add("selected", isCorrectAnswer(value, question) ? "correct" : "wrong");
     }
 
-    if (button.textContent === question.answer && value !== question.answer) {
+    if (isCorrectAnswer(button.textContent, question) && !isCorrectAnswer(value, question)) {
       button.classList.add("reveal");
     }
   });
+}
+
+function isCorrectAnswer(value, question) {
+  const accepted = getAcceptedAnswers(question);
+  const normalizedValue = normalizeAnswer(value);
+  return accepted.some((answer) => normalizeAnswer(answer) === normalizedValue);
+}
+
+function getAcceptedAnswers(question) {
+  if (Array.isArray(question.answers)) return question.answers;
+  return [question.answer || "__MATCH_OK__"];
+}
+
+function normalizeAnswer(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[。.,!?！？]/g, "")
+    .replace(/\s+/g, " ");
 }
 
 function getWaitingText(type) {
   const messages = {
     choice: "Wählen Sie die richtige Lösung.",
     cloze: "Schreiben Sie die passende Lösung.",
+    spelling: "Schreiben Sie das Wort richtig.",
     match: "Ordnen Sie die passenden Ausdrücke zu.",
     reading: "Lesen Sie den Text und wählen Sie die richtige Antwort.",
     listening: "Lesen Sie das Hörskript wie eine Hörverstehensaufgabe und wählen Sie.",
@@ -2919,6 +2967,7 @@ function getExamSkillLabel(question) {
   const labels = {
     choice: "Sprachbausteine",
     cloze: "Schreiben",
+    spelling: "Wortschatz",
     match: "Wortschatz",
     reading: "Lesen",
     listening: "Hören",
