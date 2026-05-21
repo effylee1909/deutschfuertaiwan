@@ -77,9 +77,45 @@ button:disabled {
   grid-template-columns: minmax(0, 1fr) 300px;
   gap: 28px;
   align-items: center;
-  min-height: 240px;
-  padding: 12px 0 30px;
+  min-height: 360px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 34px;
+  background:
+    linear-gradient(135deg, rgba(0, 0, 0, 0.06), transparent 34%),
+    linear-gradient(150deg, rgba(221, 0, 0, 0.1), transparent 46%),
+    linear-gradient(165deg, rgba(255, 206, 0, 0.16), transparent 60%),
+    rgba(255, 254, 250, 0.86);
+  box-shadow: var(--shadow);
   overflow: hidden;
+}
+
+.germany-ribbon {
+  position: absolute;
+  top: 26px;
+  right: 34px;
+  width: 176px;
+  overflow: hidden;
+  border: 1px solid rgba(32, 33, 36, 0.12);
+  border-radius: 8px;
+  box-shadow: var(--soft-shadow);
+}
+
+.germany-ribbon span {
+  display: block;
+  height: 22px;
+}
+
+.germany-ribbon span:nth-child(1) {
+  background: #111;
+}
+
+.germany-ribbon span:nth-child(2) {
+  background: #dd0000;
+}
+
+.germany-ribbon span:nth-child(3) {
+  background: #ffce00;
 }
 
 .intro-copy h1 {
@@ -113,7 +149,7 @@ button:disabled {
   background:
     radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.92), transparent 36%),
     rgba(255, 254, 250, 0.72);
-  box-shadow: var(--soft-shadow);
+  box-shadow: var(--shadow);
 }
 
 .article-orbit::before {
@@ -157,7 +193,7 @@ button:disabled {
 
 .home-decor {
   position: absolute;
-  inset: auto 0 8px 0;
+  inset: auto 34px 26px 34px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -343,7 +379,21 @@ button:disabled {
 
 .quiz-tree-item .tree-code {
   color: #fff;
-  background: var(--blue);
+  background: var(--rose);
+}
+
+.quiz-tree-item {
+  border-color: rgba(181, 72, 93, 0.2);
+  background: rgba(181, 72, 93, 0.07);
+}
+
+.quiz-tree-item:hover {
+  background: rgba(181, 72, 93, 0.12);
+}
+
+.quiz-tree-item[data-active="true"] {
+  border-color: rgba(181, 72, 93, 0.45);
+  background: rgba(181, 72, 93, 0.16);
 }
 
 .lesson-tab strong {

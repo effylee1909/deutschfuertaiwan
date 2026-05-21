@@ -1601,7 +1601,7 @@ function renderLessonList() {
 
     const testGroup = document.createElement("div");
     testGroup.className = "folder-branch";
-    testGroup.innerHTML = "<h4>Lektionstest</h4>";
+    testGroup.innerHTML = "<h4>Pruefung</h4>";
 
     [...levelLessons]
       .sort(sortLessonsByCode)
@@ -1612,7 +1612,7 @@ function renderLessonList() {
         button.dataset.active = lesson.id === activeLesson.id && !quizPanel.hidden;
         button.innerHTML = `
           <span class="tree-code">T${lesson.lessonNumber}</span>
-          <strong>${lesson.lessonCode} 測驗</strong>
+          <strong>${lesson.lessonCode} Pruefung</strong>
           <small>20 Fragen · Lesen / Wortschatz / Grammatik</small>
         `;
         button.addEventListener("click", () => selectQuiz(lesson.id));
@@ -1666,7 +1666,7 @@ function renderLesson() {
   lessonTitleEl.textContent = `${activeLesson.lessonCode} ${activeLesson.topic}`;
   lessonDescriptionEl.textContent = activeLesson.courseSummary;
   sourceNoteEl.textContent = activeLesson.sourceNote;
-  startButton.textContent = `${activeLesson.lessonCode} Lektionstest starten`;
+  startButton.textContent = `${activeLesson.lessonCode} Pruefung starten`;
   startButton.hidden = activeMainSection === "learning";
   renderTextbookLesson(activeLesson);
 
@@ -1758,7 +1758,7 @@ function showExamGuide() {
   examGuidePanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
-  levelTextEl.textContent = "Prüfung：左側可選 Lektionstest 或 Prüfungsbereich";
+  levelTextEl.textContent = "Pruefung：左側可選 Pruefung 或 Prüfungsbereich";
   renderLessonList();
 }
 
@@ -2673,7 +2673,7 @@ function sortLessonsByCode(a, b) {
 
 function getLevelFolderLabel(level) {
   const lessonCount = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam).length;
-  if (activeMainSection === "exam") return `${lessonCount} Tests · 3 Prüfungen`;
+  if (activeMainSection === "exam") return `${lessonCount} Pruefungen · 3 Prüfungen`;
   return `${lessonCount} Lektionen`;
 }
 
