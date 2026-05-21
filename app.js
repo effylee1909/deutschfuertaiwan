@@ -1528,6 +1528,7 @@ const backToLessonButton = document.querySelector("#back-to-lesson");
 const quizPanel = document.querySelector("#quiz-panel");
 const lessonPanel = document.querySelector("#lesson-panel");
 const examGuidePanel = document.querySelector("#exam-guide-panel");
+const sectionIntroContentEl = document.querySelector("#section-intro-content");
 const resourcesPanel = document.querySelector("#resources-panel");
 const dashboardPanel = document.querySelector("#dashboard-panel");
 const quizTitleEl = document.querySelector("#quiz-title");
@@ -1557,6 +1558,7 @@ function renderLessonList() {
   lessonListEl.innerHTML = "";
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
+  if (activeMainSection === "knowledge") return;
 
   levelOrder.forEach((level) => {
     const levelLessons = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam);
@@ -1601,7 +1603,7 @@ function renderLessonList() {
 
     const testGroup = document.createElement("div");
     testGroup.className = "folder-branch";
-    testGroup.innerHTML = "<h4>Pruefung</h4>";
+    testGroup.innerHTML = "<h4>Prüfung</h4>";
 
     [...levelLessons]
       .sort(sortLessonsByCode)
@@ -1612,7 +1614,7 @@ function renderLessonList() {
         button.dataset.active = lesson.id === activeLesson.id && !quizPanel.hidden;
         button.innerHTML = `
           <span class="tree-code">T${lesson.lessonNumber}</span>
-          <strong>${lesson.lessonCode} Pruefung</strong>
+          <strong>${lesson.lessonCode} Prüfung</strong>
           <small>20 Fragen · Lesen / Wortschatz / Grammatik</small>
         `;
         button.addEventListener("click", () => selectQuiz(lesson.id));
@@ -1666,7 +1668,7 @@ function renderLesson() {
   lessonTitleEl.textContent = `${activeLesson.lessonCode} ${activeLesson.topic}`;
   lessonDescriptionEl.textContent = activeLesson.courseSummary;
   sourceNoteEl.textContent = activeLesson.sourceNote;
-  startButton.textContent = `${activeLesson.lessonCode} Pruefung starten`;
+  startButton.textContent = `${activeLesson.lessonCode} Prüfung starten`;
   startButton.hidden = activeMainSection === "learning";
   renderTextbookLesson(activeLesson);
 
@@ -1746,11 +1748,15 @@ function showHome() {
 }
 
 function showLearningPath() {
-  showLesson();
+  showSectionIntro("learning");
 }
 
 function showExamGuide() {
-  showAppSection("exam");
+  showSectionIntro("exam");
+}
+
+function showSectionIntro(section) {
+  showAppSection(section);
   lessonPanel.hidden = true;
   quizPanel.hidden = true;
   resourcesPanel.hidden = true;
@@ -1758,8 +1764,13 @@ function showExamGuide() {
   examGuidePanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
-  levelTextEl.textContent = "Pruefung：左側可選 Pruefung 或 Prüfungsbereich";
+  levelTextEl.textContent = getSectionIntro(section).side;
+  sectionIntroContentEl.innerHTML = getSectionIntro(section).html;
   renderLessonList();
+}
+
+function showKnowledgeIntro() {
+  showSectionIntro("knowledge");
 }
 
 function showResources() {
@@ -1799,6 +1810,43 @@ function showAppSection(section) {
   resourceTab.hidden = section !== "knowledge";
   dashboardTab.hidden = section !== "knowledge";
   setMainTab(section);
+}
+
+function getSectionIntro(section) {
+  const content = {
+    learning: {
+      title: "學習路徑",
+      side: "Kurs：左側目錄只顯示 Lektion",
+      items: ["A1-B2 分級課程", "每課課文、單字、文法", "日常例句與俗諺"],
+      body: "這裡用 Lektion 安排學習順序，適合先讀課文再整理單字與文法。",
+    },
+    exam: {
+      title: "測驗錦笈",
+      side: "Prüfung：左側目錄只顯示 Prüfung",
+      items: ["每課 Prüfung", "期中考", "期末考", "綜合複習考"],
+      body: "這裡集中所有 Prüfung，方便練習題型、計分與複習弱點。",
+    },
+    knowledge: {
+      title: "知識整理庫",
+      side: "Material：可進入複習表格或知識點地圖",
+      items: ["單字表", "動詞變化表", "文法總表", "知識點地圖"],
+      body: "這裡整理可下載表格與作答弱點，方便課後複習與教學追蹤。",
+    },
+  }[section];
+
+  return {
+    side: content.side,
+    html: `
+      <div class="section-heading">
+        <p class="eyebrow">Überblick</p>
+        <h2>${content.title}</h2>
+        <p class="panel-description">${content.body}</p>
+      </div>
+      <div class="section-directory">
+        ${content.items.map((item) => `<span>${item}</span>`).join("")}
+      </div>
+    `,
+  };
 }
 
 function setMainTab(active) {
@@ -2673,7 +2721,7 @@ function sortLessonsByCode(a, b) {
 
 function getLevelFolderLabel(level) {
   const lessonCount = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam).length;
-  if (activeMainSection === "exam") return `${lessonCount} Pruefungen · 3 Prüfungen`;
+  if (activeMainSection === "exam") return `${lessonCount} Prüfungen · 3 Prüfungen`;
   return `${lessonCount} Lektionen`;
 }
 
@@ -3210,7 +3258,7 @@ function goNext() {
 homeTab.addEventListener("click", showHome);
 learningTab.addEventListener("click", showLearningPath);
 examTab.addEventListener("click", showExamGuide);
-knowledgeTab.addEventListener("click", showResources);
+knowledgeTab.addEventListener("click", showKnowledgeIntro);
 startButton.addEventListener("click", startQuiz);
 resourceTab.addEventListener("click", showResources);
 dashboardTab.addEventListener("click", showDashboard);
