@@ -1579,7 +1579,7 @@ function renderLessonList() {
 
     const courseGroup = document.createElement("div");
     courseGroup.className = "folder-branch";
-    courseGroup.innerHTML = "<h4>Kurs</h4>";
+    courseGroup.innerHTML = "<h4>KURS</h4>";
 
     levelLessons
       .sort(sortLessonsByCode)
@@ -1603,7 +1603,7 @@ function renderLessonList() {
 
     const testGroup = document.createElement("div");
     testGroup.className = "folder-branch";
-    testGroup.innerHTML = "<h4>Prüfung</h4>";
+    testGroup.innerHTML = "<h4>12 Kurztest</h4>";
 
     [...levelLessons]
       .sort(sortLessonsByCode)
@@ -1614,7 +1614,7 @@ function renderLessonList() {
         button.dataset.active = lesson.id === activeLesson.id && !quizPanel.hidden;
         button.innerHTML = `
           <span class="tree-code">T${lesson.lessonNumber}</span>
-          <strong>${lesson.lessonCode} Prüfung</strong>
+          <strong>${lesson.lessonCode} Kurztest</strong>
           <small>20 Fragen · Lesen / Wortschatz / Grammatik</small>
         `;
         button.addEventListener("click", () => selectQuiz(lesson.id));
@@ -1627,7 +1627,7 @@ function renderLessonList() {
 
     const examGroup = document.createElement("div");
     examGroup.className = "folder-branch";
-    examGroup.innerHTML = "<h4>Prüfungsbereich</h4>";
+    examGroup.innerHTML = "<h4>3 Prüfung</h4>";
 
     lessons
       .filter((lesson) => lesson.level === level && lesson.isComprehensiveExam)
@@ -1821,7 +1821,7 @@ function getSectionIntro(section) {
     },
     exam: {
       title: "測驗錦笈",
-      items: ["每課 Prüfung", "期中考", "期末考", "綜合複習考"],
+      items: ["12 Kurztest", "3 Prüfung", "期中考", "期末考", "綜合複習考"],
       body: "這裡集中所有 Prüfung，方便練習題型、計分與複習弱點。",
     },
     knowledge: {
@@ -2717,7 +2717,7 @@ function sortLessonsByCode(a, b) {
 
 function getLevelFolderLabel(level) {
   const lessonCount = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam).length;
-  if (activeMainSection === "exam") return `${lessonCount} Prüfungen · 3 Prüfungen`;
+  if (activeMainSection === "exam") return `${lessonCount} Kurztest · 3 Prüfung`;
   return `${lessonCount} Lektionen`;
 }
 
