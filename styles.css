@@ -56,6 +56,21 @@ button:disabled {
   padding: 32px 0;
 }
 
+.main-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.main-tabs button {
+  min-width: 132px;
+}
+
+.main-tabs button[data-active="true"] {
+  background: var(--blue);
+}
+
 .intro {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;

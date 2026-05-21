@@ -8,13 +8,18 @@
   </head>
   <body>
     <main class="shell">
+      <nav class="main-tabs" aria-label="主選單">
+        <button id="home-tab" type="button">Wilkommen</button>
+        <button id="learning-tab" class="secondary" type="button">學習路徑</button>
+        <button id="exam-tab" class="secondary" type="button">測驗錦笈</button>
+        <button id="knowledge-tab" class="secondary" type="button">知識整理庫</button>
+      </nav>
+
       <section class="intro" aria-labelledby="page-title">
         <div class="intro-copy">
           <p class="eyebrow">Deutsch Lernen</p>
-          <h1 id="page-title">德文學習與測驗平台</h1>
-          <p>
-            以資料夾式 Kurs 整理 A1 到 B2，每一課都有主題、課文、單字、文法與 Lektionstest。
-          </p>
+          <h1 id="page-title">Wilkommen</h1>
+          <p></p>
         </div>
         <div class="article-orbit" aria-label="德文冠詞示意">
           <span class="orbit-item masculine">der</span>
@@ -23,7 +28,7 @@
         </div>
       </section>
 
-      <section class="study-app" aria-label="德文學習平台">
+      <section class="study-app" aria-label="德文學習平台" hidden>
         <aside class="course-nav" aria-label="單元選單">
           <div>
             <p class="eyebrow">Kurs</p>
@@ -228,6 +233,14 @@
                 <tbody id="preterite-verb-table"></tbody>
               </table>
             </div>
+          </div>
+        </section>
+
+        <section id="exam-guide-panel" class="lesson-panel" hidden>
+          <div class="section-heading">
+            <p class="eyebrow">Prüfung</p>
+            <h2>測驗錦笈</h2>
+            <p class="panel-description"></p>
           </div>
         </section>
       </section>

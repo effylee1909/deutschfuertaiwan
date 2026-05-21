@@ -1503,6 +1503,12 @@ let currentPreparedQuestion = null;
 const progressStorageKey = "deutschfuertaiwan-progress-v1";
 const usedLessonVocabularyByLevel = {};
 
+const homePanel = document.querySelector(".intro");
+const studyApp = document.querySelector(".study-app");
+const homeTab = document.querySelector("#home-tab");
+const learningTab = document.querySelector("#learning-tab");
+const examTab = document.querySelector("#exam-tab");
+const knowledgeTab = document.querySelector("#knowledge-tab");
 const lessonListEl = document.querySelector("#lesson-list");
 const levelTextEl = document.querySelector("#level-text");
 const lessonBadgeEl = document.querySelector("#lesson-badge");
@@ -1520,6 +1526,7 @@ const dashboardTab = document.querySelector("#dashboard-tab");
 const backToLessonButton = document.querySelector("#back-to-lesson");
 const quizPanel = document.querySelector("#quiz-panel");
 const lessonPanel = document.querySelector("#lesson-panel");
+const examGuidePanel = document.querySelector("#exam-guide-panel");
 const resourcesPanel = document.querySelector("#resources-panel");
 const dashboardPanel = document.querySelector("#dashboard-panel");
 const quizTitleEl = document.querySelector("#quiz-title");
@@ -1693,9 +1700,11 @@ function renderLesson() {
 }
 
 function showLesson() {
+  showAppSection("learning");
   quizPanel.hidden = true;
   resourcesPanel.hidden = true;
   dashboardPanel.hidden = true;
+  examGuidePanel.hidden = true;
   lessonPanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
@@ -1703,12 +1712,14 @@ function showLesson() {
 }
 
 function startQuiz() {
+  showAppSection("exam");
   currentIndex = 0;
   score = 0;
   quizSeed = Date.now();
   lessonPanel.hidden = true;
   resourcesPanel.hidden = true;
   dashboardPanel.hidden = true;
+  examGuidePanel.hidden = true;
   quizPanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
@@ -1719,10 +1730,35 @@ function startQuiz() {
   renderQuestion();
 }
 
+function showHome() {
+  homePanel.hidden = false;
+  studyApp.hidden = true;
+  setMainTab("home");
+}
+
+function showLearningPath() {
+  showLesson();
+}
+
+function showExamGuide() {
+  showAppSection("exam");
+  lessonPanel.hidden = true;
+  quizPanel.hidden = true;
+  resourcesPanel.hidden = true;
+  dashboardPanel.hidden = true;
+  examGuidePanel.hidden = false;
+  resourceTab.dataset.active = "false";
+  dashboardTab.dataset.active = "false";
+  levelTextEl.textContent = "Prüfung：左側可選 Lektionstest 或 Prüfungsbereich";
+  renderLessonList();
+}
+
 function showResources() {
+  showAppSection("knowledge");
   lessonPanel.hidden = true;
   quizPanel.hidden = true;
   dashboardPanel.hidden = true;
+  examGuidePanel.hidden = true;
   resourcesPanel.hidden = false;
   resourceTab.dataset.active = "true";
   dashboardTab.dataset.active = "false";
@@ -1733,9 +1769,11 @@ function showResources() {
 }
 
 function showDashboard() {
+  showAppSection("knowledge");
   lessonPanel.hidden = true;
   quizPanel.hidden = true;
   resourcesPanel.hidden = true;
+  examGuidePanel.hidden = true;
   dashboardPanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "true";
@@ -1743,6 +1781,24 @@ function showDashboard() {
   dashboardTab.dataset.active = "true";
   levelTextEl.textContent = "教師後台：統整學生在本機作答的弱點";
   renderDashboard();
+}
+
+function showAppSection(section) {
+  homePanel.hidden = true;
+  studyApp.hidden = false;
+  setMainTab(section);
+}
+
+function setMainTab(active) {
+  [
+    [homeTab, "home"],
+    [learningTab, "learning"],
+    [examTab, "exam"],
+    [knowledgeTab, "knowledge"],
+  ].forEach(([button, value]) => {
+    button.dataset.active = active === value;
+    button.classList.toggle("secondary", active !== value);
+  });
 }
 
 function renderResourceTables() {
@@ -3138,6 +3194,10 @@ function goNext() {
   renderQuestion();
 }
 
+homeTab.addEventListener("click", showHome);
+learningTab.addEventListener("click", showLearningPath);
+examTab.addEventListener("click", showExamGuide);
+knowledgeTab.addEventListener("click", showResources);
 startButton.addEventListener("click", startQuiz);
 resourceTab.addEventListener("click", showResources);
 dashboardTab.addEventListener("click", showDashboard);
@@ -3196,3 +3256,4 @@ downloadGrammarButton.addEventListener("click", () => {
 initializeLessons();
 renderLesson();
 renderResourceTables();
+showHome();
