@@ -1522,7 +1522,7 @@ function renderLessonList() {
   dashboardTab.dataset.active = "false";
 
   levelOrder.forEach((level) => {
-    const levelLessons = lessons.filter((lesson) => lesson.level === level);
+    const levelLessons = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam);
     if (levelLessons.length === 0) return;
 
     const levelGroup = document.createElement("details");
@@ -1581,6 +1581,28 @@ function renderLessonList() {
       });
 
     levelGroup.appendChild(testGroup);
+
+    const examGroup = document.createElement("div");
+    examGroup.className = "folder-branch";
+    examGroup.innerHTML = "<h4>考試專區</h4>";
+
+    lessons
+      .filter((lesson) => lesson.level === level && lesson.isComprehensiveExam)
+      .forEach((exam) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "lesson-tab tree-item quiz-tree-item";
+        button.dataset.active = exam.id === activeLesson.id && !quizPanel.hidden;
+        button.innerHTML = `
+          <span class="tree-code">${exam.examCode}</span>
+          <strong>${exam.title}</strong>
+          <small>${exam.description}</small>
+        `;
+        button.addEventListener("click", () => selectQuiz(exam.id));
+        examGroup.appendChild(button);
+      });
+
+    levelGroup.appendChild(examGroup);
     lessonListEl.appendChild(levelGroup);
   });
 }
@@ -1661,7 +1683,9 @@ function startQuiz() {
   quizPanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
-  quizTitleEl.textContent = `${activeLesson.level} Prüfung - ${stageGermanLabels[activeLesson.stage]}`;
+  quizTitleEl.textContent = activeLesson.isComprehensiveExam
+    ? `${activeLesson.level} Prüfung - ${activeLesson.title}`
+    : `${activeLesson.level} Prüfung - ${stageGermanLabels[activeLesson.stage]}`;
   renderLessonList();
   renderQuestion();
 }
@@ -2138,6 +2162,7 @@ function initializeLessons() {
   });
 
   lessons.forEach((lesson, index) => {
+    if (lesson.isComprehensiveExam) return;
     lesson.stage = lessonStages[lesson.id] || testStages[index % testStages.length];
     lesson.badge = lesson.level;
     lesson.shortTitle = lesson.title;
@@ -2154,6 +2179,51 @@ function initializeLessons() {
     lesson.courseSummary = getCourseSummary(lesson);
     lesson.questions = buildLessonQuestions(lesson, index);
   });
+
+  createComprehensiveExams();
+}
+
+function createComprehensiveExams() {
+  const examTypes = [
+    { id: "midterm", code: "M", title: "期中考", description: "L1-L6 綜合測驗", from: 1, to: 6 },
+    { id: "final", code: "F", title: "期末考", description: "L7-L12 綜合測驗", from: 7, to: 12 },
+    { id: "review", code: "R", title: "綜合複習考", description: "L1-L12 Gesamtwiederholung", from: 1, to: 12 },
+  ];
+
+  levelOrder.forEach((level) => {
+    const levelLessons = lessons
+      .filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam)
+      .sort(sortLessonsByCode);
+
+    examTypes.forEach((exam) => {
+      const id = `${level.toLowerCase()}-${exam.id}-exam`;
+      const scopedLessons = levelLessons.filter((lesson) => lesson.lessonNumber >= exam.from && lesson.lessonNumber <= exam.to);
+      const questions = buildComprehensiveExamQuestions(scopedLessons, exam.id);
+      const existing = lessons.find((lesson) => lesson.id === id);
+      const examLesson = {
+        id,
+        level,
+        stage: "進階",
+        lessonCode: exam.code,
+        examCode: exam.code,
+        title: `${level} ${exam.title}`,
+        topic: exam.description,
+        description: `${exam.description} · 30 Fragen`,
+        courseSummary: `${level} ${exam.description}`,
+        sourceNote: "綜合測驗依課程內容與德語檢定題型原創整理。",
+        isComprehensiveExam: true,
+        questions,
+      };
+
+      if (existing) Object.assign(existing, examLesson);
+      else lessons.push(examLesson);
+    });
+  });
+}
+
+function buildComprehensiveExamQuestions(scopedLessons, examId) {
+  const questions = scopedLessons.flatMap((lesson) => lesson.questions || []);
+  return shuffleWithSeed(questions, examId.length * 997).slice(0, 30);
 }
 
 function expandSyllabusLessons() {
