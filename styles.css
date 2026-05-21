@@ -190,139 +190,29 @@ button:disabled {
 
 .hero-gallery figure {
   display: grid;
-  grid-template-rows: minmax(118px, 1fr) auto;
+  grid-template-rows: 150px auto;
   gap: 10px;
-  min-height: 168px;
   margin: 0;
   border: 1px solid rgba(32, 33, 36, 0.1);
   border-radius: 8px;
-  padding: 14px;
+  overflow: hidden;
   background: rgba(255, 254, 250, 0.78);
   box-shadow: var(--soft-shadow);
+}
+
+.hero-gallery img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
 }
 
 .hero-gallery figcaption {
   color: var(--ink);
   font-size: 0.82rem;
   font-weight: 900;
+  padding: 0 10px 12px;
   text-align: center;
-}
-
-.hero-icon {
-  position: relative;
-  display: block;
-  min-height: 118px;
-}
-
-.hero-icon::before,
-.hero-icon::after {
-  position: absolute;
-  content: "";
-}
-
-.hero-icon.beer::before {
-  left: 29%;
-  bottom: 18px;
-  width: 34%;
-  height: 66px;
-  border-radius: 4px 4px 8px 8px;
-  background: #ffce00;
-  box-shadow: inset 0 12px 0 rgba(255, 255, 255, 0.46);
-}
-
-.hero-icon.beer::after {
-  right: 20%;
-  bottom: 30px;
-  width: 16%;
-  height: 36px;
-  border: 8px solid #ffce00;
-  border-left: 0;
-  border-radius: 0 14px 14px 0;
-}
-
-.hero-icon.pretzel::before {
-  inset: 24px 25%;
-  border: 10px solid var(--rose);
-  border-radius: 50%;
-}
-
-.hero-icon.pretzel::after {
-  left: 40%;
-  top: 26px;
-  width: 20%;
-  height: 58px;
-  border-left: 10px solid var(--rose);
-  border-right: 10px solid var(--rose);
-  border-radius: 50%;
-}
-
-.hero-icon.football::before {
-  inset: 20px 25%;
-  border: 7px solid #111;
-  border-radius: 50%;
-  background: #fff;
-}
-
-.hero-icon.football::after {
-  left: 43%;
-  top: 45px;
-  width: 26px;
-  height: 26px;
-  background: #111;
-  clip-path: polygon(50% 0, 100% 38%, 82% 100%, 18% 100%, 0 38%);
-}
-
-.hero-icon.castle::before {
-  left: 19%;
-  right: 19%;
-  bottom: 16px;
-  height: 64px;
-  background: var(--gold);
-}
-
-.hero-icon.castle::after {
-  left: 23%;
-  right: 23%;
-  top: 18px;
-  height: 32px;
-  background: linear-gradient(90deg, var(--gold) 0 26%, transparent 26% 37%, var(--gold) 37% 63%, transparent 63% 74%, var(--gold) 74%);
-}
-
-.hero-icon.gate::before {
-  left: 18%;
-  right: 18%;
-  bottom: 18px;
-  height: 58px;
-  border: 8px solid #111;
-  border-bottom: 0;
-}
-
-.hero-icon.gate::after {
-  left: 14%;
-  right: 14%;
-  top: 24px;
-  height: 10px;
-  background: #111;
-}
-
-.hero-icon.cathedral::before {
-  left: 22%;
-  right: 22%;
-  bottom: 14px;
-  height: 72px;
-  background:
-    linear-gradient(90deg, transparent 0 12%, #111 12% 24%, transparent 24% 38%, #111 38% 62%, transparent 62% 76%, #111 76% 88%, transparent 88%),
-    linear-gradient(#111, #111);
-}
-
-.hero-icon.cathedral::after {
-  left: 22%;
-  right: 22%;
-  top: 10px;
-  height: 44px;
-  background:
-    linear-gradient(135deg, transparent 0 35%, #111 35% 50%, transparent 50%),
-    linear-gradient(45deg, transparent 0 35%, #111 35% 50%, transparent 50%);
 }
 
 .section-directory {
