@@ -1764,7 +1764,7 @@ function showSectionIntro(section) {
   examGuidePanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
-  levelTextEl.textContent = getSectionIntro(section).side;
+  levelTextEl.textContent = "";
   sectionIntroContentEl.innerHTML = getSectionIntro(section).html;
   renderLessonList();
 }
@@ -1816,26 +1816,22 @@ function getSectionIntro(section) {
   const content = {
     learning: {
       title: "學習路徑",
-      side: "Kurs：左側目錄只顯示 Lektion",
       items: ["A1-B2 分級課程", "每課課文、單字、文法", "日常例句與俗諺"],
       body: "這裡用 Lektion 安排學習順序，適合先讀課文再整理單字與文法。",
     },
     exam: {
       title: "測驗錦笈",
-      side: "Prüfung：左側目錄只顯示 Prüfung",
       items: ["每課 Prüfung", "期中考", "期末考", "綜合複習考"],
       body: "這裡集中所有 Prüfung，方便練習題型、計分與複習弱點。",
     },
     knowledge: {
       title: "知識整理庫",
-      side: "Material：可進入複習表格或知識點地圖",
       items: ["單字表", "動詞變化表", "文法總表", "知識點地圖"],
       body: "這裡整理可下載表格與作答弱點，方便課後複習與教學追蹤。",
     },
   }[section];
 
   return {
-    side: content.side,
     html: `
       <div class="section-heading">
         <p class="eyebrow">Überblick</p>
