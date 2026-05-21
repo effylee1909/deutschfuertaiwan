@@ -1540,7 +1540,7 @@ function renderLessonList() {
 
     const courseGroup = document.createElement("div");
     courseGroup.className = "folder-branch";
-    courseGroup.innerHTML = "<h4>課程</h4>";
+    courseGroup.innerHTML = "<h4>Kurs</h4>";
 
     levelLessons
       .sort(sortLessonsByCode)
@@ -1562,7 +1562,7 @@ function renderLessonList() {
 
     const testGroup = document.createElement("div");
     testGroup.className = "folder-branch";
-    testGroup.innerHTML = "<h4>課後測驗</h4>";
+    testGroup.innerHTML = "<h4>Lektionstest</h4>";
 
     [...levelLessons]
       .sort(sortLessonsByCode)
@@ -1584,7 +1584,7 @@ function renderLessonList() {
 
     const examGroup = document.createElement("div");
     examGroup.className = "folder-branch";
-    examGroup.innerHTML = "<h4>考試專區</h4>";
+    examGroup.innerHTML = "<h4>Prüfungsbereich</h4>";
 
     lessons
       .filter((lesson) => lesson.level === level && lesson.isComprehensiveExam)
@@ -1623,7 +1623,7 @@ function renderLesson() {
   lessonTitleEl.textContent = `${activeLesson.lessonCode} ${activeLesson.topic}`;
   lessonDescriptionEl.textContent = activeLesson.courseSummary;
   sourceNoteEl.textContent = activeLesson.sourceNote;
-  startButton.textContent = `開始 ${activeLesson.lessonCode} 課後測驗`;
+  startButton.textContent = `${activeLesson.lessonCode} Lektionstest starten`;
   renderTextbookLesson(activeLesson);
 
   lessonCardsEl.innerHTML = "";
@@ -2707,16 +2707,29 @@ function renderChoiceQuestion(question) {
 
   const grid = document.createElement("div");
   grid.className = "answer-grid";
+  let selectedOption = "";
 
   question.options.forEach((option) => {
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = option;
-    button.addEventListener("click", () => answerQuestion(option, question));
+    button.addEventListener("click", () => {
+      selectedOption = option;
+      grid.querySelectorAll("button").forEach((item) => item.classList.remove("selected"));
+      button.classList.add("selected");
+      submit.disabled = false;
+    });
     grid.appendChild(button);
   });
 
   answersEl.appendChild(grid);
+
+  const submit = document.createElement("button");
+  submit.type = "button";
+  submit.textContent = "Antwort abgeben";
+  submit.disabled = true;
+  submit.addEventListener("click", () => answerQuestion(selectedOption, question));
+  answersEl.appendChild(submit);
 }
 
 function renderSelfCheckQuestion(question) {
