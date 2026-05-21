@@ -177,14 +177,18 @@
             </p>
           </div>
 
-          <div class="download-actions">
-            <button id="download-vocab" type="button">下載單字表 CSV</button>
-            <button id="download-verbs" class="secondary" type="button">下載動詞變化表 CSV</button>
-            <button id="download-grammar" class="secondary" type="button">下載文法總表 CSV</button>
+          <div class="resource-pages">
+            <button class="resource-page-tab" data-resource-page="vocab" type="button">單字表</button>
+            <button class="resource-page-tab secondary" data-resource-page="verbs" type="button">動詞變化表</button>
+            <button class="resource-page-tab secondary" data-resource-page="grammar" type="button">文法總表</button>
           </div>
 
-          <div class="table-block">
-            <h3>德文文法總表</h3>
+          <div class="resource-page" data-resource-page-panel="grammar" hidden>
+            <div class="resource-page-head">
+              <h3>德文文法總表</h3>
+              <button id="download-grammar" class="secondary" type="button">下載文法總表 CSV</button>
+            </div>
+            <div class="table-block">
             <div class="table-wrap">
               <table>
                 <thead>
@@ -198,14 +202,25 @@
                 <tbody id="grammar-overview-table"></tbody>
               </table>
             </div>
+            </div>
           </div>
 
-          <div class="table-block">
-            <h3>分級單字表</h3>
+          <div class="resource-page" data-resource-page-panel="vocab">
+            <div class="resource-page-head">
+              <h3>分級單字表</h3>
+              <button id="download-vocab" type="button">下載單字表 CSV</button>
+            </div>
+            <div class="table-block">
             <div id="vocab-level-tables" class="level-table-stack"></div>
+            </div>
           </div>
 
-          <div class="table-block">
+          <div class="resource-page" data-resource-page-panel="verbs" hidden>
+            <div class="resource-page-head">
+              <h3>動詞變化表</h3>
+              <button id="download-verbs" class="secondary" type="button">下載動詞變化表 CSV</button>
+            </div>
+            <div class="table-block">
             <h3>現在式動詞變化表</h3>
             <div class="table-wrap">
               <table>
@@ -222,9 +237,9 @@
                 <tbody id="present-verb-table"></tbody>
               </table>
             </div>
-          </div>
+            </div>
 
-          <div class="table-block">
+            <div class="table-block">
             <h3>完成式 Perfekt 表</h3>
             <div class="table-wrap">
               <table>
@@ -240,9 +255,9 @@
                 <tbody id="perfect-verb-table"></tbody>
               </table>
             </div>
-          </div>
+            </div>
 
-          <div class="table-block">
+            <div class="table-block">
             <h3>Präteritum 過去式表（含不規則）</h3>
             <div class="table-wrap">
               <table>
@@ -258,6 +273,7 @@
                 </thead>
                 <tbody id="preterite-verb-table"></tbody>
               </table>
+            </div>
             </div>
           </div>
         </section>

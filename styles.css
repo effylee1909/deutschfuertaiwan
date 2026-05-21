@@ -1000,8 +1000,28 @@ button:disabled {
   margin-top: 18px;
 }
 
-.table-block {
+.resource-pages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.resource-page-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
   margin-top: 24px;
+}
+
+.resource-page-head h3 {
+  margin: 0;
+}
+
+.table-block {
+  margin-top: 14px;
 }
 
 .table-block h3 {

@@ -1566,6 +1566,8 @@ const grammarOverviewTableEl = document.querySelector("#grammar-overview-table")
 const downloadVocabButton = document.querySelector("#download-vocab");
 const downloadVerbsButton = document.querySelector("#download-verbs");
 const downloadGrammarButton = document.querySelector("#download-grammar");
+const resourcePageTabs = document.querySelectorAll(".resource-page-tab");
+const resourcePagePanels = document.querySelectorAll("[data-resource-page-panel]");
 const dashboardSummaryEl = document.querySelector("#dashboard-summary");
 const knowledgeMapEl = document.querySelector("#knowledge-map");
 const resetProgressButton = document.querySelector("#reset-progress");
@@ -1802,6 +1804,7 @@ function showResources() {
   resourceTab.dataset.active = "true";
   levelTextEl.textContent = "常用單字與動詞：可下載表格複習";
   renderResourceTables();
+  showResourcePage("vocab");
 }
 
 function showDashboard() {
@@ -1870,6 +1873,18 @@ function setMainTab(active) {
   ].forEach(([button, value]) => {
     button.dataset.active = active === value;
     button.classList.toggle("secondary", active !== value);
+  });
+}
+
+function showResourcePage(page) {
+  resourcePagePanels.forEach((panel) => {
+    panel.hidden = panel.dataset.resourcePagePanel !== page;
+  });
+
+  resourcePageTabs.forEach((tab) => {
+    const active = tab.dataset.resourcePage === page;
+    tab.dataset.active = active;
+    tab.classList.toggle("secondary", !active);
   });
 }
 
@@ -3324,6 +3339,9 @@ downloadGrammarButton.addEventListener("click", () => {
     { key: "usage", label: "用法" },
     { key: "example", label: "例句" },
   ]);
+});
+resourcePageTabs.forEach((tab) => {
+  tab.addEventListener("click", () => showResourcePage(tab.dataset.resourcePage));
 });
 
 initializeLessons();
