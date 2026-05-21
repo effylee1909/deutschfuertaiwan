@@ -626,6 +626,33 @@ const syllabusGrammar = {
   ],
 };
 
+const grammarOverviewRows = [
+  { level: "A1", topic: "Artikel", usage: "名詞需搭配 der/die/das 記憶。", example: "der Tisch, die Lampe, das Buch" },
+  { level: "A1", topic: "Nominativ", usage: "主詞或 sein 後的身分用主格。", example: "Ich bin Studentin." },
+  { level: "A1", topic: "Akkusativ", usage: "直接受詞用 Akkusativ；der 變 den。", example: "Ich kaufe den Kaffee." },
+  { level: "A1", topic: "Verbposition 2", usage: "主句變位動詞放第二位。", example: "Heute lerne ich Deutsch." },
+  { level: "A1", topic: "W-Fragen", usage: "疑問詞開頭，動詞接第二位。", example: "Wo wohnst du?" },
+  { level: "A1", topic: "sein / haben", usage: "最常用助動詞需熟記變化。", example: "Ich bin müde. / Ich habe Zeit." },
+  { level: "A1", topic: "Modalverben", usage: "情態動詞後接原形動詞。", example: "Ich möchte Kaffee trinken." },
+  { level: "A1", topic: "Plural", usage: "名詞複數需逐字記憶。", example: "das Buch - die Bücher" },
+  { level: "A2", topic: "Perfekt", usage: "用 haben/sein + Partizip II 表過去。", example: "Ich habe gelernt. / Ich bin gefahren." },
+  { level: "A2", topic: "Dativ", usage: "mit, nach, bei, von, zu 後常接 Dativ。", example: "mit dem Bus" },
+  { level: "A2", topic: "Wechselpräpositionen", usage: "地點用 Dativ，方向用 Akkusativ。", example: "in der Schule / in die Schule" },
+  { level: "A2", topic: "Nebensatz", usage: "weil, dass, wenn 子句動詞放最後。", example: "Ich komme später, weil ich arbeite." },
+  { level: "A2", topic: "trennbare Verben", usage: "可分動詞前綴在主句放句尾。", example: "Ich stehe um sieben Uhr auf." },
+  { level: "A2", topic: "Komparativ", usage: "形容詞加 -er 表比較。", example: "Der Zug ist schneller." },
+  { level: "B1", topic: "Konjunktiv II", usage: "表禮貌、建議或假設。", example: "Könnten Sie mir helfen?" },
+  { level: "B1", topic: "Passiv", usage: "werden + Partizip II 強調事情本身。", example: "Das Formular wird ausgefüllt." },
+  { level: "B1", topic: "Konnektoren", usage: "連接原因、結果、轉折。", example: "Obwohl es regnet, gehe ich raus." },
+  { level: "B1", topic: "indirekte Frage", usage: "間接問句動詞放最後。", example: "Ich weiß nicht, ob er kommt." },
+  { level: "B1", topic: "Relativsatz", usage: "用關係子句補充名詞資訊。", example: "Das ist der Kurs, den ich besuche." },
+  { level: "B2", topic: "Nominalisierung", usage: "用名詞化讓表達更正式。", example: "die Verbesserung der Situation" },
+  { level: "B2", topic: "zweiteilige Konnektoren", usage: "平衡或對比兩方觀點。", example: "Einerseits ..., andererseits ..." },
+  { level: "B2", topic: "Passiversatz", usage: "表可行性或必要性。", example: "Das Problem lässt sich lösen." },
+  { level: "B2", topic: "Argumentstruktur", usage: "立場、理由、例子、限制、結論。", example: "Insgesamt überwiegen die Vorteile." },
+  { level: "B2", topic: "Partizipialattribute", usage: "用分詞修飾名詞，常見於書面語。", example: "die steigenden Kosten" },
+];
+
 const learningExpansionCards = {
   A1: [
     {
@@ -1510,8 +1537,10 @@ const vocabLevelTablesEl = document.querySelector("#vocab-level-tables");
 const presentVerbTableEl = document.querySelector("#present-verb-table");
 const perfectVerbTableEl = document.querySelector("#perfect-verb-table");
 const preteriteVerbTableEl = document.querySelector("#preterite-verb-table");
+const grammarOverviewTableEl = document.querySelector("#grammar-overview-table");
 const downloadVocabButton = document.querySelector("#download-vocab");
 const downloadVerbsButton = document.querySelector("#download-verbs");
+const downloadGrammarButton = document.querySelector("#download-grammar");
 const dashboardSummaryEl = document.querySelector("#dashboard-summary");
 const knowledgeMapEl = document.querySelector("#knowledge-map");
 const resetProgressButton = document.querySelector("#reset-progress");
@@ -1717,10 +1746,22 @@ function showDashboard() {
 }
 
 function renderResourceTables() {
-  if (!vocabLevelTablesEl || !presentVerbTableEl || !perfectVerbTableEl || !preteriteVerbTableEl) return;
+  if (!vocabLevelTablesEl || !presentVerbTableEl || !perfectVerbTableEl || !preteriteVerbTableEl || !grammarOverviewTableEl) return;
 
   const vocabByLevel = groupVocabularyByLevel();
   const principalRows = getAllVerbPrincipalRows();
+
+  grammarOverviewTableEl.innerHTML = grammarOverviewRows
+    .map((row) => `
+      <tr>
+        <td>${row.level}</td>
+        <td>${row.topic}</td>
+        <td>${row.usage}</td>
+        <td>${row.example}</td>
+      </tr>
+    `)
+    .join("");
+
   vocabLevelTablesEl.innerHTML = levelOrder
     .map((level) => `
       <section>
@@ -3092,6 +3133,14 @@ downloadVerbsButton.addEventListener("click", () => {
     { key: "preteriteDu", label: "Präteritum du" },
     { key: "preteriteThird", label: "Präteritum er/sie/es" },
     { key: "preteritePlural", label: "Präteritum wir/sie/Sie" },
+  ]);
+});
+downloadGrammarButton.addEventListener("click", () => {
+  downloadCsv("deutsch-grammatik.csv", grammarOverviewRows, [
+    { key: "level", label: "程度" },
+    { key: "topic", label: "文法重點" },
+    { key: "usage", label: "用法" },
+    { key: "example", label: "例句" },
   ]);
 });
 
