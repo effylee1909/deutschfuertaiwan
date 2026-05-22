@@ -2449,14 +2449,116 @@ function expandSyllabusLessons() {
   });
 }
 
+const a1LessonPlans = [
+  {
+    titleZh: "開學日",
+    titleDe: "Der erste Schultag",
+    focusZh: "自我介紹與基本句",
+    text: "Heute ist der erste Schultag. Anna kommt in die Klasse und sieht Ben. Die Lehrerin sagt: Guten Morgen, ich heiße Frau Miller. Anna sagt ihren Namen, ihr Alter und ihre Stadt. Ben fragt: Woher kommst du? Anna antwortet: Ich komme aus Taipei und lerne Deutsch.",
+    vocab: [["der Name", "名字", "die Namen"], ["das Alter", "年齡", "-"], ["die Stadt", "城市", "die Städte"], ["die Klasse", "班級", "die Klassen"], ["die Lehrerin", "女老師", "die Lehrerinnen"], ["kommen", "來自；來", ""], ["heißen", "叫做", ""], ["fragen", "詢問", ""], ["antworten", "回答", ""], ["lernen", "學習", ""]],
+    extraVocab: [["der Schultag", "上課日", "die Schultage"], ["Guten Morgen", "早安", ""], ["woher", "從哪裡來", ""], ["aus Taipei", "來自台北", ""], ["Deutsch", "德文", "-"]],
+  },
+  {
+    titleZh: "新同學",
+    titleDe: "Ein neuer Mitschüler",
+    focusZh: "人稱、sein/haben",
+    text: "Tom ist neu in der Schule. Er ist freundlich und hat einen Rucksack. In der Pause spricht er mit Emma. Emma hat ein Heft und einen Stift. Sie sagt: Wir sind jetzt in einer Gruppe. Tom lacht und sagt: Das ist gut.",
+    vocab: [["der Mitschüler", "男同學", "die Mitschüler"], ["die Schule", "學校", "die Schulen"], ["der Rucksack", "背包", "die Rucksäcke"], ["die Pause", "下課時間", "die Pausen"], ["das Heft", "筆記本", "die Hefte"], ["der Stift", "筆", "die Stifte"], ["freundlich", "友善的", ""], ["neu", "新的", ""], ["sprechen", "說話", ""], ["lachen", "笑", ""]],
+    extraVocab: [["die Gruppe", "小組", "die Gruppen"], ["jetzt", "現在", ""], ["gut", "好的", ""], ["mit Emma", "和 Emma", ""], ["in der Schule", "在學校", ""]],
+  },
+  {
+    titleZh: "咖啡店早餐",
+    titleDe: "Frühstück im Café",
+    focusZh: "冠詞與點餐",
+    text: "Am Morgen geht David in ein Café. Er möchte einen Kaffee und ein Brötchen. Die Kellnerin fragt: Möchten Sie auch Wasser? David sagt: Nein, danke. Der Kaffee kostet drei Euro. David bezahlt mit Karte.",
+    vocab: [["das Café", "咖啡店", "die Cafés"], ["der Kaffee", "咖啡", "die Kaffees"], ["das Brötchen", "小麵包", "die Brötchen"], ["das Wasser", "水", "-"], ["die Kellnerin", "女服務生", "die Kellnerinnen"], ["der Euro", "歐元", "die Euro"], ["möchten", "想要", ""], ["kosten", "花費", ""], ["bezahlen", "付款", ""], ["mit Karte", "用卡片", ""]],
+    extraVocab: [["das Frühstück", "早餐", "-"], ["am Morgen", "早上", ""], ["auch", "也", ""], ["nein", "不", ""], ["danke", "謝謝", ""]],
+  },
+  {
+    titleZh: "教室時鐘",
+    titleDe: "Die Uhr im Klassenzimmer",
+    focusZh: "數字、時間與星期",
+    text: "Im Klassenzimmer hängt eine Uhr. Es ist acht Uhr. Der Deutschkurs beginnt um acht Uhr zehn. Julia schreibt das Datum an die Tafel: Montag, der fünfte September. Die Schüler zählen von eins bis zwanzig.",
+    vocab: [["die Uhr", "時鐘", "die Uhren"], ["das Klassenzimmer", "教室", "die Klassenzimmer"], ["der Deutschkurs", "德文課", "die Deutschkurse"], ["das Datum", "日期", "die Daten"], ["die Tafel", "黑板", "die Tafeln"], ["der Montag", "星期一", "die Montage"], ["beginnen", "開始", ""], ["zählen", "數數", ""], ["acht", "八", ""], ["zwanzig", "二十", ""]],
+    extraVocab: [["hängen", "掛著", ""], ["um acht Uhr", "八點", ""], ["fünfte", "第五", ""], ["September", "九月", ""], ["die Schüler", "學生們", "die Schüler"]],
+  },
+  {
+    titleZh: "家庭照片",
+    titleDe: "Das Familienfoto",
+    focusZh: "家庭與所有格",
+    text: "Sara zeigt ein Familienfoto. Das ist mein Vater, sagt sie. Meine Mutter arbeitet heute zu Hause. Ich habe einen Bruder und eine Schwester. Ben sieht auch einen Hund auf dem Foto. Sara sagt: Das ist Max, unser Hund.",
+    vocab: [["die Familie", "家庭", "die Familien"], ["das Foto", "照片", "die Fotos"], ["der Vater", "父親", "die Väter"], ["die Mutter", "母親", "die Mütter"], ["der Bruder", "兄弟", "die Brüder"], ["die Schwester", "姊妹", "die Schwestern"], ["der Hund", "狗", "die Hunde"], ["zeigen", "展示", ""], ["arbeiten", "工作", ""], ["mein", "我的", ""]],
+    extraVocab: [["zu Hause", "在家", ""], ["unser", "我們的", ""], ["das Familienfoto", "家庭照片", "die Familienfotos"], ["sehen", "看見", ""], ["auf dem Foto", "在照片上", ""]],
+  },
+  {
+    titleZh: "學校午餐",
+    titleDe: "Mittagessen in der Schule",
+    focusZh: "食物、點餐與付款",
+    text: "In der Schule gibt es heute Suppe, Reis und Salat. Emma nimmt eine Suppe und einen Apfel. Tom möchte lieber Nudeln. An der Kasse bezahlt Emma vier Euro. Danach setzt sie sich an einen Tisch.",
+    vocab: [["das Mittagessen", "午餐", "-"], ["die Suppe", "湯", "die Suppen"], ["der Reis", "米飯", "-"], ["der Salat", "沙拉", "die Salate"], ["der Apfel", "蘋果", "die Äpfel"], ["die Nudeln", "麵", "die Nudeln"], ["die Kasse", "收銀台", "die Kassen"], ["nehmen", "拿；選", ""], ["sich setzen", "坐下", ""], ["lieber", "比較想要", ""]],
+    extraVocab: [["das Menü", "菜單；套餐", "die Menüs"], ["vier Euro", "四歐元", ""], ["nach dem Essen", "飯後", ""], ["der Tisch", "桌子", "die Tische"], ["die Mensa", "學校餐廳", "die Mensen"]],
+  },
+  {
+    titleZh: "去車站",
+    titleDe: "Auf dem Weg zum Bahnhof",
+    focusZh: "城市、方向與交通",
+    text: "Nach dem Kurs geht Anna zum Bahnhof. Sie sucht die richtige Straße. Ein Mann hilft ihr und sagt: Gehen Sie geradeaus und dann links. Dort fährt der Bus zur Stadtmitte. Anna kauft eine Fahrkarte.",
+    vocab: [["der Bahnhof", "車站", "die Bahnhöfe"], ["die Straße", "街道", "die Straßen"], ["der Bus", "公車", "die Busse"], ["die Stadtmitte", "市中心", "-"], ["die Fahrkarte", "車票", "die Fahrkarten"], ["der Mann", "男人", "die Männer"], ["suchen", "尋找", ""], ["helfen", "幫助", ""], ["geradeaus", "直走", ""], ["links", "左邊", ""]],
+    extraVocab: [["nach dem Kurs", "下課後", ""], ["richtig", "正確的", ""], ["dort", "在那裡", ""], ["fahren", "行駛；搭乘", ""], ["zum Bahnhof", "到車站", ""]],
+  },
+  {
+    titleZh: "買新外套",
+    titleDe: "Eine neue Jacke",
+    focusZh: "購物、價格與顏色",
+    text: "Mia geht am Samstag in ein Geschäft. Sie braucht eine neue Jacke. Die rote Jacke ist schön, aber zu teuer. Die blaue Jacke kostet weniger. Mia probiert sie an und sagt: Diese Jacke nehme ich.",
+    vocab: [["die Jacke", "外套", "die Jacken"], ["das Geschäft", "商店", "die Geschäfte"], ["der Samstag", "星期六", "die Samstage"], ["der Preis", "價格", "die Preise"], ["rot", "紅色的", ""], ["blau", "藍色的", ""], ["schön", "漂亮的", ""], ["teuer", "貴的", ""], ["anprobieren", "試穿", ""], ["kaufen", "購買", ""]],
+    extraVocab: [["weniger", "較少", ""], ["diese", "這個", ""], ["diese Jacke", "這件外套", ""], ["am Samstag", "星期六", ""], ["zu teuer", "太貴", ""]],
+  },
+  {
+    titleZh: "忙碌的早晨",
+    titleDe: "Ein voller Morgen",
+    focusZh: "日常作息與可分動詞",
+    text: "Ben steht um sieben Uhr auf. Er duscht, zieht ein Hemd an und frühstückt schnell. Um halb acht fährt er mit dem Fahrrad zur Schule. Im Kurs schreibt er die Hausaufgabe auf.",
+    vocab: [["der Morgen", "早晨", "die Morgen"], ["das Hemd", "襯衫", "die Hemden"], ["das Fahrrad", "腳踏車", "die Fahrräder"], ["die Hausaufgabe", "作業", "die Hausaufgaben"], ["aufstehen", "起床", ""], ["duschen", "洗澡", ""], ["anziehen", "穿上", ""], ["frühstücken", "吃早餐", ""], ["aufschreiben", "寫下", ""], ["schnell", "快速地", ""]],
+    extraVocab: [["um sieben Uhr", "七點", ""], ["halb acht", "七點半", ""], ["zur Schule", "去學校", ""], ["mit dem Fahrrad", "騎腳踏車", ""], ["im Kurs", "在課堂上", ""]],
+  },
+  {
+    titleZh: "戶外教學",
+    titleDe: "Der Ausflug",
+    focusZh: "天氣、衣著與顏色",
+    text: "Heute macht die Klasse einen Ausflug. Am Morgen ist es kühl und windig. Die Lehrerin sagt: Nehmt bitte eine Jacke mit. Am Mittag scheint die Sonne. Anna trägt eine gelbe Mütze und Ben trägt einen grünen Pullover.",
+    vocab: [["der Ausflug", "戶外教學；郊遊", "die Ausflüge"], ["das Wetter", "天氣", "-"], ["die Sonne", "太陽", "die Sonnen"], ["der Wind", "風", "die Winde"], ["die Mütze", "帽子", "die Mützen"], ["der Pullover", "毛衣", "die Pullover"], ["kühl", "涼的", ""], ["windig", "有風的", ""], ["gelb", "黃色的", ""], ["grün", "綠色的", ""]],
+    extraVocab: [["scheinen", "照耀", ""], ["mitnehmen", "帶著", ""], ["am Mittag", "中午", ""], ["tragen", "穿戴", ""], ["draußen", "在戶外", ""]],
+  },
+  {
+    titleZh: "校護室",
+    titleDe: "Im Krankenzimmer",
+    focusZh: "身體、健康與預約",
+    text: "Tom fühlt sich nicht gut. Er hat Kopfschmerzen und geht ins Krankenzimmer. Die Schulärztin fragt: Tut der Hals weh? Tom sagt: Ja, und ich bin müde. Die Ärztin gibt ihm Tee und macht einen Termin.",
+    vocab: [["das Krankenzimmer", "保健室", "die Krankenzimmer"], ["die Schulärztin", "校醫", "die Schulärztinnen"], ["der Kopf", "頭", "die Köpfe"], ["der Hals", "喉嚨；脖子", "die Hälse"], ["der Termin", "預約", "die Termine"], ["der Tee", "茶", "die Tees"], ["sich fühlen", "感覺", ""], ["wehtun", "疼痛", ""], ["müde", "疲累的", ""], ["geben", "給", ""]],
+    extraVocab: [["Kopfschmerzen", "頭痛", "die Kopfschmerzen"], ["nicht gut", "不舒服", ""], ["die Ärztin", "女醫師", "die Ärztinnen"], ["ja", "是的", ""], ["ins Krankenzimmer", "到保健室", ""]],
+  },
+  {
+    titleZh: "檢定練習日",
+    titleDe: "Training für die Prüfung",
+    focusZh: "A1 綜合任務",
+    text: "Heute übt das Team für die Prüfung. Julia liest eine kurze Nachricht, David hört einen Dialog und Emma schreibt eine Antwort. Zum Schluss sprechen alle über Alltag, Schule und Familie. Die Lehrerin sagt: Kleine Schritte helfen jeden Tag.",
+    vocab: [["die Prüfung", "考試", "die Prüfungen"], ["das Team", "團隊", "die Teams"], ["die Nachricht", "訊息", "die Nachrichten"], ["der Dialog", "對話", "die Dialoge"], ["die Antwort", "回答", "die Antworten"], ["der Alltag", "日常", "-"], ["lesen", "閱讀", ""], ["hören", "聽", ""], ["schreiben", "寫", ""], ["üben", "練習", ""]],
+    extraVocab: [["kurz", "短的", ""], ["zum Schluss", "最後", ""], ["alle", "所有人", ""], ["kleine Schritte", "小步驟", ""], ["jeden Tag", "每天", ""]],
+  },
+];
+
 function createTextbookContent(level, lessonNumber, topicData) {
   const normalizedTopic = normalizeTopicData(topicData);
-  const vocab = createLessonVocabulary(level, lessonNumber, normalizedTopic);
+  const plan = level === "A1" ? a1LessonPlans[lessonNumber - 1] : null;
+  const vocab = plan ? plan.vocab : createLessonVocabulary(level, lessonNumber, normalizedTopic);
   const grammar = createLessonGrammar(level, lessonNumber, normalizedTopic);
   return {
-    title: `${level} L${lessonNumber}: ${normalizedTopic.zh} · ${normalizedTopic.de}`,
-    text: createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
+    title: plan ? `${level} L${lessonNumber}: ${plan.titleZh} · ${plan.titleDe}` : `${level} L${lessonNumber}: ${normalizedTopic.zh} · ${normalizedTopic.de}`,
+    text: plan ? plan.text : createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
+    focus: plan ? plan.focusZh : normalizedTopic.zh,
     vocab,
+    extraVocab: plan ? plan.extraVocab : [],
     grammar,
     proverb: getLessonProverb(level, lessonNumber),
   };
@@ -2794,7 +2896,7 @@ function buildLessonQuestions(lesson, index) {
 
 function buildLessonSpecificQuestions(lesson, index) {
   const textbook = lesson.textbook || {};
-  const vocab = textbook.vocab || [];
+  const vocab = [...(textbook.vocab || []), ...(textbook.extraVocab || [])];
   const grammar = textbook.grammar || [];
   const phrases = lesson.dailyPhrases || [];
   const lessonTag = `${lesson.level} ${lesson.lessonCode}`;
@@ -3031,7 +3133,16 @@ function renderTextbookLesson(lesson) {
         <span>${chinese}</span>
       </div>
     `)
-    .join("");
+    .join("") + (content.extraVocab?.length ? `
+      <div class="vocab-divider">課文額外單字</div>
+      ${content.extraVocab.map(([german, chinese, plural]) => `
+        <div>
+          <strong>${german}</strong>
+          ${plural ? `<small>Plural: ${plural}</small>` : ""}
+          <span>${chinese}</span>
+        </div>
+      `).join("")}
+    ` : "");
 
   lessonGrammarEl.innerHTML = content.grammar
     .map(([title, body, example]) => `

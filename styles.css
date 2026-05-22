@@ -524,6 +524,13 @@ button:disabled {
   font-weight: 800;
 }
 
+.mini-vocab-list .vocab-divider {
+  color: var(--red);
+  font-weight: 900;
+  border-top: 1px solid var(--line);
+  padding: 16px 0 4px;
+}
+
 .mini-vocab-list span,
 .grammar-list span {
   color: var(--muted);
