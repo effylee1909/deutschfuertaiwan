@@ -1533,6 +1533,7 @@ const lessonTitleEl = document.querySelector("#lesson-title");
 const lessonDescriptionEl = document.querySelector("#lesson-description");
 const lessonReadingEl = document.querySelector("#lesson-reading");
 const lessonVocabularyEl = document.querySelector("#lesson-vocabulary");
+const lessonExtraVocabularyEl = document.querySelector("#lesson-extra-vocabulary");
 const lessonGrammarEl = document.querySelector("#lesson-grammar");
 const lessonCardsEl = document.querySelector("#lesson-cards");
 const dailyPhrasesEl = document.querySelector("#daily-phrases");
@@ -3156,16 +3157,17 @@ function renderTextbookLesson(lesson) {
         <span>${chinese}</span>
       </div>
     `)
-    .join("") + (content.extraVocab?.length ? `
-      <div class="vocab-divider">課文額外單字</div>
-      ${content.extraVocab.map(([german, chinese, plural]) => `
-        <div>
-          <strong>${german}</strong>
-          ${plural ? `<small>Plural: ${plural}</small>` : ""}
-          <span>${chinese}</span>
-        </div>
-      `).join("")}
-    ` : "");
+    .join("");
+
+  lessonExtraVocabularyEl.innerHTML = (content.extraVocab?.length ? content.extraVocab : [["-", "本課暫無課外單字", ""]])
+    .map(([german, chinese, plural]) => `
+      <div>
+        <strong>${german}</strong>
+        ${plural ? `<small>Plural: ${plural}</small>` : ""}
+        <span>${chinese}</span>
+      </div>
+    `)
+    .join("");
 
   lessonGrammarEl.innerHTML = content.grammar
     .map(([title, body, example]) => `

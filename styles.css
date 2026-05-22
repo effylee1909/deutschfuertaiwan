@@ -486,7 +486,7 @@ button:disabled {
 
 .textbook-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 0.95fr) minmax(320px, 1.25fr);
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
   gap: 16px;
   margin-top: 18px;
 }
@@ -522,13 +522,6 @@ button:disabled {
 .mini-vocab-list small {
   color: var(--blue);
   font-weight: 800;
-}
-
-.mini-vocab-list .vocab-divider {
-  color: var(--red);
-  font-weight: 900;
-  border-top: 1px solid var(--line);
-  padding: 16px 0 4px;
 }
 
 .mini-vocab-list span,
