@@ -2367,6 +2367,12 @@ function initializeLessons() {
     lesson.topic = `${topicData.zh} · ${topicData.de}`;
     lesson.navTitle = `${lesson.lessonCode} ${lesson.topic}`;
     lesson.textbook = createTextbookContent(lesson.level, lesson.lessonNumber, topicData);
+    if (lesson.level === "A1" && lesson.textbook?.storyTitleZh) {
+      lesson.topicZh = lesson.textbook.storyTitleZh;
+      lesson.topicDe = lesson.textbook.storyTitleDe;
+      lesson.topic = `${lesson.topicZh} · ${lesson.topicDe}`;
+      lesson.navTitle = `${lesson.lessonCode} ${lesson.topic}`;
+    }
     lesson.dailyPhrases = createLessonDailyPhrases(lesson.level, lesson.lessonNumber, topicData.de);
     lesson.courseSummary = getCourseSummary(lesson);
     lesson.questions = buildLessonQuestions(lesson, index);
@@ -2548,6 +2554,21 @@ const a1LessonPlans = [
   },
 ];
 
+const a1LessonDetails = [
+  "Nach dem Unterricht schreibt Anna drei Sätze in ihr Heft: Ich heiße Anna. Ich bin achtzehn Jahre alt. Ich wohne in Taipei. Zu Hause liest sie die Sätze noch einmal laut.",
+  "Die Gruppe macht eine kleine Aufgabe. Tom sagt: Ich bin neu hier. Emma antwortet: Wir helfen dir. Dann suchen sie zusammen ein Bild, ein Wort und einen kurzen Satz.",
+  "David setzt sich an einen kleinen Tisch am Fenster. Er liest die Karte langsam und zeigt auf das Brötchen. Danach fragt er höflich nach der Rechnung.",
+  "Die Lehrerin fragt: Welcher Tag ist heute? Julia antwortet laut und die Klasse wiederholt den Satz. Danach schreiben alle drei Uhrzeiten und zwei Wochentage.",
+  "Sara spricht langsam über ihre Familie. Die anderen Schüler stellen einfache Fragen. Am Ende schreibt Ben: Saras Bruder ist zwölf Jahre alt und ihr Hund heißt Max.",
+  "Emma liest zuerst das Menü an der Wand. Sie fragt Tom: Was nimmst du? Nach dem Essen räumt sie das Tablett weg und sagt der Frau an der Kasse danke.",
+  "Anna liest die Schilder in der Straße. Sie findet den Bus, aber sie ist unsicher. Deshalb fragt sie noch einmal und wiederholt die Richtung: geradeaus, dann links.",
+  "Mia schaut auf das Preisschild und vergleicht zwei Jacken. Die Verkäuferin bringt eine andere Größe. Mia spricht langsam und benutzt die Farben rot, blau und grün.",
+  "Ben hat wenig Zeit, aber er bleibt ruhig. Er packt sein Heft, seinen Stift und eine kleine Flasche ein. In der Schule erzählt er kurz von seinem Morgen.",
+  "Die Klasse geht in einen Park. Weil das Wetter anders wird, ziehen einige Schüler ihre Jacken aus. Die Lehrerin fragt später: Wie ist das Wetter jetzt?",
+  "Tom wartet auf einem Stuhl und beschreibt seine Schmerzen. Die Schulärztin schreibt eine kurze Notiz. Danach ruft Tom seine Mutter an und geht langsam zurück.",
+  "Die Lehrerin verteilt kleine Karten mit Aufgaben. Jede Person liest, hört, schreibt oder spricht. Am Ende markieren alle zwei Wörter, die sie noch üben möchten.",
+];
+
 function createTextbookContent(level, lessonNumber, topicData) {
   const normalizedTopic = normalizeTopicData(topicData);
   const plan = level === "A1" ? a1LessonPlans[lessonNumber - 1] : null;
@@ -2555,8 +2576,10 @@ function createTextbookContent(level, lessonNumber, topicData) {
   const grammar = createLessonGrammar(level, lessonNumber, normalizedTopic);
   return {
     title: plan ? `${level} L${lessonNumber}: ${plan.titleZh} · ${plan.titleDe}` : `${level} L${lessonNumber}: ${normalizedTopic.zh} · ${normalizedTopic.de}`,
-    text: plan ? plan.text : createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
+    text: plan ? `${plan.text} ${a1LessonDetails[lessonNumber - 1]}` : createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
     focus: plan ? plan.focusZh : normalizedTopic.zh,
+    storyTitleZh: plan?.titleZh,
+    storyTitleDe: plan?.titleDe,
     vocab,
     extraVocab: plan ? plan.extraVocab : [],
     grammar,
