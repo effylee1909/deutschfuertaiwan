@@ -2415,7 +2415,7 @@ function createComprehensiveExams() {
 
 function buildComprehensiveExamQuestions(scopedLessons, examId) {
   const questions = scopedLessons.flatMap((lesson) => lesson.questions || []);
-  return shuffleWithSeed(questions, examId.length * 997).slice(0, 30);
+  return shuffleWithSeed(dedupeQuestions(questions), examId.length * 997).slice(0, 30);
 }
 
 function expandSyllabusLessons() {
@@ -2709,9 +2709,187 @@ function ensureStageCoverage() {
 }
 
 function buildLessonQuestions(lesson, index) {
+  const lessonQuestions = buildLessonSpecificQuestions(lesson, index);
   const pool = germanExamPools[lesson.level] || supplementalQuestionPools[lesson.level] || [];
   const rotatedPool = rotateArray(pool, index * 5);
-  return rotatedPool.slice(0, 20);
+  return dedupeQuestions([...lessonQuestions, ...rotatedPool]).slice(0, 20);
+}
+
+function buildLessonSpecificQuestions(lesson, index) {
+  const textbook = lesson.textbook || {};
+  const vocab = textbook.vocab || [];
+  const grammar = textbook.grammar || [];
+  const phrases = lesson.dailyPhrases || [];
+  const lessonTag = `${lesson.level} ${lesson.lessonCode}`;
+  const questions = [];
+
+  if (textbook.text) {
+    questions.push({
+      type: "reading",
+      skill: "Lesen",
+      tags: [lessonTag, "Text"],
+      group: lessonTag,
+      prompt: `${lessonTag}: Lesen Sie den Text und wählen Sie die richtige Antwort.`,
+      passage: textbook.text,
+      question: "Worum geht es in dieser Lektion?",
+      options: buildOptions(lesson.topicDe, [lesson.topicZh, "Eine andere Alltagssituation", "Eine allgemeine Regel"]),
+      answer: lesson.topicDe,
+      hint: `Das Thema ist: ${lesson.topicDe}.`,
+    });
+  }
+
+  vocab.forEach((entry, vocabIndex) => {
+    const [word, meaning, plural] = entry;
+    const bareWord = stripVocabularyArticle(word);
+    const otherMeanings = rotateArray(vocab.map((item) => item[1]), vocabIndex + 1);
+    const otherWords = rotateArray(vocab.map((item) => item[0]), vocabIndex + 1);
+
+    questions.push({
+      type: "choice",
+      skill: "Wortschatz",
+      tags: [lessonTag, "Wortschatz"],
+      group: lessonTag,
+      prompt: `Was bedeutet "${word}"?`,
+      options: buildOptions(meaning, otherMeanings),
+      answer: meaning,
+      hint: `${word}: ${meaning}`,
+    });
+
+    questions.push({
+      type: "spelling",
+      skill: "Wortschatz",
+      tags: [lessonTag, "Rechtschreibung"],
+      group: lessonTag,
+      prompt: `Schreiben Sie das Wort: ${meaning}`,
+      answers: [word, bareWord],
+      hint: `Richtig ist: ${word}.`,
+    });
+
+    if (plural) {
+      questions.push({
+        type: "cloze",
+        skill: "Wortschatz",
+        tags: [lessonTag, "Plural"],
+        group: lessonTag,
+        prompt: `Ergänzen Sie den Plural: ${word} - ___`,
+        answer: plural,
+        hint: `${word} - ${plural}`,
+      });
+    } else {
+      questions.push({
+        type: "choice",
+        skill: "Wortschatz",
+        tags: [lessonTag, "Wortform"],
+        group: lessonTag,
+        prompt: `Welche Form passt zu "${meaning}"?`,
+        options: buildOptions(word, otherWords),
+        answer: word,
+        hint: `Richtig ist: ${word}.`,
+      });
+    }
+  });
+
+  grammar.forEach(([title, body, example], grammarIndex) => {
+    const cleanTitle = cleanGrammarTitle(title);
+    const otherGrammar = rotateArray(grammar.map(([item]) => cleanGrammarTitle(item)), grammarIndex + 1);
+
+    questions.push({
+      type: "reading",
+      skill: "Sprachbausteine",
+      tags: [lessonTag, "Grammatik"],
+      group: lessonTag,
+      prompt: `${lessonTag}: Welche Grammatik wird hier geübt? ${cleanTitle}`,
+      passage: example || body,
+      question: body,
+      options: buildOptions(cleanTitle, otherGrammar),
+      answer: cleanTitle,
+      hint: cleanTitle,
+    });
+
+    questions.push({
+      type: "cloze",
+      skill: "Grammatik",
+      tags: [lessonTag, "Grammatik"],
+      group: lessonTag,
+      prompt: `${lessonTag}: Nennen Sie den Grammatikpunkt: ${body}`,
+      answer: cleanTitle,
+      hint: cleanTitle,
+    });
+  });
+
+  phrases.forEach((phrase, phraseIndex) => {
+    const otherPhrases = rotateArray(phrases.map((item) => item.german), phraseIndex + 1);
+
+    questions.push({
+      type: "choice",
+      skill: "Hören/Sprechen",
+      tags: [lessonTag, "Redemittel"],
+      group: lessonTag,
+      prompt: `Welche Redemittel passt? ${phrase.chinese}`,
+      options: buildOptions(phrase.german, otherPhrases),
+      answer: phrase.german,
+      hint: phrase.german,
+    });
+  });
+
+  if (phrases.length >= 3) {
+    questions.push({
+      type: "match",
+      skill: "Redemittel",
+      tags: [lessonTag, "Zuordnung"],
+      group: lessonTag,
+      prompt: `${lessonTag}: Ordnen Sie die Redemittel zu.`,
+      pairs: phrases.slice(0, 4).map((phrase) => ({ term: phrase.chinese, answer: phrase.german })),
+      hint: "Ordnen Sie Bedeutung und Satz zu.",
+    });
+  }
+
+  if (textbook.proverb) {
+    questions.push({
+      type: "reading",
+      skill: "Lesen",
+      tags: [lessonTag, "Sprichwort"],
+      group: lessonTag,
+      prompt: `${lessonTag}: Was bedeutet das Sprichwort?`,
+      passage: textbook.proverb.german,
+      question: "Wählen Sie die passende Bedeutung.",
+      options: buildOptions(textbook.proverb.chinese, ["做事要有耐心。", "學習需要練習。", "應該準時到達。"]),
+      answer: textbook.proverb.chinese,
+      hint: textbook.proverb.chinese,
+    });
+  }
+
+  return shuffleWithSeed(dedupeQuestions(questions), index + lesson.id.length);
+}
+
+function buildOptions(answer, candidates) {
+  const fallbackOptions = ["nicht passend", "andere Bedeutung", "andere Form"];
+  return [...new Set([answer, ...candidates, ...fallbackOptions].filter(Boolean))]
+    .filter((option) => option !== undefined && option !== null)
+    .slice(0, 4);
+}
+
+function cleanGrammarTitle(title) {
+  return title.replace(/^L\d+\.\d+\s+/, "");
+}
+
+function dedupeQuestions(questions) {
+  const seen = new Set();
+  return questions.filter((question) => {
+    const answer = Array.isArray(question.answers) ? question.answers.join("|") : question.answer || "";
+    const key = [
+      question.type,
+      question.group,
+      question.prompt,
+      question.question || "",
+      question.passage || "",
+      answer,
+    ].join("::").toLowerCase();
+
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function getCourseSummary(lesson) {
