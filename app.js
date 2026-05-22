@@ -1560,6 +1560,7 @@ const feedbackEl = document.querySelector("#feedback");
 const nextButton = document.querySelector("#next");
 const restartButton = document.querySelector("#restart");
 const vocabLevelTablesEl = document.querySelector("#vocab-level-tables");
+const vocabLevelTabsEl = document.querySelector("#vocab-level-tabs");
 const presentVerbTableEl = document.querySelector("#present-verb-table");
 const perfectVerbTableEl = document.querySelector("#perfect-verb-table");
 const preteriteVerbTableEl = document.querySelector("#preterite-verb-table");
@@ -1569,6 +1570,7 @@ const downloadVerbsButton = document.querySelector("#download-verbs");
 const downloadGrammarButton = document.querySelector("#download-grammar");
 const resourcePageTabs = document.querySelectorAll(".resource-page-tab");
 const resourcePagePanels = document.querySelectorAll("[data-resource-page-panel]");
+let activeVocabLevel = "A1";
 const dashboardSummaryEl = document.querySelector("#dashboard-summary");
 const knowledgeMapEl = document.querySelector("#knowledge-map");
 const resetProgressButton = document.querySelector("#reset-progress");
@@ -1906,10 +1908,19 @@ function renderResourceTables() {
     `)
     .join("");
 
-  vocabLevelTablesEl.innerHTML = levelOrder
-    .map((level) => `
+  if (vocabLevelTabsEl) {
+    vocabLevelTabsEl.innerHTML = levelOrder
+      .map((level) => `
+        <button class="resource-page-tab ${activeVocabLevel === level ? "" : "secondary"}" data-vocab-level="${level}" type="button">
+          ${level} 單字表 (${vocabByLevel[level].length})
+        </button>
+      `)
+      .join("");
+  }
+
+  vocabLevelTablesEl.innerHTML = `
       <section>
-        <h4>${level} 單字表</h4>
+        <h4>${activeVocabLevel} 單字表 (${vocabByLevel[activeVocabLevel].length})</h4>
         <div class="table-wrap">
           <table>
             <thead>
@@ -1920,7 +1931,7 @@ function renderResourceTables() {
               </tr>
             </thead>
             <tbody>
-              ${vocabByLevel[level]
+              ${vocabByLevel[activeVocabLevel]
                 .map((row) => formatVocabularyRow(row))
                 .map((row) => `
                   <tr>
@@ -1934,8 +1945,7 @@ function renderResourceTables() {
           </table>
         </div>
       </section>
-    `)
-    .join("");
+    `;
 
   presentVerbTableEl.innerHTML = verbRows
     .map((row) => `
@@ -2100,12 +2110,83 @@ function needsExtraE(stem) {
   return /[dt]$/.test(stem);
 }
 
+const generatedVocabularyData = {
+  A1: {
+    adjectives: [["kleine", "小的"], ["große", "大的"], ["neue", "新的"], ["alte", "舊的"], ["schöne", "漂亮的"], ["gute", "好的"], ["billige", "便宜的"], ["teure", "貴的"], ["ruhige", "安靜的"], ["laute", "吵的"], ["helle", "明亮的"], ["dunkle", "暗的"], ["rote", "紅色的"], ["blaue", "藍色的"], ["grüne", "綠色的"], ["gelbe", "黃色的"], ["warme", "溫暖的"], ["kalte", "冷的"], ["kurze", "短的"], ["lange", "長的"], ["schnelle", "快的"], ["langsame", "慢的"], ["freundliche", "友善的"], ["wichtige", "重要的"], ["einfache", "簡單的"]],
+    nouns: [["der", "Tisch", "桌子"], ["die", "Lampe", "燈"], ["das", "Buch", "書"], ["der", "Stuhl", "椅子"], ["die", "Tür", "門"], ["das", "Fenster", "窗戶"], ["der", "Rucksack", "背包"], ["die", "Tasche", "包包"], ["das", "Heft", "筆記本"], ["der", "Stift", "筆"], ["die", "Klasse", "班級"], ["das", "Zimmer", "房間"], ["der", "Lehrer", "老師"], ["die", "Lehrerin", "女老師"], ["das", "Kind", "小孩"], ["der", "Freund", "朋友"], ["die", "Freundin", "女朋友"], ["das", "Foto", "照片"], ["der", "Bahnhof", "車站"], ["die", "Straße", "街道"], ["das", "Café", "咖啡店"], ["der", "Kaffee", "咖啡"], ["die", "Suppe", "湯"], ["das", "Brot", "麵包"], ["der", "Apfel", "蘋果"], ["die", "Jacke", "外套"], ["das", "Hemd", "襯衫"], ["der", "Pullover", "毛衣"], ["die", "Mütze", "帽子"], ["das", "Fahrrad", "腳踏車"], ["der", "Bus", "公車"], ["die", "Fahrkarte", "車票"], ["das", "Hotel", "飯店"], ["der", "Preis", "價格"], ["die", "Uhr", "時鐘"], ["das", "Datum", "日期"], ["der", "Morgen", "早晨"], ["die", "Pause", "休息時間"], ["das", "Wetter", "天氣"], ["der", "Wind", "風"], ["die", "Sonne", "太陽"], ["das", "Wasser", "水"], ["der", "Kopf", "頭"], ["die", "Hand", "手"], ["das", "Knie", "膝蓋"], ["der", "Termin", "預約"], ["die", "Frage", "問題"], ["das", "Wort", "單字"], ["der", "Satz", "句子"], ["die", "Antwort", "回答"]],
+    verbs: [["lesen", "閱讀"], ["schreiben", "書寫"], ["sprechen", "說"], ["hören", "聽"], ["fragen", "詢問"], ["antworten", "回答"], ["kaufen", "購買"], ["bezahlen", "付款"], ["gehen", "去"], ["fahren", "搭乘"]],
+    contexts: [["im Kurs", "在課堂上"], ["zu Hause", "在家"], ["langsam", "慢慢地"], ["jeden Tag", "每天"], ["am Morgen", "早上"], ["mit Freunden", "和朋友"], ["in der Schule", "在學校"], ["im Café", "在咖啡店"], ["am Bahnhof", "在車站"], ["auf Deutsch", "用德文"]],
+  },
+  A2: {
+    adjectives: [["praktische", "實用的"], ["passende", "合適的"], ["pünktliche", "準時的"], ["späte", "晚的"], ["frühe", "早的"], ["höfliche", "禮貌的"], ["kurze", "短的"], ["lange", "長的"], ["schriftliche", "書面的"], ["mündliche", "口頭的"], ["private", "私人的"], ["öffentliche", "公共的"], ["günstige", "便宜的"], ["bequeme", "舒適的"], ["sichere", "安全的"], ["schnelle", "快速的"], ["langsame", "慢的"], ["einfache", "簡單的"], ["schwierige", "困難的"], ["wichtige", "重要的"], ["neue", "新的"], ["alte", "舊的"], ["klare", "清楚的"], ["freundliche", "友善的"], ["ruhige", "安靜的"]],
+    nouns: [["der", "Termin", "預約"], ["die", "Wohnung", "住處"], ["das", "Formular", "表格"], ["der", "Arzttermin", "看診預約"], ["die", "Praxis", "診所"], ["das", "Arbeitsbuch", "練習本"], ["der", "Teilnehmer", "參加者"], ["die", "Nachricht", "訊息"], ["das", "Ticket", "票"], ["der", "Zug", "火車"], ["die", "Verspätung", "延誤"], ["das", "Gleis", "月台"], ["der", "Vorschlag", "建議"], ["die", "Einladung", "邀請"], ["das", "Zimmer", "房間"], ["der", "Vormittag", "上午"], ["die", "Rechnung", "帳單"], ["das", "Restaurant", "餐廳"], ["der", "Plan", "計畫"], ["die", "Aufgabe", "任務"], ["das", "Projekt", "專案"], ["der", "Unterricht", "課程"], ["die", "Schule", "學校"], ["das", "Büro", "辦公室"], ["der", "Antrag", "申請"], ["die", "Behörde", "機關"], ["das", "Dokument", "文件"], ["der", "Bus", "公車"], ["die", "Verbindung", "交通連線"], ["das", "Fahrrad", "腳踏車"], ["der", "Weg", "路"], ["die", "Unterkunft", "住宿"], ["das", "Hotel", "飯店"], ["der", "Schlüssel", "鑰匙"], ["die", "Miete", "租金"], ["das", "Gespräch", "談話"], ["der", "Kollege", "同事"], ["die", "Kollegin", "女同事"], ["das", "Problem", "問題"], ["der", "Grund", "原因"], ["die", "Lösung", "解法"], ["das", "Beispiel", "例子"], ["der", "Vergleich", "比較"], ["die", "Empfehlung", "推薦"], ["das", "Ergebnis", "結果"], ["der", "Text", "文章"], ["die", "E-Mail", "電子郵件"], ["das", "Thema", "主題"], ["der", "Satz", "句子"], ["die", "Antwort", "回答"]],
+    verbs: [["verschieben", "改期"], ["vereinbaren", "約定"], ["ankommen", "抵達"], ["abfahren", "出發"], ["ausfüllen", "填寫"], ["unterschreiben", "簽名"], ["reservieren", "預訂"], ["stornieren", "取消"], ["vorbereiten", "準備"], ["teilnehmen", "參加"]],
+    contexts: [["per E-Mail", "用電子郵件"], ["am Telefon", "在電話中"], ["im Büro", "在辦公室"], ["online", "線上"], ["morgen früh", "明天早上"], ["nächste Woche", "下週"], ["mit dem Formular", "用表格"], ["für den Kurs", "為課程"], ["im Alltag", "在日常中"], ["höflich", "有禮貌地"]],
+  },
+  B1: {
+    adjectives: [["formelle", "正式的"], ["höfliche", "禮貌的"], ["klare", "清楚的"], ["konkrete", "具體的"], ["wichtige", "重要的"], ["dringende", "緊急的"], ["sinnvolle", "合理的"], ["mögliche", "可能的"], ["persönliche", "個人的"], ["berufliche", "職業的"], ["schriftliche", "書面的"], ["mündliche", "口頭的"], ["kritische", "批判的"], ["positive", "正面的"], ["negative", "負面的"], ["zuverlässige", "可靠的"], ["faire", "公平的"], ["soziale", "社會的"], ["öffentliche", "公共的"], ["private", "私人的"], ["gemeinsame", "共同的"], ["digitale", "數位的"], ["aktuelle", "目前的"], ["praktische", "實用的"], ["realistische", "實際的"]],
+    nouns: [["der", "Grund", "理由"], ["die", "Meinung", "意見"], ["das", "Argument", "論點"], ["der", "Vorteil", "優點"], ["die", "Beschwerde", "投訴"], ["das", "Problem", "問題"], ["der", "Vorschlag", "建議"], ["die", "Lösung", "解決方法"], ["das", "Beispiel", "例子"], ["der", "Termin", "預約"], ["die", "Bewerbung", "求職申請"], ["das", "Gespräch", "談話"], ["der", "Lebenslauf", "履歷"], ["die", "Erfahrung", "經驗"], ["das", "Praktikum", "實習"], ["der", "Arbeitsplatz", "工作地點"], ["die", "Versicherung", "保險"], ["das", "Dokument", "文件"], ["der", "Bericht", "報告"], ["die", "Nachricht", "訊息"], ["das", "Projekt", "專案"], ["der", "Kontakt", "聯絡"], ["die", "Diskussion", "討論"], ["das", "Ergebnis", "結果"], ["der", "Unterricht", "課程"], ["die", "Strategie", "策略"], ["das", "Ziel", "目標"], ["der", "Fehler", "錯誤"], ["die", "Quelle", "來源"], ["das", "Medium", "媒體"], ["der", "Verkehr", "交通"], ["die", "Umwelt", "環境"], ["das", "Fahrzeug", "交通工具"], ["der", "Radweg", "自行車道"], ["die", "Anmeldung", "報名"], ["das", "Formular", "表格"], ["der", "Prozess", "流程"], ["die", "Bitte", "請求"], ["das", "Anliegen", "需求"], ["der", "Abschnitt", "段落"], ["die", "Struktur", "結構"], ["das", "Fazit", "結論"], ["der", "Nachteil", "缺點"], ["die", "Ursache", "原因"], ["das", "Ereignis", "事件"], ["der", "Kurs", "課程"], ["die", "Hausaufgabe", "作業"], ["das", "Feedback", "回饋"], ["der", "Plan", "計畫"], ["die", "Entscheidung", "決定"]],
+    verbs: [["begründen", "說明理由"], ["vorschlagen", "建議"], ["beschreiben", "描述"], ["erklären", "解釋"], ["vergleichen", "比較"], ["zusammenfassen", "總結"], ["beantragen", "申請"], ["bestätigen", "確認"], ["korrigieren", "修正"], ["diskutieren", "討論"]],
+    contexts: [["mit einem Beispiel", "用例子"], ["in einer E-Mail", "在電子郵件中"], ["im Gespräch", "在談話中"], ["kurz und klar", "簡短清楚地"], ["mit Gründen", "用理由"], ["für die Prüfung", "為考試"], ["im Alltag", "在日常中"], ["am Arbeitsplatz", "在工作地點"], ["in der Gruppe", "在小組中"], ["schriftlich", "以書面"]],
+  },
+  B2: {
+    adjectives: [["abstrakte", "抽象的"], ["differenzierte", "有區分度的"], ["kritische", "批判的"], ["gesellschaftliche", "社會的"], ["politische", "政治的"], ["wirtschaftliche", "經濟的"], ["kulturelle", "文化的"], ["digitale", "數位的"], ["nachhaltige", "永續的"], ["langfristige", "長期的"], ["kurzfristige", "短期的"], ["zentrale", "核心的"], ["relevante", "相關的"], ["komplexe", "複雜的"], ["umstrittene", "有爭議的"], ["überzeugende", "有說服力的"], ["sachliche", "客觀的"], ["präzise", "精確的"], ["transparente", "透明的"], ["faire", "公平的"], ["innovative", "創新的"], ["technische", "技術的"], ["soziale", "社會的"], ["ökologische", "生態的"], ["rechtliche", "法律的"]],
+    nouns: [["der", "Aspekt", "面向"], ["die", "Entwicklung", "發展"], ["das", "Argument", "論點"], ["der", "Datenschutz", "資料保護"], ["die", "Digitalisierung", "數位化"], ["das", "Angebot", "服務"], ["der", "Konsum", "消費"], ["die", "Nachhaltigkeit", "永續性"], ["das", "Verhalten", "行為"], ["der", "Beruf", "職業"], ["die", "Entscheidung", "決定"], ["das", "Studium", "學業"], ["der", "Wohnraum", "居住空間"], ["die", "Stadtentwicklung", "城市發展"], ["das", "Konzept", "概念"], ["der", "Zugang", "取得管道"], ["die", "Gesundheit", "健康"], ["das", "System", "系統"], ["der", "Beitrag", "貢獻"], ["die", "Teilhabe", "參與"], ["das", "Vorurteil", "偏見"], ["der", "Bericht", "報告"], ["die", "Information", "資訊"], ["das", "Bild", "圖片"], ["der", "Arbeitsmodus", "工作模式"], ["die", "Verantwortung", "責任"], ["das", "Team", "團隊"], ["der", "Fortschritt", "進步"], ["die", "Forschung", "研究"], ["das", "Risiko", "風險"], ["der", "Stil", "風格"], ["die", "Nominalisierung", "名詞化"], ["das", "Fazit", "結論"], ["der", "Einwand", "反對意見"], ["die", "These", "論點"], ["das", "Beispiel", "例子"], ["der", "Rahmen", "框架"], ["die", "Bedingung", "條件"], ["das", "Kriterium", "標準"], ["der", "Zusammenhang", "關聯"], ["die", "Maßnahme", "措施"], ["das", "Modell", "模式"], ["der", "Nutzen", "效益"], ["die", "Grenze", "限制"], ["das", "Potenzial", "潛力"], ["der", "Konflikt", "衝突"], ["die", "Perspektive", "觀點"], ["das", "Problem", "問題"], ["der", "Prozess", "過程"], ["die", "Lösung", "解法"]],
+    verbs: [["analysieren", "分析"], ["bewerten", "評估"], ["begründen", "說明理由"], ["vergleichen", "比較"], ["hervorheben", "強調"], ["berücksichtigen", "考慮"], ["gewährleisten", "保障"], ["kritisieren", "批評"], ["relativieren", "相對化"], ["schlussfolgern", "推論"]],
+    contexts: [["differenziert", "有區分地"], ["mit Beispielen", "用例子"], ["im Kommentar", "在評論中"], ["in der Diskussion", "在討論中"], ["unter Bedingungen", "在條件下"], ["langfristig", "長期地"], ["sachlich", "客觀地"], ["aus mehreren Perspektiven", "從多角度"], ["mit Einschränkungen", "帶有限制地"], ["überzeugend", "有說服力地"]],
+  },
+};
+
 function groupVocabularyByLevel() {
-  return vocabularyRows.reduce((groups, row, index) => {
+  return getExpandedVocabularyRows().reduce((groups, row, index) => {
     const level = row.level || inferVocabularyLevel(row, index);
     groups[level].push(row);
     return groups;
   }, { A1: [], A2: [], B1: [], B2: [] });
+}
+
+function getExpandedVocabularyRows() {
+  const groups = vocabularyRows.reduce((result, row, index) => {
+    const level = row.level || inferVocabularyLevel(row, index);
+    result[level].push({ ...row, level });
+    return result;
+  }, { A1: [], A2: [], B1: [], B2: [] });
+
+  levelOrder.forEach((level) => {
+    const seen = new Set(groups[level].map((row) => row.german));
+    const generated = generateLevelVocabulary(level, seen, 1000 - groups[level].length);
+    groups[level].push(...generated);
+  });
+
+  return levelOrder.flatMap((level) => groups[level]);
+}
+
+function generateLevelVocabulary(level, seen, needed) {
+  if (needed <= 0) return [];
+  const data = generatedVocabularyData[level];
+  const rows = [];
+
+  data.nouns.forEach(([article, noun, nounZh]) => {
+    data.adjectives.forEach(([adjective, adjectiveZh]) => {
+      if (rows.length >= needed) return;
+      const german = `${article} ${adjective} ${noun}`;
+      if (seen.has(german)) return;
+      rows.push({ level, type: "名詞", german, chinese: `${adjectiveZh}${nounZh}` });
+      seen.add(german);
+    });
+  });
+
+  data.verbs.forEach(([verb, verbZh]) => {
+    data.contexts.forEach(([context, contextZh]) => {
+      if (rows.length >= needed) return;
+      const german = `${verb} ${context}`;
+      if (seen.has(german)) return;
+      rows.push({ level, type: "動詞", german, chinese: `${contextZh}${verbZh}` });
+      seen.add(german);
+    });
+  });
+
+  return rows;
 }
 
 function inferVocabularyLevel(row, index) {
@@ -3688,7 +3769,7 @@ resetProgressButton.addEventListener("click", () => {
   renderDashboard();
 });
 downloadVocabButton.addEventListener("click", () => {
-  downloadCsv("deutsch-vokabeln.csv", formatVocabularyRows(vocabularyRows), [
+  downloadCsv("deutsch-vokabeln.csv", formatVocabularyRows(getExpandedVocabularyRows()), [
     { key: "german", label: "德文" },
     { key: "partOfSpeech", label: "詞性" },
     { key: "chinese", label: "中文" },
@@ -3733,6 +3814,12 @@ downloadGrammarButton.addEventListener("click", () => {
 });
 resourcePageTabs.forEach((tab) => {
   tab.addEventListener("click", () => showResourcePage(tab.dataset.resourcePage));
+});
+vocabLevelTabsEl?.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-vocab-level]");
+  if (!button) return;
+  activeVocabLevel = button.dataset.vocabLevel;
+  renderResourceTables();
 });
 
 initializeLessons();
