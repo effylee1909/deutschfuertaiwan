@@ -2178,24 +2178,8 @@ function generateLevelVocabulary(level, seen, needed) {
     addGeneratedVocabularyRow(rows, seen, { level, type: "形容詞", german: normalizeAdjectiveLemma(adjective), chinese: adjectiveZh });
   });
 
-  const prefixes = generatedCompoundPrefixes[level] || [];
-  prefixes.forEach(([prefix, prefixZh]) => {
-    data.nouns.forEach(([article, noun, nounZh]) => {
-      if (rows.length >= needed) return;
-      addGeneratedVocabularyRow(rows, seen, {
-        level,
-        type: "名詞",
-        german: `${article} ${buildCompoundWord(prefix, noun)}`,
-        chinese: `${prefixZh}${nounZh}`,
-      });
-    });
-  });
-
-  data.verbs.forEach(([verb, verbZh]) => {
-    generatedVerbPrefixes[level].forEach(([prefix, prefixZh]) => {
-      if (rows.length >= needed) return;
-      addGeneratedVocabularyRow(rows, seen, { level, type: "動詞", german: `${prefix}${verb}`, chinese: `${prefixZh}${verbZh}` });
-    });
+  data.contexts.forEach(([context, contextZh]) => {
+    addGeneratedVocabularyRow(rows, seen, { level, type: "片語", german: context, chinese: contextZh });
   });
 
   return rows;
@@ -2210,24 +2194,6 @@ function addGeneratedVocabularyRow(rows, seen, row) {
 function normalizeAdjectiveLemma(adjective) {
   return adjective.replace(/e$/, "").replace("groß", "groß");
 }
-
-function buildCompoundWord(prefix, noun) {
-  return `${prefix}${noun.charAt(0).toLowerCase()}${noun.slice(1)}`;
-}
-
-const generatedCompoundPrefixes = {
-  A1: [["Schul", "學校"], ["Haus", "家庭"], ["Kinder", "兒童"], ["Familien", "家庭"], ["Küchen", "廚房"], ["Wohn", "居住"], ["Tages", "日常"], ["Stadt", "城市"], ["Bus", "公車"], ["Bahn", "鐵路"], ["Kaffee", "咖啡"], ["Brot", "麵包"], ["Wetter", "天氣"], ["Sport", "運動"], ["Deutsch", "德文"], ["Lern", "學習"], ["Reise", "旅行"], ["Kurs", "課程"], ["Sommer", "夏天"], ["Winter", "冬天"]],
-  A2: [["Termin", "預約"], ["Wohnungs", "住屋"], ["Reise", "旅行"], ["Hotel", "飯店"], ["Büro", "辦公室"], ["Arbeits", "工作"], ["Kurs", "課程"], ["Projekt", "專案"], ["Formular", "表格"], ["Verkehrs", "交通"], ["Ticket", "票務"], ["Arzt", "醫療"], ["Miet", "租屋"], ["E-Mail", "電子郵件"], ["Telefon", "電話"], ["Behörden", "機關"], ["Wochen", "週"], ["Tages", "日常"], ["Planungs", "規劃"], ["Service", "服務"]],
-  B1: [["Bewerbungs", "求職"], ["Beschwerde", "投訴"], ["Arbeits", "工作"], ["Kommunikations", "溝通"], ["Versicherungs", "保險"], ["Projekt", "專案"], ["Umwelt", "環境"], ["Verkehrs", "交通"], ["Lern", "學習"], ["Medien", "媒體"], ["Diskussions", "討論"], ["Beratungs", "諮詢"], ["Problem", "問題"], ["Lösungs", "解決"], ["Erfahrungs", "經驗"], ["Prüfungs", "考試"], ["Informations", "資訊"], ["Gruppen", "小組"], ["Alltags", "日常"], ["Entscheidungs", "決定"]],
-  B2: [["Datenschutz", "資料保護"], ["Digitalisierungs", "數位化"], ["Nachhaltigkeits", "永續"], ["Gesellschafts", "社會"], ["Wirtschafts", "經濟"], ["Bildungs", "教育"], ["Stadtentwicklungs", "城市發展"], ["Gesundheits", "健康"], ["Migrations", "移民"], ["Medien", "媒體"], ["Forschungs", "研究"], ["Innovations", "創新"], ["Argumentations", "論述"], ["Analyse", "分析"], ["Strategie", "策略"], ["Risiko", "風險"], ["Rahmen", "框架"], ["Teilnahme", "參與"], ["Verantwortungs", "責任"], ["Perspektiven", "觀點"]],
-};
-
-const generatedVerbPrefixes = {
-  A1: [["an", ""], ["auf", ""], ["mit", ""], ["ein", ""], ["aus", ""]],
-  A2: [["um", "改"], ["an", ""], ["ab", ""], ["vor", "預先"], ["aus", ""]],
-  B1: [["be", ""], ["er", ""], ["ver", ""], ["mit", "一起"], ["zusammen", "共同"]],
-  B2: [["be", ""], ["er", ""], ["ver", ""], ["über", "深入"], ["weiter", "進一步"]],
-};
 
 function inferVocabularyLevel(row, index) {
   const a1Words = new Set([
