@@ -2452,7 +2452,7 @@ function expandSyllabusLessons() {
 function createTextbookContent(level, lessonNumber, topicData) {
   const normalizedTopic = normalizeTopicData(topicData);
   const vocab = createLessonVocabulary(level, lessonNumber, normalizedTopic);
-  const grammar = createLessonGrammar(level, lessonNumber);
+  const grammar = createLessonGrammar(level, lessonNumber, normalizedTopic);
   return {
     title: `${level} L${lessonNumber}: ${normalizedTopic.zh} · ${normalizedTopic.de}`,
     text: createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
@@ -2462,10 +2462,87 @@ function createTextbookContent(level, lessonNumber, topicData) {
   };
 }
 
-function createLessonGrammar(level, lessonNumber) {
-  return rotateArray(syllabusGrammar[level], lessonNumber - 1)
-    .slice(0, getGrammarCount(level))
-    .map(([title, body, example], index) => [`L${lessonNumber}.${index + 1} ${title}`, body, example]);
+function createLessonGrammar(level, lessonNumber, topicData) {
+  const count = getGrammarCount(level);
+  const levelRows = grammarOverviewRows.filter((row) => row.level === level);
+
+  return Array.from({ length: count }, (_, index) => {
+    const serial = (lessonNumber - 1) * count + index;
+    const row = levelRows[serial % levelRows.length];
+    const scope = grammarScopes[serial % grammarScopes.length];
+    const topic = topicData.de;
+    const title = `${row.topic} ${scope}`;
+    const body = `${row.usage} 本課放在「${topic}」情境中練習，重點是能在課文、單字與口說任務中正確使用。`;
+    const example = buildContextGrammarExample(row.topic, topic, serial);
+
+    return [`L${lessonNumber}.${index + 1} ${title}`, body, example];
+  });
+}
+
+const grammarScopes = [
+  "im Dialog",
+  "in kurzen Fragen",
+  "im Alltagstext",
+  "bei Informationen",
+  "in höflichen Sätzen",
+  "bei Terminen",
+  "in E-Mails",
+  "beim Vergleichen",
+  "in Begründungen",
+  "in Erzählungen",
+  "bei offiziellen Texten",
+  "in Prüfungssituationen",
+  "mit Wortschatz",
+  "bei Redemitteln",
+  "in Zusammenfassungen",
+  "in Meinungen",
+];
+
+function buildContextGrammarExample(topicName, topic, serial) {
+  const examples = {
+    Artikel: `Der Ausdruck zum Thema ${topic} steht im Text.`,
+    Nominativ: `${topic} ist heute das Thema der Lektion.`,
+    Akkusativ: `Anna übt einen Satz zum Thema ${topic}.`,
+    "Verbposition 2": `Heute lernt Ben ${topic}.`,
+    "W-Fragen": `Was bedeutet ${topic} im Alltag?`,
+    "sein / haben": `Mia hat eine Frage zu ${topic}.`,
+    Modalverben: `Tom möchte mehr über ${topic} sprechen.`,
+    Plural: `Die neuen Wörter zu ${topic} stehen im Heft.`,
+    Personalpronomen: `Sie liest den Text zu ${topic}.`,
+    Possessivartikel: `Mein Beispiel passt zum Thema ${topic}.`,
+    Negation: `Das Beispiel ist nicht schwer.`,
+    Imperativ: `Lesen Sie den Text zu ${topic}.`,
+    Perfekt: `Emma hat gestern ${topic} geübt.`,
+    Dativ: `David spricht mit der Lehrerin über ${topic}.`,
+    Wechselpräpositionen: `Die Notizen liegen auf dem Tisch.`,
+    Nebensatz: `Sara lernt weiter, weil ${topic} wichtig ist.`,
+    "trennbare Verben": `Ben schreibt die Aufgabe zu Hause auf.`,
+    Komparativ: `Diese Aufgabe ist klarer als die letzte.`,
+    "Reflexive Verben": `Julia interessiert sich für ${topic}.`,
+    Adjektivdeklination: `Anna schreibt einen kurzen Text über ${topic}.`,
+    "zu + Infinitiv": `Es ist hilfreich, die Beispiele laut zu lesen.`,
+    "Futur mit werden": `Mia wird morgen weiterüben.`,
+    "Konjunktiv II": `Könnten Sie den Satz bitte erklären?`,
+    Passiv: `Der Text wird im Kurs besprochen.`,
+    Konnektoren: `Das Thema ist wichtig, deshalb üben wir es.`,
+    "indirekte Frage": `Ich möchte wissen, warum ${topic} wichtig ist.`,
+    Relativsatz: `Das ist ein Thema, das oft geprüft wird.`,
+    Präteritum: `Früher übte Ben jeden Tag zehn Minuten.`,
+    Genitiv: `Die Struktur des Textes ist klar.`,
+    Temporalsätze: `Bevor Anna antwortet, liest sie die Aufgabe.`,
+    Plusquamperfekt: `Sie hatte den Text gelesen, bevor sie antwortete.`,
+    Nominalisierung: `Die Bearbeitung des Themas ${topic} braucht Struktur.`,
+    "zweiteilige Konnektoren": `Einerseits ist ${topic} praktisch, andererseits gibt es Fragen.`,
+    Passiversatz: `Das Problem lässt sich mit Beispielen erklären.`,
+    Argumentstruktur: `Insgesamt ist das Thema relevant, weil es im Alltag vorkommt.`,
+    Partizipialattribute: `Die besprochenen Beispiele helfen beim Schreiben.`,
+    "Subjektiver Konjunktiv": `Der Text sagt, das Thema sei wichtig.`,
+    "Kausale und konzessive Strukturen": `Trotz kleiner Fehler ist die Antwort verständlich.`,
+    Infinitivkonstruktionen: `Anna übt, um sicherer zu sprechen.`,
+    "Präpositionale Nomen-Verb-Verbindungen": `Ben nimmt an der Diskussion teil.`,
+  };
+
+  return examples[topicName] || `Beispiel ${serial + 1}: ${topic} wird im Satz geübt.`;
 }
 
 function createLessonVocabulary(level, lessonNumber, topicData) {
