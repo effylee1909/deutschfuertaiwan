@@ -2166,17 +2166,17 @@ function formatVocabularyRow(row) {
 
 function getPartOfSpeechAbbreviation(type) {
   const abbreviations = {
-    名詞: "N.",
-    動詞: "V.",
-    形容詞: "Adj.",
-    片語: "Redem.",
-    代詞: "Pron.",
-    冠詞: "Art.",
-    介系詞: "Präp.",
-    連接詞: "Konj.",
-    副詞: "Adv.",
-    常用詞: "Sonst.",
-    "副詞/連接詞": "Adv./Konj.",
+    名詞: "n",
+    動詞: "v",
+    形容詞: "adj",
+    片語: "phr",
+    代詞: "pron",
+    冠詞: "art",
+    介系詞: "prep",
+    連接詞: "konj",
+    副詞: "adv",
+    常用詞: "x",
+    "副詞/連接詞": "adv/konj",
   };
 
   return abbreviations[type] || type;
