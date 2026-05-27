@@ -3120,6 +3120,105 @@ const b1LessonDetails = [
   "Bei der Generalprobe merkt jede Person, welcher Prüfungsteil noch schwerfällt. Danach wird gezielt wiederholt, statt alles gleichzeitig zu lernen.",
 ];
 
+const b2LessonPlans = [
+  {
+    titleZh: "公民論壇",
+    titleDe: "Ein Abend im Bürgerforum",
+    focusZh: "立場、比較與討論",
+    text: "In einem Bürgerforum diskutieren Clara, Felix und mehrere Einwohner über die Zukunft ihres Stadtteils. Zunächst stellt die Moderatorin zwei gegensätzliche Positionen vor: mehr Parkplätze oder mehr öffentliche Grünflächen. Clara argumentiert, dass Grünflächen langfristig die Lebensqualität erhöhen, während Felix auf die Bedürfnisse kleiner Geschäfte hinweist. Im Laufe der Debatte werden Kosten, Nutzen und mögliche Kompromisse verglichen. Besonders kontrovers ist die Frage, ob kurzfristige wirtschaftliche Interessen schwerer wiegen als ökologische Ziele. Am Ende formuliert die Gruppe keine einfache Lösung, sondern eine Empfehlung mit mehreren Bedingungen.",
+    vocab: [["das Bürgerforum", "公民論壇", "die Bürgerforen"], ["der Stadtteil", "城市區域", "die Stadtteile"], ["die Position", "立場", "die Positionen"], ["die Grünfläche", "綠地", "die Grünflächen"], ["die Lebensqualität", "生活品質", "-"], ["das Bedürfnis", "需求", "die Bedürfnisse"], ["der Nutzen", "效益", "-"], ["der Kompromiss", "妥協", "die Kompromisse"], ["die Debatte", "辯論", "die Debatten"], ["das Interesse", "利益", "die Interessen"], ["kontrovers", "有爭議的", ""], ["langfristig", "長期的", ""], ["wirtschaftlich", "經濟的", ""], ["ökologisch", "生態的", ""], ["hinweisen", "指出", ""], ["überwiegen", "佔優勢", ""]],
+    extraVocab: [["gegenseitig", "相互的", ""], ["zunächst", "首先", ""], ["im Laufe", "在……過程中", ""], ["eine Empfehlung formulieren", "提出建議", ""], ["schwerer wiegen", "更具分量", ""], ["die Bedingung", "條件", "die Bedingungen"], ["der Einwand", "異議", "die Einwände"], ["die Perspektive", "觀點", "die Perspektiven"]],
+  },
+  {
+    titleZh: "資料外洩後",
+    titleDe: "Nach dem Datenleck",
+    focusZh: "數位化與資料保護",
+    text: "Nach einem Datenleck an einer privaten Sprachlernplattform sind viele Nutzer verunsichert. Die Geschäftsleitung veröffentlicht eine Stellungnahme und verspricht, die Sicherheitsmaßnahmen zu verschärfen. In der Klasse analysieren die Lernenden, welche Verantwortung Unternehmen gegenüber ihren Kundinnen und Kunden tragen. Einige betonen den Komfort digitaler Dienste, andere kritisieren die undurchsichtige Sammlung persönlicher Informationen. Die Lehrerin fordert die Gruppe auf, zwischen Bequemlichkeit, Transparenz und Kontrolle abzuwägen. Daraus entsteht eine Diskussion über digitale Selbstbestimmung und gesetzliche Regulierung.",
+    vocab: [["das Datenleck", "資料外洩", "die Datenlecks"], ["die Sprachlernplattform", "語言學習平台", "die Sprachlernplattformen"], ["die Geschäftsleitung", "經營層", "die Geschäftsleitungen"], ["die Stellungnahme", "聲明", "die Stellungnahmen"], ["die Sicherheitsmaßnahme", "安全措施", "die Sicherheitsmaßnahmen"], ["die Verantwortung", "責任", "die Verantwortungen"], ["der Dienst", "服務", "die Dienste"], ["die Transparenz", "透明度", "-"], ["die Selbstbestimmung", "自主決定", "-"], ["die Regulierung", "監管", "die Regulierungen"], ["verunsichern", "使不安", ""], ["veröffentlichen", "公開發布", ""], ["verschärfen", "加強", ""], ["analysieren", "分析", ""], ["abwägen", "權衡", ""], ["kritisieren", "批評", ""]],
+    extraVocab: [["undurchsichtig", "不透明的", ""], ["persönlich", "個人的", ""], ["gesetzlich", "法律上的", ""], ["der Komfort", "便利性", "-"], ["die Kontrolle", "控制", "die Kontrollen"], ["der Zugriff", "存取", "die Zugriffe"], ["die Verschlüsselung", "加密", "die Verschlüsselungen"], ["die Einwilligung", "同意", "die Einwilligungen"]],
+  },
+  {
+    titleZh: "無塑膠的一週後",
+    titleDe: "Bilanz nach einer plastikarmen Woche",
+    focusZh: "永續生活與消費",
+    text: "Eine Klasse wertet ein Projekt zu nachhaltigem Konsum aus. Eine Woche lang haben die Lernenden versucht, Verpackungen zu vermeiden und regionale Produkte zu kaufen. Dabei zeigt sich, dass umweltbewusstes Verhalten nicht nur vom persönlichen Willen abhängt, sondern auch von Preisen, Angeboten und Gewohnheiten. Besonders schwierig war es, schnelle Mahlzeiten ohne Einwegverpackung zu finden. Trotzdem berichten mehrere Teilnehmende, dass sie bewusster einkaufen und Werbung kritischer wahrnehmen. Die Auswertung endet mit der Frage, welche Verantwortung Verbraucher, Handel und Politik jeweils übernehmen sollten.",
+    vocab: [["die Bilanz", "總結；盤點", "die Bilanzen"], ["der Konsum", "消費", "-"], ["die Verpackung", "包裝", "die Verpackungen"], ["das Produkt", "產品", "die Produkte"], ["das Verhalten", "行為", "-"], ["der Wille", "意願", "-"], ["die Gewohnheit", "習慣", "die Gewohnheiten"], ["die Mahlzeit", "餐點", "die Mahlzeiten"], ["die Einwegverpackung", "一次性包裝", "die Einwegverpackungen"], ["die Auswertung", "評估", "die Auswertungen"], ["nachhaltig", "永續的", ""], ["regional", "在地的", ""], ["umweltbewusst", "環保意識的", ""], ["bewusst", "有意識的", ""], ["vermeiden", "避免", ""], ["wahrnehmen", "察覺", ""]],
+    extraVocab: [["der Verbraucher", "消費者", "die Verbraucher"], ["der Handel", "商業；零售業", "-"], ["jeweils", "各自", ""], ["abhängen von", "取決於", ""], ["auswerten", "評估", ""], ["plastikarm", "低塑膠的", ""], ["die Ressource", "資源", "die Ressourcen"], ["die Lieferkette", "供應鏈", "die Lieferketten"]],
+  },
+  {
+    titleZh: "職涯十字路口",
+    titleDe: "Zwischen Studium und Ausbildung",
+    focusZh: "教育與職涯選擇",
+    text: "Nach dem Schulabschluss steht Nora vor einer schwierigen Entscheidung. Ihre Eltern empfehlen ein Universitätsstudium, weil es langfristig bessere Aufstiegschancen bieten könne. Nora interessiert sich jedoch für eine duale Ausbildung, da sie praktische Erfahrung sammeln und früher finanziell unabhängig werden möchte. In einem Beratungsgespräch vergleicht sie Voraussetzungen, Belastungen und Perspektiven beider Wege. Der Berater rät ihr, nicht nur Prestige, sondern auch persönliche Stärken und Arbeitsmarktentwicklungen zu berücksichtigen. Nora erkennt, dass eine fundierte Entscheidung Zeit und ehrliche Selbstreflexion braucht.",
+    vocab: [["der Schulabschluss", "畢業資格", "die Schulabschlüsse"], ["das Universitätsstudium", "大學學業", "die Universitätsstudien"], ["die Ausbildung", "職業培訓", "die Ausbildungen"], ["die Aufstiegschance", "升遷機會", "die Aufstiegschancen"], ["die Erfahrung", "經驗", "die Erfahrungen"], ["das Beratungsgespräch", "諮詢談話", "die Beratungsgespräche"], ["die Voraussetzung", "條件", "die Voraussetzungen"], ["die Belastung", "負擔", "die Belastungen"], ["das Prestige", "聲望", "-"], ["die Selbstreflexion", "自我反思", "-"], ["dual", "雙軌的", ""], ["finanziell", "財務上的", ""], ["unabhängig", "獨立的", ""], ["fundiert", "有根據的", ""], ["berücksichtigen", "考量", ""], ["sich interessieren für", "對……感興趣", ""]],
+    extraVocab: [["der Arbeitsmarkt", "就業市場", "die Arbeitsmärkte"], ["die Entwicklung", "發展", "die Entwicklungen"], ["die Stärke", "強項", "die Stärken"], ["der Berater", "顧問", "die Berater"], ["raten", "建議", ""], ["sammeln", "累積", ""], ["gegenüberstellen", "對照", ""], ["die Laufbahn", "職涯路徑", "die Laufbahnen"]],
+  },
+  {
+    titleZh: "租金上漲的街區",
+    titleDe: "Wenn Mieten den Stadtteil verändern",
+    focusZh: "城市發展與居住",
+    text: "In einem beliebten Viertel steigen die Mieten seit Jahren. Alte Geschäfte schließen, neue Cafés eröffnen, und viele Familien können sich ihre Wohnungen kaum noch leisten. Eine Stadtplanerin erklärt in einem Interview, dass Aufwertung und Verdrängung oft gleichzeitig stattfinden. Einige Bewohner begrüßen die Renovierung verfallener Häuser, andere fürchten den Verlust sozialer Vielfalt. Im Kurs analysieren die Lernenden, welche Maßnahmen bezahlbaren Wohnraum schützen könnten. Sie diskutieren Mietbegrenzungen, genossenschaftliche Modelle und die Rolle öffentlicher Flächen.",
+    vocab: [["die Miete", "房租", "die Mieten"], ["das Viertel", "街區", "die Viertel"], ["die Stadtplanerin", "都市規劃師", "die Stadtplanerinnen"], ["die Aufwertung", "升級；價值提升", "die Aufwertungen"], ["die Verdrängung", "排擠", "die Verdrängungen"], ["die Renovierung", "翻修", "die Renovierungen"], ["der Verlust", "喪失", "die Verluste"], ["die Vielfalt", "多樣性", "-"], ["die Maßnahme", "措施", "die Maßnahmen"], ["die Mietbegrenzung", "租金限制", "die Mietbegrenzungen"], ["beliebt", "受歡迎的", ""], ["bezahlbar", "可負擔的", ""], ["verfallen", "破敗的", ""], ["genossenschaftlich", "合作社式的", ""], ["schützen", "保護", ""], ["stattfinden", "發生", ""]],
+    extraVocab: [["der Wohnraum", "居住空間", "-"], ["die Fläche", "面積；空間", "die Flächen"], ["eröffnen", "開幕", ""], ["schließen", "歇業；關閉", ""], ["sich leisten können", "負擔得起", ""], ["fürchten", "擔心", ""], ["gleichzeitig", "同時", ""], ["die Gentrifizierung", "仕紳化", "-"]],
+  },
+  {
+    titleZh: "四天工作制",
+    titleDe: "Gesünder arbeiten?",
+    focusZh: "健康政策與生活品質",
+    text: "Ein Unternehmen testet sechs Monate lang die Vier-Tage-Woche. Die Mitarbeitenden berichten von weniger Stress, mehr Schlaf und einer besseren Vereinbarkeit von Beruf und Familie. Gleichzeitig befürchtet die Leitung, dass bestimmte Aufgaben liegen bleiben oder Kundinnen länger warten müssen. Eine Arbeitspsychologin erklärt, dass Arbeitszeitverkürzung nur dann sinnvoll sei, wenn Prozesse neu organisiert würden. Im Kurs vergleichen die Lernenden individuelle Vorteile mit betrieblichen Risiken. Die Diskussion zeigt, dass Gesundheitspolitik nicht nur Krankenhäuser betrifft, sondern auch Arbeitsbedingungen.",
+    vocab: [["die Vier-Tage-Woche", "四天工作制", "die Vier-Tage-Wochen"], ["der Mitarbeitende", "員工", "die Mitarbeitenden"], ["die Vereinbarkeit", "兼顧性", "-"], ["die Leitung", "管理層", "die Leitungen"], ["die Arbeitspsychologin", "職場心理學家", "die Arbeitspsychologinnen"], ["die Arbeitszeitverkürzung", "工時縮短", "die Arbeitszeitverkürzungen"], ["der Prozess", "流程", "die Prozesse"], ["das Risiko", "風險", "die Risiken"], ["die Gesundheitspolitik", "健康政策", "-"], ["die Arbeitsbedingung", "工作條件", "die Arbeitsbedingungen"], ["betrieblich", "企業內部的", ""], ["sinnvoll", "有意義的", ""], ["individuell", "個人的", ""], ["befürchten", "擔心", ""], ["betreffen", "涉及", ""], ["organisieren", "組織安排", ""]],
+    extraVocab: [["liegen bleiben", "被擱置", ""], ["der Kunde", "顧客", "die Kunden"], ["sechs Monate lang", "長達六個月", ""], ["berichten von", "報告；敘述", ""], ["der Stress", "壓力", "-"], ["der Schlaf", "睡眠", "-"], ["die Produktivität", "生產力", "-"], ["die Prävention", "預防", "-"]],
+  },
+  {
+    titleZh: "社區節前的對話",
+    titleDe: "Vor dem Nachbarschaftsfest",
+    focusZh: "移民、文化與社會參與",
+    text: "Vor einem Nachbarschaftsfest treffen sich Menschen aus verschiedenen Vereinen, um das Programm gemeinsam zu planen. Aylin schlägt vor, nicht nur Essen und Musik zu präsentieren, sondern auch kurze Gespräche über Erfahrungen mit Ankommen und Zugehörigkeit anzubieten. Einige Teilnehmende befürchten, dass politische Themen die Stimmung belasten könnten. Andere halten gerade solche Gespräche für notwendig, weil Teilhabe mehr bedeutet als freundliche Unterhaltung. Schließlich entsteht ein Konzept, das kulturelle Beiträge mit moderierten Gesprächsrunden verbindet.",
+    vocab: [["das Nachbarschaftsfest", "鄰里節", "die Nachbarschaftsfeste"], ["der Verein", "協會", "die Vereine"], ["die Zugehörigkeit", "歸屬感", "-"], ["die Teilhabe", "參與", "-"], ["die Unterhaltung", "娛樂；交談", "die Unterhaltungen"], ["das Konzept", "概念；企劃", "die Konzepte"], ["der Beitrag", "貢獻；節目", "die Beiträge"], ["die Gesprächsrunde", "座談", "die Gesprächsrunden"], ["das Ankommen", "抵達；融入", "-"], ["die Stimmung", "氣氛", "die Stimmungen"], ["kulturell", "文化的", ""], ["moderiert", "主持的", ""], ["notwendig", "必要的", ""], ["belasten", "造成負擔", ""], ["verbinden", "連結", ""], ["anbieten", "提供", ""]],
+    extraVocab: [["die Migration", "移民", "-"], ["die Integration", "融入", "-"], ["die Teilnahme", "參加", "die Teilnahmen"], ["das Ehrenamt", "志工服務", "die Ehrenämter"], ["vorschlagen", "提議", ""], ["gemeinsam", "共同地", ""], ["freundlich", "友善的", ""], ["politisch", "政治性的", ""]],
+  },
+  {
+    titleZh: "真假訊息工作坊",
+    titleDe: "Workshop gegen Falschinformationen",
+    focusZh: "媒體素養與假訊息",
+    text: "In einem Workshop prüfen Jugendliche verschiedene Meldungen aus sozialen Netzwerken. Eine besonders emotionale Nachricht verbreitet sich schnell, obwohl die Quelle unklar ist. Der Referent zeigt, wie man Überschriften, Bilder und angebliche Zahlen kritisch untersucht. Die Gruppe lernt, zwischen Meinung, Werbung und überprüfbarer Information zu unterscheiden. Außerdem diskutiert sie, warum Menschen Falschinformationen teilen, selbst wenn sie Zweifel haben. Am Ende erstellen die Jugendlichen eine Checkliste für verantwortungsbewusstes Weiterleiten.",
+    vocab: [["der Workshop", "工作坊", "die Workshops"], ["die Falschinformation", "假訊息", "die Falschinformationen"], ["das Netzwerk", "網路；社群", "die Netzwerke"], ["die Quelle", "來源", "die Quellen"], ["der Referent", "講者", "die Referenten"], ["die Überschrift", "標題", "die Überschriften"], ["die Werbung", "廣告", "die Werbungen"], ["der Zweifel", "懷疑", "die Zweifel"], ["die Checkliste", "檢查清單", "die Checklisten"], ["das Weiterleiten", "轉傳", "-"], ["emotional", "情緒化的", ""], ["angeblich", "據稱的", ""], ["überprüfbar", "可驗證的", ""], ["verantwortungsbewusst", "負責任的", ""], ["untersuchen", "檢查", ""], ["unterscheiden", "區分", ""]],
+    extraVocab: [["die Meldung", "消息", "die Meldungen"], ["sich verbreiten", "傳播", ""], ["unklar", "不清楚的", ""], ["kritisch", "批判性的", ""], ["teilen", "分享", ""], ["erstellen", "製作", ""], ["die Manipulation", "操控", "die Manipulationen"], ["die Glaubwürdigkeit", "可信度", "-"]],
+  },
+  {
+    titleZh: "混合辦公實驗",
+    titleDe: "Hybrides Arbeiten im Team",
+    focusZh: "工作模式與責任",
+    text: "Ein internationales Team arbeitet seit einem Jahr hybrid. Manche Aufgaben gelingen online effizienter, während kreative Entscheidungen im direkten Gespräch leichter fallen. Die Projektleiterin bemerkt jedoch, dass Verantwortlichkeiten manchmal unklar bleiben, wenn Informationen nur in einzelnen Chats auftauchen. Deshalb führt das Team verbindliche Dokumentationsregeln ein. In einer Sitzung diskutieren die Mitarbeitenden, wie Vertrauen, Erreichbarkeit und Selbstorganisation zusammenhängen. Das Ergebnis ist kein starres Kontrollsystem, sondern eine gemeinsame Vereinbarung über transparente Kommunikation.",
+    vocab: [["das Team", "團隊", "die Teams"], ["die Entscheidung", "決定", "die Entscheidungen"], ["die Projektleiterin", "專案主管", "die Projektleiterinnen"], ["die Verantwortlichkeit", "職責", "die Verantwortlichkeiten"], ["die Erreichbarkeit", "可聯繫性", "-"], ["die Selbstorganisation", "自我管理", "-"], ["das Kontrollsystem", "管控制度", "die Kontrollsysteme"], ["die Vereinbarung", "協議", "die Vereinbarungen"], ["die Kommunikation", "溝通", "-"], ["die Sitzung", "會議", "die Sitzungen"], ["hybrid", "混合式的", ""], ["effizient", "有效率的", ""], ["kreativ", "創造性的", ""], ["verbindlich", "具約束力的", ""], ["zusammenhängen", "有關聯", ""], ["auftauchen", "出現", ""]],
+    extraVocab: [["starr", "僵硬的", ""], ["transparent", "透明的", ""], ["online", "線上的", ""], ["direkt", "直接的", ""], ["gelingen", "成功", ""], ["implementieren", "導入；實施", ""], ["die Dokumentation", "文件紀錄", "die Dokumentationen"], ["die Zuständigkeit", "權責", "die Zuständigkeiten"]],
+  },
+  {
+    titleZh: "自動駕駛測試",
+    titleDe: "Autonomes Fahren im Test",
+    focusZh: "科學、科技與風險",
+    text: "Eine Forschungsgruppe testet autonome Busse auf einer kurzen Strecke außerhalb der Innenstadt. Die Technik verspricht weniger Unfälle, stößt aber auf Skepsis, sobald unvorhersehbare Situationen auftreten. In einem Bericht werden Sensoren, Reaktionszeiten und rechtliche Verantwortlichkeiten erläutert. Besonders schwierig ist die Frage, wer haftet, wenn ein automatisches System eine falsche Entscheidung trifft. Die Lernenden diskutieren, ob technische Innovationen erst nach vollständiger Sicherheit eingeführt werden sollten oder ob kontrollierte Experimente notwendig sind.",
+    vocab: [["die Forschungsgruppe", "研究團隊", "die Forschungsgruppen"], ["der Bus", "巴士", "die Busse"], ["die Strecke", "路線", "die Strecken"], ["die Innenstadt", "市中心", "die Innenstädte"], ["die Technik", "技術", "die Techniken"], ["der Unfall", "事故", "die Unfälle"], ["die Skepsis", "懷疑", "-"], ["der Sensor", "感測器", "die Sensoren"], ["die Reaktionszeit", "反應時間", "die Reaktionszeiten"], ["die Innovation", "創新", "die Innovationen"], ["autonom", "自動自主的", ""], ["unvorhersehbar", "不可預見的", ""], ["rechtlich", "法律上的", ""], ["vollständig", "完整的", ""], ["haften", "負法律責任", ""], ["erläutern", "說明", ""]],
+    extraVocab: [["das System", "系統", "die Systeme"], ["das Experiment", "實驗", "die Experimente"], ["kontrolliert", "受控的", ""], ["auftreten", "發生；出現", ""], ["versprechen", "承諾；有望", ""], ["einführen", "引進", ""], ["die Genehmigung", "許可", "die Genehmigungen"], ["die Risikoabwägung", "風險權衡", "die Risikoabwägungen"]],
+  },
+  {
+    titleZh: "正式報告的改寫",
+    titleDe: "Vom Gespräch zur Analyse",
+    focusZh: "抽象名詞與名詞化",
+    text: "Im Schreibkurs sollen die Lernenden ein lockeres Interview in einen formellen Analysebericht umwandeln. Aus dem Satz viele Menschen ziehen weg wird die Abwanderung vieler Einwohner. Die Lehrerin erklärt, dass Nominalisierungen Texte verdichten und wissenschaftlicher wirken lassen können. Gleichzeitig warnt sie davor, zu viele abstrakte Nomen zu verwenden, weil der Text sonst schwer verständlich wird. Die Gruppe überarbeitet gemeinsam einen Absatz und achtet auf Präzision, Lesbarkeit und angemessenen Stil.",
+    vocab: [["der Analysebericht", "分析報告", "die Analyseberichte"], ["die Abwanderung", "人口外流", "-"], ["der Einwohner", "居民", "die Einwohner"], ["die Nominalisierung", "名詞化", "die Nominalisierungen"], ["das Nomen", "名詞", "die Nomen"], ["der Absatz", "段落", "die Absätze"], ["die Präzision", "精確性", "-"], ["die Lesbarkeit", "可讀性", "-"], ["der Stil", "風格", "die Stile"], ["die Wissenschaftlichkeit", "學術性", "-"], ["formell", "正式的", ""], ["abstrakt", "抽象的", ""], ["angemessen", "適當的", ""], ["verdichten", "濃縮", ""], ["umwandeln", "轉換", ""], ["überarbeiten", "修改", ""]],
+    extraVocab: [["locker", "輕鬆的", ""], ["verständlich", "易懂的", ""], ["wirken", "顯得", ""], ["warnen vor", "警告不要", ""], ["verwenden", "使用", ""], ["kooperativ", "合作式的", ""], ["die Fachsprache", "專業語言", "-"], ["die Ausdrucksweise", "表達方式", "die Ausdrucksweisen"]],
+  },
+  {
+    titleZh: "考前論述日",
+    titleDe: "Der letzte Argumentationstag",
+    focusZh: "B2 論述整合任務",
+    text: "Eine Woche vor der B2-Prüfung trainiert die Klasse eine vollständige Argumentationsaufgabe. Zuerst lesen die Lernenden zwei kurze Ausgangstexte mit unterschiedlichen Positionen. Danach markieren sie zentrale Thesen, Beispiele und Einschränkungen. In der Schreibphase entwickeln sie eine eigene Stellungnahme, die Einleitung, Hauptargumente, Gegenargumente und Schlussfolgerung enthält. Beim mündlichen Teil reagieren sie spontan auf Nachfragen und präzisieren ihre Aussagen. Die Lehrerin bewertet nicht nur grammatische Richtigkeit, sondern auch Kohärenz, Register und überzeugende Begründungen.",
+    vocab: [["die Argumentationsaufgabe", "論述任務", "die Argumentationsaufgaben"], ["der Ausgangstext", "原始文本", "die Ausgangstexte"], ["die These", "論點", "die Thesen"], ["die Einschränkung", "限制", "die Einschränkungen"], ["die Schreibphase", "寫作階段", "die Schreibphasen"], ["das Hauptargument", "主要論據", "die Hauptargumente"], ["das Gegenargument", "反方論據", "die Gegenargumente"], ["die Schlussfolgerung", "結論", "die Schlussfolgerungen"], ["die Kohärenz", "連貫性", "-"], ["das Register", "語體", "die Register"], ["zentral", "核心的", ""], ["mündlich", "口頭的", ""], ["spontan", "即時的", ""], ["überzeugend", "有說服力的", ""], ["präzisieren", "精確化", ""], ["bewerten", "評分；評估", ""]],
+    extraVocab: [["die Richtigkeit", "正確性", "-"], ["die Begründung", "理由說明", "die Begründungen"], ["die Aussage", "陳述", "die Aussagen"], ["die Nachfrage", "追問", "die Nachfragen"], ["reagieren auf", "回應", ""], ["enthalten", "包含", ""], ["die Textsorte", "文本類型", "die Textsorten"], ["die Überleitung", "轉承句", "die Überleitungen"]],
+  },
+];
+
 const lessonEnhancements = {
   A2: [
     { text: "Später vergleicht Emma die Fotos mit ihren Notizen und schreibt drei Sätze über das, was ihr besonders gefallen hat.", extraVocab: [["die Notiz", "筆記", "die Notizen"], ["besonders", "特別地", ""]] },
@@ -3166,7 +3265,7 @@ const b1ReadingExtensions = [
   "Die Klasse bespricht typische Fehler aus der Simulation. Danach setzt jede Person eigene Prioritäten. Einige üben mehr Schreiben, andere mehr Sprechen. Der Lernplan bleibt realistisch und messbar.",
 ];
 
-const lessonPlanSets = { A1: a1LessonPlans, A2: a2LessonPlans, B1: b1LessonPlans };
+const lessonPlanSets = { A1: a1LessonPlans, A2: a2LessonPlans, B1: b1LessonPlans, B2: b2LessonPlans };
 const lessonDetailSets = { A1: a1LessonDetails, A2: a2LessonDetails, B1: b1LessonDetails };
 
 function getStoryLessonPlan(level, lessonNumber) {
