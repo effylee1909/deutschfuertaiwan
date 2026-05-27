@@ -1705,6 +1705,7 @@ const sourceNoteEl = document.querySelector("#source-note");
 const startButton = document.querySelector("#start-quiz");
 const resourceTab = document.querySelector("#resource-tab");
 const dashboardTab = document.querySelector("#dashboard-tab");
+const platformTab = document.querySelector("#platform-tab");
 const backToLessonButton = document.querySelector("#back-to-lesson");
 const quizPanel = document.querySelector("#quiz-panel");
 const lessonPanel = document.querySelector("#lesson-panel");
@@ -1903,6 +1904,7 @@ function showLesson() {
   lessonPanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
+  platformTab.dataset.active = "false";
   renderLessonList();
   renderLesson();
   saveAppView("lesson");
@@ -1920,6 +1922,7 @@ function startQuiz() {
   quizPanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
+  platformTab.dataset.active = "false";
   quizTitleEl.textContent = activeLesson.isComprehensiveExam
     ? `${activeLesson.level} Prüfung - ${activeLesson.title}`
     : `${activeLesson.level} Prüfung - ${stageGermanLabels[activeLesson.stage]}`;
@@ -1952,6 +1955,7 @@ function showSectionIntro(section) {
   examGuidePanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
+  platformTab.dataset.active = "false";
   levelTextEl.textContent = "";
   sectionIntroContentEl.innerHTML = getSectionIntro(section).html;
   renderLessonList();
@@ -1971,12 +1975,29 @@ function showResources() {
   resourcesPanel.hidden = false;
   resourceTab.dataset.active = "true";
   dashboardTab.dataset.active = "false";
+  platformTab.dataset.active = "false";
   renderLessonList();
   resourceTab.dataset.active = "true";
   levelTextEl.textContent = "常用單字與動詞：可下載表格複習";
   renderResourceTables();
   showResourcePage("vocab");
   saveAppView("resources");
+}
+
+function showPlatforms() {
+  showAppSection("knowledge");
+  lessonPanel.hidden = true;
+  quizPanel.hidden = true;
+  dashboardPanel.hidden = true;
+  examGuidePanel.hidden = true;
+  resourcesPanel.hidden = false;
+  resourceTab.dataset.active = "false";
+  dashboardTab.dataset.active = "false";
+  platformTab.dataset.active = "true";
+  renderLessonList();
+  levelTextEl.textContent = "德文公開平台：新聞與閱讀練習連結";
+  showResourcePage("platforms");
+  saveAppView("platforms");
 }
 
 function showDashboard() {
@@ -1988,6 +2009,7 @@ function showDashboard() {
   dashboardPanel.hidden = false;
   resourceTab.dataset.active = "false";
   dashboardTab.dataset.active = "true";
+  platformTab.dataset.active = "false";
   renderLessonList();
   dashboardTab.dataset.active = "true";
   levelTextEl.textContent = "教師後台：統整學生在本機作答的弱點";
@@ -2001,6 +2023,7 @@ function showAppSection(section) {
   studyApp.hidden = false;
   resourceTab.hidden = section !== "knowledge";
   dashboardTab.hidden = section !== "knowledge";
+  platformTab.hidden = section !== "knowledge";
   setMainTab(section);
 }
 
@@ -2031,6 +2054,7 @@ function restoreAppView() {
     showResourcePage(saved.resourcePage || "vocab");
     return saveAppView("resources");
   }
+  if (saved.view === "platforms") return showPlatforms();
   if (saved.view === "dashboard") return showDashboard();
   if (saved.view === "intro" && saved.section !== "home") return showSectionIntro(saved.section || "learning");
   return showHome();
@@ -4496,6 +4520,7 @@ knowledgeTab.addEventListener("click", showKnowledgeIntro);
 startButton.addEventListener("click", startQuiz);
 resourceTab.addEventListener("click", showResources);
 dashboardTab.addEventListener("click", showDashboard);
+platformTab.addEventListener("click", showPlatforms);
 backToLessonButton.addEventListener("click", showLesson);
 restartButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", goNext);
