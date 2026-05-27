@@ -3006,8 +3006,122 @@ const a2LessonDetails = [
   "Die Lerngruppe arbeitet mit einem Timer. Jede Person übernimmt eine Aufgabe: Lesen, Schreiben, Hören oder Sprechen. Am Ende notieren sie drei Punkte, die sie morgen zuerst wiederholen.",
 ];
 
-const lessonPlanSets = { A1: a1LessonPlans, A2: a2LessonPlans };
-const lessonDetailSets = { A1: a1LessonDetails, A2: a2LessonDetails };
+const b1LessonPlans = [
+  {
+    titleZh: "搬家通知",
+    titleDe: "Ein neuer Anfang in Leipzig",
+    focusZh: "經驗敘述與理由說明",
+    text: "Nach drei Jahren in München zieht Sophia nach Leipzig. Sie hat dort eine Stelle in einer Sprachschule gefunden und möchte näher bei ihrer Schwester wohnen. In einer E-Mail erklärt sie ihren Freunden, warum sie umzieht und was sich für sie verändert. Sie beschreibt ihre alte Wohnung, die neue Umgebung und ihre Hoffnung, schnell Anschluss zu finden.",
+    vocab: [["der Anfang", "開始", "die Anfänge"], ["die Stelle", "職位", "die Stellen"], ["die Sprachschule", "語言學校", "die Sprachschulen"], ["die Schwester", "姊妹", "die Schwestern"], ["die Umgebung", "環境", "die Umgebungen"], ["umziehen", "搬家", ""], ["verändern", "改變", ""], ["beschreiben", "描述", ""], ["erklären", "解釋", ""], ["finden", "找到", ""]],
+    extraVocab: [["der Anschluss", "人際連結", "die Anschlüsse"], ["die Hoffnung", "希望", "die Hoffnungen"], ["näher", "較近的", ""], ["seit", "自從", ""], ["deshalb", "因此", ""]],
+  },
+  {
+    titleZh: "職場第一週",
+    titleDe: "Die erste Woche im Büro",
+    focusZh: "工作流程與職場溝通",
+    text: "Jonas beginnt ein Praktikum in einer Firma. Am ersten Tag bekommt er einen Arbeitsplatz, ein Passwort und eine kurze Einführung. Seine Kollegin zeigt ihm, wie man Dateien speichert und Termine in den Kalender einträgt. Am Freitag schreibt Jonas einen Bericht über seine Aufgaben und bittet um Feedback, weil er seine Arbeit verbessern möchte.",
+    vocab: [["das Praktikum", "實習", "die Praktika"], ["die Firma", "公司", "die Firmen"], ["der Arbeitsplatz", "工作座位", "die Arbeitsplätze"], ["das Passwort", "密碼", "die Passwörter"], ["die Einführung", "介紹", "die Einführungen"], ["speichern", "儲存", ""], ["eintragen", "登錄", ""], ["bitten", "請求", ""], ["verbessern", "改善", ""], ["beginnen", "開始", ""]],
+    extraVocab: [["die Datei", "檔案", "die Dateien"], ["das Feedback", "回饋", "-"], ["die Kollegin", "女同事", "die Kolleginnen"], ["der Bericht", "報告", "die Berichte"], ["zuständig", "負責的", ""]],
+  },
+  {
+    titleZh: "新聞討論",
+    titleDe: "Eine Nachricht im Kurs",
+    focusZh: "表達意見與轉述資訊",
+    text: "Im Kurs lesen die Lernenden einen kurzen Artikel über öffentlichen Verkehr. Danach diskutieren sie, ob Busse und Bahnen günstiger werden sollten. Maria meint, dass mehr Menschen umsteigen würden, wenn die Preise niedriger wären. Paul ist anderer Meinung, weil er die Finanzierung schwierig findet. Die Lehrerin sammelt Argumente an der Tafel.",
+    vocab: [["der Artikel", "文章", "die Artikel"], ["der Verkehr", "交通", "-"], ["die Meinung", "意見", "die Meinungen"], ["das Argument", "論點", "die Argumente"], ["die Finanzierung", "資金來源", "die Finanzierungen"], ["diskutieren", "討論", ""], ["meinen", "認為", ""], ["umsteigen", "轉乘", ""], ["sammeln", "收集", ""], ["senken", "降低", ""]],
+    extraVocab: [["öffentlich", "公共的", ""], ["niedrig", "低的", ""], ["schwierig", "困難的", ""], ["anderer Meinung sein", "持不同意見", ""], ["die Tafel", "黑板", "die Tafeln"]],
+  },
+  {
+    titleZh: "鄰居會議",
+    titleDe: "Die Besprechung im Haus",
+    focusZh: "抱怨、建議與解決衝突",
+    text: "In Lenas Haus gibt es seit Wochen Streit über Lärm im Treppenhaus. Deshalb organisiert die Hausverwaltung eine Besprechung. Einige Nachbarn beschweren sich, andere schlagen feste Ruhezeiten vor. Lena versucht, sachlich zu bleiben und eine Lösung zu vermitteln. Am Ende einigen sich alle auf klare Regeln für Musik, Besuch und Müll.",
+    vocab: [["der Streit", "爭執", "die Streite"], ["der Lärm", "噪音", "-"], ["das Treppenhaus", "樓梯間", "die Treppenhäuser"], ["die Hausverwaltung", "物業管理", "die Hausverwaltungen"], ["die Ruhezeit", "安靜時段", "die Ruhezeiten"], ["sich beschweren", "抱怨", ""], ["vorschlagen", "提議", ""], ["vermitteln", "協調", ""], ["sich einigen", "達成共識", ""], ["organisieren", "組織", ""]],
+    extraVocab: [["sachlich", "客觀的", ""], ["fest", "固定的", ""], ["der Besuch", "訪客", "die Besuche"], ["der Müll", "垃圾", "-"], ["die Regel", "規則", "die Regeln"]],
+  },
+  {
+    titleZh: "健康決定",
+    titleDe: "Mehr Bewegung im Alltag",
+    focusZh: "建議、目標與條件句",
+    text: "David merkt, dass er nach der Arbeit oft müde ist. Sein Arzt empfiehlt ihm mehr Bewegung und regelmäßige Pausen. David entscheidet sich, dreimal pro Woche zu joggen und mittags einen kurzen Spaziergang zu machen. Wenn das Wetter schlecht ist, trainiert er zu Hause. Nach einem Monat fühlt er sich konzentrierter und schläft besser.",
+    vocab: [["die Bewegung", "運動", "die Bewegungen"], ["die Pause", "休息", "die Pausen"], ["der Spaziergang", "散步", "die Spaziergänge"], ["der Monat", "月份", "die Monate"], ["das Ziel", "目標", "die Ziele"], ["empfehlen", "建議", ""], ["entscheiden", "決定", ""], ["joggen", "慢跑", ""], ["trainieren", "訓練", ""], ["schlafen", "睡覺", ""]],
+    extraVocab: [["regelmäßig", "規律的", ""], ["dreimal", "三次", ""], ["konzentriert", "專注的", ""], ["schlecht", "差的", ""], ["merken", "察覺", ""]],
+  },
+  {
+    titleZh: "城市提案",
+    titleDe: "Ein Vorschlag für die Stadt",
+    focusZh: "正式書信與公共議題",
+    text: "Eine Jugendgruppe schreibt einen Brief an die Stadtverwaltung. Sie wünscht sich mehr Bäume, sichere Radwege und einen kleinen Platz zum Sitzen. Im Brief nennen die Jugendlichen konkrete Beispiele aus ihrem Viertel. Sie erklären höflich, welche Probleme es gibt und wie die Stadt die Situation verbessern könnte.",
+    vocab: [["die Jugendgruppe", "青年團體", "die Jugendgruppen"], ["die Stadtverwaltung", "市政府", "die Stadtverwaltungen"], ["der Radweg", "自行車道", "die Radwege"], ["das Viertel", "街區", "die Viertel"], ["die Situation", "情況", "die Situationen"], ["wünschen", "希望", ""], ["nennen", "列舉", ""], ["fördern", "促進", ""], ["könnte", "可以", ""], ["schreiben", "寫", ""]],
+    extraVocab: [["sicher", "安全的", ""], ["konkret", "具體的", ""], ["höflich", "禮貌的", ""], ["der Baum", "樹", "die Bäume"], ["der Platz", "廣場；位置", "die Plätze"]],
+  },
+  {
+    titleZh: "文化週",
+    titleDe: "Die Kulturwoche",
+    focusZh: "活動描述與被動語態",
+    text: "An der Schule wird eine Kulturwoche vorbereitet. In der Aula werden Plakate aufgehängt, ein Programm wird gedruckt und Gäste werden eingeladen. Jede Klasse stellt ein Land vor. Am Donnerstag wird ein Film gezeigt, danach wird über Musik, Essen und Traditionen gesprochen. Die Schülerinnen und Schüler lernen, wie Veranstaltungen geplant werden.",
+    vocab: [["die Kulturwoche", "文化週", "die Kulturwochen"], ["die Aula", "禮堂", "die Aulen"], ["das Plakat", "海報", "die Plakate"], ["das Programm", "節目表", "die Programme"], ["die Tradition", "傳統", "die Traditionen"], ["vorbereiten", "準備", ""], ["aufhängen", "掛起", ""], ["drucken", "印刷", ""], ["einladen", "邀請", ""], ["zeigen", "播放；展示", ""]],
+    extraVocab: [["die Veranstaltung", "活動", "die Veranstaltungen"], ["planen", "規劃", ""], ["das Land", "國家", "die Länder"], ["der Gast", "客人", "die Gäste"], ["danach", "之後", ""]],
+  },
+  {
+    titleZh: "環保挑戰",
+    titleDe: "Eine Woche ohne Plastik",
+    focusZh: "因果關係與結果描述",
+    text: "Im Deutschkurs startet eine Challenge: Eine Woche lang sollen alle möglichst wenig Plastik benutzen. Karim kauft Obst auf dem Markt und nimmt eigene Dosen mit. Am Anfang findet er es unbequem, doch später bemerkt er viele Vorteile. In seinem Tagebuch erklärt er, welche Gewohnheiten er geändert hat und welche Schwierigkeiten geblieben sind.",
+    vocab: [["die Challenge", "挑戰", "die Challenges"], ["das Plastik", "塑膠", "-"], ["der Markt", "市場", "die Märkte"], ["die Dose", "盒子", "die Dosen"], ["die Gewohnheit", "習慣", "die Gewohnheiten"], ["benutzen", "使用", ""], ["bemerken", "注意到", ""], ["ändern", "改變", ""], ["bleiben", "保留；停留", ""], ["mitnehmen", "攜帶", ""]],
+    extraVocab: [["möglichst", "盡可能", ""], ["wenig", "少的", ""], ["unbequem", "不方便的", ""], ["der Vorteil", "優點", "die Vorteile"], ["das Tagebuch", "日記", "die Tagebücher"]],
+  },
+  {
+    titleZh: "遺失的背包",
+    titleDe: "Der verlorene Rucksack",
+    focusZh: "事件經過與間接問句",
+    text: "Nach einer Zugfahrt merkt Nina, dass ihr Rucksack fehlt. Sie geht zum Fundbüro und beschreibt genau, wie er aussieht. Der Mitarbeiter fragt, wann sie ausgestiegen ist und ob wichtige Dokumente darin waren. Nina bleibt ruhig, füllt ein Formular aus und bekommt später einen Anruf: Der Rucksack wurde gefunden.",
+    vocab: [["der Rucksack", "背包", "die Rucksäcke"], ["die Zugfahrt", "火車旅程", "die Zugfahrten"], ["das Fundbüro", "失物招領處", "die Fundbüros"], ["das Dokument", "文件", "die Dokumente"], ["der Anruf", "電話", "die Anrufe"], ["fehlen", "不見；缺少", ""], ["aussteigen", "下車", ""], ["aussehen", "看起來", ""], ["ausfüllen", "填寫", ""], ["wiederfinden", "找回", ""]],
+    extraVocab: [["genau", "精確地", ""], ["wichtig", "重要的", ""], ["darin", "在裡面", ""], ["später", "稍後", ""], ["ruhig", "冷靜的", ""]],
+  },
+  {
+    titleZh: "線上課問題",
+    titleDe: "Technische Probleme im Onlinekurs",
+    focusZh: "說明問題與提出要求",
+    text: "Während des Onlinekurses funktioniert Leons Mikrofon nicht. Er schreibt der Lehrerin im Chat, dass er die anderen hören kann, aber nicht sprechen kann. Die Lehrerin bittet ihn, die Einstellungen zu prüfen und den Browser neu zu starten. Danach klappt es wieder. Leon entschuldigt sich und fasst kurz zusammen, was er verpasst hat.",
+    vocab: [["der Onlinekurs", "線上課", "die Onlinekurse"], ["das Mikrofon", "麥克風", "die Mikrofone"], ["der Chat", "聊天室", "die Chats"], ["die Einstellung", "設定", "die Einstellungen"], ["der Browser", "瀏覽器", "die Browser"], ["funktionieren", "運作", ""], ["prüfen", "檢查", ""], ["starten", "啟動", ""], ["sich entschuldigen", "道歉", ""], ["zusammenfassen", "摘要", ""]],
+    extraVocab: [["während", "在……期間", ""], ["klappen", "順利", ""], ["verpassen", "錯過", ""], ["neu", "新的；重新", ""], ["kurz", "簡短地", ""]],
+  },
+  {
+    titleZh: "讀者投書",
+    titleDe: "Ein Leserbrief zur Schulcafeteria",
+    focusZh: "論述文結構與連接詞",
+    text: "Clara schreibt einen Leserbrief an die Schülerzeitung. Sie findet, dass die Schulcafeteria gesünderes Essen anbieten sollte. Zuerst nennt sie das Problem, dann beschreibt sie mögliche Lösungen. Außerdem vergleicht sie Preise und Qualität. Am Schluss fordert sie die Schulleitung auf, mit den Lernenden über neue Angebote zu sprechen.",
+    vocab: [["der Leserbrief", "讀者投書", "die Leserbriefe"], ["die Schülerzeitung", "校刊", "die Schülerzeitungen"], ["die Cafeteria", "自助餐廳", "die Cafeterien"], ["die Qualität", "品質", "die Qualitäten"], ["die Schulleitung", "校方", "die Schulleitungen"], ["anbieten", "提供", ""], ["fordern", "要求", ""], ["vergleichen", "比較", ""], ["sprechen", "談論", ""], ["sollte", "應該", ""]],
+    extraVocab: [["gesund", "健康的", ""], ["außerdem", "此外", ""], ["möglich", "可能的", ""], ["die Lösung", "解決方式", "die Lösungen"], ["am Schluss", "最後", ""]],
+  },
+  {
+    titleZh: "考前模擬",
+    titleDe: "Die Generalprobe",
+    focusZh: "B1 綜合任務",
+    text: "Eine Woche vor der Prüfung macht die Klasse eine Generalprobe. Zuerst hören die Lernenden ein Interview, danach lesen sie mehrere kurze Texte. Anschließend schreiben sie eine Stellungnahme und führen ein Gespräch zu zweit. Die Lehrerin achtet auf Struktur, Wortschatz und klare Begründungen. Nach der Übung bespricht jeder seinen persönlichen Lernplan.",
+    vocab: [["die Generalprobe", "總彩排；模擬", "die Generalproben"], ["das Interview", "訪談", "die Interviews"], ["die Stellungnahme", "立場表述", "die Stellungnahmen"], ["das Gespräch", "對話", "die Gespräche"], ["die Begründung", "理由說明", "die Begründungen"], ["anhören", "聆聽", ""], ["führen", "進行", ""], ["achten", "注意", ""], ["besprechen", "討論", ""], ["wiederholen", "複習", ""]],
+    extraVocab: [["mehrere", "好幾個", ""], ["anschließend", "接著", ""], ["persönlich", "個人的", ""], ["der Lernplan", "學習計畫", "die Lernpläne"], ["die Struktur", "結構", "die Strukturen"]],
+  },
+];
+
+const b1LessonDetails = [
+  "Sophia nutzt in ihrer E-Mail Nebensätze mit weil und obwohl. Dadurch klingt ihr Text persönlicher und klarer. Am Ende lädt sie ihre Freunde ein, sie im Sommer zu besuchen.",
+  "Jonas lernt, im Büro genau nachzufragen. Wenn er eine Aufgabe nicht versteht, formuliert er eine höfliche Frage. So vermeidet er Fehler und zeigt Interesse.",
+  "Die Lernenden unterscheiden zwischen Tatsache und Meinung. Sie üben Redemittel wie meiner Ansicht nach und dagegen spricht. Danach schreiben sie drei eigene Argumente.",
+  "Lena notiert die wichtigsten Punkte der Besprechung. Sie achtet darauf, keine Person direkt anzugreifen. So wird aus einer Beschwerde ein konstruktiver Vorschlag.",
+  "David schreibt seine Ziele realistisch auf. Er verbindet Bedingungen mit wenn und Ergebnisse mit deshalb. Dadurch kann er seinen Fortschritt besser beobachten.",
+  "Die Jugendgruppe verwendet eine formelle Anrede und einen klaren Schluss. Ihr Brief wirkt überzeugender, weil er konkrete Beispiele und höfliche Forderungen enthält.",
+  "Die Klasse markiert alle Passivformen im Text. Danach formulieren die Lernenden eigene Sätze: Das Programm wird vorbereitet. Die Gäste werden eingeladen.",
+  "Karim vergleicht sein Verhalten vor und nach der Challenge. Er erkennt, dass kleine Entscheidungen im Alltag eine sichtbare Wirkung haben können.",
+  "Nina übt indirekte Fragen: Können Sie mir sagen, ob mein Rucksack gefunden wurde? Dadurch klingt sie höflich und bekommt schneller Hilfe.",
+  "Leon beschreibt das technische Problem Schritt für Schritt. Er nennt zuerst das Problem, dann die bisherigen Versuche und schließlich seine Bitte.",
+  "Clara baut ihren Leserbrief mit Einleitung, Hauptteil und Schluss auf. Sie verbindet ihre Argumente mit außerdem, deshalb und trotzdem.",
+  "Bei der Generalprobe merkt jede Person, welcher Prüfungsteil noch schwerfällt. Danach wird gezielt wiederholt, statt alles gleichzeitig zu lernen.",
+];
+
+const lessonPlanSets = { A1: a1LessonPlans, A2: a2LessonPlans, B1: b1LessonPlans };
+const lessonDetailSets = { A1: a1LessonDetails, A2: a2LessonDetails, B1: b1LessonDetails };
 
 function getStoryLessonPlan(level, lessonNumber) {
   return lessonPlanSets[level]?.[lessonNumber - 1] || null;
