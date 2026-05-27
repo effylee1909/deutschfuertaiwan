@@ -3120,6 +3120,37 @@ const b1LessonDetails = [
   "Bei der Generalprobe merkt jede Person, welcher Prüfungsteil noch schwerfällt. Danach wird gezielt wiederholt, statt alles gleichzeitig zu lernen.",
 ];
 
+const lessonEnhancements = {
+  A2: [
+    { text: "Später vergleicht Emma die Fotos mit ihren Notizen und schreibt drei Sätze über das, was ihr besonders gefallen hat.", extraVocab: [["die Notiz", "筆記", "die Notizen"], ["besonders", "特別地", ""]] },
+    { text: "Vor dem Auflegen wiederholt die Assistentin alle Daten, damit kein Missverständnis entsteht.", extraVocab: [["das Missverständnis", "誤會", "die Missverständnisse"], ["auflegen", "掛電話", ""]] },
+    { text: "Mia leitet die Information außerdem an einen Mitschüler weiter, der die Nachricht noch nicht gesehen hat.", extraVocab: [["weiterleiten", "轉寄", ""], ["der Mitschüler", "男同學", "die Mitschüler"]] },
+    { text: "Zu Hause berechnet Noah seine monatlichen Kosten und entscheidet, ob die Wohnung zu seinem Budget passt.", extraVocab: [["das Budget", "預算", "die Budgets"], ["monatlich", "每月的", ""]] },
+    { text: "Sophie kontrolliert danach die App, damit sie den neuen Zug nicht noch einmal verpasst.", extraVocab: [["kontrollieren", "確認", ""], ["die App", "應用程式", "die Apps"]] },
+    { text: "Vor der Präsentation testen sie die Technik und sprechen ab, wer welchen Teil erklärt.", extraVocab: [["die Technik", "設備；技術", "-"], ["absprechen", "協調", ""]] },
+    { text: "Auf dem Heimweg merken beide, dass eine sichere Entscheidung manchmal wichtiger als die schnellste Route ist.", extraVocab: [["der Heimweg", "回家的路", "die Heimwege"], ["sicher", "安全的", ""]] },
+    { text: "Lily schreibt danach in ihr Heft, mit wem sie gelernt hat und wohin sie später gegangen ist.", extraVocab: [["das Heft", "筆記本", "die Hefte"], ["wohin", "往哪裡", ""]] },
+    { text: "Die Klasse vergleicht zwei Varianten und entscheidet gemeinsam, welcher Plan realistischer ist.", extraVocab: [["die Variante", "版本；方案", "die Varianten"], ["realistisch", "實際的", ""]] },
+    { text: "Emily bewahrt die Bestätigung in einer Mappe auf, weil sie das Dokument später noch braucht.", extraVocab: [["die Mappe", "資料夾", "die Mappen"], ["aufbewahren", "保存", ""]] },
+    { text: "Anna antwortet schnell und bedankt sich dafür, dass Ethan ehrlich und früh genug geschrieben hat.", extraVocab: [["früh genug", "夠早", ""], ["dafür", "為此", ""]] },
+    { text: "Nach der Simulation tauschen sie Tipps aus und planen kurze Lernphasen für den Abend.", extraVocab: [["die Simulation", "模擬", "die Simulationen"], ["austauschen", "交換", ""]] },
+  ],
+  B1: [
+    { text: "Sie erwähnt auch, dass ein Umzug zwar anstrengend ist, aber neue berufliche Möglichkeiten eröffnet. Ihre Freunde reagieren verständnisvoll und bieten Hilfe beim Tragen der Kisten an.", extraVocab: [["die Möglichkeit", "可能性", "die Möglichkeiten"], ["die Kiste", "箱子", "die Kisten"], ["anstrengend", "費力的", ""], ["verständnisvoll", "體諒的", ""]] },
+    { text: "Im Bericht beschreibt Jonas nicht nur, was er gemacht hat, sondern auch, welche Abläufe noch unklar waren. Sein Betreuer lobt seine genaue Beobachtung und gibt ihm konkrete Tipps.", extraVocab: [["der Ablauf", "流程", "die Abläufe"], ["der Betreuer", "指導員", "die Betreuer"], ["loben", "稱讚", ""], ["unklar", "不清楚的", ""]] },
+    { text: "Zum Schluss formuliert jede Person eine kurze Stellungnahme. Dabei sollen die Lernenden Beispiele nennen und auf die Argumente der anderen reagieren.", extraVocab: [["die Position", "立場", "die Positionen"], ["das Beispiel", "例子", "die Beispiele"], ["reagieren", "回應", ""], ["dabei", "在此過程中", ""]] },
+    { text: "Die Hausverwaltung schreibt die vereinbarten Regeln später in einem Protokoll auf. So können auch Nachbarn, die nicht dabei waren, die Entscheidung nachvollziehen.", extraVocab: [["das Protokoll", "紀錄", "die Protokolle"], ["die Entscheidung", "決定", "die Entscheidungen"], ["vereinbart", "約定的", ""], ["nachvollziehen", "理解", ""]] },
+    { text: "David führt zusätzlich eine kleine Tabelle, in der er Schlaf, Stimmung und Bewegung dokumentiert. Dadurch erkennt er schneller, welche Gewohnheiten ihm wirklich guttun.", extraVocab: [["die Tabelle", "表格", "die Tabellen"], ["die Stimmung", "心情", "die Stimmungen"], ["dokumentieren", "記錄", ""], ["guttun", "有益", ""]] },
+    { text: "Bevor die Gruppe den Brief abschickt, überarbeitet sie die Formulierungen. Sie achtet darauf, respektvoll zu bleiben und trotzdem deutlich zu sagen, was sich ändern soll.", extraVocab: [["die Formulierung", "措辭", "die Formulierungen"], ["respektvoll", "尊重的", ""], ["deutlich", "清楚的", ""], ["überarbeiten", "修改", ""]] },
+    { text: "Während der Kulturwoche werden nicht nur Ergebnisse gezeigt, sondern auch Gespräche zwischen den Klassen organisiert. Dadurch entsteht ein Austausch über Unterschiede und Gemeinsamkeiten.", extraVocab: [["das Ergebnis", "成果", "die Ergebnisse"], ["der Unterschied", "差異", "die Unterschiede"], ["die Gemeinsamkeit", "共同點", "die Gemeinsamkeiten"], ["entstehen", "產生", ""]] },
+    { text: "Karim präsentiert seine Erfahrungen im Kurs und erklärt, welche Alternativen im Alltag realistisch waren. Einige Lernende beschließen, die Challenge zu Hause weiterzuführen.", extraVocab: [["die Alternative", "替代方案", "die Alternativen"], ["die Erfahrung", "經驗", "die Erfahrungen"], ["beschließen", "決定", ""], ["weiterführen", "繼續進行", ""]] },
+    { text: "Als Nina den Rucksack abholt, kontrolliert sie sofort den Inhalt. Sie bedankt sich beim Mitarbeiter und schreibt sich für die Zukunft auf, wichtige Dinge getrennt aufzubewahren.", extraVocab: [["der Inhalt", "內容物", "die Inhalte"], ["die Zukunft", "未來", "-"], ["getrennt", "分開的", ""], ["abholen", "領取", ""]] },
+    { text: "Nach dem Kurs schickt Leon eine kurze Zusammenfassung an seine Lerngruppe. Damit zeigt er, dass er trotz der technischen Probleme aktiv am Unterricht teilgenommen hat.", extraVocab: [["die Zusammenfassung", "摘要", "die Zusammenfassungen"], ["die Lerngruppe", "讀書小組", "die Lerngruppen"], ["trotz", "儘管", ""], ["teilnehmen", "參與", ""]] },
+    { text: "Die Redaktion der Schülerzeitung veröffentlicht Claras Brief in der nächsten Ausgabe. Danach melden sich weitere Schülerinnen und Schüler mit eigenen Vorschlägen.", extraVocab: [["die Redaktion", "編輯部", "die Redaktionen"], ["die Ausgabe", "期刊；版本", "die Ausgaben"], ["veröffentlichen", "刊登", ""], ["sich melden", "主動聯繫", ""]] },
+    { text: "Die Lehrerin gibt danach individuelles Feedback und empfiehlt passende Übungen. Wer beim Schreiben unsicher ist, wiederholt zuerst Einleitung, Argumentation und Schluss.", extraVocab: [["die Argumentation", "論證", "die Argumentationen"], ["die Einleitung", "開頭", "die Einleitungen"], ["individuell", "個別的", ""], ["passend", "合適的", ""]] },
+  ],
+};
+
 const lessonPlanSets = { A1: a1LessonPlans, A2: a2LessonPlans, B1: b1LessonPlans };
 const lessonDetailSets = { A1: a1LessonDetails, A2: a2LessonDetails, B1: b1LessonDetails };
 
@@ -3131,19 +3162,24 @@ function getStoryLessonDetail(level, lessonNumber) {
   return lessonDetailSets[level]?.[lessonNumber - 1] || "";
 }
 
+function getLessonEnhancement(level, lessonNumber) {
+  return lessonEnhancements[level]?.[lessonNumber - 1] || { text: "", extraVocab: [] };
+}
+
 function createTextbookContent(level, lessonNumber, topicData) {
   const normalizedTopic = normalizeTopicData(topicData);
   const plan = getStoryLessonPlan(level, lessonNumber);
+  const enhancement = getLessonEnhancement(level, lessonNumber);
   const vocab = plan ? plan.vocab : createLessonVocabulary(level, lessonNumber, normalizedTopic);
   const grammar = createLessonGrammar(level, lessonNumber, normalizedTopic);
   return {
     title: plan ? `${level} L${lessonNumber}: ${plan.titleZh} · ${plan.titleDe}` : `${level} L${lessonNumber}: ${normalizedTopic.zh} · ${normalizedTopic.de}`,
-    text: plan ? `${plan.text} ${getStoryLessonDetail(level, lessonNumber)}` : createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
+    text: plan ? `${plan.text} ${getStoryLessonDetail(level, lessonNumber)} ${enhancement.text}`.trim() : createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
     focus: plan ? plan.focusZh : normalizedTopic.zh,
     storyTitleZh: plan?.titleZh,
     storyTitleDe: plan?.titleDe,
     vocab,
-    extraVocab: plan ? plan.extraVocab : [],
+    extraVocab: plan ? [...plan.extraVocab, ...enhancement.extraVocab] : [],
     grammar,
     proverb: getLessonProverb(level, lessonNumber),
   };
