@@ -1681,6 +1681,7 @@ let currentPreparedQuestion = null;
 let activeMainSection = "home";
 
 const progressStorageKey = "deutschfuertaiwan-progress-v1";
+const viewStorageKey = "deutschfuertaiwan-view-v1";
 const usedLessonVocabularyByLevel = {};
 
 const homePanel = document.querySelector(".intro");
@@ -1904,6 +1905,7 @@ function showLesson() {
   dashboardTab.dataset.active = "false";
   renderLessonList();
   renderLesson();
+  saveAppView("lesson");
 }
 
 function startQuiz() {
@@ -1923,12 +1925,14 @@ function startQuiz() {
     : `${activeLesson.level} Prüfung - ${stageGermanLabels[activeLesson.stage]}`;
   renderLessonList();
   renderQuestion();
+  saveAppView("quiz");
 }
 
 function showHome() {
   homePanel.hidden = false;
   studyApp.hidden = true;
   setMainTab("home");
+  saveAppView("home");
 }
 
 function showLearningPath() {
@@ -1951,6 +1955,7 @@ function showSectionIntro(section) {
   levelTextEl.textContent = "";
   sectionIntroContentEl.innerHTML = getSectionIntro(section).html;
   renderLessonList();
+  saveAppView("intro");
 }
 
 function showKnowledgeIntro() {
@@ -1971,6 +1976,7 @@ function showResources() {
   levelTextEl.textContent = "常用單字與動詞：可下載表格複習";
   renderResourceTables();
   showResourcePage("vocab");
+  saveAppView("resources");
 }
 
 function showDashboard() {
@@ -1986,6 +1992,7 @@ function showDashboard() {
   dashboardTab.dataset.active = "true";
   levelTextEl.textContent = "教師後台：統整學生在本機作答的弱點";
   renderDashboard();
+  saveAppView("dashboard");
 }
 
 function showAppSection(section) {
@@ -1995,6 +2002,38 @@ function showAppSection(section) {
   resourceTab.hidden = section !== "knowledge";
   dashboardTab.hidden = section !== "knowledge";
   setMainTab(section);
+}
+
+function getActiveResourcePage() {
+  return [...resourcePageTabs].find((tab) => tab.dataset.active === "true")?.dataset.resourcePage || "vocab";
+}
+
+function saveAppView(view) {
+  localStorage.setItem(viewStorageKey, JSON.stringify({
+    view,
+    section: activeMainSection,
+    lessonId: activeLesson?.id,
+    resourcePage: getActiveResourcePage(),
+    vocabLevel: activeVocabLevel,
+  }));
+}
+
+function restoreAppView() {
+  const saved = JSON.parse(localStorage.getItem(viewStorageKey) || "{}");
+  const savedLesson = lessons.find((lesson) => lesson.id === saved.lessonId);
+  if (savedLesson) activeLesson = savedLesson;
+  if (saved.vocabLevel) activeVocabLevel = saved.vocabLevel;
+
+  if (saved.view === "lesson") return showLesson();
+  if (saved.view === "quiz") return startQuiz();
+  if (saved.view === "resources") {
+    showResources();
+    showResourcePage(saved.resourcePage || "vocab");
+    return saveAppView("resources");
+  }
+  if (saved.view === "dashboard") return showDashboard();
+  if (saved.view === "intro" && saved.section !== "home") return showSectionIntro(saved.section || "learning");
+  return showHome();
 }
 
 function getSectionIntro(section) {
@@ -2052,6 +2091,7 @@ function showResourcePage(page) {
     tab.dataset.active = active;
     tab.classList.toggle("secondary", !active);
   });
+  if (!resourcesPanel.hidden) saveAppView("resources");
 }
 
 function renderResourceTables() {
@@ -4515,9 +4555,10 @@ vocabLevelTabsEl?.addEventListener("click", (event) => {
   if (!button) return;
   activeVocabLevel = button.dataset.vocabLevel;
   renderResourceTables();
+  saveAppView("resources");
 });
 
 initializeLessons();
 renderLesson();
 renderResourceTables();
-showHome();
+restoreAppView();
