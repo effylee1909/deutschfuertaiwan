@@ -3151,6 +3151,21 @@ const lessonEnhancements = {
   ],
 };
 
+const b1ReadingExtensions = [
+  "Sie plant außerdem, regelmäßig einen Stammtisch zu besuchen. Dort möchte sie neue Kontakte knüpfen. Vor dem Umzug sortiert sie ihre Möbel und Bücher. Sie schreibt eine Liste, damit sie nichts vergisst.",
+  "Am Montag fragt Jonas nach den wichtigsten Regeln im Team. Am Dienstag beobachtet er eine Besprechung mit Kunden. Am Mittwoch darf er selbst eine kleine Aufgabe übernehmen. Am Ende der Woche fühlt er sich sicherer.",
+  "Die Klasse sucht zuerst Fakten aus dem Artikel. Danach markieren sie persönliche Bewertungen. Anschließend ordnen sie Pro- und Contra-Argumente. Zum Schluss formulieren sie eine ausgewogene Meinung.",
+  "Vor der Besprechung sammelt Lena Beispiele aus den letzten Wochen. Während des Gesprächs hört sie den anderen genau zu. Sie fragt nach, wenn eine Aussage unklar bleibt. Dadurch entsteht langsam Vertrauen.",
+  "David spricht mit einem Freund über seine Motivation. Gemeinsam planen sie feste Zeiten für Sport. Er merkt, dass kleine Routinen leichter einzuhalten sind. Deshalb beginnt er mit kurzen Einheiten.",
+  "Die Gruppe liest ähnliche Briefe im Internet. Danach vergleicht sie Aufbau und Ton. Sie streicht zu emotionale Formulierungen. Am Ende wirkt der Brief klarer und professioneller.",
+  "Vor der Kulturwoche verteilt die Lehrerin Aufgabenlisten. Einige Lernende kümmern sich um Musik. Andere bereiten kurze Vorträge vor. Nach jeder Aktivität gibt es eine kurze Reflexion.",
+  "Karim achtet besonders auf Verpackungen beim Einkaufen. Er fragt Verkäufer nach Alternativen. Manchmal findet er keine perfekte Lösung. Trotzdem verändert sich sein Blick auf Konsum.",
+  "Nina erinnert sich genau an ihren Sitzplatz im Zug. Diese Information hilft dem Mitarbeiter. Sie beschreibt auch einen kleinen Aufkleber am Rucksack. Später nutzt sie die Erfahrung für einen kurzen Bericht.",
+  "Leon testet nach dem Unterricht sein Mikrofon erneut. Er macht Screenshots von den Einstellungen. So kann er das Problem später genauer erklären. Beim nächsten Onlinekurs ist er besser vorbereitet.",
+  "Clara liest ihren Leserbrief einer Freundin vor. Die Freundin fragt nach weiteren Beispielen. Clara ergänzt einen Vergleich mit einer anderen Schule. Dadurch wird ihr Text überzeugender.",
+  "Die Klasse bespricht typische Fehler aus der Simulation. Danach setzt jede Person eigene Prioritäten. Einige üben mehr Schreiben, andere mehr Sprechen. Der Lernplan bleibt realistisch und messbar.",
+];
+
 const lessonPlanSets = { A1: a1LessonPlans, A2: a2LessonPlans, B1: b1LessonPlans };
 const lessonDetailSets = { A1: a1LessonDetails, A2: a2LessonDetails, B1: b1LessonDetails };
 
@@ -3166,6 +3181,10 @@ function getLessonEnhancement(level, lessonNumber) {
   return lessonEnhancements[level]?.[lessonNumber - 1] || { text: "", extraVocab: [] };
 }
 
+function getReadingExtension(level, lessonNumber) {
+  return level === "B1" ? b1ReadingExtensions[lessonNumber - 1] || "" : "";
+}
+
 function createTextbookContent(level, lessonNumber, topicData) {
   const normalizedTopic = normalizeTopicData(topicData);
   const plan = getStoryLessonPlan(level, lessonNumber);
@@ -3174,7 +3193,7 @@ function createTextbookContent(level, lessonNumber, topicData) {
   const grammar = createLessonGrammar(level, lessonNumber, normalizedTopic);
   return {
     title: plan ? `${level} L${lessonNumber}: ${plan.titleZh} · ${plan.titleDe}` : `${level} L${lessonNumber}: ${normalizedTopic.zh} · ${normalizedTopic.de}`,
-    text: plan ? `${plan.text} ${getStoryLessonDetail(level, lessonNumber)} ${enhancement.text}`.trim() : createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
+    text: plan ? `${plan.text} ${getStoryLessonDetail(level, lessonNumber)} ${enhancement.text} ${getReadingExtension(level, lessonNumber)}`.trim() : createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
     focus: plan ? plan.focusZh : normalizedTopic.zh,
     storyTitleZh: plan?.titleZh,
     storyTitleDe: plan?.titleDe,
@@ -3740,10 +3759,13 @@ function getLessonCards(lesson) {
 function renderTextbookLesson(lesson) {
   const content = lesson.textbook || textbookLessons[lesson.level]?.[lesson.stage];
   if (!content) return;
+  const readingLines = lesson.level === "B1"
+    ? content.text.split(/(?<=[.!?])\s+/).filter(Boolean)
+    : [content.text];
 
   lessonReadingEl.innerHTML = `
     <h3>${content.title}</h3>
-    <p>${content.text}</p>
+    ${readingLines.map((line) => `<p>${line}</p>`).join("")}
   `;
 
   lessonVocabularyEl.innerHTML = content.vocab
