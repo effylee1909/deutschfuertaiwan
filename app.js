@@ -2050,7 +2050,7 @@ function getSectionIntro(section) {
     },
     knowledge: {
       title: "知識整理庫",
-      items: ["單字表", "動詞變化表", "文法總表", "知識點地圖"],
+      items: ["單字表", "動詞變化表", "文法總表", "德文公開平台", "知識點地圖"],
       body: "這裡整理可下載表格與作答弱點，方便課後複習與教學追蹤。",
     },
   }[section];
