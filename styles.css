@@ -74,26 +74,36 @@ button:disabled {
 .intro {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 30px;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  gap: 28px;
   align-items: center;
-  min-height: 620px;
-  border: 1px solid var(--line);
+  min-height: 700px;
+  border: 0;
   border-radius: 8px;
-  padding: 38px;
+  padding: 44px;
   background:
-    linear-gradient(90deg, rgba(17, 17, 17, 0.08) 0 33%, rgba(221, 0, 0, 0.08) 33% 66%, rgba(255, 206, 0, 0.16) 66%),
-    radial-gradient(circle at 20% 12%, rgba(255, 206, 0, 0.24), transparent 22%),
-    radial-gradient(circle at 86% 18%, rgba(221, 0, 0, 0.16), transparent 20%),
-    rgba(255, 254, 250, 0.86);
+    linear-gradient(115deg, rgba(20, 20, 20, 0.86), rgba(32, 33, 36, 0.58) 42%, rgba(255, 254, 250, 0.08)),
+    linear-gradient(90deg, #111 0 16px, #dd0000 16px 32px, #ffce00 32px 48px, transparent 48px),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Brandenburger_Tor_abends.jpg");
+  background-position: center;
+  background-size: cover;
   box-shadow: var(--shadow);
   overflow: hidden;
 }
 
 .intro::before {
   position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.42)),
+    linear-gradient(90deg, rgba(255, 206, 0, 0.16), transparent 46%, rgba(221, 0, 0, 0.16));
+  content: "";
+}
+
+.intro::after {
+  position: absolute;
   inset: 22px;
-  border: 1px solid rgba(32, 33, 36, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 8px;
   pointer-events: none;
   content: "";
@@ -101,21 +111,61 @@ button:disabled {
 
 .intro-copy {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  color: #fff;
 }
 
 .intro-copy h1 {
   max-width: 760px;
   margin: 0;
-  font-size: clamp(3rem, 7vw, 6.4rem);
+  font-size: clamp(3.8rem, 8vw, 7.4rem);
   line-height: 0.95;
+  text-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
 }
 
 .intro-copy p:last-child {
   max-width: 620px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.88);
   font-size: 1.08rem;
   line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.hero-actions .secondary {
+  color: var(--ink);
+  background: #ffce00;
+}
+
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.hero-stats span {
+  display: grid;
+  gap: 2px;
+  min-width: 116px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  padding: 12px;
+  color: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.hero-stats strong {
+  color: #fff;
+  font-size: 1.22rem;
 }
 
 .eyebrow {
@@ -129,20 +179,21 @@ button:disabled {
 
 .article-orbit {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   aspect-ratio: 1;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.92), transparent 36%),
-    rgba(255, 254, 250, 0.72);
+    radial-gradient(circle at 50% 50%, rgba(255, 206, 0, 0.28), transparent 34%),
+    rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
   box-shadow: var(--shadow);
 }
 
 .article-orbit::before {
   position: absolute;
   inset: 25%;
-  border: 1px dashed rgba(32, 33, 36, 0.18);
+  border: 1px dashed rgba(255, 255, 255, 0.35);
   border-radius: inherit;
   content: "";
 }
@@ -180,38 +231,50 @@ button:disabled {
 
 .hero-gallery {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 14px;
-  margin: 12px 0 0;
+  margin: 14px 0 0;
 }
 
 .hero-gallery figure {
+  position: relative;
   display: grid;
-  grid-template-rows: 150px auto;
-  gap: 10px;
   margin: 0;
-  border: 1px solid rgba(32, 33, 36, 0.1);
+  min-height: 154px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   overflow: hidden;
-  background: rgba(255, 254, 250, 0.78);
+  background: rgba(255, 254, 250, 0.18);
   box-shadow: var(--soft-shadow);
+}
+
+.hero-gallery .feature-card {
+  grid-column: span 2;
 }
 
 .hero-gallery img {
   width: 100%;
-  height: 150px;
+  height: 100%;
   object-fit: cover;
   display: block;
+  filter: saturate(1.08) contrast(1.04);
 }
 
 .hero-gallery figcaption {
-  color: var(--ink);
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  border-radius: 8px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(8px);
   font-size: 0.82rem;
   font-weight: 900;
-  padding: 0 10px 12px;
+  padding: 8px 10px;
   text-align: center;
 }
 
@@ -1142,6 +1205,10 @@ td {
 
   .hero-gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero-gallery .feature-card {
+    grid-column: span 1;
   }
 }
 

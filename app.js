@@ -4526,6 +4526,12 @@ homeTab.addEventListener("click", showHome);
 learningTab.addEventListener("click", showLearningPath);
 examTab.addEventListener("click", showExamGuide);
 knowledgeTab.addEventListener("click", showKnowledgeIntro);
+document.querySelectorAll("[data-hero-target]").forEach((button) => {
+  button.addEventListener("click", () => {
+    if (button.dataset.heroTarget === "learning") showLearningPath();
+    if (button.dataset.heroTarget === "exam") showExamGuide();
+  });
+});
 startButton.addEventListener("click", startQuiz);
 resourceTab.addEventListener("click", showResources);
 dashboardTab.addEventListener("click", showDashboard);
