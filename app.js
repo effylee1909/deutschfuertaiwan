@@ -3759,13 +3759,10 @@ function getLessonCards(lesson) {
 function renderTextbookLesson(lesson) {
   const content = lesson.textbook || textbookLessons[lesson.level]?.[lesson.stage];
   if (!content) return;
-  const readingLines = lesson.level === "B1"
-    ? content.text.split(/(?<=[.!?])\s+/).filter(Boolean)
-    : [content.text];
 
   lessonReadingEl.innerHTML = `
     <h3>${content.title}</h3>
-    ${readingLines.map((line) => `<p>${line}</p>`).join("")}
+    <p>${content.text}</p>
   `;
 
   lessonVocabularyEl.innerHTML = content.vocab
