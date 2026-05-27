@@ -1712,6 +1712,9 @@ const lessonPanel = document.querySelector("#lesson-panel");
 const examGuidePanel = document.querySelector("#exam-guide-panel");
 const sectionIntroContentEl = document.querySelector("#section-intro-content");
 const resourcesPanel = document.querySelector("#resources-panel");
+const resourcesTitleEl = document.querySelector("#resources-title");
+const resourcesDescriptionEl = document.querySelector("#resources-description");
+const resourcePageTabsWrap = document.querySelector("#resource-page-tabs");
 const dashboardPanel = document.querySelector("#dashboard-panel");
 const quizTitleEl = document.querySelector("#quiz-title");
 const scoreEl = document.querySelector("#score");
@@ -1979,6 +1982,9 @@ function showResources() {
   renderLessonList();
   resourceTab.dataset.active = "true";
   levelTextEl.textContent = "常用單字與動詞：可下載表格複習";
+  resourcesTitleEl.textContent = "複習表格";
+  resourcesDescriptionEl.textContent = "這裡整理常用德文單字和動詞變化，可下載成 CSV 後用 Excel 或 Google Sheets 複習。";
+  resourcePageTabsWrap.hidden = false;
   renderResourceTables();
   showResourcePage("vocab");
   saveAppView("resources");
@@ -1996,6 +2002,9 @@ function showPlatforms() {
   platformTab.dataset.active = "true";
   renderLessonList();
   levelTextEl.textContent = "德文公開平台：新聞與閱讀練習連結";
+  resourcesTitleEl.textContent = "德文公開平台";
+  resourcesDescriptionEl.textContent = "這裡整理可增進德文閱讀能力的公開新聞與學習平台。";
+  resourcePageTabsWrap.hidden = true;
   showResourcePage("platforms");
   saveAppView("platforms");
 }
