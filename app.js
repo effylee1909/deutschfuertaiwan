@@ -3497,10 +3497,46 @@ const lessonProverbs = [
   ["Geduld bringt Rosen.", "耐心會帶來成果。"],
   ["Reden ist Silber, Schweigen ist Gold.", "言語是銀，沉默是金。"],
   ["Wer A sagt, muss auch B sagen.", "開始了就要負責到底。"],
+  ["Morgenstund hat Gold im Mund.", "早起有好處。"],
+  ["Es ist noch kein Meister vom Himmel gefallen.", "沒有人天生就是高手。"],
+  ["Probieren geht über Studieren.", "實際嘗試勝過空想。"],
+  ["Wer nicht wagt, der nicht gewinnt.", "不冒險就不會成功。"],
+  ["Kommt Zeit, kommt Rat.", "時間到了自然有辦法。"],
+  ["Man lernt nie aus.", "學無止境。"],
+  ["Eile mit Weile.", "欲速則不達。"],
+  ["In der Ruhe liegt die Kraft.", "冷靜中有力量。"],
+  ["Erst denken, dann handeln.", "先思考再行動。"],
+  ["Kleider machen Leute.", "人靠衣裝。"],
+  ["Hunger ist der beste Koch.", "飢餓是最好的廚師。"],
+  ["Geteiltes Leid ist halbes Leid.", "痛苦分擔就減半。"],
+  ["Geteilte Freude ist doppelte Freude.", "快樂分享就加倍。"],
+  ["Der Ton macht die Musik.", "說話方式決定效果。"],
+  ["Wer suchet, der findet.", "有尋找就會找到。"],
+  ["Not macht erfinderisch.", "困境使人有創意。"],
+  ["Ein Bild sagt mehr als tausend Worte.", "一張圖勝過千言萬語。"],
+  ["Gut Ding will Weile haben.", "好事需要時間。"],
+  ["Jeder Anfang hat ein Ende.", "凡事有始也有終。"],
+  ["Wo ein Wille ist, ist auch ein Weg.", "有志者事竟成。"],
+  ["Lieber den Spatz in der Hand als die Taube auf dem Dach.", "把握眼前勝過空想。"],
+  ["Man soll den Tag nicht vor dem Abend loben.", "事情未定前不要太早高興。"],
+  ["Alte Liebe rostet nicht.", "舊情不易褪色。"],
+  ["Der Apfel fällt nicht weit vom Stamm.", "有其父母必有其子女。"],
+  ["Andere Länder, andere Sitten.", "不同國家有不同習俗。"],
+  ["Lügen haben kurze Beine.", "謊言很快會被揭穿。"],
+  ["Papier ist geduldig.", "紙上承諾未必可靠。"],
+  ["Das Auge isst mit.", "食物也要看起來好。"],
+  ["Wer rastet, der rostet.", "不前進就會退步。"],
+  ["Keine Antwort ist auch eine Antwort.", "不回答也是一種回答。"],
+  ["Der Zweck heiligt nicht die Mittel.", "目的不能正當化手段。"],
+  ["Vertrauen ist gut, Kontrolle ist besser.", "信任很好，查證更好。"],
+  ["Der Klügere gibt nach.", "聰明人懂得退讓。"],
+  ["Ein Unglück kommt selten allein.", "禍不單行。"],
+  ["Aus Schaden wird man klug.", "吃一塹長一智。"],
+  ["Neue Besen kehren gut.", "新官上任三把火。"],
 ];
 
 function getLessonProverb(level, lessonNumber) {
-  const levelOffset = levelOrder.indexOf(level) * 3;
+  const levelOffset = levelOrder.indexOf(level) * 12;
   const [german, chinese] = lessonProverbs[(lessonNumber - 1 + levelOffset) % lessonProverbs.length];
   return { german, chinese };
 }
