@@ -403,7 +403,6 @@ button:disabled {
 }
 
 .quiz-tree-item {
-  border-color: var(--line);
   background: #fff;
 }
 
