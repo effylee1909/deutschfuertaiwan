@@ -1750,7 +1750,7 @@ function renderLessonList() {
 
     const levelGroup = document.createElement("details");
     levelGroup.className = "level-folder";
-    levelGroup.open = activeLesson.level === level || level === "A1";
+    levelGroup.open = activeLesson.level === level;
     levelGroup.innerHTML = `
       <summary>
         <span class="level-chip">${level}</span>
