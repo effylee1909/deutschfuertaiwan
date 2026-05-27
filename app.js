@@ -2690,7 +2690,7 @@ function initializeLessons() {
     lesson.topic = `${topicData.zh} · ${topicData.de}`;
     lesson.navTitle = `${lesson.lessonCode} ${lesson.topic}`;
     lesson.textbook = createTextbookContent(lesson.level, lesson.lessonNumber, topicData);
-    if (lesson.level === "A1" && lesson.textbook?.storyTitleZh) {
+    if (lesson.textbook?.storyTitleZh) {
       lesson.topicZh = lesson.textbook.storyTitleZh;
       lesson.topicDe = lesson.textbook.storyTitleDe;
       lesson.topic = `${lesson.topicZh} · ${lesson.topicDe}`;
@@ -2892,14 +2892,139 @@ const a1LessonDetails = [
   "Die Lehrerin verteilt kleine Karten mit Aufgaben. Jede Person liest, hört, schreibt oder spricht. Am Ende markieren alle zwei Wörter, die sie noch üben möchten.",
 ];
 
+const a2LessonPlans = [
+  {
+    titleZh: "台南週末",
+    titleDe: "Ein Wochenende in Tainan",
+    focusZh: "完成式敘述經驗",
+    text: "Am Samstag ist Emma mit dem Zug nach Tainan gefahren. Sie hat eine Fahrkarte gekauft und am Bahnhof auf Tom gewartet. Zusammen haben sie die alte Stadt besucht, viele Fotos gemacht und in einem kleinen Restaurant gegessen. Am Abend hat Emma ihrer Freundin eine Nachricht geschrieben und von dem schönen Ausflug erzählt.",
+    vocab: [["das Wochenende", "週末", "die Wochenenden"], ["die Reise", "旅行", "die Reisen"], ["der Ausflug", "郊遊", "die Ausflüge"], ["der Zug", "火車", "die Züge"], ["die Fahrkarte", "車票", "die Fahrkarten"], ["besuchen", "拜訪；參觀", ""], ["erleben", "經歷", ""], ["erzählen", "敘述", ""], ["fotografieren", "拍照", ""], ["zurückkommen", "回來", ""]],
+    extraVocab: [["der Bahnhof", "車站", "die Bahnhöfe"], ["zusammen", "一起", ""], ["alt", "舊的；古老的", ""], ["das Restaurant", "餐廳", "die Restaurants"], ["schön", "美好的", ""]],
+  },
+  {
+    titleZh: "改時間的電話",
+    titleDe: "Ein Anruf in der Praxis",
+    focusZh: "預約、改期與禮貌電話",
+    text: "Lucas hat am Freitag einen Arzttermin. Leider schreibt seine Lehrerin genau für diese Zeit einen Test. Deshalb ruft Lucas in der Praxis an. Er spricht langsam, nennt seinen Namen und fragt nach einem neuen Termin. Die Assistentin schaut in den Kalender und schlägt Dienstagvormittag vor. Lucas notiert die Uhrzeit und bestätigt den Termin höflich.",
+    vocab: [["der Arzttermin", "看診預約", "die Arzttermine"], ["die Praxis", "診所", "die Praxen"], ["der Kalender", "行事曆", "die Kalender"], ["die Uhrzeit", "時間點", "die Uhrzeiten"], ["der Freitag", "星期五", "die Freitage"], ["verschieben", "延期；改期", ""], ["anrufen", "打電話", ""], ["passen", "合適", ""], ["notieren", "記下", ""], ["bestätigen", "確認", ""]],
+    extraVocab: [["leider", "可惜；很遺憾", ""], ["die Assistentin", "助理", "die Assistentinnen"], ["vorschlagen", "提議", ""], ["höflich", "有禮貌的", ""], ["der Vormittag", "上午", "die Vormittage"]],
+  },
+  {
+    titleZh: "課程通知",
+    titleDe: "Eine Nachricht vom Kurs",
+    focusZh: "讀懂通知與回信",
+    text: "Mia bekommt am Abend eine E-Mail vom Deutschkurs. Im Betreff steht: Raumänderung am Mittwoch. Der Kurs findet nicht im Raum 204 statt, sondern im Raum 310. Mia liest die Nachricht zweimal, markiert die wichtigste Information und antwortet kurz. Sie schreibt, dass sie die Änderung verstanden hat und rechtzeitig kommt.",
+    vocab: [["die E-Mail", "電子郵件", "die E-Mails"], ["der Betreff", "主旨", "die Betreffe"], ["die Änderung", "變更", "die Änderungen"], ["der Raum", "教室；房間", "die Räume"], ["die Information", "資訊", "die Informationen"], ["lesen", "閱讀", ""], ["antworten", "回覆", ""], ["schicken", "寄送", ""], ["beachten", "注意", ""], ["verstehen", "理解", ""]],
+    extraVocab: [["stattfinden", "舉行", ""], ["sondern", "而是", ""], ["zweimal", "兩次", ""], ["markieren", "標記", ""], ["rechtzeitig", "準時地", ""]],
+  },
+  {
+    titleZh: "第一次看房",
+    titleDe: "Die erste Wohnungsbesichtigung",
+    focusZh: "租屋、房間描述與費用",
+    text: "Noah sucht ein Zimmer in Berlin. Am Nachmittag besichtigt er eine kleine Wohnung. Das Zimmer ist hell und ruhig, aber die Miete ist hoch. In der Küche gibt es einen Tisch und zwei Stühle. Die Vermieterin erklärt den Vertrag und die Kaution. Noah möchte noch eine Nacht darüber nachdenken.",
+    vocab: [["die Wohnung", "公寓", "die Wohnungen"], ["das Zimmer", "房間", "die Zimmer"], ["die Miete", "房租", "die Mieten"], ["die Küche", "廚房", "die Küchen"], ["das Bad", "浴室", "die Bäder"], ["besichtigen", "參觀", ""], ["suchen", "尋找", ""], ["wohnen", "居住", ""], ["zahlen", "支付", ""], ["unterschreiben", "簽名", ""]],
+    extraVocab: [["hell", "明亮的", ""], ["ruhig", "安靜的", ""], ["die Kaution", "押金", "die Kautionen"], ["der Vertrag", "合約", "die Verträge"], ["nachdenken", "思考", ""]],
+  },
+  {
+    titleZh: "錯過轉車",
+    titleDe: "Der verpasste Anschluss",
+    focusZh: "交通問題與詢問協助",
+    text: "Sophie fährt nach Köln und muss in Frankfurt umsteigen. Der erste Zug hat Verspätung, deshalb verpasst sie den Anschluss. Auf dem Bahnsteig hört sie eine Durchsage, aber sie versteht nicht alles. Am Schalter fragt sie nach der nächsten Verbindung. Der Mitarbeiter erklärt eine Lösung und schreibt die neue Abfahrtszeit auf.",
+    vocab: [["der Anschluss", "銜接班次", "die Anschlüsse"], ["die Verspätung", "延誤", "die Verspätungen"], ["der Bahnsteig", "月台", "die Bahnsteige"], ["die Verbindung", "交通連接", "die Verbindungen"], ["das Ticket", "票", "die Tickets"], ["verpassen", "錯過", ""], ["warten", "等待", ""], ["fragen", "詢問", ""], ["umsteigen", "轉車", ""], ["weiterfahren", "繼續搭乘", ""]],
+    extraVocab: [["die Durchsage", "廣播", "die Durchsagen"], ["der Schalter", "櫃台", "die Schalter"], ["die Lösung", "解決方式", "die Lösungen"], ["die Abfahrtszeit", "發車時間", "die Abfahrtszeiten"], ["nächst", "下一個的", ""]],
+  },
+  {
+    titleZh: "小組專案",
+    titleDe: "Das Gruppenprojekt",
+    focusZh: "計畫、分工與報告",
+    text: "Im Deutschkurs arbeitet eine Gruppe an einem Projekt über Freizeit in Taiwan. Olivia erstellt den Plan, Ben sammelt Bilder und Daniel bereitet die Präsentation vor. Sie besprechen die Aufgaben nach dem Unterricht und setzen eine Deadline. Jeder erledigt einen Abschnitt. Am Ende üben sie den Vortrag gemeinsam.",
+    vocab: [["das Projekt", "專案", "die Projekte"], ["die Aufgabe", "任務", "die Aufgaben"], ["die Präsentation", "簡報", "die Präsentationen"], ["die Gruppe", "小組", "die Gruppen"], ["der Vortrag", "報告", "die Vorträge"], ["planen", "規劃", ""], ["vorbereiten", "準備", ""], ["besprechen", "討論", ""], ["erledigen", "完成", ""], ["organisieren", "組織安排", ""]],
+    extraVocab: [["die Deadline", "截止期限", "die Deadlines"], ["gemeinsam", "共同地", ""], ["der Abschnitt", "段落；部分", "die Abschnitte"], ["erstellen", "製作", ""], ["sammeln", "收集", ""]],
+  },
+  {
+    titleZh: "哪條路更好",
+    titleDe: "Der bessere Weg",
+    focusZh: "比較級與建議",
+    text: "Nach dem Kino wollen Grace und Henry schnell nach Hause. Grace möchte den Bus nehmen, weil er günstiger ist. Henry findet das Fahrrad praktischer, denn der Weg ist kürzer. Sie vergleichen beide Routen auf dem Handy. Schließlich empfiehlt Grace den Bus, weil es schon dunkel ist und die Haltestelle direkt vor dem Kino liegt.",
+    vocab: [["der Weg", "路", "die Wege"], ["die Route", "路線", "die Routen"], ["der Bus", "公車", "die Busse"], ["das Fahrrad", "腳踏車", "die Fahrräder"], ["die Empfehlung", "建議", "die Empfehlungen"], ["schneller", "更快的", ""], ["günstiger", "更便宜的", ""], ["besser", "更好的", ""], ["vergleichen", "比較", ""], ["empfehlen", "推薦", ""]],
+    extraVocab: [["praktisch", "實用的", ""], ["kürzer", "較短的", ""], ["schließlich", "最後", ""], ["dunkel", "暗的", ""], ["die Haltestelle", "站牌", "die Haltestellen"]],
+  },
+  {
+    titleZh: "下課後的行程",
+    titleDe: "Nach dem Unterricht",
+    focusZh: "Dativ 介系詞",
+    text: "Nach dem Unterricht geht Lily mit Max zur Bibliothek. Sie lernen dort für den Test. Danach fährt Lily zu ihren Eltern, weil sie zusammen essen. Max bleibt bei Julia und arbeitet an einem Referat. Am Abend kommt Lily von ihren Eltern zurück und legt die Bücher auf den Schreibtisch.",
+    vocab: [["der Unterricht", "課程", "die Unterrichte"], ["die Bibliothek", "圖書館", "die Bibliotheken"], ["die Eltern", "父母", "die Eltern"], ["der Test", "小考", "die Tests"], ["das Referat", "口頭報告", "die Referate"], ["mit", "和；用", ""], ["nach", "在……之後；往", ""], ["bei", "在……那裡", ""], ["von", "從", ""], ["zu", "到", ""]],
+    extraVocab: [["danach", "之後", ""], ["zurück", "回來", ""], ["legen", "放置", ""], ["der Schreibtisch", "書桌", "die Schreibtische"], ["zusammen essen", "一起吃飯", ""]],
+  },
+  {
+    titleZh: "雨天計畫",
+    titleDe: "Wenn es regnet",
+    focusZh: "weil、dass、wenn 子句",
+    text: "Die Klasse möchte am Freitag draußen Sport machen. Am Morgen sieht Jack aber dunkle Wolken. Er schreibt der Gruppe, dass es vielleicht regnet. Die Lehrerin antwortet, dass sie den Plan ändern können. Wenn es stark regnet, bleiben alle im Klassenraum. Weil die Schüler trotzdem aktiv sein möchten, machen sie dort kleine Übungen.",
+    vocab: [["der Regen", "雨", "die Regen"], ["der Grund", "理由", "die Gründe"], ["die Mitteilung", "通知", "die Mitteilungen"], ["die Möglichkeit", "可能性", "die Möglichkeiten"], ["der Klassenraum", "教室", "die Klassenräume"], ["weil", "因為", ""], ["dass", "引導受詞子句", ""], ["wenn", "如果；當", ""], ["absagen", "取消", ""], ["bleiben", "停留", ""]],
+    extraVocab: [["draußen", "在外面", ""], ["vielleicht", "也許", ""], ["stark", "強烈的", ""], ["trotzdem", "儘管如此", ""], ["die Übung", "練習", "die Übungen"]],
+  },
+  {
+    titleZh: "市民服務中心",
+    titleDe: "Im Bürgerbüro",
+    focusZh: "表格、申請與官方文件",
+    text: "Emily geht am Montag ins Bürgerbüro, weil sie eine neue Adresse anmelden muss. Zuerst nimmt sie eine Nummer. Dann füllt sie ein Formular aus und legt ihren Ausweis dazu. Der Mitarbeiter prüft den Antrag und bittet um eine Unterschrift. Emily fragt, ob ein weiteres Dokument fehlt. Alles ist vollständig, und sie bekommt eine Bestätigung.",
+    vocab: [["das Formular", "表格", "die Formulare"], ["der Antrag", "申請", "die Anträge"], ["die Unterschrift", "簽名", "die Unterschriften"], ["der Ausweis", "證件", "die Ausweise"], ["die Behörde", "政府機關", "die Behörden"], ["ausfüllen", "填寫", ""], ["abgeben", "繳交", ""], ["prüfen", "檢查", ""], ["brauchen", "需要", ""], ["öffnen", "打開", ""]],
+    extraVocab: [["das Bürgerbüro", "市民服務中心", "die Bürgerbüros"], ["anmelden", "登記", ""], ["die Adresse", "地址", "die Adressen"], ["vollständig", "完整的", ""], ["die Bestätigung", "確認文件", "die Bestätigungen"]],
+  },
+  {
+    titleZh: "生日邀請",
+    titleDe: "Die Geburtstagseinladung",
+    focusZh: "邀請、接受、拒絕與改期",
+    text: "Ethan bekommt eine Einladung zu Annas Geburtstag. Die Feier ist am Samstagabend, aber Ethan muss arbeiten. Er schreibt Anna sofort eine freundliche Antwort. Er bedankt sich, sagt leider ab und fragt nach einem Treffen am Sonntag. Anna freut sich über die ehrliche Nachricht und schlägt Kaffee und Kuchen am Nachmittag vor.",
+    vocab: [["die Einladung", "邀請", "die Einladungen"], ["der Geburtstag", "生日", "die Geburtstage"], ["die Feier", "慶祝會", "die Feiern"], ["die Absage", "拒絕；取消", "die Absagen"], ["die Antwort", "回覆", "die Antworten"], ["einladen", "邀請", ""], ["zusagen", "答應出席", ""], ["neu planen", "重新安排", ""], ["treffen", "見面", ""], ["sich bedanken", "道謝", ""]],
+    extraVocab: [["sofort", "立刻", ""], ["ehrlich", "誠實的", ""], ["sich freuen", "感到高興", ""], ["der Kuchen", "蛋糕", "die Kuchen"], ["am Nachmittag", "下午", ""]],
+  },
+  {
+    titleZh: "考前任務日",
+    titleDe: "Ein Tag vor der Prüfung",
+    focusZh: "A2 綜合任務",
+    text: "Am Tag vor der Prüfung trifft sich die Lerngruppe in der Schule. Zuerst wiederholen sie wichtige Wörter, danach lesen sie einen Lesetext und markieren die Hauptinformationen. Maya schreibt eine kurze E-Mail, während Paul einen Dialog trainiert. Zum Schluss sprechen alle über typische Fehler und wählen eine Strategie für den nächsten Tag.",
+    vocab: [["die Prüfung", "考試", "die Prüfungen"], ["der Dialog", "對話", "die Dialoge"], ["der Lesetext", "閱讀文本", "die Lesetexte"], ["die Hauptinformation", "主要資訊", "die Hauptinformationen"], ["der Fehler", "錯誤", "die Fehler"], ["wiederholen", "複習", ""], ["unterstreichen", "畫線標示", ""], ["schreiben", "書寫", ""], ["sprechen", "說話", ""], ["trainieren", "訓練", ""]],
+    extraVocab: [["die Lerngruppe", "讀書小組", "die Lerngruppen"], ["zuerst", "首先", ""], ["während", "當……期間", ""], ["typisch", "典型的", ""], ["die Strategie", "策略", "die Strategien"]],
+  },
+];
+
+const a2LessonDetails = [
+  "Am Sonntag hat Emma die Bilder sortiert und einen kurzen Bericht geschrieben. Sie hat gemerkt, dass sie im Perfekt besser erzählen kann, wenn sie zuerst die Zeit und dann die Handlung nennt.",
+  "Nach dem Telefonat speichert Lucas den Termin im Handy. Er wiederholt: Ich habe den Termin verschoben, weil ich am Freitag keine Zeit habe. So übt er einen klaren Grund und eine höfliche Bitte.",
+  "Am nächsten Tag fragt die Lehrerin, wer die E-Mail verstanden hat. Mia erklärt den neuen Raum und die Uhrzeit. Danach schreiben alle eine kurze Antwort mit Anrede, Hauptsatz und Gruß.",
+  "Noah vergleicht die Wohnung mit zwei anderen Zimmern. Er schreibt eine Liste mit Vorteilen und Nachteilen. Besonders wichtig sind ihm Miete, Lage, Licht und eine ruhige Umgebung.",
+  "Sophie bleibt ruhig und liest die Anzeige auf dem Bildschirm. Sie lernt, dass sie bei Problemen nach Verbindung, Bahnsteig und Abfahrtszeit fragen kann.",
+  "Die Gruppe teilt die Arbeit fair auf. Jeder sagt, was er bis Mittwoch macht. Danach schreibt Olivia eine kurze Zusammenfassung, damit alle den gleichen Plan haben.",
+  "Grace und Henry erklären ihre Entscheidung. Grace benutzt den Komparativ: Der Bus ist günstiger. Henry sagt: Das Fahrrad ist schneller. Am Ende wählen sie die sicherere Lösung.",
+  "Lily markiert alle Dativformen im Text. Sie sieht, dass nach mit, bei, von, zu und nach oft eine feste Form steht. Danach schreibt sie fünf eigene Sätze.",
+  "Die Lehrerin sammelt die Sätze an der Tafel. Die Klasse übt die Verbposition am Ende des Nebensatzes. Danach formulieren die Schüler eigene Pläne für Regen und Sonne.",
+  "Emily liest jedes Feld langsam, bevor sie schreibt. Sie fragt nach, wenn sie ein Wort nicht versteht. So übt sie Sprache, die man bei Behörden wirklich braucht.",
+  "Ethan liest seine Antwort noch einmal, damit sie freundlich klingt. Er benutzt eine Entschuldigung, einen Grund und einen neuen Vorschlag. So bleibt die Einladung positiv.",
+  "Die Lerngruppe arbeitet mit einem Timer. Jede Person übernimmt eine Aufgabe: Lesen, Schreiben, Hören oder Sprechen. Am Ende notieren sie drei Punkte, die sie morgen zuerst wiederholen.",
+];
+
+const lessonPlanSets = { A1: a1LessonPlans, A2: a2LessonPlans };
+const lessonDetailSets = { A1: a1LessonDetails, A2: a2LessonDetails };
+
+function getStoryLessonPlan(level, lessonNumber) {
+  return lessonPlanSets[level]?.[lessonNumber - 1] || null;
+}
+
+function getStoryLessonDetail(level, lessonNumber) {
+  return lessonDetailSets[level]?.[lessonNumber - 1] || "";
+}
+
 function createTextbookContent(level, lessonNumber, topicData) {
   const normalizedTopic = normalizeTopicData(topicData);
-  const plan = level === "A1" ? a1LessonPlans[lessonNumber - 1] : null;
+  const plan = getStoryLessonPlan(level, lessonNumber);
   const vocab = plan ? plan.vocab : createLessonVocabulary(level, lessonNumber, normalizedTopic);
   const grammar = createLessonGrammar(level, lessonNumber, normalizedTopic);
   return {
     title: plan ? `${level} L${lessonNumber}: ${plan.titleZh} · ${plan.titleDe}` : `${level} L${lessonNumber}: ${normalizedTopic.zh} · ${normalizedTopic.de}`,
-    text: plan ? `${plan.text} ${a1LessonDetails[lessonNumber - 1]}` : createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
+    text: plan ? `${plan.text} ${getStoryLessonDetail(level, lessonNumber)}` : createReadingText(level, normalizedTopic.de, lessonNumber, vocab),
     focus: plan ? plan.focusZh : normalizedTopic.zh,
     storyTitleZh: plan?.titleZh,
     storyTitleDe: plan?.titleDe,
