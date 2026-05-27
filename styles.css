@@ -510,6 +510,15 @@ button:disabled {
   gap: 0;
 }
 
+.mini-vocab-list--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 18px;
+}
+
+.textbook-box--wide {
+  grid-column: span 2;
+}
+
 .mini-vocab-list div,
 .grammar-list div {
   display: grid;
@@ -517,6 +526,16 @@ button:disabled {
   border-top: 1px solid var(--line);
   padding: 12px 0;
   line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .mini-vocab-list--two {
+    grid-template-columns: 1fr;
+  }
+
+  .textbook-box--wide {
+    grid-column: auto;
+  }
 }
 
 .mini-vocab-list small {

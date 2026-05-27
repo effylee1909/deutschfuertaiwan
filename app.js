@@ -3765,6 +3765,14 @@ function renderTextbookLesson(lesson) {
     <p>${content.text}</p>
   `;
 
+  const hasExtraVocab = Boolean(content.extraVocab?.length);
+  const useWideVocab = lesson.level === "B2" && !hasExtraVocab;
+  lessonVocabularyEl.classList.toggle("mini-vocab-list--two", useWideVocab);
+  lessonVocabularyEl.closest(".textbook-box")?.classList.toggle("textbook-box--wide", useWideVocab);
+  if (lessonExtraVocabularyEl.closest(".textbook-box")) {
+    lessonExtraVocabularyEl.closest(".textbook-box").hidden = useWideVocab;
+  }
+
   lessonVocabularyEl.innerHTML = content.vocab
     .map(([german, chinese, plural]) => `
       <div>
@@ -3775,7 +3783,7 @@ function renderTextbookLesson(lesson) {
     `)
     .join("");
 
-  lessonExtraVocabularyEl.innerHTML = (content.extraVocab?.length ? content.extraVocab : [["-", "本課暫無課外單字", ""]])
+  lessonExtraVocabularyEl.innerHTML = (hasExtraVocab ? content.extraVocab : [["-", "本課暫無課外單字", ""]])
     .map(([german, chinese, plural]) => `
       <div>
         <strong>${german}</strong>
