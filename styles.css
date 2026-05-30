@@ -566,60 +566,47 @@ button:disabled {
   font-size: 1.02rem;
 }
 
-.writing-panel {
-  margin-top: 18px;
+.writing-example-stack {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.writing-example-card {
+  display: grid;
+  gap: 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 20px;
+  padding: 18px;
   background: #fff;
   box-shadow: var(--soft-shadow);
-}
-
-.writing-panel .section-heading {
-  margin-bottom: 12px;
-}
-
-.writing-panel h3 {
-  margin: 0;
-  font-size: 1.08rem;
-}
-
-.writing-grid {
-  display: grid;
-  grid-template-columns: 1fr 0.8fr 1.25fr;
-  gap: 14px;
-}
-
-.writing-grid article {
-  border-top: 1px solid var(--line);
-  padding-top: 12px;
   line-height: 1.65;
 }
 
-.writing-grid span {
+.writing-example-card h4 {
+  margin: 0 0 6px;
+  font-size: 1.08rem;
+}
+
+.writing-example-card span,
+.writing-example-card small {
   display: block;
   color: var(--muted);
-  font-size: 0.82rem;
-  margin-bottom: 6px;
 }
 
-.writing-grid strong {
+.writing-example-card section {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.writing-example-card strong {
   display: block;
   margin-bottom: 6px;
 }
 
-.writing-grid p,
-.writing-grid ul {
+.writing-example-card p {
   margin: 0;
-}
-
-.writing-grid ul {
-  padding-left: 18px;
-}
-
-.writing-model {
-  border-left: 4px solid var(--gold);
-  padding-left: 14px;
+  max-width: 92ch;
 }
 
 .mini-vocab-list,
@@ -1242,10 +1229,6 @@ td {
   }
 
   .textbook-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .writing-grid {
     grid-template-columns: 1fr;
   }
 

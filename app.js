@@ -1516,6 +1516,41 @@ const verbRows = [
   { verb: "beweisen", chinese: "證明", ich: "beweise", du: "beweist", third: "beweist", plural: "beweisen" },
 ];
 
+const writingExampleRows = [
+  {
+    level: "A1",
+    title: "Kurze Nachricht",
+    format: "Anrede · 3-4 kurze Sätze · Gruß",
+    task: "Sie können heute nicht zum Deutschkurs kommen. Schreiben Sie an Ihre Lehrerin: Entschuldigung, Grund, Bitte um Hausaufgaben.",
+    sample: "Sehr geehrte Frau Weber,\n\nich kann heute leider nicht zum Deutschkurs kommen. Ich bin krank und muss zu Hause bleiben. Morgen komme ich wieder in den Kurs. Können Sie mir bitte die Hausaufgaben per E-Mail schicken?\n\nViele Grüße\nAnna Schmidt",
+    note: "約 35-45 Wörter",
+  },
+  {
+    level: "A2",
+    title: "Private E-Mail",
+    format: "Anrede · Einleitung · 3 Inhaltspunkte · Schluss",
+    task: "Sie möchten am Wochenende mit einem Freund lernen. Schreiben Sie: warum Sie lernen möchten, wann und wo Sie sich treffen, was Ihr Freund mitbringen soll.",
+    sample: "Lieber Ben,\n\nwie geht es dir? Ich möchte am Samstag Deutsch lernen, weil wir nächste Woche einen Test schreiben. Ich bin bei der Grammatik noch unsicher und möchte auch die neuen Wörter wiederholen. Hast du am Nachmittag Zeit? Wir können uns um 15 Uhr in der Bibliothek treffen. Dort ist es ruhig und wir können gut arbeiten. Bitte bring dein Kursbuch, dein Heft und die Wortkarten mit. Wenn du möchtest, können wir zuerst die Übungen vergleichen und danach kurze Texte schreiben. Danach können wir noch einen Kaffee trinken.\n\nViele Grüße\nAnna",
+    note: "約 70-90 Wörter",
+  },
+  {
+    level: "B1",
+    title: "E-Mail mit drei Inhaltspunkten",
+    format: "Anrede · Einleitung · Inhaltspunkte mit Begründung · Vorschlag · Gruß",
+    task: "Ein Freund konnte nicht zu Ihrer Geburtstagsfeier kommen. Schreiben Sie: Wie war die Feier? Welches Geschenk fanden Sie besonders gut und warum? Machen Sie einen Vorschlag für ein Treffen.",
+    sample: "Lieber Max,\n\nschade, dass du wegen deiner Erkältung nicht zu meiner Geburtstagsfeier kommen konntest. Die Feier war sehr schön und die Stimmung war den ganzen Abend sehr locker. Viele Freunde aus dem Deutschkurs waren da, und wir haben zusammen gekocht, Musik gehört und lange geredet. Am Anfang haben wir Pizza gemacht, später hat Mia noch einen Kuchen mitgebracht. Besonders gefreut habe ich mich über ein Wörterbuch, das mir meine Schwester geschenkt hat, weil ich es für die Prüfungsvorbereitung gut gebrauchen kann. Außerdem finde ich es praktisch, dass es viele Beispielsätze enthält und nicht zu schwer ist.\n\nWenn du wieder gesund bist, können wir uns gern treffen. Hast du nächste Woche Freitag Zeit? Dann erzähle ich dir alles genauer, und wir können zusammen essen gehen.\n\nLiebe Grüße\nAnna",
+    note: "約 120-150 Wörter",
+  },
+  {
+    level: "B2",
+    title: "Forumsbeitrag",
+    format: "Einleitung · Meinung · Gründe · Alternativen/Vorteile · Fazit",
+    task: "Schreiben Sie einen Forumsbeitrag zum Thema Plastikverpackungen im Alltag. Äußern Sie Ihre Meinung, nennen Sie Gründe für die Verbreitung, beschreiben Sie Alternativen und deren Vorteile.",
+    sample: "In vielen Geschäften werden Lebensmittel und andere Produkte noch immer in Plastik verpackt. Meiner Meinung nach ist das problematisch, weil dadurch große Mengen Müll entstehen und die Umwelt langfristig belastet wird. Besonders kritisch sehe ich Einwegverpackungen, die nur wenige Minuten benutzt werden, aber jahrelang in der Natur bleiben. Trotzdem greifen viele Menschen zu Plastikverpackungen, denn sie sind leicht, billig und hygienisch. Für Hersteller sind sie außerdem praktisch, weil Produkte gut transportiert und lange gelagert werden können. Auch Kundinnen und Kunden wählen oft die bequemste Lösung, wenn sie wenig Zeit haben.\n\nEs gibt jedoch sinnvolle Alternativen. Obst und Gemüse kann man unverpackt kaufen, Getränke können in Mehrwegflaschen verkauft werden, und für den Einkauf eignen sich Stofftaschen oder eigene Behälter. Der Vorteil solcher Lösungen besteht darin, dass weniger Abfall entsteht und Verbraucher bewusster einkaufen. Außerdem können Unternehmen durch bessere Verpackungen zeigen, dass sie Verantwortung übernehmen. Natürlich braucht die Umstellung Zeit, weil neue Systeme Geld kosten und organisiert werden müssen. Aber Politik, Unternehmen und Kunden können gemeinsam viel verändern.\n\nInsgesamt bin ich der Meinung, dass Plastikverpackungen deutlich reduziert werden sollten. Bequemlichkeit darf nicht wichtiger sein als Verantwortung für die Umwelt. Wenn umweltfreundliche Alternativen einfach zugänglich und bezahlbar sind, werden viele Menschen sie auch im Alltag nutzen.",
+    note: "約 190-230 Wörter",
+  },
+];
+
 const verbPrincipalRows = [
   { verb: "sein", chinese: "是", aux: "sein", participle: "gewesen", example: "Ich bin in Berlin gewesen.", ich: "war", du: "warst", third: "war", plural: "waren" },
   { verb: "haben", chinese: "有", aux: "haben", participle: "gehabt", example: "Ich habe Zeit gehabt.", ich: "hatte", du: "hattest", third: "hatte", plural: "hatten" },
@@ -1699,7 +1734,6 @@ const lessonReadingEl = document.querySelector("#lesson-reading");
 const lessonVocabularyEl = document.querySelector("#lesson-vocabulary");
 const lessonExtraVocabularyEl = document.querySelector("#lesson-extra-vocabulary");
 const lessonGrammarEl = document.querySelector("#lesson-grammar");
-const lessonWritingEl = document.querySelector("#lesson-writing");
 const lessonCardsEl = document.querySelector("#lesson-cards");
 const dailyPhrasesEl = document.querySelector("#daily-phrases");
 const sourceNoteEl = document.querySelector("#source-note");
@@ -1718,6 +1752,7 @@ const resourcesDescriptionEl = document.querySelector("#resources-description");
 const resourcePageTabsWrap = document.querySelector("#resource-page-tabs");
 const dashboardPanel = document.querySelector("#dashboard-panel");
 const quizTitleEl = document.querySelector("#quiz-title");
+const writingExamplesEl = document.querySelector("#writing-examples");
 const scoreEl = document.querySelector("#score");
 const totalEl = document.querySelector("#total");
 const progressBar = document.querySelector("#progress-bar");
@@ -2084,7 +2119,7 @@ function getSectionIntro(section) {
     },
     knowledge: {
       title: "知識整理庫",
-      items: ["單字表", "動詞變化表", "文法總表", "德文公開平台", "知識點地圖"],
+      items: ["單字表", "動詞變化表", "文法總表", "寫作範例", "德文公開平台", "知識點地圖"],
       body: "這裡整理可下載表格與作答弱點，方便課後複習與教學追蹤。",
     },
   }[section];
@@ -2133,6 +2168,8 @@ function renderResourceTables() {
 
   const vocabByLevel = groupVocabularyByLevel();
   const principalRows = getAllVerbPrincipalRows();
+
+  renderWritingExamples();
 
   grammarOverviewTableEl.innerHTML = grammarOverviewRows
     .map((row) => `
@@ -2219,6 +2256,31 @@ function renderResourceTables() {
         <td>${row.third}</td>
         <td>${row.plural}</td>
       </tr>
+    `)
+    .join("");
+}
+
+function renderWritingExamples() {
+  if (!writingExamplesEl) return;
+
+  writingExamplesEl.innerHTML = writingExampleRows
+    .map((row) => `
+      <article class="writing-example-card">
+        <div>
+          <p class="eyebrow">${row.level}</p>
+          <h4>${row.title}</h4>
+          <span>${row.format}</span>
+        </div>
+        <section>
+          <strong>Aufgabe</strong>
+          <p>${row.task}</p>
+        </section>
+        <section>
+          <strong>Mustertext</strong>
+          <p>${row.sample.replace(/\n/g, "<br>")}</p>
+        </section>
+        <small>${row.note}</small>
+      </article>
     `)
     .join("");
 }
@@ -3390,42 +3452,8 @@ function createTextbookContent(level, lessonNumber, topicData) {
     vocab,
     extraVocab: plan ? [...plan.extraVocab, ...enhancement.extraVocab] : [],
     grammar,
-    writing: createWritingGuide(level, lessonNumber, normalizedTopic, plan),
     proverb: getLessonProverb(level, lessonNumber),
   };
-}
-
-function createWritingGuide(level, lessonNumber, topicData, plan) {
-  const theme = plan?.titleDe || topicData.de;
-  const place = ["in der Schule", "im Kurs", "in der Stadt", "auf einer Reise"][lessonNumber % 4];
-  const guides = {
-    A1: {
-      type: "Formular / kurze Nachricht",
-      task: `Sie schreiben an eine Freundin. Thema: ${theme}. Schreiben Sie 3 kurze Sätze: Situation, Zeit, Bitte.`,
-      checklist: ["Name und Grund", "Zeit oder Ort", "eine Bitte"],
-      model: `Hallo Emma, ich bin heute ${place}. Wir lernen ${theme}. Kommst du um 16 Uhr? Viele Grüße Anna`,
-    },
-    A2: {
-      type: "private E-Mail",
-      task: `Schreiben Sie eine E-Mail an Ben. Thema: ${theme}. Schreiben Sie: Was ist passiert? Was planen Sie? Was soll Ben mitbringen?`,
-      checklist: ["Anrede und Schluss", "Vergangenheit + Plan", "eine höfliche Frage"],
-      model: `Lieber Ben, gestern haben wir im Kurs über ${theme} gesprochen. Am Samstag möchte ich die Wörter noch einmal üben. Kannst du bitte dein Heft und die Karten mitbringen? Dann lernen wir zusammen und trinken danach einen Kaffee. Viele Grüße Anna`,
-    },
-    B1: {
-      type: "E-Mail / Forumsbeitrag",
-      task: `Schreiben Sie einen Beitrag zum Thema ${theme}. Beschreiben Sie eine Erfahrung, nennen Sie einen Vorteil und geben Sie einen Rat.`,
-      checklist: ["klare Einleitung", "Begründung mit weil/deshalb", "Rat oder Vorschlag"],
-      model: `Ich habe mit dem Thema ${theme} gute Erfahrungen gemacht, weil man dabei viele Wörter aus dem Alltag benutzt. Besonders hilfreich ist es, zuerst kurze Notizen zu machen und danach einen zusammenhängenden Text zu schreiben. Deshalb würde ich anderen Lernenden empfehlen, nicht nur einzelne Wörter zu lernen, sondern sie sofort in eigenen Sätzen zu verwenden.`,
-    },
-    B2: {
-      type: "Meinungsbeitrag / formelle Nachricht",
-      task: `Verfassen Sie einen strukturierten Text zum Thema ${theme}. Stellen Sie die Situation dar, nennen Sie zwei Argumente und formulieren Sie ein Fazit.`,
-      checklist: ["Einleitung mit Thema", "zwei verbundene Argumente", "abschließende Bewertung"],
-      model: `Das Thema ${theme} spielt in vielen Alltagssituationen eine wichtige Rolle. Einerseits erleichtert eine gute Vorbereitung die Kommunikation, weil man schneller passende Wörter und Strukturen findet. Andererseits reicht reines Auswendiglernen nicht aus, wenn man spontan reagieren muss. Aus meiner Sicht sollten Lernende deshalb regelmäßig authentische Texte lesen, eigene Beispiele formulieren und Feedback nutzen. So wird Sprache nicht nur verstanden, sondern auch aktiv und sicher angewendet.`,
-    },
-  };
-
-  return guides[level] || guides.A1;
 }
 
 function createLessonGrammar(level, lessonNumber, topicData) {
@@ -4062,33 +4090,6 @@ function renderTextbookLesson(lesson) {
       </div>
     `)
     .join("");
-
-  if (lessonWritingEl) {
-    const writing = content.writing;
-    lessonWritingEl.innerHTML = writing ? `
-      <div class="section-heading">
-        <p class="eyebrow">Schreiben</p>
-        <h3>寫作範例</h3>
-      </div>
-      <div class="writing-grid">
-        <article>
-          <span>${writing.type}</span>
-          <strong>Aufgabe</strong>
-          <p>${writing.task}</p>
-        </article>
-        <article>
-          <span>Checkliste</span>
-          <strong>作答重點</strong>
-          <ul>${writing.checklist.map((item) => `<li>${item}</li>`).join("")}</ul>
-        </article>
-        <article class="writing-model">
-          <span>Beispiel</span>
-          <strong>範文</strong>
-          <p>${writing.model}</p>
-        </article>
-      </div>
-    ` : "";
-  }
 }
 
 function rotateArray(items, offset) {
