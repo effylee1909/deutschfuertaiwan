@@ -1699,6 +1699,7 @@ const lessonReadingEl = document.querySelector("#lesson-reading");
 const lessonVocabularyEl = document.querySelector("#lesson-vocabulary");
 const lessonExtraVocabularyEl = document.querySelector("#lesson-extra-vocabulary");
 const lessonGrammarEl = document.querySelector("#lesson-grammar");
+const lessonWritingEl = document.querySelector("#lesson-writing");
 const lessonCardsEl = document.querySelector("#lesson-cards");
 const dailyPhrasesEl = document.querySelector("#daily-phrases");
 const sourceNoteEl = document.querySelector("#source-note");
@@ -3389,8 +3390,42 @@ function createTextbookContent(level, lessonNumber, topicData) {
     vocab,
     extraVocab: plan ? [...plan.extraVocab, ...enhancement.extraVocab] : [],
     grammar,
+    writing: createWritingGuide(level, lessonNumber, normalizedTopic, plan),
     proverb: getLessonProverb(level, lessonNumber),
   };
+}
+
+function createWritingGuide(level, lessonNumber, topicData, plan) {
+  const theme = plan?.titleDe || topicData.de;
+  const place = ["in der Schule", "im Kurs", "in der Stadt", "auf einer Reise"][lessonNumber % 4];
+  const guides = {
+    A1: {
+      type: "Formular / kurze Nachricht",
+      task: `Sie schreiben an eine Freundin. Thema: ${theme}. Schreiben Sie 3 kurze Sätze: Situation, Zeit, Bitte.`,
+      checklist: ["Name und Grund", "Zeit oder Ort", "eine Bitte"],
+      model: `Hallo Emma, ich bin heute ${place}. Wir lernen ${theme}. Kommst du um 16 Uhr? Viele Grüße Anna`,
+    },
+    A2: {
+      type: "private E-Mail",
+      task: `Schreiben Sie eine E-Mail an Ben. Thema: ${theme}. Schreiben Sie: Was ist passiert? Was planen Sie? Was soll Ben mitbringen?`,
+      checklist: ["Anrede und Schluss", "Vergangenheit + Plan", "eine höfliche Frage"],
+      model: `Lieber Ben, gestern haben wir im Kurs über ${theme} gesprochen. Am Samstag möchte ich die Wörter noch einmal üben. Kannst du bitte dein Heft und die Karten mitbringen? Dann lernen wir zusammen und trinken danach einen Kaffee. Viele Grüße Anna`,
+    },
+    B1: {
+      type: "E-Mail / Forumsbeitrag",
+      task: `Schreiben Sie einen Beitrag zum Thema ${theme}. Beschreiben Sie eine Erfahrung, nennen Sie einen Vorteil und geben Sie einen Rat.`,
+      checklist: ["klare Einleitung", "Begründung mit weil/deshalb", "Rat oder Vorschlag"],
+      model: `Ich habe mit dem Thema ${theme} gute Erfahrungen gemacht, weil man dabei viele Wörter aus dem Alltag benutzt. Besonders hilfreich ist es, zuerst kurze Notizen zu machen und danach einen zusammenhängenden Text zu schreiben. Deshalb würde ich anderen Lernenden empfehlen, nicht nur einzelne Wörter zu lernen, sondern sie sofort in eigenen Sätzen zu verwenden.`,
+    },
+    B2: {
+      type: "Meinungsbeitrag / formelle Nachricht",
+      task: `Verfassen Sie einen strukturierten Text zum Thema ${theme}. Stellen Sie die Situation dar, nennen Sie zwei Argumente und formulieren Sie ein Fazit.`,
+      checklist: ["Einleitung mit Thema", "zwei verbundene Argumente", "abschließende Bewertung"],
+      model: `Das Thema ${theme} spielt in vielen Alltagssituationen eine wichtige Rolle. Einerseits erleichtert eine gute Vorbereitung die Kommunikation, weil man schneller passende Wörter und Strukturen findet. Andererseits reicht reines Auswendiglernen nicht aus, wenn man spontan reagieren muss. Aus meiner Sicht sollten Lernende deshalb regelmäßig authentische Texte lesen, eigene Beispiele formulieren und Feedback nutzen. So wird Sprache nicht nur verstanden, sondern auch aktiv und sicher angewendet.`,
+    },
+  };
+
+  return guides[level] || guides.A1;
 }
 
 function createLessonGrammar(level, lessonNumber, topicData) {
@@ -4027,6 +4062,33 @@ function renderTextbookLesson(lesson) {
       </div>
     `)
     .join("");
+
+  if (lessonWritingEl) {
+    const writing = content.writing;
+    lessonWritingEl.innerHTML = writing ? `
+      <div class="section-heading">
+        <p class="eyebrow">Schreiben</p>
+        <h3>寫作範例</h3>
+      </div>
+      <div class="writing-grid">
+        <article>
+          <span>${writing.type}</span>
+          <strong>Aufgabe</strong>
+          <p>${writing.task}</p>
+        </article>
+        <article>
+          <span>Checkliste</span>
+          <strong>作答重點</strong>
+          <ul>${writing.checklist.map((item) => `<li>${item}</li>`).join("")}</ul>
+        </article>
+        <article class="writing-model">
+          <span>Beispiel</span>
+          <strong>範文</strong>
+          <p>${writing.model}</p>
+        </article>
+      </div>
+    ` : "";
+  }
 }
 
 function rotateArray(items, offset) {
