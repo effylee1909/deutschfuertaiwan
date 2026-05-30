@@ -1753,6 +1753,7 @@ const resourcesDescriptionEl = document.querySelector("#resources-description");
 const resourcePageTabsWrap = document.querySelector("#resource-page-tabs");
 const dashboardPanel = document.querySelector("#dashboard-panel");
 const quizTitleEl = document.querySelector("#quiz-title");
+const writingLevelTabsEl = document.querySelector("#writing-level-tabs");
 const writingExamplesEl = document.querySelector("#writing-examples");
 const scoreEl = document.querySelector("#score");
 const totalEl = document.querySelector("#total");
@@ -1776,6 +1777,7 @@ const downloadGrammarButton = document.querySelector("#download-grammar");
 const resourcePageTabs = document.querySelectorAll(".resource-page-tab");
 const resourcePagePanels = document.querySelectorAll("[data-resource-page-panel]");
 let activeVocabLevel = "A1";
+let activeWritingLevel = "A1";
 const dashboardSummaryEl = document.querySelector("#dashboard-summary");
 const knowledgeMapEl = document.querySelector("#knowledge-map");
 const resetProgressButton = document.querySelector("#reset-progress");
@@ -2114,6 +2116,7 @@ function saveAppView(view) {
     lessonId: activeLesson?.id,
     resourcePage: getActiveResourcePage(),
     vocabLevel: activeVocabLevel,
+    writingLevel: activeWritingLevel,
   }));
 }
 
@@ -2122,6 +2125,7 @@ function restoreAppView() {
   const savedLesson = lessons.find((lesson) => lesson.id === saved.lessonId);
   if (savedLesson) activeLesson = savedLesson;
   if (saved.vocabLevel) activeVocabLevel = saved.vocabLevel;
+  if (saved.writingLevel) activeWritingLevel = saved.writingLevel;
 
   if (saved.view === "lesson") return showLesson();
   if (saved.view === "quiz") return startQuiz();
@@ -2294,8 +2298,19 @@ function renderResourceTables() {
 
 function renderWritingExamples() {
   if (!writingExamplesEl) return;
+  const currentRows = writingExampleRows.filter((row) => row.level === activeWritingLevel);
 
-  writingExamplesEl.innerHTML = writingExampleRows
+  if (writingLevelTabsEl) {
+    writingLevelTabsEl.innerHTML = levelOrder
+      .map((level) => `
+        <button class="resource-page-tab ${activeWritingLevel === level ? "" : "secondary"}" data-writing-level="${level}" type="button">
+          ${level} 寫作範例
+        </button>
+      `)
+      .join("");
+  }
+
+  writingExamplesEl.innerHTML = currentRows
     .map((row) => `
       <article class="writing-example-card">
         <div>
@@ -4692,6 +4707,13 @@ vocabLevelTabsEl?.addEventListener("click", (event) => {
   activeVocabLevel = button.dataset.vocabLevel;
   renderResourceTables();
   saveAppView("resources");
+});
+writingLevelTabsEl?.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-writing-level]");
+  if (!button) return;
+  activeWritingLevel = button.dataset.writingLevel;
+  renderWritingExamples();
+  saveAppView("writing");
 });
 
 initializeLessons();
