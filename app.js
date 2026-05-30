@@ -1739,6 +1739,7 @@ const dailyPhrasesEl = document.querySelector("#daily-phrases");
 const sourceNoteEl = document.querySelector("#source-note");
 const startButton = document.querySelector("#start-quiz");
 const resourceTab = document.querySelector("#resource-tab");
+const writingTab = document.querySelector("#writing-tab");
 const dashboardTab = document.querySelector("#dashboard-tab");
 const platformTab = document.querySelector("#platform-tab");
 const backToLessonButton = document.querySelector("#back-to-lesson");
@@ -1782,6 +1783,7 @@ const resetProgressButton = document.querySelector("#reset-progress");
 function renderLessonList() {
   lessonListEl.innerHTML = "";
   resourceTab.dataset.active = "false";
+  writingTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
   if (activeMainSection === "knowledge") return;
 
@@ -1942,6 +1944,7 @@ function showLesson() {
   examGuidePanel.hidden = true;
   lessonPanel.hidden = false;
   resourceTab.dataset.active = "false";
+  writingTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
   platformTab.dataset.active = "false";
   renderLessonList();
@@ -1960,6 +1963,7 @@ function startQuiz() {
   examGuidePanel.hidden = true;
   quizPanel.hidden = false;
   resourceTab.dataset.active = "false";
+  writingTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
   platformTab.dataset.active = "false";
   quizTitleEl.textContent = activeLesson.isComprehensiveExam
@@ -1993,6 +1997,7 @@ function showSectionIntro(section) {
   dashboardPanel.hidden = true;
   examGuidePanel.hidden = false;
   resourceTab.dataset.active = "false";
+  writingTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
   platformTab.dataset.active = "false";
   levelTextEl.textContent = "";
@@ -2013,6 +2018,7 @@ function showResources() {
   examGuidePanel.hidden = true;
   resourcesPanel.hidden = false;
   resourceTab.dataset.active = "true";
+  writingTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
   platformTab.dataset.active = "false";
   renderLessonList();
@@ -2026,6 +2032,28 @@ function showResources() {
   saveAppView("resources");
 }
 
+function showWritingExamples() {
+  showAppSection("knowledge");
+  lessonPanel.hidden = true;
+  quizPanel.hidden = true;
+  dashboardPanel.hidden = true;
+  examGuidePanel.hidden = true;
+  resourcesPanel.hidden = false;
+  resourceTab.dataset.active = "false";
+  writingTab.dataset.active = "true";
+  dashboardTab.dataset.active = "false";
+  platformTab.dataset.active = "false";
+  renderLessonList();
+  writingTab.dataset.active = "true";
+  levelTextEl.textContent = "寫作範例：A1-B2 德檢格式";
+  resourcesTitleEl.textContent = "寫作範例";
+  resourcesDescriptionEl.textContent = "這裡依德檢寫作題型整理 A1 到 B2 的標準格式範文。";
+  resourcePageTabsWrap.hidden = true;
+  renderWritingExamples();
+  showResourcePage("writing");
+  saveAppView("writing");
+}
+
 function showPlatforms() {
   showAppSection("knowledge");
   lessonPanel.hidden = true;
@@ -2034,6 +2062,7 @@ function showPlatforms() {
   examGuidePanel.hidden = true;
   resourcesPanel.hidden = false;
   resourceTab.dataset.active = "false";
+  writingTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
   platformTab.dataset.active = "true";
   renderLessonList();
@@ -2053,6 +2082,7 @@ function showDashboard() {
   examGuidePanel.hidden = true;
   dashboardPanel.hidden = false;
   resourceTab.dataset.active = "false";
+  writingTab.dataset.active = "false";
   dashboardTab.dataset.active = "true";
   platformTab.dataset.active = "false";
   renderLessonList();
@@ -2067,6 +2097,7 @@ function showAppSection(section) {
   homePanel.hidden = true;
   studyApp.hidden = false;
   resourceTab.hidden = section !== "knowledge";
+  writingTab.hidden = section !== "knowledge";
   dashboardTab.hidden = section !== "knowledge";
   platformTab.hidden = section !== "knowledge";
   setMainTab(section);
@@ -2099,6 +2130,7 @@ function restoreAppView() {
     showResourcePage(saved.resourcePage || "vocab");
     return saveAppView("resources");
   }
+  if (saved.view === "writing") return showWritingExamples();
   if (saved.view === "platforms") return showPlatforms();
   if (saved.view === "dashboard") return showDashboard();
   if (saved.view === "intro" && saved.section !== "home") return showSectionIntro(saved.section || "learning");
@@ -4597,6 +4629,7 @@ document.querySelectorAll("[data-hero-target]").forEach((button) => {
 });
 startButton.addEventListener("click", startQuiz);
 resourceTab.addEventListener("click", showResources);
+writingTab.addEventListener("click", showWritingExamples);
 dashboardTab.addEventListener("click", showDashboard);
 platformTab.addEventListener("click", showPlatforms);
 backToLessonButton.addEventListener("click", showLesson);
