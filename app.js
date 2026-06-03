@@ -2964,7 +2964,7 @@ function initializeLessons() {
       lesson.navTitle = `${lesson.lessonCode} ${lesson.topic}`;
     }
     lesson.dailyPhrases = createLessonDailyPhrases(lesson.level, lesson.lessonNumber, topicData.de);
-    lesson.cards = createLessonFocusCards(lesson.level, lesson.topic, lesson.textbook, lesson.dailyPhrases);
+    lesson.cards = createLessonFocusCards(lesson.level, lesson.topic, lesson.textbook);
     lesson.courseSummary = getCourseSummary(lesson);
     lesson.questions = buildLessonQuestions(lesson, index);
   });
@@ -3894,15 +3894,19 @@ function normalizeTopicData(topicData) {
   return topicData;
 }
 
-function createLessonFocusCards(level, topic, textbook, dailyPhrases = []) {
-  const firstPhrase = dailyPhrases[0];
-  const secondPhrase = dailyPhrases[1];
+function createLessonFocusCards(level, topic, textbook) {
   const proverb = textbook.proverb;
   const commonMistakes = {
     A1: "注意冠詞要和名詞一起背，句首有時間時動詞仍放第二位。",
     A2: "注意 Perfekt 助動詞 haben/sein，weil 從句的動詞要放句尾。",
     B1: "注意連接詞後的詞序，表達意見時要補上理由與例子。",
     B2: "注意正式語氣、連接詞層次與段落銜接，避免只列點不論證。",
+  };
+  const examTasks = {
+    A1: "常見於表格、短訊或簡短公告，重點是找姓名、時間、地點與需求。",
+    A2: "常見於私人信件、預約更改或短文閱讀，重點是理解原因與下一步。",
+    B1: "常見於信件、論壇文或意見題，重點是說明情況、理由和建議。",
+    B2: "常見於論述文或正式信件，重點是比較觀點、提出理由並做結論。",
   };
 
   return [
@@ -3913,10 +3917,10 @@ function createLessonFocusCards(level, topic, textbook, dailyPhrases = []) {
       example: textbook.text.split(".")[0] + ".",
     },
     {
-      tag: "句型",
-      title: "應用句型",
-      body: "把本課日常句改寫成自己的句子，之後可直接用在口說或寫作。",
-      example: [firstPhrase?.german, secondPhrase?.german].filter(Boolean).join(" / ") || textbook.grammar[0]?.[2] || topic,
+      tag: "Prüfung",
+      title: "考試題型",
+      body: examTasks[level] || "把本課主題連到閱讀、寫作或口說任務中練習。",
+      example: `${textbook.grammar[0]?.[0] || topic} · ${textbook.vocab[0]?.[0] || "Wortschatz"}`,
     },
     {
       tag: "提醒",
