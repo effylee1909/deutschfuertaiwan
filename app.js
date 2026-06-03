@@ -2010,18 +2010,6 @@ function renderLesson() {
     lessonCardsEl.appendChild(article);
   });
 
-  if (activeLesson.textbook?.proverb) {
-    const proverb = document.createElement("article");
-    proverb.className = "rule-card note proverb-card";
-    proverb.innerHTML = `
-      <span class="article-tag">Sprichwort</span>
-      <h3>本課德文俗諺</h3>
-      <p class="example">${activeLesson.textbook.proverb.german}</p>
-      <p>${activeLesson.textbook.proverb.chinese}</p>
-    `;
-    lessonCardsEl.appendChild(proverb);
-  }
-
   dailyPhrasesEl.innerHTML = (activeLesson.dailyPhrases || dailyPhraseBanks[activeLesson.level])
     .map((phrase) => `
       <article class="phrase-card">
@@ -2976,6 +2964,7 @@ function initializeLessons() {
       lesson.navTitle = `${lesson.lessonCode} ${lesson.topic}`;
     }
     lesson.dailyPhrases = createLessonDailyPhrases(lesson.level, lesson.lessonNumber, topicData.de);
+    lesson.cards = createLessonFocusCards(lesson.level, lesson.topic, lesson.textbook, lesson.dailyPhrases);
     lesson.courseSummary = getCourseSummary(lesson);
     lesson.questions = buildLessonQuestions(lesson, index);
   });
@@ -3050,7 +3039,7 @@ function expandSyllabusLessons() {
         description: `${level} L${lessonNumber}：${topicData.zh} · ${topicData.de}`,
         sourceNote: "課程內容依 CEFR 能力描述、Goethe/telc 題型方向與台灣學習者常見需求原創整理。",
         textbook,
-        cards: createLessonFocusCards(level, `${topicData.zh} · ${topicData.de}`, textbook),
+        cards: [],
         questions: [],
       });
     });
@@ -3905,40 +3894,41 @@ function normalizeTopicData(topicData) {
   return topicData;
 }
 
-function createLessonFocusCards(level, topic, textbook) {
-  const firstPhrase = textbook.dailyPhrases?.[0];
+function createLessonFocusCards(level, topic, textbook, dailyPhrases = []) {
+  const firstPhrase = dailyPhrases[0];
+  const secondPhrase = dailyPhrases[1];
   const proverb = textbook.proverb;
-  const taskTemplates = {
-    A1: "寫 3 句簡短德文，包含人物、地點和一個請求。",
-    A2: "寫一封 70 字左右短訊，說明發生什麼事、時間與下一步。",
-    B1: "寫一段 120 字左右文字，描述情況、說明原因並提出建議。",
-    B2: "寫一段 180 字以上論述，提出立場、兩個理由與結論。",
+  const commonMistakes = {
+    A1: "注意冠詞要和名詞一起背，句首有時間時動詞仍放第二位。",
+    A2: "注意 Perfekt 助動詞 haben/sein，weil 從句的動詞要放句尾。",
+    B1: "注意連接詞後的詞序，表達意見時要補上理由與例子。",
+    B2: "注意正式語氣、連接詞層次與段落銜接，避免只列點不論證。",
   };
 
   return [
     {
-      tag: "課文",
-      title: `${topic} 的閱讀目標`,
-      body: `先找出這課在「${topic}」情境中的人物、行動與問題，再整理關鍵資訊。`,
+      tag: "重點",
+      title: "本課重點",
+      body: `本課以「${topic}」為主題，先讀懂課文情境，再整理核心單字與主要文法。`,
       example: textbook.text.split(".")[0] + ".",
     },
     {
-      tag: "單字",
-      title: `${level} 本課核心詞`,
-      body: `把 ${textbook.vocab[0]?.[0] || "本課單字"}、${textbook.vocab[1]?.[0] || "重要表達"} 放回課文情境中造句。`,
-      example: textbook.vocab.slice(0, 3).map(([word]) => word).join(" / "),
+      tag: "句型",
+      title: "應用句型",
+      body: "把本課日常句改寫成自己的句子，之後可直接用在口說或寫作。",
+      example: [firstPhrase?.german, secondPhrase?.german].filter(Boolean).join(" / ") || textbook.grammar[0]?.[2] || topic,
     },
     {
-      tag: "文法",
-      title: textbook.grammar[0]?.[0] || "本課文法任務",
-      body: textbook.grammar[0]?.[1] || "把文法放進口說與寫作任務中練習。",
+      tag: "提醒",
+      title: "易錯提醒",
+      body: commonMistakes[level] || "注意詞序、冠詞與介系詞，寫作時要用完整句。",
       example: textbook.grammar[0]?.[2] || topic,
     },
     {
-      tag: "Prüfung",
-      title: `${level} 本課輸出任務`,
-      body: taskTemplates[level] || "用本課單字和文法完成一段德文輸出。",
-      example: firstPhrase ? firstPhrase.german : proverb?.german || topic,
+      tag: "Sprichwort",
+      title: "本課俗諺",
+      body: proverb?.chinese || "本課俗諺可作為延伸閱讀與文化補充。",
+      example: proverb?.german || topic,
     },
   ];
 }
