@@ -3906,24 +3906,39 @@ function normalizeTopicData(topicData) {
 }
 
 function createLessonFocusCards(level, topic, textbook) {
+  const firstPhrase = textbook.dailyPhrases?.[0];
+  const proverb = textbook.proverb;
+  const taskTemplates = {
+    A1: "寫 3 句簡短德文，包含人物、地點和一個請求。",
+    A2: "寫一封 70 字左右短訊，說明發生什麼事、時間與下一步。",
+    B1: "寫一段 120 字左右文字，描述情況、說明原因並提出建議。",
+    B2: "寫一段 180 字以上論述，提出立場、兩個理由與結論。",
+  };
+
   return [
     {
       tag: "課文",
       title: `${topic} 的閱讀目標`,
-      body: "先抓主題、人物、時間、地點和原因，再回頭整理細節。",
+      body: `先找出這課在「${topic}」情境中的人物、行動與問題，再整理關鍵資訊。`,
       example: textbook.text.split(".")[0] + ".",
     },
     {
       tag: "單字",
-      title: "用情境記單字",
-      body: "每課單字都應該放回句子中練習，不只背中文意思。",
+      title: `${level} 本課核心詞`,
+      body: `把 ${textbook.vocab[0]?.[0] || "本課單字"}、${textbook.vocab[1]?.[0] || "重要表達"} 放回課文情境中造句。`,
       example: textbook.vocab.slice(0, 3).map(([word]) => word).join(" / "),
     },
     {
       tag: "文法",
-      title: "本課文法任務",
+      title: textbook.grammar[0]?.[0] || "本課文法任務",
       body: textbook.grammar[0]?.[1] || "把文法放進口說與寫作任務中練習。",
-      example: textbook.grammar[0]?.[0] || topic,
+      example: textbook.grammar[0]?.[2] || topic,
+    },
+    {
+      tag: "Prüfung",
+      title: `${level} 本課輸出任務`,
+      body: taskTemplates[level] || "用本課單字和文法完成一段德文輸出。",
+      example: firstPhrase ? firstPhrase.german : proverb?.german || topic,
     },
   ];
 }
@@ -4181,10 +4196,7 @@ function getLevelFolderLabel(level) {
 }
 
 function getLessonCards(lesson) {
-  const stageCards = stageLearningCards[lesson.level]?.[lesson.stage] || [];
-  const generalCards = learningExpansionCards[lesson.level] || [];
-  const baseCards = lesson.isGeneratedTest ? [] : lesson.cards.slice(0, 2);
-  return [...stageCards, ...baseCards, ...generalCards.slice(0, 1)];
+  return lesson.isGeneratedTest ? [] : lesson.cards;
 }
 
 function renderTextbookLesson(lesson) {
