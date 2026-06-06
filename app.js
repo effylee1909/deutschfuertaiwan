@@ -1837,6 +1837,8 @@ const startButton = document.querySelector("#start-quiz");
 const resourceTab = document.querySelector("#resource-tab");
 const writingTab = document.querySelector("#writing-tab");
 const dashboardTab = document.querySelector("#dashboard-tab");
+const wrongbookTab = document.querySelector("#wrongbook-tab");
+const progressTab = document.querySelector("#progress-tab");
 const platformTab = document.querySelector("#platform-tab");
 const backToLessonButton = document.querySelector("#back-to-lesson");
 const quizPanel = document.querySelector("#quiz-panel");
@@ -1848,6 +1850,8 @@ const resourcesTitleEl = document.querySelector("#resources-title");
 const resourcesDescriptionEl = document.querySelector("#resources-description");
 const resourcePageTabsWrap = document.querySelector("#resource-page-tabs");
 const dashboardPanel = document.querySelector("#dashboard-panel");
+const wrongbookPanel = document.querySelector("#wrongbook-panel");
+const learningProgressPanel = document.querySelector("#learning-progress-panel");
 const quizTitleEl = document.querySelector("#quiz-title");
 const writingLevelTabsEl = document.querySelector("#writing-level-tabs");
 const writingExamplesEl = document.querySelector("#writing-examples");
@@ -1876,6 +1880,10 @@ let activeVocabLevel = "A1";
 let activeWritingLevel = "A1";
 const dashboardSummaryEl = document.querySelector("#dashboard-summary");
 const knowledgeMapEl = document.querySelector("#knowledge-map");
+const wrongbookListEl = document.querySelector("#wrongbook-list");
+const learningProgressSummaryEl = document.querySelector("#learning-progress-summary");
+const learningProgressMapEl = document.querySelector("#learning-progress-map");
+const recentResultsEl = document.querySelector("#recent-results");
 const resetProgressButton = document.querySelector("#reset-progress");
 
 function renderLessonList() {
@@ -1883,6 +1891,8 @@ function renderLessonList() {
   resourceTab.dataset.active = "false";
   writingTab.dataset.active = "false";
   dashboardTab.dataset.active = "false";
+  wrongbookTab.dataset.active = "false";
+  progressTab.dataset.active = "false";
   if (activeMainSection === "knowledge") return;
 
   levelOrder.forEach((level) => {
@@ -1987,6 +1997,25 @@ function selectQuiz(id) {
   startQuiz();
 }
 
+function hideWorkspacePanels() {
+  lessonPanel.hidden = true;
+  quizPanel.hidden = true;
+  resourcesPanel.hidden = true;
+  dashboardPanel.hidden = true;
+  wrongbookPanel.hidden = true;
+  learningProgressPanel.hidden = true;
+  examGuidePanel.hidden = true;
+}
+
+function resetKnowledgeTabs() {
+  resourceTab.dataset.active = "false";
+  writingTab.dataset.active = "false";
+  dashboardTab.dataset.active = "false";
+  wrongbookTab.dataset.active = "false";
+  progressTab.dataset.active = "false";
+  platformTab.dataset.active = "false";
+}
+
 function renderLesson() {
   levelTextEl.textContent = `${activeLesson.level}：${levelLabels[activeLesson.level]}`;
   lessonBadgeEl.textContent = `${activeLesson.level} · ${activeLesson.lessonCode}`;
@@ -2024,15 +2053,9 @@ function renderLesson() {
 
 function showLesson() {
   showAppSection("learning");
-  quizPanel.hidden = true;
-  resourcesPanel.hidden = true;
-  dashboardPanel.hidden = true;
-  examGuidePanel.hidden = true;
+  hideWorkspacePanels();
   lessonPanel.hidden = false;
-  resourceTab.dataset.active = "false";
-  writingTab.dataset.active = "false";
-  dashboardTab.dataset.active = "false";
-  platformTab.dataset.active = "false";
+  resetKnowledgeTabs();
   renderLessonList();
   renderLesson();
   saveAppView("lesson");
@@ -2043,15 +2066,9 @@ function startQuiz() {
   currentIndex = 0;
   score = 0;
   quizSeed = Date.now();
-  lessonPanel.hidden = true;
-  resourcesPanel.hidden = true;
-  dashboardPanel.hidden = true;
-  examGuidePanel.hidden = true;
+  hideWorkspacePanels();
   quizPanel.hidden = false;
-  resourceTab.dataset.active = "false";
-  writingTab.dataset.active = "false";
-  dashboardTab.dataset.active = "false";
-  platformTab.dataset.active = "false";
+  resetKnowledgeTabs();
   quizTitleEl.textContent = activeLesson.isComprehensiveExam
     ? `${activeLesson.level} Prüfung - ${activeLesson.title}`
     : `${activeLesson.level} Prüfung - ${stageGermanLabels[activeLesson.stage]}`;
@@ -2077,15 +2094,9 @@ function showExamGuide() {
 
 function showSectionIntro(section) {
   showAppSection(section);
-  lessonPanel.hidden = true;
-  quizPanel.hidden = true;
-  resourcesPanel.hidden = true;
-  dashboardPanel.hidden = true;
+  hideWorkspacePanels();
   examGuidePanel.hidden = false;
-  resourceTab.dataset.active = "false";
-  writingTab.dataset.active = "false";
-  dashboardTab.dataset.active = "false";
-  platformTab.dataset.active = "false";
+  resetKnowledgeTabs();
   levelTextEl.textContent = "";
   sectionIntroContentEl.innerHTML = getSectionIntro(section).html;
   renderLessonList();
@@ -2098,15 +2109,10 @@ function showKnowledgeIntro() {
 
 function showResources() {
   showAppSection("knowledge");
-  lessonPanel.hidden = true;
-  quizPanel.hidden = true;
-  dashboardPanel.hidden = true;
-  examGuidePanel.hidden = true;
+  hideWorkspacePanels();
   resourcesPanel.hidden = false;
+  resetKnowledgeTabs();
   resourceTab.dataset.active = "true";
-  writingTab.dataset.active = "false";
-  dashboardTab.dataset.active = "false";
-  platformTab.dataset.active = "false";
   renderLessonList();
   resourceTab.dataset.active = "true";
   levelTextEl.textContent = "常用單字與動詞：可下載表格複習";
@@ -2120,15 +2126,10 @@ function showResources() {
 
 function showWritingExamples() {
   showAppSection("knowledge");
-  lessonPanel.hidden = true;
-  quizPanel.hidden = true;
-  dashboardPanel.hidden = true;
-  examGuidePanel.hidden = true;
+  hideWorkspacePanels();
   resourcesPanel.hidden = false;
-  resourceTab.dataset.active = "false";
+  resetKnowledgeTabs();
   writingTab.dataset.active = "true";
-  dashboardTab.dataset.active = "false";
-  platformTab.dataset.active = "false";
   renderLessonList();
   writingTab.dataset.active = "true";
   levelTextEl.textContent = "寫作範例：A1-B2 德檢格式";
@@ -2142,14 +2143,9 @@ function showWritingExamples() {
 
 function showPlatforms() {
   showAppSection("knowledge");
-  lessonPanel.hidden = true;
-  quizPanel.hidden = true;
-  dashboardPanel.hidden = true;
-  examGuidePanel.hidden = true;
+  hideWorkspacePanels();
   resourcesPanel.hidden = false;
-  resourceTab.dataset.active = "false";
-  writingTab.dataset.active = "false";
-  dashboardTab.dataset.active = "false";
+  resetKnowledgeTabs();
   platformTab.dataset.active = "true";
   renderLessonList();
   levelTextEl.textContent = "德文公開平台：新聞與閱讀練習連結";
@@ -2162,20 +2158,41 @@ function showPlatforms() {
 
 function showDashboard() {
   showAppSection("knowledge");
-  lessonPanel.hidden = true;
-  quizPanel.hidden = true;
-  resourcesPanel.hidden = true;
-  examGuidePanel.hidden = true;
+  hideWorkspacePanels();
   dashboardPanel.hidden = false;
-  resourceTab.dataset.active = "false";
-  writingTab.dataset.active = "false";
+  resetKnowledgeTabs();
   dashboardTab.dataset.active = "true";
-  platformTab.dataset.active = "false";
   renderLessonList();
   dashboardTab.dataset.active = "true";
   levelTextEl.textContent = "教師後台：統整學生在本機作答的弱點";
   renderDashboard();
   saveAppView("dashboard");
+}
+
+function showWrongbook() {
+  showAppSection("knowledge");
+  hideWorkspacePanels();
+  wrongbookPanel.hidden = false;
+  resetKnowledgeTabs();
+  wrongbookTab.dataset.active = "true";
+  renderLessonList();
+  wrongbookTab.dataset.active = "true";
+  levelTextEl.textContent = "錯題本：最近答錯題目與複習建議";
+  renderWrongbook();
+  saveAppView("wrongbook");
+}
+
+function showLearningProgress() {
+  showAppSection("knowledge");
+  hideWorkspacePanels();
+  learningProgressPanel.hidden = false;
+  resetKnowledgeTabs();
+  progressTab.dataset.active = "true";
+  renderLessonList();
+  progressTab.dataset.active = "true";
+  levelTextEl.textContent = "學習進度：完成度、平均分數與最近測驗";
+  renderLearningProgress();
+  saveAppView("learning-progress");
 }
 
 function showAppSection(section) {
@@ -2185,6 +2202,8 @@ function showAppSection(section) {
   resourceTab.hidden = section !== "knowledge";
   writingTab.hidden = section !== "knowledge";
   dashboardTab.hidden = section !== "knowledge";
+  wrongbookTab.hidden = section !== "knowledge";
+  progressTab.hidden = section !== "knowledge";
   platformTab.hidden = section !== "knowledge";
   setMainTab(section);
 }
@@ -2221,6 +2240,8 @@ function restoreAppView() {
   if (saved.view === "writing") return showWritingExamples();
   if (saved.view === "platforms") return showPlatforms();
   if (saved.view === "dashboard") return showDashboard();
+  if (saved.view === "wrongbook") return showWrongbook();
+  if (saved.view === "learning-progress") return showLearningProgress();
   if (saved.view === "intro" && saved.section !== "home") return showSectionIntro(saved.section || "learning");
   return showHome();
 }
@@ -2239,7 +2260,7 @@ function getSectionIntro(section) {
     },
     knowledge: {
       title: "知識整理庫",
-      items: ["單字表", "動詞變化表", "文法總表", "寫作範例", "德文公開平台", "知識點地圖"],
+      items: ["單字表", "動詞變化表", "文法總表", "寫作範例", "錯題本", "學習進度", "德文公開平台", "知識點地圖"],
       body: "這裡整理可下載表格與作答弱點，方便課後複習與教學追蹤。",
     },
   }[section];
@@ -4587,6 +4608,8 @@ function recordAttempt(question, correct, value) {
     prompt: question.prompt,
     correct,
     answer: String(value),
+    expected: getAcceptedAnswers(question)[0],
+    hint: question.hint || "",
   };
 
   progress.attempts.push(entry);
@@ -4596,10 +4619,18 @@ function recordAttempt(question, correct, value) {
 
 function loadProgress() {
   try {
-    return JSON.parse(localStorage.getItem(progressStorageKey)) || { attempts: [] };
+    const progress = JSON.parse(localStorage.getItem(progressStorageKey)) || {};
+    return normalizeProgress(progress);
   } catch (error) {
-    return { attempts: [] };
+    return normalizeProgress({});
   }
+}
+
+function normalizeProgress(progress) {
+  return {
+    attempts: Array.isArray(progress.attempts) ? progress.attempts : [],
+    quizResults: Array.isArray(progress.quizResults) ? progress.quizResults : [],
+  };
 }
 
 function saveProgress(progress) {
@@ -4697,8 +4728,157 @@ function getKnowledgeAdvice(tag, rate) {
   return `${tag} 目前掌握度穩定，可維持一般複習。`;
 }
 
+function renderWrongbook() {
+  const wrongAttempts = loadProgress().attempts
+    .filter((attempt) => !attempt.correct)
+    .slice()
+    .reverse()
+    .slice(0, 40);
+
+  if (wrongAttempts.length === 0) {
+    wrongbookListEl.innerHTML = `
+      <article class="knowledge-card">
+        <h3>目前沒有錯題</h3>
+        <p>完成幾份 Prüfung 後，答錯的題目會自動整理到這裡。</p>
+      </article>
+    `;
+    return;
+  }
+
+  wrongbookListEl.innerHTML = wrongAttempts
+    .map((attempt) => `
+      <article class="wrongbook-card">
+        <div>
+          <span>${escapeHtml(attempt.level)} · ${escapeHtml(attempt.lesson)} · ${escapeHtml(attempt.skill)}</span>
+          <h3>${escapeHtml(attempt.prompt)}</h3>
+          <p>${escapeHtml(attempt.topic)}</p>
+        </div>
+        <small>你的答案：${escapeHtml(formatTrackedAnswer(attempt.answer))}</small>
+        <small>參考答案：${escapeHtml(formatTrackedAnswer(attempt.expected))}</small>
+        <small>提示：${escapeHtml(attempt.hint || "回到該課重新整理相關文法與單字。")}</small>
+        <small>補強標籤：${escapeHtml(attempt.tags.join(" / "))}</small>
+        <small>${formatDate(attempt.time)}</small>
+      </article>
+    `)
+    .join("");
+}
+
+function formatTrackedAnswer(value) {
+  if (!value) return "未填寫";
+  if (value === "__SELF_OK__") return "自我檢核題";
+  if (value === "__MATCH_OK__") return "配對完成";
+  if (value === "__MATCH_WRONG__") return "配對錯誤";
+  return value;
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderLearningProgress() {
+  const progress = loadProgress();
+  const lessonResults = progress.quizResults.filter((result) => !result.isExam);
+  const examResults = progress.quizResults.filter((result) => result.isExam);
+  const bestByLesson = getBestResultByLesson(lessonResults);
+  const completedCount = [...bestByLesson.values()].filter((result) => result.percent >= 60).length;
+  const totalLessons = lessons.filter((lesson) => !lesson.isComprehensiveExam).length;
+  const average = lessonResults.length
+    ? Math.round(lessonResults.reduce((sum, result) => sum + result.percent, 0) / lessonResults.length)
+    : 0;
+
+  learningProgressSummaryEl.innerHTML = `
+    <article>
+      <strong>${completedCount}/${totalLessons}</strong>
+      <span>完成課後測驗</span>
+    </article>
+    <article>
+      <strong>${average}%</strong>
+      <span>課後測驗平均</span>
+    </article>
+    <article>
+      <strong>${examResults.length}</strong>
+      <span>綜合 Prüfung 紀錄</span>
+    </article>
+  `;
+
+  learningProgressMapEl.innerHTML = levelOrder
+    .map((level) => renderLevelProgress(level, bestByLesson))
+    .join("");
+
+  const recent = progress.quizResults.slice().reverse().slice(0, 8);
+  recentResultsEl.innerHTML = `
+    <h3>最近測驗</h3>
+    ${recent.length ? recent.map(renderRecentResult).join("") : "<p>尚未有測驗紀錄。</p>"}
+  `;
+}
+
+function getBestResultByLesson(results) {
+  const map = new Map();
+
+  results.forEach((result) => {
+    const current = map.get(result.lessonId);
+    if (!current || result.percent > current.percent) map.set(result.lessonId, result);
+  });
+
+  return map;
+}
+
+function renderLevelProgress(level, bestByLesson) {
+  const levelLessons = lessons
+    .filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam)
+    .sort(sortLessonsByCode);
+  const completed = levelLessons.filter((lesson) => (bestByLesson.get(lesson.id)?.percent || 0) >= 60).length;
+  const percent = Math.round((completed / levelLessons.length) * 100);
+
+  return `
+    <article class="progress-level-card">
+      <div>
+        <h3>${level}</h3>
+        <strong>${completed}/${levelLessons.length}</strong>
+      </div>
+      <span class="risk-bar"><span style="width:${percent}%"></span></span>
+      <div class="lesson-progress-list">
+        ${levelLessons.map((lesson) => renderLessonProgressPill(lesson, bestByLesson.get(lesson.id))).join("")}
+      </div>
+    </article>
+  `;
+}
+
+function renderLessonProgressPill(lesson, result) {
+  const scoreText = result ? `${result.percent}%` : "未測";
+  const status = result?.percent >= 60 ? "done" : result ? "try" : "new";
+  return `<span data-status="${status}">${lesson.lessonCode} ${scoreText}</span>`;
+}
+
+function renderRecentResult(result) {
+  return `
+    <article class="recent-result-card">
+      <div>
+        <strong>${result.level} · ${result.lesson}</strong>
+        <span>${result.title}</span>
+      </div>
+      <b>${result.percent}%</b>
+      <small>${formatDate(result.time)}</small>
+    </article>
+  `;
+}
+
+function formatDate(value) {
+  return new Date(value).toLocaleDateString("zh-TW", {
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 function renderResult() {
   const percent = Math.round((score / activeLesson.questions.length) * 100);
+  recordQuizResult(percent);
 
   progressBar.style.width = "100%";
   metaEl.textContent = "Test beendet";
@@ -4708,6 +4888,25 @@ function renderResult() {
   feedbackEl.innerHTML = getResultMessage(percent);
   nextButton.disabled = true;
   nextButton.textContent = "Fertig";
+}
+
+function recordQuizResult(percent) {
+  const progress = loadProgress();
+  const result = {
+    time: new Date().toISOString(),
+    lessonId: activeLesson.id,
+    level: activeLesson.level,
+    lesson: activeLesson.lessonCode || activeLesson.code || "Prüfung",
+    title: activeLesson.isComprehensiveExam ? activeLesson.title : activeLesson.topic,
+    score,
+    total: activeLesson.questions.length,
+    percent,
+    isExam: Boolean(activeLesson.isComprehensiveExam),
+  };
+
+  progress.quizResults.push(result);
+  progress.quizResults = progress.quizResults.slice(-200);
+  saveProgress(progress);
 }
 
 function getResultMessage(percent) {
@@ -4749,13 +4948,17 @@ startButton.addEventListener("click", startQuiz);
 resourceTab.addEventListener("click", showResources);
 writingTab.addEventListener("click", showWritingExamples);
 dashboardTab.addEventListener("click", showDashboard);
+wrongbookTab.addEventListener("click", showWrongbook);
+progressTab.addEventListener("click", showLearningProgress);
 platformTab.addEventListener("click", showPlatforms);
 backToLessonButton.addEventListener("click", showLesson);
 restartButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", goNext);
 resetProgressButton.addEventListener("click", () => {
-  saveProgress({ attempts: [] });
+  saveProgress({ attempts: [], quizResults: [] });
   renderDashboard();
+  renderWrongbook();
+  renderLearningProgress();
 });
 downloadVocabButton.addEventListener("click", () => {
   downloadCsv("deutsch-vokabeln.csv", formatVocabularyRows(getExpandedVocabularyRows()), [

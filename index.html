@@ -128,6 +128,8 @@
           <button id="resource-tab" class="resource-tab" type="button">複習表格下載</button>
           <button id="writing-tab" class="resource-tab" type="button">寫作範例</button>
           <button id="dashboard-tab" class="resource-tab" type="button">知識點地圖後台</button>
+          <button id="wrongbook-tab" class="resource-tab" type="button">錯題本</button>
+          <button id="progress-tab" class="resource-tab" type="button">學習進度</button>
           <button id="platform-tab" class="resource-tab" type="button">德文公開平台</button>
           <div id="lesson-list" class="lesson-list"></div>
         </aside>
@@ -240,6 +242,26 @@
           <div class="download-actions">
             <button id="reset-progress" class="secondary" type="button">清除本機學習紀錄</button>
           </div>
+        </section>
+
+        <section id="wrongbook-panel" class="dashboard-panel" aria-labelledby="wrongbook-title" hidden>
+          <div class="section-heading">
+            <p class="eyebrow">Fehlerheft</p>
+            <h2 id="wrongbook-title">錯題本</h2>
+            <p class="panel-description">這裡自動整理此裝置最近答錯的題目，方便重新複習。</p>
+          </div>
+          <div id="wrongbook-list" class="wrongbook-list"></div>
+        </section>
+
+        <section id="learning-progress-panel" class="dashboard-panel" aria-labelledby="learning-progress-title" hidden>
+          <div class="section-heading">
+            <p class="eyebrow">Fortschritt</p>
+            <h2 id="learning-progress-title">學習進度</h2>
+            <p class="panel-description">這裡顯示每個程度的完成狀態、平均分數與最近測驗紀錄。</p>
+          </div>
+          <div id="learning-progress-summary" class="dashboard-summary"></div>
+          <div id="learning-progress-map" class="progress-level-grid"></div>
+          <div id="recent-results" class="recent-results"></div>
         </section>
 
         <section id="resources-panel" class="resources-panel" aria-labelledby="resources-title" hidden>

@@ -1232,6 +1232,113 @@ button:disabled {
   grid-column: 1 / -1;
 }
 
+.wrongbook-list,
+.progress-level-grid,
+.recent-results {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.wrongbook-card,
+.progress-level-card,
+.recent-result-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: var(--soft-shadow);
+}
+
+.wrongbook-card {
+  display: grid;
+  gap: 8px;
+}
+
+.wrongbook-card h3 {
+  margin: 4px 0;
+  font-size: 1rem;
+}
+
+.wrongbook-card p,
+.wrongbook-card small,
+.wrongbook-card span {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.progress-level-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.progress-level-card {
+  display: grid;
+  gap: 12px;
+}
+
+.progress-level-card > div:first-child,
+.recent-result-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.progress-level-card h3,
+.recent-results h3 {
+  margin: 0;
+}
+
+.progress-level-card strong {
+  color: var(--blue);
+  font-size: 1.35rem;
+}
+
+.lesson-progress-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lesson-progress-list span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: var(--muted);
+  background: #faf8f2;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.lesson-progress-list span[data-status="done"] {
+  border-color: rgba(115, 139, 107, 0.35);
+  color: var(--green);
+  background: rgba(115, 139, 107, 0.1);
+}
+
+.lesson-progress-list span[data-status="try"] {
+  border-color: rgba(183, 154, 88, 0.38);
+  color: var(--gold);
+  background: rgba(183, 154, 88, 0.1);
+}
+
+.recent-result-card div {
+  display: grid;
+  gap: 4px;
+}
+
+.recent-result-card span,
+.recent-result-card small,
+.recent-results p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.recent-result-card b {
+  color: var(--rose);
+  font-size: 1.15rem;
+}
+
 .download-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1369,7 +1476,8 @@ td {
   }
 
   .dashboard-summary,
-  .knowledge-map {
+  .knowledge-map,
+  .progress-level-grid {
     grid-template-columns: 1fr;
   }
 
