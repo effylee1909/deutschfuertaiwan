@@ -4742,6 +4742,7 @@ document.querySelectorAll("[data-hero-target]").forEach((button) => {
   button.addEventListener("click", () => {
     if (button.dataset.heroTarget === "learning") showLearningPath();
     if (button.dataset.heroTarget === "exam") showExamGuide();
+    if (button.dataset.heroTarget === "knowledge") showKnowledgeIntro();
   });
 });
 startButton.addEventListener("click", startQuiz);
