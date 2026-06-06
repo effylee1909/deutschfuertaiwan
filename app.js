@@ -1809,6 +1809,7 @@ let score = 0;
 let answered = false;
 let quizSeed = Date.now();
 let currentPreparedQuestion = null;
+let currentQuizAttempts = [];
 let activeMainSection = "home";
 
 const progressStorageKey = "deutschfuertaiwan-progress-v1";
@@ -2066,6 +2067,7 @@ function startQuiz() {
   currentIndex = 0;
   score = 0;
   quizSeed = Date.now();
+  currentQuizAttempts = [];
   hideWorkspacePanels();
   quizPanel.hidden = false;
   resetKnowledgeTabs();
@@ -4514,10 +4516,12 @@ function answerQuestion(value, question) {
   if (answered) return;
 
   const correct = isCorrectAnswer(value, question);
+  const attempt = createAttemptEntry(question, correct, value);
 
   answered = true;
   if (correct) score += 1;
-  recordAttempt(question, correct, value);
+  currentQuizAttempts.push(attempt);
+  recordAttempt(attempt);
 
   feedbackEl.innerHTML = correct
     ? `<strong>Richtig.</strong> ${question.hint}`
@@ -4595,10 +4599,9 @@ function getExamSkillLabel(question) {
   return question.skill || labels[question.type] || "Prüfung";
 }
 
-function recordAttempt(question, correct, value) {
-  const progress = loadProgress();
+function createAttemptEntry(question, correct, value) {
   const tags = getQuestionTags(question);
-  const entry = {
+  return {
     time: new Date().toISOString(),
     level: activeLesson.level,
     lesson: activeLesson.lessonCode,
@@ -4611,7 +4614,10 @@ function recordAttempt(question, correct, value) {
     expected: getAcceptedAnswers(question)[0],
     hint: question.hint || "",
   };
+}
 
+function recordAttempt(entry) {
+  const progress = loadProgress();
   progress.attempts.push(entry);
   progress.attempts = progress.attempts.slice(-500);
   saveProgress(progress);
@@ -4884,10 +4890,117 @@ function renderResult() {
   metaEl.textContent = "Test beendet";
   textEl.textContent = `${score} / ${activeLesson.questions.length}`;
   translationEl.textContent = `Ergebnis: ${percent}%`;
-  answersEl.innerHTML = "";
+  answersEl.innerHTML = renderQuizReport(percent);
   feedbackEl.innerHTML = getResultMessage(percent);
   nextButton.disabled = true;
   nextButton.textContent = "Fertig";
+}
+
+function renderQuizReport(percent) {
+  const stats = buildReportStats(currentQuizAttempts);
+  const strengths = stats.skills
+    .filter((item) => item.rate >= 80)
+    .sort((a, b) => b.rate - a.rate || b.total - a.total)
+    .slice(0, 3);
+  const weakSkills = stats.skills.filter((item) => item.rate < 70).slice(0, 3);
+  const weakTags = stats.tags.filter((item) => item.wrong > 0).slice(0, 4);
+  const recommendations = getQuizRecommendations(percent, weakSkills, weakTags);
+
+  return `
+    <section class="result-report" aria-label="測驗結果報告">
+      <div class="result-report-grid">
+        <article>
+          <span>Score</span>
+          <strong>${percent}%</strong>
+          <small>${score}/${activeLesson.questions.length} richtig</small>
+        </article>
+        <article>
+          <span>Stärken</span>
+          <strong>${strengths.length || "0"}</strong>
+          <small>${strengths.map((item) => item.name).join(" / ") || "尚未形成明顯強項"}</small>
+        </article>
+        <article>
+          <span>Fokus</span>
+          <strong>${weakTags.length || "0"}</strong>
+          <small>${weakTags.map((item) => item.name).join(" / ") || "維持一般複習"}</small>
+        </article>
+      </div>
+
+      <div class="result-section">
+        <h4>技能表現</h4>
+        ${stats.skills.map(renderReportStat).join("")}
+      </div>
+
+      <div class="result-section">
+        <h4>推薦複習</h4>
+        <div class="result-advice-list">
+          ${recommendations.map((item) => `<p>${item}</p>`).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function buildReportStats(attempts) {
+  return {
+    skills: buildNamedAttemptStats(attempts.map((attempt) => [attempt.skill, attempt])),
+    tags: buildNamedAttemptStats(attempts.flatMap((attempt) => attempt.tags.map((tag) => [tag, attempt]))),
+  };
+}
+
+function buildNamedAttemptStats(pairs) {
+  const map = new Map();
+
+  pairs.forEach(([name, attempt]) => {
+    const current = map.get(name) || { name, total: 0, wrong: 0 };
+    current.total += 1;
+    if (!attempt.correct) current.wrong += 1;
+    map.set(name, current);
+  });
+
+  return [...map.values()]
+    .map((item) => ({
+      ...item,
+      rate: Math.round(((item.total - item.wrong) / item.total) * 100),
+    }))
+    .sort((a, b) => a.rate - b.rate || b.total - a.total);
+}
+
+function renderReportStat(item) {
+  return `
+    <div class="result-stat-row">
+      <span>${item.name}</span>
+      <strong>${item.rate}%</strong>
+      <small>${item.total - item.wrong}/${item.total}</small>
+      <span class="risk-bar"><span style="width:${item.rate}%"></span></span>
+    </div>
+  `;
+}
+
+function getQuizRecommendations(percent, weakSkills, weakTags) {
+  const recommendations = [];
+
+  if (!activeLesson.isComprehensiveExam) {
+    recommendations.push(`回到 ${activeLesson.level} ${activeLesson.lessonCode}，重讀課文並整理本課單字與文法。`);
+  } else {
+    recommendations.push(`先複習 ${activeLesson.level} 的相關 Lektion，再重做同一份 Prüfung。`);
+  }
+
+  if (weakSkills.length) {
+    recommendations.push(`優先補強：${weakSkills.map((item) => item.name).join("、")}。`);
+  }
+
+  if (weakTags.length) {
+    recommendations.push(`錯題標籤：${weakTags.map((item) => item.name).join("、")}，可到錯題本集中複習。`);
+  }
+
+  if (percent >= 80) {
+    recommendations.push("本次表現穩定，可以進入下一課或挑戰綜合 Prüfung。");
+  } else if (percent < 60) {
+    recommendations.push("建議先不要往下一課，重新完成本課 Kurztest 到 60% 以上。");
+  }
+
+  return recommendations.slice(0, 4);
 }
 
 function recordQuizResult(percent) {

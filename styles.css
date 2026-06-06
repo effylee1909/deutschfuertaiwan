@@ -1138,6 +1138,75 @@ button:disabled {
   color: var(--ink);
 }
 
+.result-report {
+  display: grid;
+  gap: 16px;
+}
+
+.result-report-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.result-report-grid article,
+.result-section {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: #faf8f2;
+}
+
+.result-report-grid article {
+  display: grid;
+  gap: 6px;
+}
+
+.result-report-grid span,
+.result-report-grid small,
+.result-stat-row small,
+.result-advice-list p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.result-report-grid strong {
+  color: var(--blue);
+  font-size: 1.55rem;
+}
+
+.result-section h4 {
+  margin: 0 0 10px;
+}
+
+.result-stat-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+
+.result-stat-row:first-of-type {
+  border-top: 0;
+}
+
+.result-stat-row .risk-bar {
+  grid-column: 1 / -1;
+}
+
+.result-advice-list {
+  display: grid;
+  gap: 8px;
+}
+
+.result-advice-list p {
+  margin: 0;
+  border-left: 4px solid var(--gold);
+  padding-left: 10px;
+}
+
 .quiz-actions {
   margin-top: 16px;
 }
@@ -1506,6 +1575,10 @@ td {
   }
 
   .phrase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-report-grid {
     grid-template-columns: 1fr;
   }
 
