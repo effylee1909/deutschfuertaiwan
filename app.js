@@ -2091,19 +2091,21 @@ function renderLessonList() {
       certificationGroup.className = "folder-branch";
       certificationGroup.innerHTML = "<h4>Zertifikat</h4>";
 
-      certificationExams.forEach((exam) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "lesson-tab tree-item quiz-tree-item";
-        button.dataset.active = exam.id === activeLesson.id && !quizPanel.hidden;
-        button.innerHTML = `
-          <span class="tree-code">${exam.examCode}</span>
-          <strong>${exam.title}</strong>
-          <small>${exam.description}</small>
-        `;
-        button.addEventListener("click", () => selectQuiz(exam.id));
-        certificationGroup.appendChild(button);
-      });
+      certificationExams
+        .sort((a, b) => a.certificationOrder - b.certificationOrder)
+        .forEach((exam) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "lesson-tab tree-item quiz-tree-item";
+          button.dataset.active = exam.id === activeLesson.id && !quizPanel.hidden;
+          button.innerHTML = `
+            <span class="tree-code">${exam.examCode}</span>
+            <strong>${exam.title}</strong>
+            <small>${exam.description}</small>
+          `;
+          button.addEventListener("click", () => selectQuiz(exam.id));
+          certificationGroup.appendChild(button);
+        });
 
       levelGroup.appendChild(certificationGroup);
     }
@@ -2195,7 +2197,7 @@ function startQuiz() {
   quizPanel.hidden = false;
   resetKnowledgeTabs();
   quizTitleEl.textContent = activeLesson.isCertificationExam
-    ? `${activeLesson.level} Zertifikat Training`
+    ? activeLesson.title
     : activeLesson.isComprehensiveExam
     ? `${activeLesson.level} Prüfung - ${activeLesson.title}`
     : `${activeLesson.level} Prüfung - ${stageGermanLabels[activeLesson.stage]}`;
@@ -3175,33 +3177,45 @@ function buildComprehensiveExamQuestions(scopedLessons, examId) {
 }
 
 function createCertificationExams() {
+  const certificationSkills = [
+    { key: "listening", code: "H", title: "Hören 聽力", topic: "Hören", description: "聽力理解 · Hörskript / Auswahl", order: 1 },
+    { key: "speaking", code: "SP", title: "Sprechen 口說", topic: "Sprechen", description: "口說題卡 · 自我檢核", order: 2 },
+    { key: "reading", code: "L", title: "Lesen 閱讀", topic: "Lesen", description: "閱讀理解 · Auswahl", order: 3 },
+    { key: "writing", code: "SC", title: "Schreiben 寫作", topic: "Schreiben", description: "寫作任務 · 範文自評", order: 4 },
+  ];
+
   levelOrder.forEach((level) => {
-    const id = `${level.toLowerCase()}-zertifikat-exam`;
-    const examLesson = {
-      id,
-      level,
-      stage: "進階",
-      lessonCode: "Z",
-      examCode: "Z",
-      title: `${level} Zertifikat Training`,
-      topic: "Lesen / Hören / Schreiben / Sprechen",
-      description: "12 Aufgaben · Goethe/telc 風格原創題",
-      courseSummary: `${level} 德文檢定模擬練習`,
-      sourceNote: "題型參考 Goethe/telc 公開檢定方向，內容為原創練習。",
-      isCertificationExam: true,
-      questions: buildCertificationQuestions(level),
-    };
-    const existing = lessons.find((lesson) => lesson.id === id);
-    if (existing) Object.assign(existing, examLesson);
-    else lessons.push(examLesson);
+    certificationSkills.forEach((skill) => {
+      const id = `${level.toLowerCase()}-zertifikat-${skill.key}`;
+      const questions = buildCertificationQuestions(level, skill.key);
+      const examLesson = {
+        id,
+        level,
+        stage: "進階",
+        lessonCode: skill.code,
+        examCode: skill.code,
+        title: `${level} Zertifikat ${skill.title}`,
+        topic: skill.topic,
+        description: `${questions.length} Aufgaben · ${skill.description}`,
+        courseSummary: `${level} 德文檢定 ${skill.title}`,
+        sourceNote: "題型參考 Goethe/telc 公開檢定方向，內容為原創練習。",
+        isCertificationExam: true,
+        certificationSkill: skill.key,
+        certificationOrder: skill.order,
+        questions,
+      };
+      const existing = lessons.find((lesson) => lesson.id === id);
+      if (existing) Object.assign(existing, examLesson);
+      else lessons.push(examLesson);
+    });
   });
 }
 
-function buildCertificationQuestions(level) {
+function buildCertificationQuestions(level, skillKey) {
   const data = certificationQuestionSets[level];
   if (!data) return [];
-  const questions = [
-    ...data.reading.map((item) => ({
+  const builders = {
+    reading: () => data.reading.map((item) => ({
       type: "reading",
       skill: "Lesen",
       tags: [level, "Lesen", "Zertifikat"],
@@ -3209,7 +3223,7 @@ function buildCertificationQuestions(level) {
       prompt: "Lesen Sie den Text und wählen Sie die richtige Antwort.",
       ...item,
     })),
-    ...data.listening.map((item) => ({
+    listening: () => data.listening.map((item) => ({
       type: "listening",
       skill: "Hören",
       tags: [level, "Hören", "Zertifikat"],
@@ -3217,14 +3231,7 @@ function buildCertificationQuestions(level) {
       prompt: "Lesen Sie das Hörskript wie eine Hörverstehensaufgabe und wählen Sie.",
       ...item,
     })),
-    ...data.language.map((item) => ({
-      type: item.type || "cloze",
-      skill: "Sprachbausteine",
-      tags: [level, "Sprachbausteine", "Zertifikat"],
-      group: `${level} Zertifikat Sprachbausteine`,
-      ...item,
-    })),
-    ...data.writing.map((item) => ({
+    writing: () => data.writing.map((item) => ({
       type: "writing",
       skill: "Schreiben",
       tags: [level, "Schreiben", "Zertifikat"],
@@ -3232,7 +3239,7 @@ function buildCertificationQuestions(level) {
       answer: "__SELF_OK__",
       ...item,
     })),
-    ...data.speaking.map((item) => ({
+    speaking: () => data.speaking.map((item) => ({
       type: "speaking",
       skill: "Sprechen",
       tags: [level, "Sprechen", "Zertifikat"],
@@ -3240,9 +3247,10 @@ function buildCertificationQuestions(level) {
       answer: "__SELF_OK__",
       ...item,
     })),
-  ];
+  };
 
-  return shuffleWithSeed(questions, level.charCodeAt(0) * 100 + level.charCodeAt(1));
+  const questions = builders[skillKey]?.() || [];
+  return shuffleWithSeed(questions, level.charCodeAt(0) * 100 + level.charCodeAt(1) + skillKey.length);
 }
 
 function expandSyllabusLessons() {
@@ -4415,7 +4423,7 @@ function sortLessonsByCode(a, b) {
 
 function getLevelFolderLabel(level) {
   const lessonCount = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam && !lesson.isCertificationExam).length;
-  if (activeMainSection === "certification") return "1 Zertifikat Training";
+  if (activeMainSection === "certification") return "4 Zertifikat Teile";
   if (activeMainSection === "exam") return `${lessonCount} Kurztest · 3 Prüfung`;
   return `${lessonCount} Lektionen`;
 }
