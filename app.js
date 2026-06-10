@@ -2186,7 +2186,7 @@ function showLesson() {
 }
 
 function startQuiz() {
-  showAppSection("exam");
+  showAppSection(activeLesson.isCertificationExam ? "certification" : "exam");
   currentIndex = 0;
   score = 0;
   quizSeed = Date.now();
