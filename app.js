@@ -1647,6 +1647,105 @@ const writingExampleRows = [
   },
 ];
 
+const certificationQuestionSets = {
+  A1: {
+    reading: [
+      { passage: "Hallo Emma, der Deutschkurs beginnt heute nicht um 18 Uhr, sondern um 19 Uhr. Wir treffen uns vor Raum 204. Bring bitte dein Buch mit. Anna", question: "Wann beginnt der Kurs?", options: ["um 19 Uhr", "um 18 Uhr", "morgen früh", "am Samstag"], answer: "um 19 Uhr", hint: "Im Text steht: nicht um 18 Uhr, sondern um 19 Uhr." },
+      { passage: "Öffnungszeiten: Montag bis Freitag 9-17 Uhr. Am Samstag geschlossen.", question: "Wann ist das Büro geöffnet?", options: ["am Mittwoch um 10 Uhr", "am Samstag", "am Sonntag", "am Freitag um 20 Uhr"], answer: "am Mittwoch um 10 Uhr", hint: "Geöffnet ist Montag bis Freitag von 9 bis 17 Uhr." },
+      { passage: "Liebe Frau Keller, ich bin krank und kann heute nicht kommen. Können Sie mir bitte die Hausaufgaben schicken? Viele Grüße, Tom", question: "Was möchte Tom?", options: ["die Hausaufgaben bekommen", "einen Kaffee bestellen", "ein Zimmer buchen", "eine Reise machen"], answer: "die Hausaufgaben bekommen", hint: "Tom bittet um die Hausaufgaben." },
+    ],
+    listening: [
+      { passage: "Hörskript: Der Zug nach Köln fährt heute von Gleis 5 ab. Abfahrt ist um 14.20 Uhr.", question: "Von welchem Gleis fährt der Zug?", options: ["Gleis 5", "Gleis 4", "Gleis 14", "Gleis 20"], answer: "Gleis 5", hint: "Im Hörskript steht: von Gleis 5." },
+      { passage: "Hörskript: Guten Tag, ich hätte gern ein Wasser und ein Brötchen. Das macht zusammen 4 Euro.", question: "Was kauft die Person?", options: ["Wasser und Brötchen", "Kaffee und Kuchen", "Tee und Suppe", "Saft und Pizza"], answer: "Wasser und Brötchen", hint: "Die Person bestellt Wasser und Brötchen." },
+      { passage: "Hörskript: Hallo Ben, ich komme zehn Minuten später. Der Bus hat Verspätung.", question: "Warum kommt die Person später?", options: ["Der Bus hat Verspätung.", "Sie ist krank.", "Der Kurs fällt aus.", "Sie findet das Buch nicht."], answer: "Der Bus hat Verspätung.", hint: "Verspätung ist der Grund." },
+    ],
+    language: [
+      { prompt: "Ich ___ Anna.", answer: "heiße", answers: ["heiße", "heisse"], hint: "heißen: ich heiße." },
+      { prompt: "___ Buch liegt auf dem Tisch.", answer: "Das", answers: ["Das", "das"], hint: "das Buch." },
+      { prompt: "Heute ___ Ben Deutsch.", answer: "lernt", hint: "Verbposition 2: Heute lernt Ben Deutsch." },
+      { type: "choice", prompt: "Welche Frage passt?", options: ["Woher kommst du?", "Woher du kommst?", "Kommst woher du?", "Du woher kommst?"], answer: "Woher kommst du?", hint: "W-Frage: Fragewort + Verb + Subjekt." },
+    ],
+    writing: [
+      { prompt: "Schreiben Sie eine kurze Nachricht.", task: "Sie können heute nicht zum Kurs kommen. Schreiben Sie 3 Sätze: Entschuldigung, Grund, Bitte um Hausaufgaben.", model: "Hallo Frau Weber, ich kann heute leider nicht zum Kurs kommen, weil ich krank bin. Können Sie mir bitte die Hausaufgaben schicken? Vielen Dank!" },
+    ],
+    speaking: [
+      { prompt: "Sprechen Teil 1", task: "Stellen Sie sich kurz vor: Name, Herkunft, Wohnort, Sprache.", model: "Ich heiße Anna. Ich komme aus Taiwan. Ich wohne in Taipei und lerne Deutsch." },
+    ],
+  },
+  A2: {
+    reading: [
+      { passage: "Sehr geehrte Frau Keller, leider kann ich morgen nicht zum Termin kommen, weil ich arbeiten muss. Können wir den Termin auf Freitag verschieben?", question: "Was möchte die Person?", options: ["den Termin verschieben", "eine Wohnung mieten", "eine Rechnung bezahlen", "ein Buch kaufen"], answer: "den Termin verschieben", hint: "Die Person fragt nach einem neuen Termin." },
+      { passage: "Im Sprachkurs sprechen wir nächste Woche über Reisen. Bitte bringen Sie ein Foto aus Ihrem letzten Urlaub mit und erzählen Sie kurz darüber.", question: "Was sollen die Teilnehmenden mitbringen?", options: ["ein Urlaubsfoto", "ein Wörterbuch", "eine Rechnung", "einen Pass"], answer: "ein Urlaubsfoto", hint: "Im Text steht: ein Foto aus Ihrem letzten Urlaub." },
+      { passage: "Das Zimmer ist frei ab dem 1. Juni. Die Miete beträgt 520 Euro. Die Wohnung liegt zehn Minuten vom Bahnhof entfernt.", question: "Welche Information ist richtig?", options: ["Das Zimmer kostet 520 Euro.", "Das Zimmer ist am Bahnhof.", "Die Miete beträgt 1. Juni.", "Die Wohnung ist geschlossen."], answer: "Das Zimmer kostet 520 Euro.", hint: "Die Miete beträgt 520 Euro." },
+    ],
+    listening: [
+      { passage: "Hörskript: Guten Tag, Ihre Bestellung ist fertig. Sie können das Paket heute bis 18 Uhr abholen.", question: "Bis wann kann man das Paket abholen?", options: ["bis 18 Uhr", "bis 8 Uhr", "morgen früh", "am Sonntag"], answer: "bis 18 Uhr", hint: "Im Hörskript steht: bis 18 Uhr." },
+      { passage: "Hörskript: Der Arzttermin ist nicht am Dienstag, sondern am Donnerstag um 9.30 Uhr.", question: "Wann ist der Termin?", options: ["Donnerstag um 9.30 Uhr", "Dienstag um 9.30 Uhr", "Donnerstag um 19.30 Uhr", "Dienstag um 8 Uhr"], answer: "Donnerstag um 9.30 Uhr", hint: "nicht Dienstag, sondern Donnerstag." },
+      { passage: "Hörskript: Am Wochenende fahren wir nach Hamburg. Wir übernachten bei meiner Tante und besuchen den Hafen.", question: "Wohin fahren die Personen?", options: ["nach Hamburg", "nach Berlin", "nach Köln", "nach Wien"], answer: "nach Hamburg", hint: "Die Personen fahren nach Hamburg." },
+    ],
+    language: [
+      { prompt: "Gestern ___ ich im Restaurant gegessen.", answer: "habe", hint: "Perfekt mit haben: ich habe gegessen." },
+      { prompt: "Ich komme später, ___ mein Zug Verspätung hat.", answer: "weil", hint: "weil nennt den Grund." },
+      { prompt: "Können wir den Termin ___ Freitag verschieben?", answer: "auf", hint: "einen Termin auf Freitag verschieben." },
+      { type: "choice", prompt: "Welche Satzstellung ist richtig?", options: ["Morgen muss ich arbeiten.", "Morgen ich muss arbeiten.", "Muss morgen ich arbeiten.", "Ich arbeiten morgen muss."], answer: "Morgen muss ich arbeiten.", hint: "Verbposition 2." },
+    ],
+    writing: [
+      { prompt: "Schreiben Sie eine E-Mail.", task: "Sie möchten mit einem Freund lernen. Schreiben Sie: warum, wann, wo und was er mitbringen soll.", model: "Lieber Ben, nächste Woche schreiben wir einen Test. Ich möchte am Samstag um 15 Uhr in der Bibliothek lernen. Bring bitte dein Kursbuch und die Wortkarten mit. Viele Grüße Anna" },
+    ],
+    speaking: [
+      { prompt: "Sprechen Teil 2", task: "Erzählen Sie kurz von einem Wochenende: wohin, mit wem, was gemacht.", model: "Am Wochenende bin ich mit Emma nach Tainan gefahren. Wir haben einen Tempel besucht und gutes Essen probiert." },
+    ],
+  },
+  B1: {
+    reading: [
+      { passage: "Viele Lernende nutzen Onlinekurse, weil sie flexibel sind. Trotzdem fehlt manchen der direkte Kontakt zur Gruppe. Deshalb kombinieren einige Schulen Online-Unterricht mit Präsenzterminen.", question: "Was ist die Hauptaussage?", options: ["Onlinekurse haben Vorteile und Nachteile.", "Onlinekurse sind immer schlecht.", "Präsenzunterricht ist verboten.", "Schulen bieten keine Kurse an."], answer: "Onlinekurse haben Vorteile und Nachteile.", hint: "Der Text nennt Flexibilität und fehlenden Kontakt." },
+      { passage: "Sehr geehrte Damen und Herren, in meinem Hotelzimmer funktionierte das WLAN nicht. Außerdem war es nachts sehr laut. Ich bitte Sie um eine Rückmeldung.", question: "Warum schreibt die Person?", options: ["wegen einer Beschwerde", "wegen einer Einladung", "wegen einer Bewerbung", "wegen einer Bestellung"], answer: "wegen einer Beschwerde", hint: "Probleme mit Zimmer und WLAN sind eine Beschwerde." },
+      { passage: "Die Stadt plant mehr Fahrradwege. Einige Bewohner begrüßen den Plan, weil Radfahren umweltfreundlich ist. Andere sorgen sich um Parkplätze.", question: "Welche Positionen gibt es?", options: ["Zustimmung und Sorge", "nur Zustimmung", "nur Ablehnung", "keine Meinung"], answer: "Zustimmung und Sorge", hint: "Es gibt unterschiedliche Meinungen." },
+    ],
+    listening: [
+      { passage: "Hörskript: Der Kursraum wurde geändert. Der B1-Kurs findet heute im Raum 310 statt. Die Teilnehmenden sollen außerdem die Schreibaufgabe mitbringen.", question: "Was hat sich geändert?", options: ["der Raum", "der Lehrer", "die Uhrzeit", "das Kursbuch"], answer: "der Raum", hint: "Der Kurs findet in Raum 310 statt." },
+      { passage: "Hörskript: Ich kann leider nicht zur Besprechung kommen. Mein Zug ist ausgefallen. Ich schlage vor, dass wir morgen telefonieren.", question: "Was schlägt die Person vor?", options: ["morgen telefonieren", "heute reisen", "den Zug nehmen", "die Besprechung absagen ohne Ersatz"], answer: "morgen telefonieren", hint: "Sie schlägt ein Telefonat vor." },
+      { passage: "Hörskript: Im Vortrag geht es um Müllvermeidung. Besonders wichtig sind Mehrwegflaschen und eigene Einkaufstaschen.", question: "Was ist das Thema?", options: ["Müllvermeidung", "Wohnungssuche", "Prüfungsvorbereitung", "Berufswahl"], answer: "Müllvermeidung", hint: "Mehrwegflaschen und Einkaufstaschen passen zu Müllvermeidung." },
+    ],
+    language: [
+      { prompt: "Ich bleibe zu Hause, ___ ich mich besser konzentrieren kann.", answer: "damit", hint: "damit drückt ein Ziel aus." },
+      { prompt: "Der Kurs, ___ ich besuche, ist sehr hilfreich.", answer: "den", hint: "Relativpronomen Akkusativ maskulin: den." },
+      { prompt: "Meiner Meinung ___ sollte man früher anfangen.", answer: "nach", hint: "Feste Wendung: Meiner Meinung nach." },
+      { type: "choice", prompt: "Welche Verbindung passt?", options: ["Trotzdem möchte ich teilnehmen.", "Weil möchte ich teilnehmen.", "Dass ich trotzdem teilnehmen.", "Obwohl trotzdem teilnehmen ich."], answer: "Trotzdem möchte ich teilnehmen.", hint: "trotzdem steht im Hauptsatz mit Verbposition 2." },
+    ],
+    writing: [
+      { prompt: "Schreiben Sie eine E-Mail mit drei Inhaltspunkten.", task: "Ein Freund konnte nicht zu Ihrer Feier kommen. Beschreiben Sie die Feier, nennen Sie ein Geschenk und schlagen Sie ein Treffen vor.", model: "Lieber Max, schade, dass du nicht kommen konntest. Die Feier war sehr schön, und viele Freunde waren da. Besonders gefreut habe ich mich über ein Wörterbuch, weil ich es für die Prüfung brauche. Wollen wir uns nächste Woche treffen?" },
+    ],
+    speaking: [
+      { prompt: "Sprechen: Meinung äußern", task: "Sagen Sie Ihre Meinung zu Online-Unterricht. Nennen Sie einen Vorteil und einen Nachteil.", model: "Online-Unterricht ist flexibel und spart Zeit. Ein Nachteil ist, dass der direkte Kontakt zur Gruppe fehlt." },
+    ],
+  },
+  B2: {
+    reading: [
+      { passage: "Hybrides Arbeiten wird in vielen Unternehmen diskutiert. Es kann die Vereinbarkeit von Beruf und Familie verbessern, verlangt aber klare Regeln für Kommunikation, Erreichbarkeit und Verantwortung.", question: "Welche Aussage passt?", options: ["Hybrides Arbeiten braucht klare Strukturen.", "Hybrides Arbeiten hat keine Nachteile.", "Kommunikation ist unwichtig.", "Alle müssen nur im Büro arbeiten."], answer: "Hybrides Arbeiten braucht klare Strukturen.", hint: "Der Text nennt klare Regeln als Bedingung." },
+      { passage: "Viele Städte wollen den Autoverkehr reduzieren. Kritiker befürchten wirtschaftliche Nachteile, Befürworter verweisen auf bessere Luft und mehr Lebensqualität.", question: "Worum geht es?", options: ["um unterschiedliche Positionen zur Verkehrspolitik", "um eine Hotelreservierung", "um eine private Einladung", "um einen Sprachkurs"], answer: "um unterschiedliche Positionen zur Verkehrspolitik", hint: "Es werden Kritiker und Befürworter genannt." },
+      { passage: "Digitale Lernplattformen sammeln Daten über Lernverhalten. Das kann personalisierte Übungen ermöglichen, wirft aber Fragen zu Datenschutz und Transparenz auf.", question: "Welcher Konflikt wird beschrieben?", options: ["Nutzen und Datenschutz", "Preis und Öffnungszeiten", "Reise und Unterkunft", "Essen und Gesundheit"], answer: "Nutzen und Datenschutz", hint: "Personalisierung und Datenschutz stehen gegenüber." },
+    ],
+    listening: [
+      { passage: "Hörskript: Die Referentin betont, dass eine Vier-Tage-Woche nur funktioniert, wenn Arbeitsprozesse neu organisiert werden. Sonst steigt der Druck auf die Beschäftigten.", question: "Welche Bedingung nennt die Referentin?", options: ["Arbeitsprozesse müssen neu organisiert werden.", "Alle müssen länger arbeiten.", "Pausen sollen wegfallen.", "Kommunikation ist nicht nötig."], answer: "Arbeitsprozesse müssen neu organisiert werden.", hint: "Das ist die zentrale Bedingung." },
+      { passage: "Hörskript: Im Interview geht es um Medienkompetenz. Der Experte empfiehlt, Quellen zu prüfen und emotionale Überschriften besonders kritisch zu lesen.", question: "Was empfiehlt der Experte?", options: ["Quellen prüfen", "alles sofort teilen", "nur Überschriften lesen", "Bilder nie beachten"], answer: "Quellen prüfen", hint: "Quellenprüfung ist die Empfehlung." },
+      { passage: "Hörskript: Die Stadtverwaltung erklärt, dass bezahlbarer Wohnraum nur durch mehrere Maßnahmen entstehen kann: Förderung, Mietbegrenzung und Neubau.", question: "Was sagt die Stadtverwaltung?", options: ["Mehrere Maßnahmen sind nötig.", "Nur Neubau reicht immer.", "Mieten sollen gar nicht diskutiert werden.", "Förderung ist verboten."], answer: "Mehrere Maßnahmen sind nötig.", hint: "Förderung, Mietbegrenzung und Neubau werden kombiniert." },
+    ],
+    language: [
+      { prompt: "Einerseits spart Homeoffice Zeit, ___ fehlt manchmal der Austausch.", answer: "andererseits", hint: "einerseits ... andererseits." },
+      { prompt: "Die Entscheidung hängt ___ mehreren Faktoren ab.", answer: "von", hint: "abhängen von + Dativ." },
+      { prompt: "Die Maßnahmen müssen besser erklärt ___.", answer: "werden", hint: "Passiv: müssen erklärt werden." },
+      { type: "choice", prompt: "Welche Formulierung ist am formellsten?", options: ["Ich bitte Sie um eine Rückmeldung.", "Schreib mal zurück.", "Sag schnell was.", "Antwort bitte sofort!"], answer: "Ich bitte Sie um eine Rückmeldung.", hint: "Formelle Bitte." },
+    ],
+    writing: [
+      { prompt: "Schreiben Sie einen Forumsbeitrag.", task: "Thema: Sollten öffentliche Verkehrsmittel günstiger sein? Nennen Sie Vorteile, mögliche Probleme und Ihre Meinung.", model: "Öffentliche Verkehrsmittel sollten günstiger sein, weil Mobilität zur Grundversorgung gehört. Gleichzeitig muss das Angebot zuverlässig ausgebaut werden. Meiner Meinung nach sind niedrigere Preise sinnvoll, wenn sie mit mehr Verbindungen und besserer Qualität verbunden werden." },
+    ],
+    speaking: [
+      { prompt: "Sprechen: Vor- und Nachteile", task: "Vergleichen Sie Homeoffice und Arbeit im Büro. Nennen Sie Vor- und Nachteile und formulieren Sie ein Fazit.", model: "Homeoffice bietet Flexibilität, kann aber den Austausch erschweren. Das Büro stärkt die Zusammenarbeit, ist jedoch weniger flexibel. Ein hybrides Modell scheint mir am sinnvollsten." },
+    ],
+  },
+};
+
 const verbPrincipalRows = [
   { verb: "sein", chinese: "是", aux: "sein", participle: "gewesen", example: "Ich bin in Berlin gewesen.", ich: "war", du: "warst", third: "war", plural: "waren" },
   { verb: "haben", chinese: "有", aux: "haben", participle: "gehabt", example: "Ich habe Zeit gehabt.", ich: "hatte", du: "hattest", third: "hatte", plural: "hatten" },
@@ -1821,6 +1920,7 @@ const studyApp = document.querySelector(".study-app");
 const homeTab = document.querySelector("#home-tab");
 const learningTab = document.querySelector("#learning-tab");
 const examTab = document.querySelector("#exam-tab");
+const certificationTab = document.querySelector("#certification-tab");
 const knowledgeTab = document.querySelector("#knowledge-tab");
 const lessonListEl = document.querySelector("#lesson-list");
 const levelTextEl = document.querySelector("#level-text");
@@ -1897,7 +1997,8 @@ function renderLessonList() {
   if (activeMainSection === "knowledge") return;
 
   levelOrder.forEach((level) => {
-    const levelLessons = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam);
+    const levelLessons = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam && !lesson.isCertificationExam);
+    const certificationExams = lessons.filter((lesson) => lesson.level === level && lesson.isCertificationExam);
     if (levelLessons.length === 0) return;
 
     const levelGroup = document.createElement("details");
@@ -1983,6 +2084,28 @@ function renderLessonList() {
 
     if (activeMainSection === "exam") {
       levelGroup.appendChild(examGroup);
+    }
+
+    if (activeMainSection === "certification") {
+      const certificationGroup = document.createElement("div");
+      certificationGroup.className = "folder-branch";
+      certificationGroup.innerHTML = "<h4>Zertifikat</h4>";
+
+      certificationExams.forEach((exam) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "lesson-tab tree-item quiz-tree-item";
+        button.dataset.active = exam.id === activeLesson.id && !quizPanel.hidden;
+        button.innerHTML = `
+          <span class="tree-code">${exam.examCode}</span>
+          <strong>${exam.title}</strong>
+          <small>${exam.description}</small>
+        `;
+        button.addEventListener("click", () => selectQuiz(exam.id));
+        certificationGroup.appendChild(button);
+      });
+
+      levelGroup.appendChild(certificationGroup);
     }
     lessonListEl.appendChild(levelGroup);
   });
@@ -2071,7 +2194,9 @@ function startQuiz() {
   hideWorkspacePanels();
   quizPanel.hidden = false;
   resetKnowledgeTabs();
-  quizTitleEl.textContent = activeLesson.isComprehensiveExam
+  quizTitleEl.textContent = activeLesson.isCertificationExam
+    ? `${activeLesson.level} Zertifikat Training`
+    : activeLesson.isComprehensiveExam
     ? `${activeLesson.level} Prüfung - ${activeLesson.title}`
     : `${activeLesson.level} Prüfung - ${stageGermanLabels[activeLesson.stage]}`;
   renderLessonList();
@@ -2092,6 +2217,10 @@ function showLearningPath() {
 
 function showExamGuide() {
   showSectionIntro("exam");
+}
+
+function showCertificationGuide() {
+  showSectionIntro("certification");
 }
 
 function showSectionIntro(section) {
@@ -2260,6 +2389,11 @@ function getSectionIntro(section) {
       items: ["12 Kurztest", "3 Prüfung", "期中考", "期末考", "綜合複習考"],
       body: "這裡集中所有 Prüfung，方便練習題型、計分與複習弱點。",
     },
+    certification: {
+      title: "征服檢定",
+      items: ["A1 Zertifikat", "A2 Zertifikat", "B1 Zertifikat", "B2 Zertifikat", "Lesen / Hören / Schreiben / Sprechen"],
+      body: "這裡以 Goethe/telc 公開檢定方向設計原創題，適合做考前題型熟悉與弱點診斷。",
+    },
     knowledge: {
       title: "知識整理庫",
       items: ["單字表", "動詞變化表", "文法總表", "寫作範例", "錯題本", "學習進度", "德文公開平台", "知識點地圖"],
@@ -2286,6 +2420,7 @@ function setMainTab(active) {
     [homeTab, "home"],
     [learningTab, "learning"],
     [examTab, "exam"],
+    [certificationTab, "certification"],
     [knowledgeTab, "knowledge"],
   ].forEach(([button, value]) => {
     button.dataset.active = active === value;
@@ -2993,6 +3128,7 @@ function initializeLessons() {
   });
 
   createComprehensiveExams();
+  createCertificationExams();
 }
 
 function createComprehensiveExams() {
@@ -3036,6 +3172,77 @@ function createComprehensiveExams() {
 function buildComprehensiveExamQuestions(scopedLessons, examId) {
   const questions = scopedLessons.flatMap((lesson) => lesson.questions || []);
   return shuffleWithSeed(dedupeQuestions(questions), examId.length * 997).slice(0, 30);
+}
+
+function createCertificationExams() {
+  levelOrder.forEach((level) => {
+    const id = `${level.toLowerCase()}-zertifikat-exam`;
+    const examLesson = {
+      id,
+      level,
+      stage: "進階",
+      lessonCode: "Z",
+      examCode: "Z",
+      title: `${level} Zertifikat Training`,
+      topic: "Lesen / Hören / Schreiben / Sprechen",
+      description: "12 Aufgaben · Goethe/telc 風格原創題",
+      courseSummary: `${level} 德文檢定模擬練習`,
+      sourceNote: "題型參考 Goethe/telc 公開檢定方向，內容為原創練習。",
+      isCertificationExam: true,
+      questions: buildCertificationQuestions(level),
+    };
+    const existing = lessons.find((lesson) => lesson.id === id);
+    if (existing) Object.assign(existing, examLesson);
+    else lessons.push(examLesson);
+  });
+}
+
+function buildCertificationQuestions(level) {
+  const data = certificationQuestionSets[level];
+  if (!data) return [];
+  const questions = [
+    ...data.reading.map((item) => ({
+      type: "reading",
+      skill: "Lesen",
+      tags: [level, "Lesen", "Zertifikat"],
+      group: `${level} Zertifikat Lesen`,
+      prompt: "Lesen Sie den Text und wählen Sie die richtige Antwort.",
+      ...item,
+    })),
+    ...data.listening.map((item) => ({
+      type: "listening",
+      skill: "Hören",
+      tags: [level, "Hören", "Zertifikat"],
+      group: `${level} Zertifikat Hören`,
+      prompt: "Lesen Sie das Hörskript wie eine Hörverstehensaufgabe und wählen Sie.",
+      ...item,
+    })),
+    ...data.language.map((item) => ({
+      type: item.type || "cloze",
+      skill: "Sprachbausteine",
+      tags: [level, "Sprachbausteine", "Zertifikat"],
+      group: `${level} Zertifikat Sprachbausteine`,
+      ...item,
+    })),
+    ...data.writing.map((item) => ({
+      type: "writing",
+      skill: "Schreiben",
+      tags: [level, "Schreiben", "Zertifikat"],
+      group: `${level} Zertifikat Schreiben`,
+      answer: "__SELF_OK__",
+      ...item,
+    })),
+    ...data.speaking.map((item) => ({
+      type: "speaking",
+      skill: "Sprechen",
+      tags: [level, "Sprechen", "Zertifikat"],
+      group: `${level} Zertifikat Sprechen`,
+      answer: "__SELF_OK__",
+      ...item,
+    })),
+  ];
+
+  return shuffleWithSeed(questions, level.charCodeAt(0) * 100 + level.charCodeAt(1));
 }
 
 function expandSyllabusLessons() {
@@ -4207,7 +4414,8 @@ function sortLessonsByCode(a, b) {
 }
 
 function getLevelFolderLabel(level) {
-  const lessonCount = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam).length;
+  const lessonCount = lessons.filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam && !lesson.isCertificationExam).length;
+  if (activeMainSection === "certification") return "1 Zertifikat Training";
   if (activeMainSection === "exam") return `${lessonCount} Kurztest · 3 Prüfung`;
   return `${lessonCount} Lektionen`;
 }
@@ -4791,7 +4999,7 @@ function renderLearningProgress() {
   const examResults = progress.quizResults.filter((result) => result.isExam);
   const bestByLesson = getBestResultByLesson(lessonResults);
   const completedCount = [...bestByLesson.values()].filter((result) => result.percent >= 60).length;
-  const totalLessons = lessons.filter((lesson) => !lesson.isComprehensiveExam).length;
+  const totalLessons = lessons.filter((lesson) => !lesson.isComprehensiveExam && !lesson.isCertificationExam).length;
   const average = lessonResults.length
     ? Math.round(lessonResults.reduce((sum, result) => sum + result.percent, 0) / lessonResults.length)
     : 0;
@@ -4835,7 +5043,7 @@ function getBestResultByLesson(results) {
 
 function renderLevelProgress(level, bestByLesson) {
   const levelLessons = lessons
-    .filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam)
+    .filter((lesson) => lesson.level === level && !lesson.isComprehensiveExam && !lesson.isCertificationExam)
     .sort(sortLessonsByCode);
   const completed = levelLessons.filter((lesson) => (bestByLesson.get(lesson.id)?.percent || 0) >= 60).length;
   const percent = Math.round((completed / levelLessons.length) * 100);
@@ -5010,11 +5218,12 @@ function recordQuizResult(percent) {
     lessonId: activeLesson.id,
     level: activeLesson.level,
     lesson: activeLesson.lessonCode || activeLesson.code || "Prüfung",
-    title: activeLesson.isComprehensiveExam ? activeLesson.title : activeLesson.topic,
+    title: activeLesson.isComprehensiveExam || activeLesson.isCertificationExam ? activeLesson.title : activeLesson.topic,
     score,
     total: activeLesson.questions.length,
     percent,
-    isExam: Boolean(activeLesson.isComprehensiveExam),
+    isExam: Boolean(activeLesson.isComprehensiveExam || activeLesson.isCertificationExam),
+    isCertification: Boolean(activeLesson.isCertificationExam),
   };
 
   progress.quizResults.push(result);
@@ -5049,6 +5258,7 @@ function goNext() {
 homeTab.addEventListener("click", showHome);
 learningTab.addEventListener("click", showLearningPath);
 examTab.addEventListener("click", showExamGuide);
+certificationTab.addEventListener("click", showCertificationGuide);
 knowledgeTab.addEventListener("click", showKnowledgeIntro);
 document.querySelectorAll("[data-hero-target]").forEach((button) => {
   button.addEventListener("click", () => {
