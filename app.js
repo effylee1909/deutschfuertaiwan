@@ -1649,102 +1649,233 @@ const writingExampleRows = [
 
 const certificationQuestionSets = {
   A1: {
-    reading: [
-      { passage: "Hallo Emma, der Deutschkurs beginnt heute nicht um 18 Uhr, sondern um 19 Uhr. Wir treffen uns vor Raum 204. Bring bitte dein Buch mit. Anna", question: "Wann beginnt der Kurs?", options: ["um 19 Uhr", "um 18 Uhr", "morgen früh", "am Samstag"], answer: "um 19 Uhr", hint: "Im Text steht: nicht um 18 Uhr, sondern um 19 Uhr." },
-      { passage: "Öffnungszeiten: Montag bis Freitag 9-17 Uhr. Am Samstag geschlossen.", question: "Wann ist das Büro geöffnet?", options: ["am Mittwoch um 10 Uhr", "am Samstag", "am Sonntag", "am Freitag um 20 Uhr"], answer: "am Mittwoch um 10 Uhr", hint: "Geöffnet ist Montag bis Freitag von 9 bis 17 Uhr." },
-      { passage: "Liebe Frau Keller, ich bin krank und kann heute nicht kommen. Können Sie mir bitte die Hausaufgaben schicken? Viele Grüße, Tom", question: "Was möchte Tom?", options: ["die Hausaufgaben bekommen", "einen Kaffee bestellen", "ein Zimmer buchen", "eine Reise machen"], answer: "die Hausaufgaben bekommen", hint: "Tom bittet um die Hausaufgaben." },
-    ],
+    reading: expandCertificationReadingGroups([
+      {
+        group: "Lesen Teil 1: Nachricht",
+        passage: "Hallo Emma, der Deutschkurs beginnt heute nicht um 18 Uhr, sondern um 19 Uhr. Wir treffen uns vor Raum 204. Bring bitte dein Buch und einen Stift mit. Anna",
+        questions: [
+          ["Wann beginnt der Kurs?", ["um 19 Uhr", "um 18 Uhr", "morgen früh", "am Samstag"], "um 19 Uhr"],
+          ["Wo treffen sich Emma und Anna?", ["vor Raum 204", "im Café", "am Bahnhof", "zu Hause"], "vor Raum 204"],
+          ["Was soll Emma mitbringen?", ["Buch und Stift", "Kaffee und Kuchen", "Pass und Foto", "Jacke und Tasche"], "Buch und Stift"],
+          ["Wer schreibt die Nachricht?", ["Anna", "Emma", "Herr Weber", "Tom"], "Anna"],
+        ],
+      },
+      {
+        group: "Lesen Teil 2: Hinweis",
+        passage: "Bibliothek Mitte: Montag bis Freitag 9-17 Uhr geöffnet. Am Samstag nur von 10-13 Uhr. Sonntag geschlossen. Bitte leise sein.",
+        questions: [
+          ["Wann ist die Bibliothek am Mittwoch geöffnet?", ["9-17 Uhr", "10-13 Uhr", "nur abends", "gar nicht"], "9-17 Uhr"],
+          ["Wann ist die Bibliothek geschlossen?", ["am Sonntag", "am Montag", "am Freitag", "am Samstagvormittag"], "am Sonntag"],
+          ["Wie lange ist die Bibliothek am Samstag geöffnet?", ["drei Stunden", "acht Stunden", "den ganzen Tag", "gar nicht"], "drei Stunden"],
+          ["Was soll man in der Bibliothek machen?", ["leise sein", "laut sprechen", "Musik hören", "essen"], "leise sein"],
+        ],
+      },
+      {
+        group: "Lesen Teil 3: E-Mail",
+        passage: "Liebe Frau Keller, ich bin krank und kann heute nicht zum Kurs kommen. Können Sie mir bitte die Hausaufgaben schicken? Ich komme nächste Woche wieder. Viele Grüße, Tom",
+        questions: [
+          ["Warum kommt Tom heute nicht?", ["Er ist krank.", "Er arbeitet.", "Er fährt nach Berlin.", "Er hat Geburtstag."], "Er ist krank."],
+          ["Was möchte Tom bekommen?", ["die Hausaufgaben", "eine Fahrkarte", "einen Kaffee", "ein Zimmer"], "die Hausaufgaben"],
+          ["Wann kommt Tom wieder?", ["nächste Woche", "heute Abend", "morgen früh", "am Sonntag"], "nächste Woche"],
+          ["An wen schreibt Tom?", ["an Frau Keller", "an Anna", "an Emma", "an Ben"], "an Frau Keller"],
+        ],
+      },
+    ]),
     listening: [
       { passage: "Hörskript: Der Zug nach Köln fährt heute von Gleis 5 ab. Abfahrt ist um 14.20 Uhr.", question: "Von welchem Gleis fährt der Zug?", options: ["Gleis 5", "Gleis 4", "Gleis 14", "Gleis 20"], answer: "Gleis 5", hint: "Im Hörskript steht: von Gleis 5." },
       { passage: "Hörskript: Guten Tag, ich hätte gern ein Wasser und ein Brötchen. Das macht zusammen 4 Euro.", question: "Was kauft die Person?", options: ["Wasser und Brötchen", "Kaffee und Kuchen", "Tee und Suppe", "Saft und Pizza"], answer: "Wasser und Brötchen", hint: "Die Person bestellt Wasser und Brötchen." },
       { passage: "Hörskript: Hallo Ben, ich komme zehn Minuten später. Der Bus hat Verspätung.", question: "Warum kommt die Person später?", options: ["Der Bus hat Verspätung.", "Sie ist krank.", "Der Kurs fällt aus.", "Sie findet das Buch nicht."], answer: "Der Bus hat Verspätung.", hint: "Verspätung ist der Grund." },
-    ],
-    language: [
-      { prompt: "Ich ___ Anna.", answer: "heiße", answers: ["heiße", "heisse"], hint: "heißen: ich heiße." },
-      { prompt: "___ Buch liegt auf dem Tisch.", answer: "Das", answers: ["Das", "das"], hint: "das Buch." },
-      { prompt: "Heute ___ Ben Deutsch.", answer: "lernt", hint: "Verbposition 2: Heute lernt Ben Deutsch." },
-      { type: "choice", prompt: "Welche Frage passt?", options: ["Woher kommst du?", "Woher du kommst?", "Kommst woher du?", "Du woher kommst?"], answer: "Woher kommst du?", hint: "W-Frage: Fragewort + Verb + Subjekt." },
+      { passage: "Hörskript: Die Praxis von Dr. Klein ist heute bis 16 Uhr geöffnet.", question: "Bis wann ist die Praxis geöffnet?", options: ["bis 16 Uhr", "bis 6 Uhr", "bis 18 Uhr", "bis morgen"], answer: "bis 16 Uhr", hint: "Im Hörskript steht: bis 16 Uhr." },
+      { passage: "Hörskript: Frau Miller wohnt in Hamburg, aber sie arbeitet in Berlin.", question: "Wo arbeitet Frau Miller?", options: ["in Berlin", "in Hamburg", "in Wien", "in Köln"], answer: "in Berlin", hint: "Sie arbeitet in Berlin." },
+      { passage: "Hörskript: Bitte bringen Sie zur Prüfung Ihren Pass und einen schwarzen Stift mit.", question: "Was soll man mitbringen?", options: ["Pass und Stift", "Buch und Tasche", "Kaffee und Wasser", "Foto und Ticket"], answer: "Pass und Stift", hint: "Pass und schwarzer Stift werden genannt." },
+      { passage: "Hörskript: Der Film beginnt um 20 Uhr. Wir treffen uns um 19.30 Uhr vor dem Kino.", question: "Wann treffen sich die Personen?", options: ["um 19.30 Uhr", "um 20 Uhr", "um 18 Uhr", "um 9 Uhr"], answer: "um 19.30 Uhr", hint: "Treffpunkt ist um 19.30 Uhr." },
+      { passage: "Hörskript: Im Café gibt es heute Apfelkuchen für 3 Euro und Kaffee für 2 Euro.", question: "Was kostet der Kaffee?", options: ["2 Euro", "3 Euro", "5 Euro", "20 Euro"], answer: "2 Euro", hint: "Kaffee kostet 2 Euro." },
     ],
     writing: [
       { prompt: "Schreiben Sie eine kurze Nachricht.", task: "Sie können heute nicht zum Kurs kommen. Schreiben Sie 3 Sätze: Entschuldigung, Grund, Bitte um Hausaufgaben.", model: "Hallo Frau Weber, ich kann heute leider nicht zum Kurs kommen, weil ich krank bin. Können Sie mir bitte die Hausaufgaben schicken? Vielen Dank!" },
+      { prompt: "Schreiben Sie eine Einladung.", task: "Laden Sie eine Freundin zum Kaffee ein. Schreiben Sie: wann, wo, warum.", model: "Hallo Emma, hast du am Samstag Zeit? Ich möchte dich um 15 Uhr ins Café Mozart einladen. Ich habe Geburtstag und freue mich auf dich." },
+      { prompt: "Schreiben Sie eine Anmeldung.", task: "Sie möchten einen Deutschkurs besuchen. Schreiben Sie: Name, Kurszeit, Telefonnummer.", model: "Guten Tag, ich heiße Anna Chen und möchte den Deutschkurs am Montag anmelden. Meine Telefonnummer ist 0912 345 678. Vielen Dank." },
     ],
     speaking: [
       { prompt: "Sprechen Teil 1", task: "Stellen Sie sich kurz vor: Name, Herkunft, Wohnort, Sprache.", model: "Ich heiße Anna. Ich komme aus Taiwan. Ich wohne in Taipei und lerne Deutsch." },
+      { prompt: "Sprechen Teil 2", task: "Fragen Sie nach einem Gegenstand: Buch, Stift, Tasche.", model: "Haben Sie einen Stift? Können Sie mir bitte das Buch geben?" },
+      { prompt: "Sprechen Teil 3", task: "Bitten Sie um Hilfe in der Schule.", model: "Entschuldigung, können Sie mir bitte helfen? Ich verstehe die Aufgabe nicht." },
     ],
   },
   A2: {
-    reading: [
-      { passage: "Sehr geehrte Frau Keller, leider kann ich morgen nicht zum Termin kommen, weil ich arbeiten muss. Können wir den Termin auf Freitag verschieben?", question: "Was möchte die Person?", options: ["den Termin verschieben", "eine Wohnung mieten", "eine Rechnung bezahlen", "ein Buch kaufen"], answer: "den Termin verschieben", hint: "Die Person fragt nach einem neuen Termin." },
-      { passage: "Im Sprachkurs sprechen wir nächste Woche über Reisen. Bitte bringen Sie ein Foto aus Ihrem letzten Urlaub mit und erzählen Sie kurz darüber.", question: "Was sollen die Teilnehmenden mitbringen?", options: ["ein Urlaubsfoto", "ein Wörterbuch", "eine Rechnung", "einen Pass"], answer: "ein Urlaubsfoto", hint: "Im Text steht: ein Foto aus Ihrem letzten Urlaub." },
-      { passage: "Das Zimmer ist frei ab dem 1. Juni. Die Miete beträgt 520 Euro. Die Wohnung liegt zehn Minuten vom Bahnhof entfernt.", question: "Welche Information ist richtig?", options: ["Das Zimmer kostet 520 Euro.", "Das Zimmer ist am Bahnhof.", "Die Miete beträgt 1. Juni.", "Die Wohnung ist geschlossen."], answer: "Das Zimmer kostet 520 Euro.", hint: "Die Miete beträgt 520 Euro." },
-    ],
+    reading: expandCertificationReadingGroups([
+      {
+        group: "Lesen Teil 1: E-Mail",
+        passage: "Sehr geehrte Frau Keller, leider kann ich morgen nicht zum Termin kommen, weil ich arbeiten muss. Können wir den Termin auf Freitag um 10 Uhr verschieben? Bitte antworten Sie mir kurz. Mit freundlichen Grüßen, Daniel Smith",
+        questions: [
+          ["Was möchte Daniel Smith?", ["den Termin verschieben", "eine Wohnung mieten", "eine Rechnung bezahlen", "ein Buch kaufen"], "den Termin verschieben"],
+          ["Warum kann er morgen nicht kommen?", ["Er muss arbeiten.", "Er ist im Urlaub.", "Er ist krank.", "Er hat keinen Pass."], "Er muss arbeiten."],
+          ["Wann möchte er kommen?", ["Freitag um 10 Uhr", "morgen um 10 Uhr", "Montag um 18 Uhr", "Sonntag um 9 Uhr"], "Freitag um 10 Uhr"],
+          ["Was soll Frau Keller tun?", ["kurz antworten", "ein Foto schicken", "ein Zimmer buchen", "den Kurs beenden"], "kurz antworten"],
+        ],
+      },
+      {
+        group: "Lesen Teil 2: Kursinformation",
+        passage: "Im Sprachkurs sprechen wir nächste Woche über Reisen. Bitte bringen Sie ein Foto aus Ihrem letzten Urlaub mit. Jede Person erzählt drei Minuten: Wohin sind Sie gefahren? Was haben Sie gemacht? Wie war das Wetter?",
+        questions: [
+          ["Worüber spricht der Kurs nächste Woche?", ["über Reisen", "über Arbeit", "über Wohnungen", "über Gesundheit"], "über Reisen"],
+          ["Was sollen die Teilnehmenden mitbringen?", ["ein Urlaubsfoto", "ein Wörterbuch", "eine Rechnung", "einen Pass"], "ein Urlaubsfoto"],
+          ["Wie lange soll jede Person erzählen?", ["drei Minuten", "zehn Minuten", "eine Stunde", "gar nicht"], "drei Minuten"],
+          ["Welche Frage passt zum Vortrag?", ["Wie war das Wetter?", "Wie viel kostet die Miete?", "Wo ist die Apotheke?", "Wann fährt der Bus 5?"], "Wie war das Wetter?"],
+        ],
+      },
+      {
+        group: "Lesen Teil 3: Anzeige",
+        passage: "Zimmer frei ab dem 1. Juni: helles Zimmer in einer Dreier-WG, Miete 520 Euro. Die Wohnung liegt zehn Minuten vom Bahnhof entfernt. Küche und Bad werden gemeinsam benutzt. Besichtigung am Samstag möglich.",
+        questions: [
+          ["Ab wann ist das Zimmer frei?", ["ab dem 1. Juni", "ab Samstag", "ab heute", "ab Dezember"], "ab dem 1. Juni"],
+          ["Wie hoch ist die Miete?", ["520 Euro", "250 Euro", "10 Euro", "1. Juni"], "520 Euro"],
+          ["Was wird gemeinsam benutzt?", ["Küche und Bad", "Bahnhof und Bus", "Bett und Schrank", "Pass und Ticket"], "Küche und Bad"],
+          ["Wann kann man das Zimmer besichtigen?", ["am Samstag", "am Montagabend", "am Sonntagmorgen", "jeden Tag"], "am Samstag"],
+        ],
+      },
+    ]),
     listening: [
       { passage: "Hörskript: Guten Tag, Ihre Bestellung ist fertig. Sie können das Paket heute bis 18 Uhr abholen.", question: "Bis wann kann man das Paket abholen?", options: ["bis 18 Uhr", "bis 8 Uhr", "morgen früh", "am Sonntag"], answer: "bis 18 Uhr", hint: "Im Hörskript steht: bis 18 Uhr." },
       { passage: "Hörskript: Der Arzttermin ist nicht am Dienstag, sondern am Donnerstag um 9.30 Uhr.", question: "Wann ist der Termin?", options: ["Donnerstag um 9.30 Uhr", "Dienstag um 9.30 Uhr", "Donnerstag um 19.30 Uhr", "Dienstag um 8 Uhr"], answer: "Donnerstag um 9.30 Uhr", hint: "nicht Dienstag, sondern Donnerstag." },
       { passage: "Hörskript: Am Wochenende fahren wir nach Hamburg. Wir übernachten bei meiner Tante und besuchen den Hafen.", question: "Wohin fahren die Personen?", options: ["nach Hamburg", "nach Berlin", "nach Köln", "nach Wien"], answer: "nach Hamburg", hint: "Die Personen fahren nach Hamburg." },
-    ],
-    language: [
-      { prompt: "Gestern ___ ich im Restaurant gegessen.", answer: "habe", hint: "Perfekt mit haben: ich habe gegessen." },
-      { prompt: "Ich komme später, ___ mein Zug Verspätung hat.", answer: "weil", hint: "weil nennt den Grund." },
-      { prompt: "Können wir den Termin ___ Freitag verschieben?", answer: "auf", hint: "einen Termin auf Freitag verschieben." },
-      { type: "choice", prompt: "Welche Satzstellung ist richtig?", options: ["Morgen muss ich arbeiten.", "Morgen ich muss arbeiten.", "Muss morgen ich arbeiten.", "Ich arbeiten morgen muss."], answer: "Morgen muss ich arbeiten.", hint: "Verbposition 2." },
+      { passage: "Hörskript: Wegen Bauarbeiten fährt der Bus 12 heute nur bis zum Rathaus.", question: "Warum fährt der Bus anders?", options: ["wegen Bauarbeiten", "wegen eines Konzerts", "wegen Schnee", "wegen einer Prüfung"], answer: "wegen Bauarbeiten", hint: "Bauarbeiten sind der Grund." },
+      { passage: "Hörskript: Das Schwimmbad ist am Montag geschlossen. Am Dienstag öffnet es wieder um 7 Uhr.", question: "Wann öffnet das Schwimmbad wieder?", options: ["am Dienstag um 7 Uhr", "am Montag um 7 Uhr", "am Sonntag", "heute Abend"], answer: "am Dienstag um 7 Uhr", hint: "Am Dienstag öffnet es wieder." },
+      { passage: "Hörskript: Frau Becker sucht eine Wohnung mit zwei Zimmern und Balkon, nicht weit vom Zentrum.", question: "Was sucht Frau Becker?", options: ["eine Wohnung mit Balkon", "ein Hotelzimmer", "einen Sprachkurs", "eine Fahrkarte"], answer: "eine Wohnung mit Balkon", hint: "Wohnung mit zwei Zimmern und Balkon." },
+      { passage: "Hörskript: Die Führung im Museum dauert 90 Minuten. Danach können Sie den Museumsshop besuchen.", question: "Wie lange dauert die Führung?", options: ["90 Minuten", "19 Minuten", "eine Woche", "den ganzen Tag"], answer: "90 Minuten", hint: "Die Führung dauert 90 Minuten." },
+      { passage: "Hörskript: Bitte schicken Sie das Formular bis Freitag per E-Mail zurück.", question: "Bis wann soll man das Formular schicken?", options: ["bis Freitag", "bis Montag", "bis morgen 8 Uhr", "bis Sonntagabend"], answer: "bis Freitag", hint: "Im Hörskript steht: bis Freitag." },
     ],
     writing: [
       { prompt: "Schreiben Sie eine E-Mail.", task: "Sie möchten mit einem Freund lernen. Schreiben Sie: warum, wann, wo und was er mitbringen soll.", model: "Lieber Ben, nächste Woche schreiben wir einen Test. Ich möchte am Samstag um 15 Uhr in der Bibliothek lernen. Bring bitte dein Kursbuch und die Wortkarten mit. Viele Grüße Anna" },
+      { prompt: "Schreiben Sie an die Sprachschule.", task: "Sie können an einem Kurstag nicht teilnehmen. Schreiben Sie: Grund, neuer Termin, Bitte um Antwort.", model: "Sehr geehrte Damen und Herren, am Mittwoch kann ich leider nicht teilnehmen, weil ich arbeiten muss. Kann ich den Termin auf Freitag verschieben? Bitte geben Sie mir kurz Bescheid." },
+      { prompt: "Schreiben Sie eine Anfrage.", task: "Sie suchen ein Zimmer. Schreiben Sie: Zeitraum, Preisfrage, Besichtigung.", model: "Guten Tag, ich interessiere mich für das Zimmer ab Juni. Wie hoch ist die Miete genau? Kann ich das Zimmer am Samstag besichtigen?" },
     ],
     speaking: [
-      { prompt: "Sprechen Teil 2", task: "Erzählen Sie kurz von einem Wochenende: wohin, mit wem, was gemacht.", model: "Am Wochenende bin ich mit Emma nach Tainan gefahren. Wir haben einen Tempel besucht und gutes Essen probiert." },
+      { prompt: "Sprechen Teil 1", task: "Erzählen Sie kurz von einem Wochenende: wohin, mit wem, was gemacht.", model: "Am Wochenende bin ich mit Emma nach Tainan gefahren. Wir haben einen Tempel besucht und gutes Essen probiert." },
+      { prompt: "Sprechen Teil 2", task: "Planen Sie mit einer Person einen Lerntermin.", model: "Wann hast du Zeit? Wir können am Freitag in der Bibliothek lernen. Bring bitte dein Buch mit." },
+      { prompt: "Sprechen Teil 3", task: "Sprechen Sie über Ihre Wohnung oder Ihr Zimmer.", model: "Mein Zimmer ist klein, aber hell. Es liegt in der Nähe von der Uni. Das finde ich praktisch." },
     ],
   },
   B1: {
-    reading: [
-      { passage: "Viele Lernende nutzen Onlinekurse, weil sie flexibel sind. Trotzdem fehlt manchen der direkte Kontakt zur Gruppe. Deshalb kombinieren einige Schulen Online-Unterricht mit Präsenzterminen.", question: "Was ist die Hauptaussage?", options: ["Onlinekurse haben Vorteile und Nachteile.", "Onlinekurse sind immer schlecht.", "Präsenzunterricht ist verboten.", "Schulen bieten keine Kurse an."], answer: "Onlinekurse haben Vorteile und Nachteile.", hint: "Der Text nennt Flexibilität und fehlenden Kontakt." },
-      { passage: "Sehr geehrte Damen und Herren, in meinem Hotelzimmer funktionierte das WLAN nicht. Außerdem war es nachts sehr laut. Ich bitte Sie um eine Rückmeldung.", question: "Warum schreibt die Person?", options: ["wegen einer Beschwerde", "wegen einer Einladung", "wegen einer Bewerbung", "wegen einer Bestellung"], answer: "wegen einer Beschwerde", hint: "Probleme mit Zimmer und WLAN sind eine Beschwerde." },
-      { passage: "Die Stadt plant mehr Fahrradwege. Einige Bewohner begrüßen den Plan, weil Radfahren umweltfreundlich ist. Andere sorgen sich um Parkplätze.", question: "Welche Positionen gibt es?", options: ["Zustimmung und Sorge", "nur Zustimmung", "nur Ablehnung", "keine Meinung"], answer: "Zustimmung und Sorge", hint: "Es gibt unterschiedliche Meinungen." },
-    ],
+    reading: expandCertificationReadingGroups([
+      {
+        group: "Lesen Teil 1: Sachtext",
+        passage: "Viele Lernende nutzen Onlinekurse, weil sie flexibel sind und keine langen Wege haben. Trotzdem fehlt manchen der direkte Kontakt zur Gruppe. Deshalb kombinieren einige Schulen Online-Unterricht mit Präsenzterminen. So können die Teilnehmenden zu Hause lernen und trotzdem Fragen persönlich stellen.",
+        questions: [
+          ["Warum nutzen viele Lernende Onlinekurse?", ["weil sie flexibel sind", "weil sie kostenlos sein müssen", "weil Präsenzkurse verboten sind", "weil niemand Fragen stellt"], "weil sie flexibel sind"],
+          ["Was fehlt manchen Lernenden?", ["der direkte Kontakt", "das Internet", "das Kursbuch", "die Prüfungsgebühr"], "der direkte Kontakt"],
+          ["Was machen einige Schulen?", ["Sie kombinieren Online- und Präsenzunterricht.", "Sie schließen alle Kursräume.", "Sie ersetzen Lehrer durch Bücher.", "Sie bieten nur Prüfungen an."], "Sie kombinieren Online- und Präsenzunterricht."],
+          ["Welche Aussage passt zum Text?", ["Beide Lernformen können sinnvoll kombiniert werden.", "Onlinekurse sind immer besser.", "Präsenzunterricht hat keine Vorteile.", "Fragen sind im Unterricht unerwünscht."], "Beide Lernformen können sinnvoll kombiniert werden."],
+        ],
+      },
+      {
+        group: "Lesen Teil 2: Beschwerde",
+        passage: "Sehr geehrte Damen und Herren, in meinem Hotelzimmer funktionierte das WLAN nicht. Außerdem war es nachts sehr laut, weil direkt vor dem Fenster gebaut wurde. An der Rezeption konnte mir niemand helfen. Ich bitte Sie daher um eine Rückmeldung und eine angemessene Lösung.",
+        questions: [
+          ["Warum schreibt die Person?", ["wegen einer Beschwerde", "wegen einer Einladung", "wegen einer Bewerbung", "wegen einer Bestellung"], "wegen einer Beschwerde"],
+          ["Was funktionierte nicht?", ["das WLAN", "die Heizung", "der Fahrstuhl", "die Dusche"], "das WLAN"],
+          ["Warum war es nachts laut?", ["wegen Bauarbeiten", "wegen Musik im Zimmer", "wegen eines Gewitters", "wegen eines Telefons"], "wegen Bauarbeiten"],
+          ["Was erwartet die Person?", ["eine Rückmeldung und Lösung", "eine Einladung", "einen neuen Kurs", "eine Stadtführung"], "eine Rückmeldung und Lösung"],
+        ],
+      },
+      {
+        group: "Lesen Teil 3: Meinungen",
+        passage: "Die Stadt plant mehr Fahrradwege. Einige Bewohner begrüßen den Plan, weil Radfahren umweltfreundlich ist und die Innenstadt ruhiger werden könnte. Andere sorgen sich um Parkplätze und Lieferverkehr. Der Stadtrat will deshalb zuerst eine Testphase in zwei Straßen starten.",
+        questions: [
+          ["Was plant die Stadt?", ["mehr Fahrradwege", "mehr Parkhäuser", "ein neues Schwimmbad", "eine neue Sprachschule"], "mehr Fahrradwege"],
+          ["Warum begrüßen einige Bewohner den Plan?", ["wegen Umwelt und Ruhe", "wegen höherer Mieten", "wegen schnellerer Autos", "wegen neuer Büros"], "wegen Umwelt und Ruhe"],
+          ["Worüber sorgen sich andere?", ["Parkplätze und Lieferverkehr", "Schulen und Prüfungen", "Hotels und Reisen", "Kurse und Bücher"], "Parkplätze und Lieferverkehr"],
+          ["Was will der Stadtrat zuerst machen?", ["eine Testphase starten", "alle Straßen sperren", "den Plan sofort beenden", "keine Entscheidung treffen"], "eine Testphase starten"],
+        ],
+      },
+    ]),
     listening: [
       { passage: "Hörskript: Der Kursraum wurde geändert. Der B1-Kurs findet heute im Raum 310 statt. Die Teilnehmenden sollen außerdem die Schreibaufgabe mitbringen.", question: "Was hat sich geändert?", options: ["der Raum", "der Lehrer", "die Uhrzeit", "das Kursbuch"], answer: "der Raum", hint: "Der Kurs findet in Raum 310 statt." },
       { passage: "Hörskript: Ich kann leider nicht zur Besprechung kommen. Mein Zug ist ausgefallen. Ich schlage vor, dass wir morgen telefonieren.", question: "Was schlägt die Person vor?", options: ["morgen telefonieren", "heute reisen", "den Zug nehmen", "die Besprechung absagen ohne Ersatz"], answer: "morgen telefonieren", hint: "Sie schlägt ein Telefonat vor." },
       { passage: "Hörskript: Im Vortrag geht es um Müllvermeidung. Besonders wichtig sind Mehrwegflaschen und eigene Einkaufstaschen.", question: "Was ist das Thema?", options: ["Müllvermeidung", "Wohnungssuche", "Prüfungsvorbereitung", "Berufswahl"], answer: "Müllvermeidung", hint: "Mehrwegflaschen und Einkaufstaschen passen zu Müllvermeidung." },
-    ],
-    language: [
-      { prompt: "Ich bleibe zu Hause, ___ ich mich besser konzentrieren kann.", answer: "damit", hint: "damit drückt ein Ziel aus." },
-      { prompt: "Der Kurs, ___ ich besuche, ist sehr hilfreich.", answer: "den", hint: "Relativpronomen Akkusativ maskulin: den." },
-      { prompt: "Meiner Meinung ___ sollte man früher anfangen.", answer: "nach", hint: "Feste Wendung: Meiner Meinung nach." },
-      { type: "choice", prompt: "Welche Verbindung passt?", options: ["Trotzdem möchte ich teilnehmen.", "Weil möchte ich teilnehmen.", "Dass ich trotzdem teilnehmen.", "Obwohl trotzdem teilnehmen ich."], answer: "Trotzdem möchte ich teilnehmen.", hint: "trotzdem steht im Hauptsatz mit Verbposition 2." },
+      { passage: "Hörskript: Die Bewerbungsfrist endet am 15. Mai. Danach können keine Unterlagen mehr angenommen werden.", question: "Wann endet die Frist?", options: ["am 15. Mai", "am 5. Mai", "im Juni", "morgen"], answer: "am 15. Mai", hint: "Die Frist endet am 15. Mai." },
+      { passage: "Hörskript: Wegen eines technischen Problems beginnt die Online-Prüfung 30 Minuten später.", question: "Warum beginnt die Prüfung später?", options: ["wegen eines technischen Problems", "wegen Krankheit", "wegen Ferien", "wegen zu weniger Anmeldungen"], answer: "wegen eines technischen Problems", hint: "Das technische Problem ist der Grund." },
+      { passage: "Hörskript: Die Sprecherin empfiehlt, jeden Tag kurze Nachrichten auf Deutsch zu lesen und neue Wörter in ganzen Sätzen zu notieren.", question: "Was empfiehlt die Sprecherin?", options: ["Nachrichten lesen und Wörter notieren", "nur Grammatikregeln lernen", "keine Texte lesen", "alles sofort übersetzen"], answer: "Nachrichten lesen und Wörter notieren", hint: "Das sind ihre zwei Tipps." },
+      { passage: "Hörskript: Die Gruppe entscheidet sich gegen das Restaurant, weil es zu teuer ist. Stattdessen kochen alle zusammen bei Mark.", question: "Was macht die Gruppe?", options: ["Sie kocht zusammen.", "Sie geht ins teure Restaurant.", "Sie fährt nach Berlin.", "Sie besucht einen Kurs."], answer: "Sie kocht zusammen.", hint: "Stattdessen kochen alle zusammen." },
+      { passage: "Hörskript: In der Radiosendung wird erklärt, dass viele Jugendliche Nebenjobs haben, um unabhängiger zu sein und Erfahrungen zu sammeln.", question: "Warum haben viele Jugendliche Nebenjobs?", options: ["um unabhängiger zu sein", "um weniger Erfahrung zu sammeln", "weil Schule verboten ist", "weil sie keine Freizeit haben dürfen"], answer: "um unabhängiger zu sein", hint: "Unabhängigkeit und Erfahrung werden genannt." },
     ],
     writing: [
       { prompt: "Schreiben Sie eine E-Mail mit drei Inhaltspunkten.", task: "Ein Freund konnte nicht zu Ihrer Feier kommen. Beschreiben Sie die Feier, nennen Sie ein Geschenk und schlagen Sie ein Treffen vor.", model: "Lieber Max, schade, dass du nicht kommen konntest. Die Feier war sehr schön, und viele Freunde waren da. Besonders gefreut habe ich mich über ein Wörterbuch, weil ich es für die Prüfung brauche. Wollen wir uns nächste Woche treffen?" },
+      { prompt: "Schreiben Sie eine Beschwerde.", task: "Sie waren in einem Hotel. Schreiben Sie: Problem, Reaktion der Rezeption, gewünschte Lösung.", model: "Sehr geehrte Damen und Herren, während meines Aufenthalts funktionierte das WLAN nicht. An der Rezeption konnte mir leider niemand helfen. Ich bitte Sie um eine angemessene Erstattung." },
+      { prompt: "Schreiben Sie einen Forumsbeitrag.", task: "Thema: Online-Unterricht. Nennen Sie einen Vorteil, einen Nachteil und Ihre Meinung.", model: "Online-Unterricht ist praktisch, weil man Zeit spart. Ein Nachteil ist, dass der direkte Kontakt fehlt. Meiner Meinung nach ist eine Mischung aus Online- und Präsenzunterricht am besten." },
     ],
     speaking: [
       { prompt: "Sprechen: Meinung äußern", task: "Sagen Sie Ihre Meinung zu Online-Unterricht. Nennen Sie einen Vorteil und einen Nachteil.", model: "Online-Unterricht ist flexibel und spart Zeit. Ein Nachteil ist, dass der direkte Kontakt zur Gruppe fehlt." },
+      { prompt: "Sprechen: Gemeinsam planen", task: "Planen Sie mit einer Person eine kleine Kursfeier.", model: "Wir brauchen einen Termin, Getränke und Snacks. Ich kann die Getränke kaufen. Kannst du die anderen informieren?" },
+      { prompt: "Sprechen: Präsentation", task: "Sprechen Sie über ein umweltfreundliches Verkehrsmittel.", model: "Ich möchte über das Fahrrad sprechen. Es ist günstig, gesund und umweltfreundlich. In großen Städten braucht man aber sichere Fahrradwege." },
     ],
   },
   B2: {
-    reading: [
-      { passage: "Hybrides Arbeiten wird in vielen Unternehmen diskutiert. Es kann die Vereinbarkeit von Beruf und Familie verbessern, verlangt aber klare Regeln für Kommunikation, Erreichbarkeit und Verantwortung.", question: "Welche Aussage passt?", options: ["Hybrides Arbeiten braucht klare Strukturen.", "Hybrides Arbeiten hat keine Nachteile.", "Kommunikation ist unwichtig.", "Alle müssen nur im Büro arbeiten."], answer: "Hybrides Arbeiten braucht klare Strukturen.", hint: "Der Text nennt klare Regeln als Bedingung." },
-      { passage: "Viele Städte wollen den Autoverkehr reduzieren. Kritiker befürchten wirtschaftliche Nachteile, Befürworter verweisen auf bessere Luft und mehr Lebensqualität.", question: "Worum geht es?", options: ["um unterschiedliche Positionen zur Verkehrspolitik", "um eine Hotelreservierung", "um eine private Einladung", "um einen Sprachkurs"], answer: "um unterschiedliche Positionen zur Verkehrspolitik", hint: "Es werden Kritiker und Befürworter genannt." },
-      { passage: "Digitale Lernplattformen sammeln Daten über Lernverhalten. Das kann personalisierte Übungen ermöglichen, wirft aber Fragen zu Datenschutz und Transparenz auf.", question: "Welcher Konflikt wird beschrieben?", options: ["Nutzen und Datenschutz", "Preis und Öffnungszeiten", "Reise und Unterkunft", "Essen und Gesundheit"], answer: "Nutzen und Datenschutz", hint: "Personalisierung und Datenschutz stehen gegenüber." },
-    ],
+    reading: expandCertificationReadingGroups([
+      {
+        group: "Lesen Teil 1: Fachnaher Sachtext",
+        passage: "Hybrides Arbeiten wird in vielen Unternehmen intensiv diskutiert. Es kann die Vereinbarkeit von Beruf und Familie verbessern und Pendelzeiten reduzieren. Gleichzeitig verlangt es klare Regeln für Kommunikation, Erreichbarkeit und Verantwortung. Ohne solche Absprachen entstehen leicht Missverständnisse, ungleiche Arbeitsbelastung oder das Gefühl, ständig verfügbar sein zu müssen.",
+        questions: [
+          ["Welcher Vorteil wird genannt?", ["bessere Vereinbarkeit von Beruf und Familie", "mehr Dienstreisen", "längere Arbeitswege", "weniger Verantwortung"], "bessere Vereinbarkeit von Beruf und Familie"],
+          ["Was ist laut Text notwendig?", ["klare Regeln", "weniger Kommunikation", "ständige Erreichbarkeit", "Arbeit nur im Büro"], "klare Regeln"],
+          ["Was kann ohne Absprachen entstehen?", ["Missverständnisse", "automatisch mehr Freizeit", "keine Arbeitsbelastung", "mehr Gehalt"], "Missverständnisse"],
+          ["Welche Aussage fasst den Text zusammen?", ["Hybrides Arbeiten braucht Struktur.", "Hybrides Arbeiten ist unmöglich.", "Pendeln ist immer besser.", "Kommunikation ist unwichtig."], "Hybrides Arbeiten braucht Struktur."],
+        ],
+      },
+      {
+        group: "Lesen Teil 2: Argumentation",
+        passage: "Viele Städte wollen den Autoverkehr reduzieren, um Luftqualität und Lebensqualität zu verbessern. Befürworter verweisen auf ruhigere Innenstädte, mehr Platz für Fußgänger und geringere Emissionen. Kritiker befürchten dagegen wirtschaftliche Nachteile für Geschäfte und Probleme für Menschen, die beruflich auf das Auto angewiesen sind. Entscheidend ist daher, ob gleichzeitig ein zuverlässiger öffentlicher Verkehr ausgebaut wird.",
+        questions: [
+          ["Was wollen viele Städte reduzieren?", ["den Autoverkehr", "den öffentlichen Verkehr", "die Fahrradwege", "die Fußgängerzonen"], "den Autoverkehr"],
+          ["Was nennen Befürworter als Vorteil?", ["ruhigere Innenstädte", "mehr Staus", "weniger Lebensqualität", "höhere Emissionen"], "ruhigere Innenstädte"],
+          ["Was befürchten Kritiker?", ["wirtschaftliche Nachteile", "bessere Luft", "mehr Platz", "weniger Verkehr"], "wirtschaftliche Nachteile"],
+          ["Was ist laut Text entscheidend?", ["Ausbau des öffentlichen Verkehrs", "Abbau aller Buslinien", "Verbot von Fußwegen", "mehr Parkplätze in jeder Straße"], "Ausbau des öffentlichen Verkehrs"],
+        ],
+      },
+      {
+        group: "Lesen Teil 3: Kommentar",
+        passage: "Digitale Lernplattformen sammeln Daten über Lernverhalten. Dadurch können Übungen genauer an einzelne Lernende angepasst werden. Zugleich entstehen Fragen zu Datenschutz, Transparenz und Kontrolle: Wer sieht die Daten, wie lange werden sie gespeichert und wofür dürfen sie genutzt werden? Eine gute Plattform sollte Lernfortschritte sichtbar machen, aber den Umgang mit Daten klar erklären.",
+        questions: [
+          ["Was ermöglichen gesammelte Lerndaten?", ["angepasste Übungen", "weniger Transparenz als Ziel", "keine Kontrolle", "automatische Prüfungsbefreiung"], "angepasste Übungen"],
+          ["Welche Sorge wird genannt?", ["Datenschutz", "Öffnungszeiten", "Mietpreise", "Fahrpläne"], "Datenschutz"],
+          ["Welche Frage passt zum Text?", ["Wer sieht die Daten?", "Wann fährt der Zug?", "Wo ist die Rezeption?", "Wie bestellt man Kaffee?"], "Wer sieht die Daten?"],
+          ["Was sollte eine gute Plattform tun?", ["den Umgang mit Daten klar erklären", "Daten verstecken", "keine Fortschritte zeigen", "alle Daten öffentlich machen"], "den Umgang mit Daten klar erklären"],
+        ],
+      },
+    ]),
     listening: [
       { passage: "Hörskript: Die Referentin betont, dass eine Vier-Tage-Woche nur funktioniert, wenn Arbeitsprozesse neu organisiert werden. Sonst steigt der Druck auf die Beschäftigten.", question: "Welche Bedingung nennt die Referentin?", options: ["Arbeitsprozesse müssen neu organisiert werden.", "Alle müssen länger arbeiten.", "Pausen sollen wegfallen.", "Kommunikation ist nicht nötig."], answer: "Arbeitsprozesse müssen neu organisiert werden.", hint: "Das ist die zentrale Bedingung." },
       { passage: "Hörskript: Im Interview geht es um Medienkompetenz. Der Experte empfiehlt, Quellen zu prüfen und emotionale Überschriften besonders kritisch zu lesen.", question: "Was empfiehlt der Experte?", options: ["Quellen prüfen", "alles sofort teilen", "nur Überschriften lesen", "Bilder nie beachten"], answer: "Quellen prüfen", hint: "Quellenprüfung ist die Empfehlung." },
       { passage: "Hörskript: Die Stadtverwaltung erklärt, dass bezahlbarer Wohnraum nur durch mehrere Maßnahmen entstehen kann: Förderung, Mietbegrenzung und Neubau.", question: "Was sagt die Stadtverwaltung?", options: ["Mehrere Maßnahmen sind nötig.", "Nur Neubau reicht immer.", "Mieten sollen gar nicht diskutiert werden.", "Förderung ist verboten."], answer: "Mehrere Maßnahmen sind nötig.", hint: "Förderung, Mietbegrenzung und Neubau werden kombiniert." },
-    ],
-    language: [
-      { prompt: "Einerseits spart Homeoffice Zeit, ___ fehlt manchmal der Austausch.", answer: "andererseits", hint: "einerseits ... andererseits." },
-      { prompt: "Die Entscheidung hängt ___ mehreren Faktoren ab.", answer: "von", hint: "abhängen von + Dativ." },
-      { prompt: "Die Maßnahmen müssen besser erklärt ___.", answer: "werden", hint: "Passiv: müssen erklärt werden." },
-      { type: "choice", prompt: "Welche Formulierung ist am formellsten?", options: ["Ich bitte Sie um eine Rückmeldung.", "Schreib mal zurück.", "Sag schnell was.", "Antwort bitte sofort!"], answer: "Ich bitte Sie um eine Rückmeldung.", hint: "Formelle Bitte." },
+      { passage: "Hörskript: Die Wissenschaftlerin warnt, dass künstliche Intelligenz im Unterricht hilfreich sein kann, aber klare Regeln für Quellenangaben und Eigenleistung braucht.", question: "Was fordert die Wissenschaftlerin?", options: ["klare Regeln", "ein komplettes Verbot aller Technik", "weniger Quellen", "keine Eigenleistung"], answer: "klare Regeln", hint: "Regeln für Quellenangaben und Eigenleistung." },
+      { passage: "Hörskript: Der Kommentar kritisiert, dass viele Apps zwar bequem sind, aber ihre Datenschutzbedingungen schwer verständlich formulieren.", question: "Was wird kritisiert?", options: ["schwer verständliche Datenschutzbedingungen", "zu wenig Bequemlichkeit", "fehlende Smartphones", "zu kurze Öffnungszeiten"], answer: "schwer verständliche Datenschutzbedingungen", hint: "Die Bedingungen sind schwer verständlich." },
+      { passage: "Hörskript: Die Diskussion zeigt, dass flexible Arbeitszeiten besonders dann erfolgreich sind, wenn Teams feste Kernzeiten vereinbaren.", question: "Wann sind flexible Arbeitszeiten erfolgreich?", options: ["bei festen Kernzeiten", "ohne jede Absprache", "nur am Wochenende", "wenn niemand erreichbar ist"], answer: "bei festen Kernzeiten", hint: "Feste Kernzeiten sind die Bedingung." },
+      { passage: "Hörskript: Laut Studie nutzen immer mehr Menschen das Fahrrad im Alltag, wenn sichere Wege und gute Abstellmöglichkeiten vorhanden sind.", question: "Welche Bedingung nennt die Studie?", options: ["sichere Wege und Abstellmöglichkeiten", "höhere Parkgebühren allein", "weniger Licht", "längere Wege"], answer: "sichere Wege und Abstellmöglichkeiten", hint: "Diese Infrastruktur wird genannt." },
+      { passage: "Hörskript: Die Moderatorin fasst zusammen: Digitalisierung spart Zeit, darf aber persönliche Beratung nicht vollständig ersetzen.", question: "Was ist die Kernaussage?", options: ["Digitalisierung soll Beratung nicht vollständig ersetzen.", "Beratung ist unnötig.", "Digitalisierung spart nie Zeit.", "Alle Angebote sollen geschlossen werden."], answer: "Digitalisierung soll Beratung nicht vollständig ersetzen.", hint: "Die Zusammenfassung nennt beide Seiten." },
     ],
     writing: [
       { prompt: "Schreiben Sie einen Forumsbeitrag.", task: "Thema: Sollten öffentliche Verkehrsmittel günstiger sein? Nennen Sie Vorteile, mögliche Probleme und Ihre Meinung.", model: "Öffentliche Verkehrsmittel sollten günstiger sein, weil Mobilität zur Grundversorgung gehört. Gleichzeitig muss das Angebot zuverlässig ausgebaut werden. Meiner Meinung nach sind niedrigere Preise sinnvoll, wenn sie mit mehr Verbindungen und besserer Qualität verbunden werden." },
+      { prompt: "Schreiben Sie eine Stellungnahme.", task: "Thema: Hybrides Arbeiten. Beschreiben Sie Vorteile, Risiken und Ihre Empfehlung.", model: "Hybrides Arbeiten kann die Vereinbarkeit von Beruf und Familie verbessern. Gleichzeitig braucht es klare Regeln, damit Kommunikation und Verantwortung nicht unklar werden. Ich empfehle ein Modell mit festen Teamtagen und flexiblen Homeoffice-Tagen." },
+      { prompt: "Schreiben Sie eine formelle Beschwerde.", task: "Sie haben ein Online-Seminar gebucht, aber technische Probleme und fehlende Unterlagen erlebt. Schreiben Sie sachlich und fordern Sie eine Lösung.", model: "Sehr geehrte Damen und Herren, während des Online-Seminars kam es wiederholt zu technischen Problemen. Außerdem wurden die angekündigten Unterlagen nicht bereitgestellt. Ich bitte Sie daher um eine teilweise Erstattung oder einen Ersatztermin." },
     ],
     speaking: [
       { prompt: "Sprechen: Vor- und Nachteile", task: "Vergleichen Sie Homeoffice und Arbeit im Büro. Nennen Sie Vor- und Nachteile und formulieren Sie ein Fazit.", model: "Homeoffice bietet Flexibilität, kann aber den Austausch erschweren. Das Büro stärkt die Zusammenarbeit, ist jedoch weniger flexibel. Ein hybrides Modell scheint mir am sinnvollsten." },
+      { prompt: "Sprechen: Präsentation", task: "Halten Sie eine kurze Präsentation zum Thema Datenschutz beim Lernen mit Apps.", model: "Lernapps können sehr hilfreich sein, weil sie Fortschritte sichtbar machen. Wichtig ist aber, dass Nutzende wissen, welche Daten gespeichert werden. Deshalb braucht man Transparenz und klare Einstellungen." },
+      { prompt: "Sprechen: Diskussion", task: "Reagieren Sie auf die Aussage: Autos sollten aus Innenstädten verschwinden.", model: "Ich verstehe den Wunsch nach besserer Luft. Trotzdem muss man Menschen berücksichtigen, die beruflich auf das Auto angewiesen sind. Eine gute Lösung wäre ein besserer öffentlicher Verkehr." },
     ],
   },
 };
+
+function expandCertificationReadingGroups(groups) {
+  return groups.flatMap((group) => group.questions.map(([question, options, answer], index) => ({
+    passage: group.passage,
+    question,
+    options,
+    answer,
+    group: `${group.group} · Aufgabe ${index + 1}`,
+    hint: `Lesen Sie ${group.group} und markieren Sie die passende Information.`,
+  })));
+}
 
 const verbPrincipalRows = [
   { verb: "sein", chinese: "是", aux: "sein", participle: "gewesen", example: "Ich bin in Berlin gewesen.", ich: "war", du: "warst", third: "war", plural: "waren" },
